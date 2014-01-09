@@ -15,25 +15,25 @@ class agendaActions extends sfActions
       ->filterByactivo(1)
       ->filterByambulatorio(0)
       ->find();
-    $quirofano_id = $request->getParameter('quirofano');  
+    $quirofano_id = $request->getParameter('quirofano');
     $date = $request->getParameter('date', 'today');
 
   }
-  
+
  public function executeAmbulatorio(sfWebRequest $request)
   {
     $this->Quirofanos = QuirofanoQuery::create()
       ->filterByactivo(1)
       ->filterByambulatorio(1)
       ->find();
-    $quirofano_id = $request->getParameter('quirofano');  
+    $quirofano_id = $request->getParameter('quirofano');
     $date = $request->getParameter('date', 'today');
   }
 
  public function executeTquirofanos(sfWebRequest $request)
   {
     $this->Quirofanos = QuirofanoQuery::create()->find(); //datos para los quirofanos
-    $quirofano_id = $request->getParameter('quirofano');  
+    $quirofano_id = $request->getParameter('quirofano');
     $date = $request->getParameter('date', 'today');
   }
 
@@ -55,16 +55,14 @@ class agendaActions extends sfActions
   }
 
   public function executeProgramar(sfWebRequest $request)
-  {   
-
-
+  {
       $this->forward404Unless($request->hasParameter('slug'));
       $this->form = new programarCirugiaForm();
       $Quirofano = QuirofanoQuery::create()
         ->findOneBySlug($request->getParameter('slug'));
     if ($request->isMethod('POST')) {
-      	 $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-	       if ($this->form->isValid()) {
+         $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+         if ($this->form->isValid()) {
              $horapropuesta = $this->form->getValue("hora");
              $salaselecc = $this->form->getValue("sala_id");
              $fechaselecc['max'] = $this->form->getValue("programacion");
@@ -83,9 +81,9 @@ class agendaActions extends sfActions
              }else{
              $this->form->save();
              $this->getUser()->setFlash('notice', sprintf('Programación exitosa'));
-	           $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
+             $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
          }
-	       } 
+         }
     }
     $this->quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug'));
     $this->form->setSalaWidget($request->getParameter('slug'));
@@ -111,7 +109,7 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
 
         if (strtotime($fechaselecc) > strtotime($agendas->getProgramacion())) {
           //Verificar entre dia anterior y actual en caso de que la cirugia continue
-          if( $hora1 >= $hora2 && $hora2 <= $hora3) 
+          if( $hora1 >= $hora2 && $hora2 <= $hora3)
             {
               //$control = $indentificacion;
                $control = $agendas->getId();
@@ -119,10 +117,10 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
             }
         }else{
           //para el mismo dia
-          if( $hora1 <= $hora2 && $hora2 <= $hora3) 
+          if( $hora1 <= $hora2 && $hora2 <= $hora3)
             {
 
-               // $control = $identificacion; 
+               // $control = $identificacion;
               //$control = strtotime($fechaselecc);
              $control = $agendas->getId();
             }
@@ -144,7 +142,7 @@ $h2s = date('s', strtotime($h2));
 $hora2 =$h2h." hour ". $h2m ." min ".$h2s ." second";
 $horas_sumadas= $h1." + ". $hora2;
 $text=date('H:i:s', strtotime($horas_sumadas)) ;
-return $text; 
+return $text;
 }
 
   public function executeCreate(sfWebRequest $request)
@@ -204,7 +202,7 @@ public function executeTodos(sfWebRequest $request)
  $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
  $hinicio = $request->getParameter('hora');
  $hfinal = $request->getParameter('tiempo_est');
- $date = $this->date; 
+ $date = $this->date;
  $qui = $this->Quirofano->getid();
  $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($qui)
@@ -237,7 +235,7 @@ public function executeInspeccionar(sfWebRequest $request)
       ->useQuery('Quirofano')
         ->filterBySlug($request->getParameter('slug'))
       ->endUse()
-      ->find();	
+      ->find();
 }
  public function executeDiferidas(sfWebRequest $request)
   {
@@ -247,7 +245,7 @@ public function executeInspeccionar(sfWebRequest $request)
  $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
  $hinicio = $request->getParameter('hora');
  $hfinal = $request->getParameter('tiempo_est');
- $date = $this->date; 
+ $date = $this->date;
  $qui = $this->Quirofano->getid();
  $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($qui)
@@ -273,7 +271,7 @@ public function executeTransoperatorio(sfWebRequest $request)
   {
     $this->cirugia = AgendaQuery::create()->findPk($request->getParameter('id'));
     $this->form = new TransoperatorioQuirofanoForm($this->cirugia);
-    
+
 //se guardara con la fecha en que se realize la cirugia
 
     $fechaactual = date('Y-m-d', strtotime("now"));
@@ -291,6 +289,7 @@ public function executeTransoperatorio(sfWebRequest $request)
     }
     $this->form->setDefault('ingreso', date('H:i:s'));
   }
+
   public function executePxsolicitado(sfWebRequest $request)
   {
     $this->forward404Unless($request->hasParameter('id'));
@@ -343,7 +342,7 @@ public function executeTransoperatorio(sfWebRequest $request)
   $this->forward404unless($request->hasParameter('id'));
   $this->cirugia = AgendaQuery::create()->findPk($request->getParameter('id'));
   $this->Quirofano = QuirofanoQuery::create()
-    ->findOneByid($this->cirugia->getquirofanoid());      
+    ->findOneByid($this->cirugia->getquirofanoid());
   if ($request->getMethod() == 'POST') {
       $this->cirugia->setCancelada(true)->save();
       $this->redirect('agenda/show?slug='.$this->Quirofano->getSlug().'&date='.date('Y-m-d', strtotime("now")));
@@ -360,36 +359,35 @@ public function executeTransoperatorio(sfWebRequest $request)
 
 
  public function executePbusqueda(sfWebrequest $request){
-     return sfView::SUCCESS;	
+     return sfView::SUCCESS;
   }
 
 public function executeBusquedapersonalisada(sfWebrequest $request)
 {
-	$this->quirofano = $request->getParameter('Quirofano');
-	$this->sala = $request->getParameter('Sala');
-	$this->nombre = $request->getParameter('Nombre');
+  $this->quirofano = $request->getParameter('Quirofano');
+  $this->sala = $request->getParameter('Sala');
+  $this->nombre = $request->getParameter('Nombre');
 
   $this->Quirofano = QuirofanoQuery::create()
         ->findOneByNombre("%".$this->quirofano."%");
 
   $this->Salas = SalaquirurgicaQuery::create()
         ->findOneByNombre("%".$this->sala."%");
-	$this->cirugias = AgendaQuery::create()
+  $this->cirugias = AgendaQuery::create()
   ->filterByquirofanoid($this->existe($this->Quirofano))
   ->filterBysalaid($this->existe($this->Salas))
-	->filterBypacientename("%".$this->nombre."%")
+  ->filterBypacientename("%".$this->nombre."%")
   ->find();
 }
 
-public function existe($variable)
-{
-  $regreso = 0;
-if (count($variable) > 0)
+  private function existe($variable)
   {
-    $regreso = $variable->getId();
+    $regreso = 0;
+    if (count($variable) > 0) {
+      $regreso = $variable->getId();
+    }
+    return $regreso;
   }
-return $regreso;
-}
 
 
  public function executeAgregarpersonal(sfWebRequest $request)

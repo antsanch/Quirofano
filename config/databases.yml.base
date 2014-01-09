@@ -23,10 +23,10 @@ all:
     class:        sfPropelDatabase
     param:
       classname:  PropelPDO
-      dsn:        mysql:dbname=Quirofano;host=localhost
+      dsn:        mysql:dbname=quirofano;host=localhost
       username:   root
-      password:   ave9201
-      #password:   mesostel
+      #password:   ave9201
+      password:   mesostel
       encoding:   utf8
       persistent: true
       pooling:    true
