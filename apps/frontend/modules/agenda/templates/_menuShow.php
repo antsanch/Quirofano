@@ -34,10 +34,10 @@ HEAD;
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/index') ?>">&nbsp;&nbsp;Lista general de quirofanos&nbsp;&nbsp;</a>
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/programar?slug='.$Quirofano->getSlug())?>" rel="facebox">&nbsp;&nbsp;Programar Cirugia&nbsp;&nbsp;</a>
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/diferidas?slug='.$Quirofano->getSlug())?>">&nbsp;&nbsp;Cirugias Diferidas&nbsp;&nbsp;</a>
-
-<a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/todos?slug='.$Quirofano->getSlug().'&date='.date('Y-m-d', strtotime("now")))?>">&nbsp;&nbsp;Todas las cirugias&nbsp;&nbsp;</a>
-
+<a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/canceladas?slug='.$Quirofano->getSlug())?>">&nbsp;&nbsp;Cirugias Canceladas del mes&nbsp;&nbsp;</a>
+<a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/todos?slug='.$Quirofano->getSlug().'&date='.date('Y-m-d', strtotime("now")))?>">&nbsp;&nbsp;Cirugias del mes&nbsp;&nbsp;</a>
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/show?slug='.$Quirofano->getSlug().'&date='.date('Y-m-d', strtotime("now")))?>">&nbsp;&nbsp;Agenda del día&nbsp;&nbsp;</a>
+
 
 <form action="<?php echo url_for('agenda/show') ?>" style="display:inline;">
   <input type="hidden" name="slug" value="<?php echo $Quirofano->getSlug() ?>">
