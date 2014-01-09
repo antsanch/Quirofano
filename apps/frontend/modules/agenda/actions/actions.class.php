@@ -72,8 +72,8 @@ class agendaActions extends sfActions
              $identificacion = NULL;
 
     if ($request->isMethod('POST')) {
-         $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-         if ($this->form->isValid()) {  //comprobamos si es valido
+        $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+        if ($this->form->isValid()) {  //comprobamos si es valido
 
              /*Tomamos los valores del form enviado
              Esto nos ayudara a evaluar si se empalman con alguna cirugía
@@ -104,15 +104,18 @@ class agendaActions extends sfActions
              $cirugia->sethoraestado($horapropuesta)->save();                        //control de fecha para cada estados
              $this->getUser()->setFlash('notice', sprintf('Programación exitosa'));
              $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
-         }
-         }
+            }
+        }
     }
 
     $this->quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug')); //Obtenemis el quirofano
     $this->form->setSalaWidget($request->getParameter('slug'));                                //ponemos las salas del quirofano
     $this->form->setDefault('quirofano_id', $this->quirofano->getId());                        //ponemos el id del quirofano
     $request->hasParameter('sala') ? $this->form->setSalaDefault($request->getParameter('sala')): null;
+          }
+    }
   }
+
 /*Actión para programar la cirugía*/
 
 
