@@ -133,10 +133,11 @@
   <a href="<?php echo url_for('agenda/new') ?>">New</a>
 -->
 <?php slot('titulo') ?>
-  <title>Lista General de Quirofanos | SIGA-HU </title>
+  <title>Lista General de Quirofanos | SIGA-Qx </title>
 <?php end_slot() ?>
 
 
+<!-- Funciones para notificar un registro exitoso - INICIO -->
 <script type="text/javascript">
 function saludo() {alert('Registro Exitoso')}
 </script>
@@ -144,17 +145,13 @@ function saludo() {alert('Registro Exitoso')}
 <?php if ($sf_user->hasFlash('notice')): ?>
 <?php if ($sf_user->getFlash('notice') == 'Registro exitoso' ):?>
 
-
-
-
 <script type="text/javascript">
 function start() {saludo()}
 window.onload = start;
 </script>
 <?php endif; ?>
 <?php endif; ?>
-
-
+<!-- Funciones para notificar un registro exitoso - FINAL -->
 
 
 <h1>Quirofanos Activos</h1>

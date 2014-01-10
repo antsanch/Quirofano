@@ -1,5 +1,5 @@
 propel:
-  hc_usuarios:  
+  hc_usuarios:
     _attributes:          { phpName: User, package: lib.model.data }
     nombre:               { type: varchar(64) }
     pass:                 { type: varchar(64) }
@@ -11,7 +11,7 @@ propel:
     id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
 #    evento_id:
     programacion:         { type: date }
-    fechaestado:     	  { type: date }
+    fechaestado:          { type: date }
     hora:                 { type: time }
     horaestado:           { type: time }
     inicio:               { type: timestamp }

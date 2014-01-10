@@ -14,12 +14,11 @@ class agendaActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->Quirofanos = QuirofanoQuery::create()
-      ->filterByactivo(1)
-      ->filterByambulatorio(0)
+      ->filterByactivo(true)
+      ->filterByAmbulatorio(false)
       ->find();
     $quirofano_id = $request->getParameter('quirofano');
     $date = $request->getParameter('date', 'today');
-
   }
 
 
@@ -54,89 +53,75 @@ class agendaActions extends sfActions
 
 
 
-/*Actión para programar la cirugía*/
+/* Actión para programar la cirugía*/
   public function executeProgramar(sfWebRequest $request)
   {
-      $this->forward404Unless($request->hasParameter('slug'));
-      $this->form = new programarCirugiaForm();      //cargamos form
-      $Quirofano = QuirofanoQuery::create()          //filtramos por un solo quirofano
-        ->findOneBySlug($request->getParameter('slug'));
-    if ($request->isMethod('POST')) {
-         $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-         if ($this->form->isValid()) {
-             $horapropuesta = $this->form->getValue("hora");
-             $salaselecc = $this->form->getValue("sala_id");
-             $fechaselecc['max'] = $this->form->getValue("programacion");
-             $fechaselecc['min'] = date("Y-m-d",strtotime($fechaselecc['max'].' -1 day'));
-             $tiempo_est = $this->form->getValue("tiempo_est");
-             $identificacion = NULL;
+    $this->forward404Unless($request->hasParameter('slug'));
+    $this->form = new programarCirugiaForm();      //cargamos form
+    $Quirofano = QuirofanoQuery::create()          //filtramos por un solo quirofano
+      ->findOneBySlug($request->getParameter('slug'));
 
     if ($request->isMethod('POST')) {
-        $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-        if ($this->form->isValid()) {  //comprobamos si es valido
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid()) {  //comprobamos si es valido
 
-             /*Tomamos los valores del form enviado
-             Esto nos ayudara a evaluar si se empalman con alguna cirugía
-             Anteriormente programada*/
-             $ide = $this->form->getValue("id");
-             $horapropuesta = $this->form->getValue("hora");                               //Tomamos la hora propuesta
-             $salaselecc = $this->form->getValue("sala_id");                               //la sala
-             $fechaselecc['max'] = $this->form->getValue("programacion");                  //el dia actual de la programación
-             $fechaselecc['min'] = date("Y-m-d",strtotime($fechaselecc['max'].' -1 day')); //Un dia antes por si la cirugía de un día antes continua actualmente
-             $tiempo_est = $this->form->getValue("tiempo_est");                            //Tiempo estimado de la cirugía
+        /*Tomamos los valores del form enviado Esto nos ayudara a evaluar si se empalman con alguna cirugía Anteriormente programada*/
+        $ide = $this->form->getValue("id");
+        $horapropuesta = $this->form->getValue("hora");                               //Tomamos la hora propuesta
+        $salaselecc = $this->form->getValue("sala_id");                               //la sala
+        $fechaselecc['max'] = $this->form->getValue("programacion");                  //el dia actual de la programación
+        $fechaselecc['min'] = date("Y-m-d",strtotime($fechaselecc['max'].' -1 day')); //Un dia antes por si la cirugía de un día antes continua actualmente
+        $tiempo_est = $this->form->getValue("tiempo_est");                            //Tiempo estimado de la cirugía
 
-             /* llamamos a la función emHoras, esta función sirve para devolver con que cirugía se empalma o regresa un NULL en caso
-            de que no se empalme con niguna, se envian los parametros anteriores, al igual que el id del quirofano.
-            Con respecto al NULL es para que no se empalme con sigo misma, en reprogramación se envia el id de esa programación,
-            en este caso como es nuevo se va como NULL */
+        /* llamamos a la función emHoras, esta función sirve para devolver con que cirugía se empalma o regresa un NULL en caso
+        de que no se empalme con niguna, se envian los parametros anteriores, al igual que el id del quirofano.
+        Con respecto al NULL es para que no se empalme con sigo misma, en reprogramación se envia el id de esa programación,
+        en este caso como es nuevo se va como NULL */
 
-             $control = $this->emHoras($fechaselecc,$horapropuesta,$Quirofano->getid(),$salaselecc,$tiempo_est,NULL);
+        $control = $this->emHoras($fechaselecc,$horapropuesta,$Quirofano->getid(),$salaselecc,$tiempo_est,NULL);
 
-             if ($control != NULL)    //si es diferente a null quiere decir que se empalma con alguna programación anterior
-             {
-                $text = 'Se empalma con la cirugia: '.$control;
-                $this->getUser()->setFlash('notice', sprintf("$text"));
-
-             }else{   // si es null lo grabamos como debe ser
-
-             $cirugia = $this->form->save();
-             $cirugia->setfechaestado($fechaselecc['max'])->save();                  //control de fecha para cada estados
-             $cirugia->sethoraestado($horapropuesta)->save();                        //control de fecha para cada estados
-             $this->getUser()->setFlash('notice', sprintf('Programación exitosa'));
-             $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
-            }
+        if ($control != NULL) {   //si es diferente a null quiere decir que se empalma con alguna programación anterior
+          $text = 'Se empalma con la cirugia: '.$control;
+          $this->getUser()->setFlash('notice', sprintf("$text"));
         }
+        else {   // si es null lo grabamos como debe ser
+          $cirugia = $this->form->save();
+          $cirugia->setfechaestado($fechaselecc['max'])->save();                  //control de fecha para cada estados
+          $cirugia->sethoraestado($horapropuesta)->save();                        //control de fecha para cada estados
+          $this->getUser()->setFlash('notice', sprintf('Programación exitosa'));
+          $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
+        }
+      }
     }
 
     $this->quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug')); //Obtenemis el quirofano
-    $this->form->setSalaWidget($request->getParameter('slug'));                                //ponemos las salas del quirofano
-    $this->form->setDefault('quirofano_id', $this->quirofano->getId());                        //ponemos el id del quirofano
+    $this->form->setSalaWidget($request->getParameter('slug'));                                 //ponemos las salas del quirofano
+    $this->form->setDefault('quirofano_id', $this->quirofano->getId());                         //ponemos el id del quirofano
     $request->hasParameter('sala') ? $this->form->setSalaDefault($request->getParameter('sala')): null;
-          }
-    }
   }
 
-/*Actión para programar la cirugía*/
-
-
-/*Función para saber si se empalma con alguna programación anterior
-EL orden de los datos es de la siguiente manera:
-Fecha de programacion, La hora propuesta, Id del quirofano, Id de la sala, tiempo estimado, id de la cirugia(si es nueva se pone solo
-un NULL) */
-
+/**
+ * Función para saber si se empalma con alguna programación anterior el orden de los datos es de la siguiente manera:
+ * Fecha de programacion,
+ * La hora propuesta,
+ * Id del quirofano,
+ * Id de la sala,
+ * tiempo estimado,
+ * id de la cirugia (si es nueva se pone solo un NULL)
+ **/
 public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_est,$identificacion)
 {
-     //Buscamos las posibles cirugias programadas que se pueden empalmar
-    $control = NULL;
-    $estados['trans'] = 10;
-    $estados['progr'] = 1;
-    $agenda = AgendaQuery::create()                //filtramos por programaciones del dia actual y un dia anterior
-        ->filterByquirofanoid($Quiid)              //en caso de que continue la cirugia al dia de hoy
-        ->filterByfechaestado($fechaselecc)
-        ->filterBysalaid($salaselecc)
-        ->filterByStatus($estados)
-        ->filterByCancelada(false)
-        ->find();
+  //Buscamos las posibles cirugias programadas que se pueden empalmar
+  $control = NULL;
+  $estados['trans'] = 10;
+  $estados['progr'] = 1;
+  $agenda = AgendaQuery::create()              //filtramos por programaciones del dia actual y un dia anterior
+    ->filterByquirofanoid($Quiid)              //en caso de que continue la cirugia al dia de hoy
+    ->filterByfechaestado($fechaselecc)
+    ->filterBysalaid($salaselecc)
+    ->filterByStatus($estados)
+    ->filterByCancelada(false)
+    ->find();
 
     //datos de la cirugia que se trata programar
     $tiempo1 = strtotime("".$fechaselecc['max']."".$horapropuesta);
@@ -200,11 +185,6 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
      endforeach;
   return $control;
 }
-
-/*Función para saber si se empalma con alguna programación anterior
-EL orden de los datos es de la siguiente manera:
-Fecha de programacion, La hora propuesta, Id del quirofano, Id de la sala, tiempo estimado, id de la cirugia(si es nueva se pone solo
-un NULL) */
 
 public function darhora($hor)
 {
