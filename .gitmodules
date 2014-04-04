@@ -4,6 +4,3 @@
 [submodule "lib/vendor/lessphp"]
 	path = lib/vendor/lessphp
 	url = https://github.com/leafo/lessphp
-[submodule "lib/vendor/symfony"]
-	path = lib/vendor/symfony
-	url = https://github.com/antsanch/Quirofano.git
