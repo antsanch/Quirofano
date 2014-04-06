@@ -19,7 +19,23 @@
  */
 class Personalcirugia extends BasePersonalcirugia
 {
-	public function __toString() {
-		return $this->getPersonalNombre();
-	}
+  public function __toString() {
+    return $this->getPersonalNombre();
+  }
+
+  /* functionname
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-06
+  */
+  public function getTurno()
+  {
+    switch (parent::getTurno())
+    {
+      case 1: return 'Matutino';
+      case 2: return 'Vespertino';
+      case 3: return 'Nocturno';
+      case 4: return 'Plan Piloto';
+    }
+  }
+
 }

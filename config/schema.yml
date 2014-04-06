@@ -1,5 +1,5 @@
 propel:
-  hc_usuarios:  
+  hc_usuarios:
     _attributes:          { phpName: User, package: lib.model.data }
     nombre:               { type: varchar(64) }
     pass:                 { type: varchar(64) }
@@ -11,7 +11,7 @@ propel:
     id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
 #    evento_id:
     programacion:         { type: date }
-    fechaestado:     	  { type: date }
+    fechaestado:          { type: date }
     hora:                 { type: time }
     horaestado:           { type: time }
     inicio:               { type: timestamp }
@@ -101,6 +101,7 @@ propel:
     show_in_index:        { type: boolean, default: true }
     protocolo:            { type: boolean, default: false }
     cancelada:            { type: boolean, default: false }
+    sumary:               { type: longvarchar }
     created_at:
     updated_at:
     _foreignKeys:
@@ -277,7 +278,7 @@ propel:
     personal_id:          { type: integer }
     agenda_id:            { type: integer }
     personal_nombre:      { type: varchar, size: 256 }
-#    especialidad_id:
+    especialidad_id:
     tipo:                 { type: enum, valueSet: "cirujano, anestesista, enfermeria, otro" }
     status:               { type: integer }
     programa:             { type: boolean }

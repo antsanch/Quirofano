@@ -11,7 +11,7 @@
 <!--
   .formulario {
     float: left;
-    background:#ebf4fb;;   
+    background:#ebf4fb;;
   }
 
   .formulario .area {
@@ -20,10 +20,10 @@
 
   .formulario .label {
     float: left;
-    font-size: bold;	
+    font-size: bold;
   }
 
-  .formulario .field {	
+  .formulario .field {
     margin:0px 0 0px 0px;
     float: left;
   }
@@ -31,10 +31,10 @@
 </style>
 
 <!-- scripts para mostrar alertas-->
-<script type="text/javascript"> 
-  function pregunta(){ 
-    return confirm('¿Estas seguro de enviar este registro?'); 
-  } 
+<script type="text/javascript">
+  function pregunta(){
+    return confirm('¿Estas seguro de enviar este registro?');
+  }
   function saludo() {alert('Programación Exitosa')}
   function verificar() {alert('Verificar la hora')}
 </script>
@@ -168,7 +168,7 @@ window.onload = start;
     </div>
   </div>
 
- 
+
   <div class="area cols03 horizontal">
     <div class="label"><?php echo $form['protocolo']->renderLabel() ?></div>
     <div class="field">
@@ -210,7 +210,7 @@ window.onload = start;
   </div>
   <?php endforeach; ?>
 <!--Esperemos que funque-->
- 
+
   <div class="area cols04">
     <div class="label"><?php echo $form['riesgo_qx_pre']->renderLabel() ?></div>
     <div class="field">
@@ -277,7 +277,7 @@ window.onload = start;
 </form><!--Termina form-->
 
 <!--  <div class="area control">
-    <?php echo $form->renderHiddenFields() ?>
+    <?php //echo $form->renderHiddenFields() ?>
     <input type="submit" value="Guardar">
   </div>-->
 

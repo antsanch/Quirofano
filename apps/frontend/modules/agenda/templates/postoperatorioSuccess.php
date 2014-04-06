@@ -30,16 +30,12 @@
 <div id="idTag">
   <div class="name"><?php echo "Nombre del paciente: ".$form->getObject()->getPacienteName() ?></div>
   </div>
-  
+
 
 <!- Aqui va el paciente ->
 
 <style>
 /* Mientras podemos hacer botones con jQueryUI usamos css */
-
-
-
-
 .menubar a {
   background: white;
   border: 1px solid black;
@@ -55,12 +51,12 @@
 </style>
 
 
-<script type="text/javascript">
-        $(document).ready(function(){
-            // find the input fields and apply the time select to them.
-            $("#datahora").ptTimeSelect();
-        });
-</script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          // find the input fields and apply the time select to them.
+          $("#datahora").ptTimeSelect();
+      });
+    </script>
 
 
 
@@ -92,8 +88,8 @@
       <?php echo $form['clasificacionqx']->renderError() ?>
       <?php echo $form['clasificacionqx'] ?>
     </div>
-  </div> 
- 
+  </div>
+
 <div class="area cols06 horizontal">
     <div class="label"><?php echo $form['destino_px']->renderLabel() ?></div>
     <div class="field">
@@ -103,7 +99,7 @@
   </div>
 
 <br/><br/><br/>
- 
+
 
   <div class="area cols06">
     <div class="label"><?php echo $form['riesgoqx_id']->renderLabel() ?></div>
@@ -111,9 +107,9 @@
       <?php echo $form['riesgoqx_id']->renderError() ?>
       <?php echo $form['riesgoqx_id'] ?>
     </div>
-  </div> 
+  </div>
 
-  
+
 
   <div class="area cols03">
     <div class="label"><?php echo $form['eventoqx_id']->renderLabel() ?></div>
@@ -131,7 +127,7 @@
     </div>
   </div>
 
- 
+
 
   <div class="area cols12">
     <div class="label"><?php echo $form['ev_adversos_anestesia']->renderLabel() ?></div>

@@ -48,7 +48,7 @@ HEAD;
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/show?slug='.$Quirofano->getSlug().'&date='.date('Y-m-d', $date + 86400))?>" title="<?php echo $date==strtotime('today') ? 'Mañana': date('Y-m-d', $date+86400) ?>">&nbsp;&nbsp;>&nbsp;&nbsp;</a>
 
 <form action="<?php echo url_for('agenda/busqueda') ?>" style="display:inline; float:right;">
-  <input type="text" id="busqueda" name="term" placeholder="Buscar" style="width:120px">
+  <input type="text" id="busqueda" name="term" placeholder="Nombre o Registro" style="width:120px">
   <input type="submit" value="Buscar">
 </form>
 </div>
@@ -87,7 +87,7 @@ window.onload = start;
 
 <?php endif; ?>
 <?php endif; ?>
- 
+
 <!-- Mostrar alertas-->
 <?php $title = null ?>
 <?php foreach($Cirugias as $cirugia): ?>

@@ -71,6 +71,7 @@ abstract class BaseAgendaFormFilter extends BaseFormFilterPropel
       'show_in_index'         => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'protocolo'             => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'cancelada'             => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'sumary'                => new sfWidgetFormFilterInput(),
       'created_at'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'updated_at'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
     ));
@@ -135,6 +136,7 @@ abstract class BaseAgendaFormFilter extends BaseFormFilterPropel
       'show_in_index'         => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'protocolo'             => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'cancelada'             => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'sumary'                => new sfValidatorPass(array('required' => false)),
       'created_at'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'updated_at'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
@@ -214,6 +216,7 @@ abstract class BaseAgendaFormFilter extends BaseFormFilterPropel
       'show_in_index'         => 'Boolean',
       'protocolo'             => 'Boolean',
       'cancelada'             => 'Boolean',
+      'sumary'                => 'Text',
       'created_at'            => 'Date',
       'updated_at'            => 'Date',
     );

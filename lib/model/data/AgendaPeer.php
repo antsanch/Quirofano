@@ -89,7 +89,7 @@ class AgendaPeer extends BaseAgendaPeer
     '500' => 'Bloqueada por Sistema'
   );
 
-  static public function getStatus() { 
+  static public function getStatus() {
     return self::$status;
   }
 
@@ -125,6 +125,15 @@ class AgendaPeer extends BaseAgendaPeer
     return array (
       'en' => array('','january','february','march','april','may','june','july','august','september','october','november','december'),
       'es' => array('','enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre')
+    );
+  }
+
+  static public function getDestinoPx() {
+    return array(
+      'Recuperación',
+      'Intensivos',
+      'Sala',
+      'Defunción'
     );
   }
 }

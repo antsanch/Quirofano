@@ -31,7 +31,7 @@
     $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
     //});
   });
-  </script> 
+  </script>
 <!-- Para poner calendario-->
 
 <!-- Para poner reloj-->

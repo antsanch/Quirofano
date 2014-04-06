@@ -30,7 +30,7 @@ class postoperatorioQuirofanoForm extends AgendaForm
   $this->widgetSchema['status'] = new sfWidgetFormInputHidden();
   $this->widgetSchema['status']->setAttribute('value', '100');
   $this->setWidget('destino_px', new sfWidgetFormChoice(array(
-    'choices' => array('Recuperación', 'Intensivos', 'Sala', 'Defunción'),
+    'choices' => AgendaPeer::getDestinoPx(),
     'expanded' => true
   )));
   $this->setWidget('clasificacionqx', new sfWidgetFormChoice(array(
@@ -41,12 +41,13 @@ class postoperatorioQuirofanoForm extends AgendaForm
     /* Ajustes a los validadores */
   $this->validatorSchema['egreso']->setOption('required', true);
   $this->validatorSchema['egreso']->setMessage('required','Falta hora');
-  // Agregando las personas del transoperatorio
-  
-$this->widgetSchema['egreso']->setAttributes(array(
+  $this->widgetSchema['egreso']->setAttributes(array(
     'id' => 'datahora',
-  
+    'value' => date('H:i A')
+
   ));
+
+  // Agregando las personas del transoperatorio
   $transPersonal = $object->getPersonalTransoperatorio();
   $tmp = new sfForm();
 
@@ -60,7 +61,7 @@ $this->widgetSchema['egreso']->setAttributes(array(
     }
     $this->embedForm('temporal', $tmp);
   }
-  
+
   $this->validatorSchema['clasificacionqx']->setOption('required', true);
   $this->validatorSchema['clasificacionqx']->setMessage('required','Falta clasificación de la cirugía');
   }

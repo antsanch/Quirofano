@@ -74,6 +74,7 @@ abstract class BaseAgendaForm extends BaseFormPropel
       'show_in_index'         => new sfWidgetFormInputCheckbox(),
       'protocolo'             => new sfWidgetFormInputCheckbox(),
       'cancelada'             => new sfWidgetFormInputCheckbox(),
+      'sumary'                => new sfWidgetFormTextarea(),
       'created_at'            => new sfWidgetFormDateTime(),
       'updated_at'            => new sfWidgetFormDateTime(),
     ));
@@ -139,6 +140,7 @@ abstract class BaseAgendaForm extends BaseFormPropel
       'show_in_index'         => new sfValidatorBoolean(array('required' => false)),
       'protocolo'             => new sfValidatorBoolean(array('required' => false)),
       'cancelada'             => new sfValidatorBoolean(array('required' => false)),
+      'sumary'                => new sfValidatorString(array('required' => false)),
       'created_at'            => new sfValidatorDateTime(array('required' => false)),
       'updated_at'            => new sfValidatorDateTime(array('required' => false)),
     ));

@@ -98,14 +98,14 @@ class Agenda extends BaseAgenda {
     return $this->getStatus() == '-50' ? true: false;
   }
 
-  public function esmepalmado()
+  public function esEmpalmado()
   {
 
 
 
     return 0;
   }
-  
+
   protected function getIntervaloAtraso()
   {
     $hora = $this->getHora('H');
@@ -296,14 +296,18 @@ class Agenda extends BaseAgenda {
 
     return ucfirst($status[$this->getStatus()]);
   }
-  
+
   public function getempalmado()
   {
     foreach ($this as $cirugia) {
     }
     return null;
   }
-  
+
+  public function getInicioTimestamp() {
+    return strtotime(sprintf('%s %s', $this->getProgramacion('d-m-Y'), $this->getHora()));
+  }
+
   public function writeProcedimientos() {
     $result = '';  $i = 1;
     foreach ($this->getProcedimientocirugias() as $procedimiento) {
@@ -314,13 +318,76 @@ class Agenda extends BaseAgenda {
       $result .=' region = '.$procedimiento->getregion();
       $result .=' detalles = '.$procedimiento->getdetalles();
       $result .=' Servicio = '.$procedimiento->getservicioId();
-      $result .=' ||| '; 
+      $result .=' ||| ';
 
           }
     return $result;
   }
 
+ /* getProtocoloText
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-05
+  */
+  public function getProtocoloText()
+  {
+    return $this->getProtocolo() ? 'Sí' : 'No';
+  }
+
+ /* getReintervencionText
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-05
+  */
+  public function getReintervencionText()
+  {
+    return $this->getReintervencion() ? 'Sí' : 'No';
+  }
+
+  public function getTiempoFueraText()
+  {
+    return $this->getTiempoFuera() ? 'Sí' : 'No';
+  }
+
+  public function getReqHemoderiv()
+  {
+    return parent::getReqHemoderiv() ? parent::getReqHemoderiv() : 'Ninguno';
+  }
+
+  public function getReqLaboratorio()
+  {
+    return parent::getReqLaboratorio() ? parent::getReqLaboratorio() : 'Ninguno';
+  }
+
+  public function getRequerimiento()
+  {
+    return parent::getRequerimiento() ? parent::getRequerimiento() : 'Ninguno';
+  }
+
+  public function getProcedencia()
+  {
+    return parent::getProcedencia() ? parent::getProcedencia() : 'Desconocido';
+  }
+
+  public function getDestinoPxText() {
+    $values = AgendaPeer::getDestinoPx();
+    return $values[$this->getDestinoPx()];
+  }
+
   public function doSave(PropelPDO $con) {
+    switch ($this->getStatus()) {
+      case 1:
+      $this->setLastTime($this->getInicioTimestamp());
+      break;
+
+      case 10:
+      $this->setLastTime($this->getIngreso());
+      break;
+
+      case 100:
+      $this->setLastTime($this->getEgreso());
+      break;
+    }
+
+    $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
     parent::doSave($con);
   }/**/
 } // Agenda
