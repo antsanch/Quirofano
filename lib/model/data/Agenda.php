@@ -26,6 +26,27 @@ class Agenda extends BaseAgenda {
     return $this->getId().' '.$this->getProgramacion('d-M-Y').' a las '.$this->getHora('h:i A');
   }
 
+ /* doSave - Extiende las acciones de guardado nativas de la clase
+  */
+  public function doSave(PropelPDO $con) {
+    switch ($this->getStatus()) {
+      case 1:
+      $this->setLastTime($this->getInicioTimestamp());
+      break;
+
+      case 10:
+      $this->setLastTime($this->getIngreso());
+      break;
+
+      case 100:
+      $this->setLastTime($this->getEgreso());
+      break;
+    }
+
+    $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
+    parent::doSave($con);
+  }/**/
+
   public function getClasses()
   {
     $classes = array();
@@ -79,6 +100,22 @@ class Agenda extends BaseAgenda {
     return $return;
   }
 
+ /* getInicioAtrasado - Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
+  *                     si ya inicio se almacena en un campo.
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-06
+  */
+  public function getInicioAtrasado()
+  {
+    return date('U') - $this->getInicioTimestamp();
+    //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
+//~
+    //~ $now = new DateTime('now');
+    //~ $programa = new DateTime($this->getInicioTimestamp('Y-m-d H:i:s'));
+    //~ $i = date_diff($programa, $now);
+    //~ return $i->format('%y años, %m meses, %d dias, %h horas, %i minutos, %s segundos %R');
+  }
+
   public function getHoraMostrar() {
     if ($this->getStatus() >= '100') {
       return $this->getEgreso('h:i A')." [S]";
@@ -100,9 +137,6 @@ class Agenda extends BaseAgenda {
 
   public function esEmpalmado()
   {
-
-
-
     return 0;
   }
 
@@ -304,8 +338,8 @@ class Agenda extends BaseAgenda {
     return null;
   }
 
-  public function getInicioTimestamp() {
-    return strtotime(sprintf('%s %s', $this->getProgramacion('d-m-Y'), $this->getHora()));
+  public function getInicioTimestamp($format = 'U') {
+    return date($format, strtotime(sprintf('%s %s', $this->getProgramacion('d-m-Y'), $this->getHora())));
   }
 
   public function writeProcedimientos() {
@@ -371,23 +405,4 @@ class Agenda extends BaseAgenda {
     $values = AgendaPeer::getDestinoPx();
     return $values[$this->getDestinoPx()];
   }
-
-  public function doSave(PropelPDO $con) {
-    switch ($this->getStatus()) {
-      case 1:
-      $this->setLastTime($this->getInicioTimestamp());
-      break;
-
-      case 10:
-      $this->setLastTime($this->getIngreso());
-      break;
-
-      case 100:
-      $this->setLastTime($this->getEgreso());
-      break;
-    }
-
-    $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
-    parent::doSave($con);
-  }/**/
 } // Agenda

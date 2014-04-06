@@ -214,6 +214,10 @@
       Datos de la programacion de la cirugia
     </div>
 
+    <div class="cellData cols12" >
+      <div class="value" >Esta cirugia tiene <?php echo $cirugia->getInicioAtrasado() ?> de retraso</div>
+    </div>
+
     <div class='cellData cols02'>
       <div class='label'>Quirofano</div>
       <div class='value'><?php echo $cirugia->getQuirofano() ?></div>
