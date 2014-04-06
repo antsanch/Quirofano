@@ -2,7 +2,7 @@
   <tr class="<?php echo $cirugia->getClasses() ?>">
 <?php else: ?>
  <tr class="diferido cxtipo_1 convenio1 diferida">
-<?php endif ?>  
+<?php endif ?>
 
     <td style="width: 42px">
       <div class="icons clearfix">
@@ -10,12 +10,12 @@
         <div class="convenio" title="<?php echo $cirugia->getatencionId() ?>"></div>
       </div>
     </td>
- 
+
     <?php if($cirugia->getCancelada() == false): ?>
     <td><div class="atraso" title="<?php echo $cirugia->getTiempoDiferido() ?>"></div></td>
     <?php else: ?>
     <td></td>
-    <?php endif ?>  
+    <?php endif ?>
 
     <td><?php echo $cirugia->getProgramacion('Y-m-d') ?></td></div></td>
     <td><?php echo $cirugia->getHora()?></td>
@@ -23,7 +23,7 @@
     <td><?php echo $cirugia->getRegistro() ?></td>
     <td><?php echo $cirugia->getPacienteName() ?></td>
     <td><?php echo $cirugia->getDiagnostico() ?></td>
-    <td><?php 
+    <td><?php
       $i = 1;
       foreach ($cirugia->getProcedimientocirugias() as $procedimiento) {
          echo "Procedimiento: " .$i++ ." id = ".$procedimiento->getId() ." cie9mc = ".$procedimiento->getcie9mc();
@@ -35,8 +35,9 @@
 
     <td><?php echo $cirugia->getPrograma() ?></td>
      <td>
+      <a href="<?php echo url_for('agenda/details?id='.$cirugia->getId()) ?>" title="Detalles"><div>[D]</div></a>
     <?php if($cirugia->getCancelada() == true): ?>
-      
+
     <?php elseif($cirugia->getStatus() < 0 ): ?>
       <a href="<?php echo url_for('agenda/pxsolicitado?id='.$cirugia->getId()) ?>" title="Paciente en preoperatorio"><div class="button"></div></a>
       <a href="<?php echo url_for('agenda/reprogramar?slug='.$slug.'&id='.$cirugia->getId()) ?>" rel="facebox" title="Modificar"><div class="modificar"></div></a>

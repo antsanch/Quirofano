@@ -16,6 +16,10 @@
     background: lightblue;
   }
 
+  .trans {
+    background: lightred;
+  }
+
   .cellData {
     float: left;
     margin: 1px 4px;
