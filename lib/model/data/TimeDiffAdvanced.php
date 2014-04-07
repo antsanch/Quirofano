@@ -20,11 +20,16 @@ class TimeDiffAdvanced {
 
   public function __construct($start, $end = null) {
     if (is_string($start)) $this->start = new DateTime($start);
-    if (null === $end || is_string($end)) {
+    if (null === $end) {
       $this->end = new DateTime('now');
     }
+    elseif (is_string($end)) {
+      $this->end = new DateTime($end);
+    }
+
     $this->interval = $this->end->diff($this->start);
     $this->format = $this->getValues();
+    //print_r($this->format);
   }
 
   public function pluralize($num, $string) {
@@ -55,7 +60,7 @@ class TimeDiffAdvanced {
     return $format;
   }
 
-  public function format()
+  public function format($string = null)
   {
     if (is_array($this->format)) {
       if (count($this->format) > 1) {

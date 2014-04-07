@@ -9,6 +9,13 @@
  */
 class agendaActions extends sfActions
 {
+  public function executeUpgrade() {
+    $cirugias = AgendaQuery::create()->find();
+
+    foreach ($cirugias as $cx) {
+      $cx->save();
+    }
+  }
 
   /*Actión para el index inicial, filtra por quirofanos activos*/
   public function executeIndex(sfWebRequest $request)
@@ -22,9 +29,8 @@ class agendaActions extends sfActions
 
   }
 
-
 /*Actión para mostrar quirofanos ambulatorios y activos*/
- public function executeAmbulatorio(sfWebRequest $request)
+  public function executeAmbulatorio(sfWebRequest $request)
   {
     $this->Quirofanos = QuirofanoQuery::create()
       ->filterByactivo(1)
@@ -79,11 +85,6 @@ class agendaActions extends sfActions
         /*Tomamos los valores del form enviado
         Esto nos ayudara a evaluar si se empalman con alguna cirugía
         Anteriormente programada*/
-/*
-        echo "<pre>";
-        print_r($this->form->getValues());
-        echo "</pre>";
-        die('ya murio'); */
 
         $ide = $this->form->getValue("id");
         $horapropuesta = $this->form->getValue("hora");                               //Tomamos la hora propuesta
