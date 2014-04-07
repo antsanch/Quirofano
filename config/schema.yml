@@ -13,6 +13,8 @@ propel:
     programacion:         { type: date }
     fechaestado:          { type: date }
     hora:                 { type: time }
+    retraso_inicial:      { type: varchar(32) }
+    tiempo_total:         { type: varchar(32) }
     horaestado:           { type: time }
     inicio:               { type: timestamp }
     last_time:            { type: timestamp }

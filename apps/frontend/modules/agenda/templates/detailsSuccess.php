@@ -146,8 +146,8 @@
     </div>
 
     <div class='cellData cols03'>
-      <div class='label'>Tiempo de retraso</div>
-      <div class='value'><?php echo $cirugia->getTiempoDiferido() ?> </div>
+      <div class='label'>Retraso al iniciar</div>
+      <div class='value'><?php echo $cirugia->getRetrasoInicial() ?> </div>
     </div>
 
     <div class='cellData cols03'>
@@ -214,9 +214,11 @@
       Datos de la programacion de la cirugia
     </div>
 
+<?php if($cirugia->tieneRetraso()): ?>
     <div class="cellData cols12" >
       <div class="value" >Esta cirugia tiene <?php echo $cirugia->getInicioAtrasado() ?> de retraso</div>
     </div>
+<?php endif; ?>
 
     <div class='cellData cols02'>
       <div class='label'>Quirofano</div>

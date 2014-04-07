@@ -10,57 +10,65 @@
  * @return string
  */
 class TimeDiffAdvanced {
+  protected $start;
 
-  public function __construct($start, $end=null) {
-    if(!($start instanceof DateTime)) {
-        $start = new DateTime($start);
-    }
+  protected $end;
 
-    if($end === null) {
-        $end = new DateTime();
-    }
+  protected $interval;
 
-    if(!($end instanceof DateTime)) {
-        $end = new DateTime($start);
-    }
+  protected $format;
 
-    $interval = $end->diff($start);
-    $doPlural = function($nb,$str){return $nb>1?$str.'s':$str;}; // adds plurals
-
-    $format = array();
-    if($interval->y !== 0) {
-        $format[] = "%y ".$doPlural($interval->y, "año");
+  public function __construct($start, $end = null) {
+    if (is_string($start)) $this->start = new DateTime($start);
+    if (null === $end || is_string($end)) {
+      $this->end = new DateTime('now');
     }
-    if($interval->m !== 0) {
-        $format[] = "%m ".$doPlural($interval->m, "mes");
-    }
-  if($interval->d !== 0) {
-        $format[] = "%d ".$doPlural($interval->d, "dia");
-    }
-    if($interval->h !== 0) {
-        $format[] = "%h ".$doPlural($interval->h, "hora");
-    }
-    if($interval->i !== 0) {
-        $format[] = "%i ".$doPlural($interval->i, "minuto");
-    }
-    if($interval->s !== 0) {
-        if(!count($format)) {
-            return "menos de 1 minuto";
-        } else {
-            $format[] = "%s ".$doPlural($interval->s, "segundo");
-        }
-    }
-
-    // We use the two biggest parts
-    if(count($format) > 1) {
-        $format = array_shift($format)." and ".array_shift($format);
-    } else {
-        $format = array_pop($format);
-    }
-
-    // Prepend 'since ' or whatever you like
-    return $interval->format($format);
+    $this->interval = $this->end->diff($this->start);
+    $this->format = $this->getValues();
   }
 
+  public function pluralize($num, $string) {
+    $s = $string == 'mes' ? 'es' : 's';
+    return $num > 1 ? $string.$s : $string;
+  }
+
+  public function isDelayed() {
+    return $this->interval->format('%R') == '+' ? true: false;
+  }
+
+  public function getValues() {
+    $format = array();
+    if ($this->interval->y !== 0) $format[] = "%y ".$this->pluralize($this->interval->y, "año");
+    if ($this->interval->m !== 0) $format[] = "%m ".$this->pluralize($this->interval->m, "mes");
+    if ($this->interval->d !== 0) $format[] = "%d ".$this->pluralize($this->interval->d, "dia");
+    if ($this->interval->h !== 0) $format[] = "%h ".$this->pluralize($this->interval->h, "hora");
+    if ($this->interval->i !== 0) $format[] = "%i ".$this->pluralize($this->interval->i, "minuto");
+    if ($this->interval->s !== 0) {
+      if (!count($format)) {
+        return "menos de 1 minuto";
+      }
+      else {
+        $format[] = "%s ".$this->pluralize($this->interval->s, "segundo");
+      }
+    }
+
+    return $format;
+  }
+
+  public function format()
+  {
+    if (is_array($this->format)) {
+      if (count($this->format) > 1) {
+        $format = array_shift($this->format)." y ".array_shift($this->format);
+      }
+      else {
+        $format = array_pop($this->format);
+      }
+      return $this->interval->format($format);
+    }
+    elseif (is_string($this->format)) {
+      return $this->format;
+    }
+  }
 }
 

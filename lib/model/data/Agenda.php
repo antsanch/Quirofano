@@ -36,6 +36,8 @@ class Agenda extends BaseAgenda {
 
       case 10:
       $this->setLastTime($this->getIngreso());
+      $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
+      $this->setRetrasoInicial($int->format());
       break;
 
       case 100:
@@ -47,6 +49,8 @@ class Agenda extends BaseAgenda {
     parent::doSave($con);
   }/**/
 
+ /* getClasses - Genera classes para los renglones de la agenda principal
+  */
   public function getClasses()
   {
     $classes = array();
@@ -76,7 +80,7 @@ class Agenda extends BaseAgenda {
     $classes['status'] = $status[$this->getStatus()];
 
     return trim(implode(' ', $classes));
-  }
+  } /* getClasses */
 
   public function getQuirofanoSlug()
   {
@@ -107,13 +111,19 @@ class Agenda extends BaseAgenda {
   */
   public function getInicioAtrasado()
   {
-    return date('U') - $this->getInicioTimestamp();
-    //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
-//~
-    //~ $now = new DateTime('now');
-    //~ $programa = new DateTime($this->getInicioTimestamp('Y-m-d H:i:s'));
-    //~ $i = date_diff($programa, $now);
-    //~ return $i->format('%y años, %m meses, %d dias, %h horas, %i minutos, %s segundos %R');
+    if ($this->getStatus() != 1) {
+      return $this->getRetrasoInicial();
+    }
+    $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
+    return $int->format();
+  }
+
+  public function tieneRetraso() {
+    if ($this->getStatus() == 1) {
+      $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
+      return $int->isDelayed() ? false : true;
+    }
+    return false;
   }
 
   public function getHoraMostrar() {
