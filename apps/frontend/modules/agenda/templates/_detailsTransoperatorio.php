@@ -1,6 +1,12 @@
   <div class="tableData trans detail clearfix" >
     <div class="head" >Detalles del Transoperatorio</div>
 
+<?php if($cirugia->getStatus() == 10): ?>
+    <div class="cellData cols12" >
+      <div class="value" >Esta cirugia tiene una duracion de <?php echo $cirugia->getTiempoTotal('format') ?></div>
+    </div>
+<?php endif; ?>
+
 <!-- Primer Renglon -->
     <div class='cellData cols03'>
       <div class='label'>Fecha de Inicio</div>
@@ -14,7 +20,7 @@
 
     <div class='cellData cols03'>
       <div class='label'>Retraso al iniciar</div>
-      <div class='value'><?php echo $cirugia->getRetrasoInicial() ?> </div>
+      <div class='value'><?php echo $cirugia->getRetrasoInicial(true) ?> </div>
     </div>
 
     <div class='cellData cols03'>

@@ -41,6 +41,7 @@ class Agenda extends BaseAgenda {
 
       case 100:
       $this->setLastTime($this->getEgreso());
+      $this->setTiempoTotal($this->calculaDuracion());
       break;
     }
 
@@ -53,44 +54,62 @@ class Agenda extends BaseAgenda {
     parent::doSave($con);
   } /**/
 
-
+ /* calculaRetrasoInicio  Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
+  *                       si ya inicio se almacena en un campo.
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-06
+  */
   public function calculaRetrasoInicio() {
-    //~ switch ($this->getStatus()) {
+    switch ($this->getStatus()) {
     // Programada o diferida muestra el intervalo con el tiempo actual
-      //~ case -50:
-      //~ case 1:
+      case -50:
+      case 1:
         return time() > $this->getInicioTimestamp() ? time() - $this->getInicioTimestamp() : 0;
 
     // Transoperatorio o finalizada muestra el intervalo hasta el inicio de la cirugia
-      //~ case 10:
-      //~ case 100:
-        //~ return ($this->getIngreso('U') > $this->getInicioTimestamp()) ? $this->getIngreso('U') - $this->getInicioTimestamp() : 0;
-    //~ }
+      case 10:
+      case 100:
+        return ($this->getIngreso('U') > $this->getInicioTimestamp()) ? $this->getIngreso('U') - $this->getInicioTimestamp() : 0;
+    }
+  }
 
-    //~ switch ($this->getStatus()) {
-    //~ // Programada o diferida muestra el intervalo con el tiempo actual
-      //~ case -50:
-      //~ case 1:
-        //~ if (time() > $this->getInicioTimestamp()) {
-          //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
-          //~ return $int->format();
-        //~ }
-        //~ else return 'A tiempo';
-//~
-    //~ // Transoperatorio o finalizada muestra el intervalo hasta el inicio de la cirugia
-      //~ case 10:
-      //~ case 100:
-        //~ if ($this->getIngreso('U') > $this->getInicioTimestamp()) {
-          //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'), $this->getIngreso());
-          //~ return $int->format();
-        //~ }
-        //~ else return 'A Tiempo';
-    //~ }
+ /* calculaDuracion  Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
+  *                       si ya inicio se almacena en un campo.
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-06
+  */
+  public function calculaDuracion() {
+    switch ($this->getStatus()) {
+    // Programada o diferida retornan null
+      case -50:
+      case 1:
+        return null;
+
+    // Transoperatorio muestra el tiempo que lleva la cirugia
+      case 10:
+        return time() > $this->getInicioTimestamp() ? time() - $this->getInicioTimestamp() : 0;
+
+    // Transoperatorio o finalizada muestra el intervalo hasta el inicio de la cirugia
+      case 100:
+        return ($this->getEgreso('U') > $this->getIngreso('U')) ? $this->getEgreso('U') - $this->getIngreso('U') : 0;
+    }
   }
 
   public function getRetrasoInicial($format = false)
   {
     $retraso = $this->getStatus() > 1 ? parent::getRetrasoInicial() : $this->calculaRetrasoInicio();
+    if (!$retraso) return 'A tiempo';
+    if (true == $format) {
+      $i = new TimeDiffAdvanced(date('Y-m-d H:i:s', 0), date('Y-m-d H:i:s', $retraso));
+      return $i->format();
+    }
+    return $retraso;
+  }
+
+  public function getTiempoTotal($format = false)
+  {
+    $retraso = $this->getStatus() > 10 ? parent::getTiempoTotal() : $this->calculaDuracion();
+    if (!$retraso) return 'A tiempo';
     if (true == $format) {
       $i = new TimeDiffAdvanced(date('Y-m-d H:i:s', 0), date('Y-m-d H:i:s', $retraso));
       return $i->format();
@@ -152,25 +171,6 @@ class Agenda extends BaseAgenda {
     }
 
     return $return;
-  }
-
- /* getInicioAtrasado - Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
-  *                     si ya inicio se almacena en un campo.
-  * @autor: Antonio Sánchez Uresti
-  * @date:  2014-04-06
-  */
-  public function getInicioAtrasado()
-  {
-    //~ if ($this->getStatus() != 1) {
-      //~ return $this->getRetrasoInicial();
-    //~ }
-    //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
-    //~ return $int->format();
-
-    switch ($this->getStatus()) {
-      case -50:
-      case 1:
-    }
   }
 
   public function tieneRetraso() {

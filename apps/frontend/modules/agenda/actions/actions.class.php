@@ -318,6 +318,8 @@ $mes['max'] = $fechafinal->format("Y-m-d");
     $this->cirugia = AgendaQuery::create()
       ->joinWith('Personalcirugia', Criteria::LEFT_JOIN)
       ->findPk($request->getParameter('id'));
+
+    $this->forward404Unless($this->cirugia, sprintf('No existe una cirugia con ese id: (%s).', $request->getParameter('id')));
   }
 // Detalles de una cirugia
 
@@ -429,8 +431,8 @@ public function executeTransoperatorio(sfWebRequest $request)
   }
 /*Botón PO, saber si esta listo para la cirugía*/
 
-/**Reprogramar la cirugía*/
- public function executeReprogramar(sfWebRequest $request)
+// Reprogramar la cirugía*/
+  public function executeReprogramar(sfWebRequest $request)
   {
     $this->forward404Unless($request->hasParameter('id'));
     $agenda = AgendaQuery::create()->findPk($request->getParameter('id'));
@@ -471,11 +473,10 @@ public function executeTransoperatorio(sfWebRequest $request)
       }
     }
     //$this->form->setSalaWidget($request->getParameter('slug'));
-  }
-  /**Reprogramar la cirugía*/
+  } // Reprogramar la cirugía
 
-/*Cancelar la cirugía*/
- public function executeCancelar(sfWebRequest $request)
+// Cancelar la cirugía
+  public function executeCancelar(sfWebRequest $request)
   {
   $this->forward404unless($request->hasParameter('id'));
   $this->cirugia = AgendaQuery::create()->findPk($request->getParameter('id'));
@@ -485,8 +486,7 @@ public function executeTransoperatorio(sfWebRequest $request)
       $this->cirugia->setCancelada(true)->save();
       $this->redirect('agenda/show?slug='.$this->Quirofano->getSlug().'&date='.date('Y-m-d', strtotime("now")));
     }
-  }
-/*Cancelar la cirugía*/
+  } // Cancelar la cirugía
 
 /*Busqeda por registro*/
  public function executeBusqueda(sfWebRequest $request) {
@@ -494,6 +494,7 @@ public function executeTransoperatorio(sfWebRequest $request)
     $this->cirugias = AgendaQuery::create()
       ->filterBySumary('%'.$this->term.'%')
       ->filterByCancelada(false)
+      ->orderByStatus()
       ->find();
   }
 /*Busqueda por registro*/

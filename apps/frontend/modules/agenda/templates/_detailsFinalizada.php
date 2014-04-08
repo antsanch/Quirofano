@@ -14,7 +14,7 @@
 
     <div class='cellData cols03'>
       <div class='label'>Duración</div>
-      <div class='value'><?php echo $cirugia->getTiempoFueraText() ?> </div>
+      <div class='value'><?php echo $cirugia->getTiempoTotal(true) ?> </div>
     </div>
 
     <div class='cellData cols03'>

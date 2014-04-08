@@ -10,6 +10,10 @@ Programar:
   url:   /:slug/programar/*
   param: { module: agenda, action: programar }
 
+detallesCirugia:
+  url:   /detalles/cirugia/:id
+  param: { module: agenda, action: details }
+
 por_quirofano:
   url:   /agenda-quirofano/:quirofano/:date
   param: { module: agenda, action: quirofano }
