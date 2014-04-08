@@ -36,7 +36,7 @@ class Agenda extends BaseAgenda {
 
       case 10:
       $this->setLastTime($this->getIngreso());
-      $this->setRetrasoInicial($this->getTiempoEspera());
+      $this->setRetrasoInicial($this->calculaRetrasoInicio());
       break;
 
       case 100:
@@ -46,35 +46,58 @@ class Agenda extends BaseAgenda {
 
     // Se asegura de calcular el retraso inicial para todas las cirugias les falte,
     if ($this->getStatus() > 1 && $this->getRetrasoInicial() == '') {                  // Cirugias avanzadas con el campo vacio
-      $this->setRetrasoInicial($this->getTiempoEspera());
+      $this->setRetrasoInicial($this->calculaRetrasoInicio());
     }
 
     $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
     parent::doSave($con);
-  }/**/
+  } /**/
 
 
-  public function getTiempoEspera() {
-    switch ($this->getStatus()) {
+  public function calculaRetrasoInicio() {
+    //~ switch ($this->getStatus()) {
     // Programada o diferida muestra el intervalo con el tiempo actual
-      case -50:
-      case 1:
-        if (date('U') > $this->getInicioTimestamp()) {
-          $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
-          return $int->format();
-        }
-        else return 'A tiempo';
+      //~ case -50:
+      //~ case 1:
+        return time() > $this->getInicioTimestamp() ? time() - $this->getInicioTimestamp() : 0;
 
     // Transoperatorio o finalizada muestra el intervalo hasta el inicio de la cirugia
-      case 10:
-      case 100:
-        if ($this->getIngreso('U') > $this->getInicioTimestamp()) {
-          $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'), $this->getIngreso());
-          return $int->format();
-        }
-        else return 'A Tiempo';
-    }
+      //~ case 10:
+      //~ case 100:
+        //~ return ($this->getIngreso('U') > $this->getInicioTimestamp()) ? $this->getIngreso('U') - $this->getInicioTimestamp() : 0;
+    //~ }
+
+    //~ switch ($this->getStatus()) {
+    //~ // Programada o diferida muestra el intervalo con el tiempo actual
+      //~ case -50:
+      //~ case 1:
+        //~ if (time() > $this->getInicioTimestamp()) {
+          //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
+          //~ return $int->format();
+        //~ }
+        //~ else return 'A tiempo';
+//~
+    //~ // Transoperatorio o finalizada muestra el intervalo hasta el inicio de la cirugia
+      //~ case 10:
+      //~ case 100:
+        //~ if ($this->getIngreso('U') > $this->getInicioTimestamp()) {
+          //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'), $this->getIngreso());
+          //~ return $int->format();
+        //~ }
+        //~ else return 'A Tiempo';
+    //~ }
   }
+
+  public function getRetrasoInicial($format = false)
+  {
+    $retraso = $this->getStatus() > 1 ? parent::getRetrasoInicial() : $this->calculaRetrasoInicio();
+    if (true == $format) {
+      $i = new TimeDiffAdvanced(date('Y-m-d H:i:s', 0), date('Y-m-d H:i:s', $retraso));
+      return $i->format();
+    }
+    return $retraso;
+  }
+
 
  /* getClasses - Genera classes para los renglones de la agenda principal
   */
@@ -138,11 +161,16 @@ class Agenda extends BaseAgenda {
   */
   public function getInicioAtrasado()
   {
-    if ($this->getStatus() != 1) {
-      return $this->getRetrasoInicial();
+    //~ if ($this->getStatus() != 1) {
+      //~ return $this->getRetrasoInicial();
+    //~ }
+    //~ $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
+    //~ return $int->format();
+
+    switch ($this->getStatus()) {
+      case -50:
+      case 1:
     }
-    $int = new TimeDiffAdvanced($this->getInicioTimestamp('Y-m-d H:i:s'));
-    return $int->format();
   }
 
   public function tieneRetraso() {

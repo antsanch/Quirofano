@@ -9,7 +9,7 @@
 
 <?php if($cirugia->tieneRetraso()): ?>
     <div class="cellData cols12" >
-      <div class="value" >Esta cirugia tiene <?php echo $cirugia->getInicioAtrasado() ?> de retraso</div>
+      <div class="value" >Esta cirugia tiene <?php echo $cirugia->getRetrasoInicial('format') ?> de retraso</div>
     </div>
 <?php endif; ?>
 
