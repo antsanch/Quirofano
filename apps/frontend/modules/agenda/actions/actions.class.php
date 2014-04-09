@@ -320,27 +320,24 @@ $mes['max'] = $fechafinal->format("Y-m-d");
       ->findPk($request->getParameter('id'));
 
     $this->forward404Unless($this->cirugia, sprintf('No existe una cirugia con ese id: (%s).', $request->getParameter('id')));
-  }
-// Detalles de una cirugia
+  } // Detalles de una cirugia
 
-/*Mostramos la agenda para el dia actual*/
-public function executeShow(sfWebRequest $request)
+// Mostramos la agenda para el dia actual
+  public function executeShow(sfWebRequest $request)
   {
-
     $this->Quirofano = QuirofanoQuery::create()
       ->findOneBySlug($request->getParameter('slug'));
-    $offset = $request->getParameter('offset', 0) * 3600;
+    //$offset = $request->getParameter('offset', 0) * 3600;
     $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
     //$hinicio = $request->getParameter('hora');
     //$hfinal = $request->getParameter('tiempo_est');
-    $nombre = $this->Quirofano->getslug();
+    //$nombre = $this->Quirofano->getslug();
     $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($this->Quirofano->getid())
-      ->filterByprogramacion($this->date)
+      ->filterByLastTime(array('max' => $this->date, 'min' => strtotime(date('Y-m-d', $this->date).'- 1 day')))
       ->orderByStatus('asc')
       ->find();
-  }
-/*Mostramos la agenda para el dia actual*/
+  } // Mostramos la agenda para el dia actual
 
 /*Mostrar las diferentes salas del quirofano*/
 public function executeInspeccionar(sfWebRequest $request)

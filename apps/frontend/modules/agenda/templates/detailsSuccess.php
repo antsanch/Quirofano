@@ -1,3 +1,7 @@
+<?php slot('titulo') ?>
+  <title>Detalles de la cirugia de <?php echo $cirugia->getPacienteName() ?> | SIGA-HU </title>
+<?php end_slot() ?>
+
 <style>
   .detail {
     border: 1px solid black;
