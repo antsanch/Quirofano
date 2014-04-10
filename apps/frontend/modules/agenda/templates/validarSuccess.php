@@ -1,6 +1,7 @@
 <style>
   .cxrow td{
-    background: pink;
+    background: white;
+    border-bottom: 1px solid black;
     margin: 1px 0px;
   }
 
@@ -30,7 +31,7 @@
 
 <?php if(isset($cirugias)): ?>
     <div class="area cols12">
-      <table id="results" width="100%">
+      <table id="results" width="100%" border="0" cellspacing="0">
 <?php foreach($cirugias as $cx): ?>
         <tr class="<?php echo $cx->getClasses() ?>">
           <td><input type="radio" name="cirugia" value="<?php echo $cx->getId() ?>"></td>
@@ -39,16 +40,22 @@
           <td><?php echo $cx->getLastTime('d-m-Y H:i') ?> </td>
           <td><?php echo $cx->getEspecialidad() ?> </td>
           <td><?php echo $cx->getDiagnostico() ?> </td>
-<?php if($cx->getStatus() > 1): ?>
+<?php switch($cx->getStatus()): ?>
+<?php case -50 ?>
+<?php case 1 ?>
           <td><a href="<?php echo url_for('agenda/reprogramar?id='.$cx->getId()) ?>">Reprogramar</a></td>
-<?php else: ?>
+<?php break ?>
+<?php case 10?>
+          <td>En cirugia</td>
+<?php break ?>
+<?php case 100?>
           <td><a href="<?php echo url_for(sprintf('agenda/programar?slug=%s&cx=%s',$cx->getQuirofanoSlug(), $cx->getId())) ?>">Reintervenir</a></td>
-<?php endif; ?>
+<?php endswitch; ?>
 
-<!--
+
           <td><?php echo $cx->getStatus() ?> </td>
           <td><?php echo $cx->getClasses() ?> </td>
--->
+
         </tr>
 <?php endforeach; ?>
       </table>
