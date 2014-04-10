@@ -1,22 +1,3 @@
-<?php function print_head() {
-$head = <<<HEAD
-   <tr>
-    <th colspan="2">Iconos</th>
-    <th>Fecha</th>
-    <th>Hora</th>
-    <th>Sala</th>
-    <th>Registro</th>
-    <th>Paciente</th>
-    <th>Diagnóstico</th>
-    <th>Procedimiento / Cirugía</th>
-    <th>Médico que programo</th>
-    <th>Acciones</th>
-  </tr>
-HEAD;
-    return $head;
-  }
-?>
-
 <?php use_stylesheet('/css/global/widescreen.css')?>
 <?php use_stylesheet('/css/global/styleAgenda.css')?>
 <?php use_javascript('/js/global/facebox.js')?>

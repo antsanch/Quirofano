@@ -1,3 +1,22 @@
+<?php function print_head() {
+$head = <<<HEAD
+   <tr>
+    <th colspan="2">Iconos</th>
+    <th>Fecha</th>
+    <th>Hora</th>
+    <th>Sala</th>
+    <th>Registro</th>
+    <th>Paciente</th>
+    <th>Diagnóstico</th>
+    <th>Procedimiento / Cirugía</th>
+    <th>Médico que programo</th>
+    <th>Acciones</th>
+  </tr>
+HEAD;
+    return $head;
+  }
+?>
+
 <!--    Va todo el menu de arriba-->
 <div id="headtable">
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/index') ?>">&nbsp;&nbsp;Lista general de quirofanos&nbsp;&nbsp;</a>

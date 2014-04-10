@@ -9,6 +9,7 @@
  */
 class agendaActions extends sfActions
 {
+  /* actualiza todas las cirugias al formato actual de la base de datos */
   public function executeUpgrade() {
     $cirugias = AgendaQuery::create()->find();
 
@@ -26,7 +27,6 @@ class agendaActions extends sfActions
       ->find();
     $quirofano_id = $request->getParameter('quirofano');
     $date = $request->getParameter('date', 'today');
-
   }
 
 /*Actión para mostrar quirofanos ambulatorios y activos*/
@@ -41,7 +41,6 @@ class agendaActions extends sfActions
   }
 /*Actión para mostrar quirofanos ambulatorios y activos*/
 
-
 /*Actión para mostrar todos los quirofanos*/
  public function executeTquirofanos(sfWebRequest $request)
   {
@@ -51,13 +50,49 @@ class agendaActions extends sfActions
   }
 /*Actión para mostrar todos los quirofanos*/
 
-/*Actión de prueba*/
-  public function executeNew(sfWebRequest $request)
-  {
-    $this->form = new AgendaForm();
-  }
-/*Actión de prueba*/
+  // Actión de prueba
+  //~ public function executeNew(sfWebRequest $request)
+  //~ {
+    //~ $this->form = new AgendaForm();
+  //~ } // Actión de prueba
 
+  /* executeValidar Valida los datos antes de iniciar la captura de una nueva cirugia
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-09
+  */
+  public function executeValidar(sfWebRequest $request)
+  {
+    $this->search = $request->getParameter('search');
+    if ($request->getParameter('search') != null) {
+      $this->cirugias = AgendaQuery::create()
+        ->filterBySumary('%'.$request->getParameter('search').'%')
+        ->orderByStatus('Desc')
+        //->filterByStatus(array('1', '100', '-50'))
+        ->joinWith('Especialidad', Criteria::LEFT_JOIN)
+        ->find();
+    }
+  }
+
+
+ /* executeReporte
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-09
+  */
+  public function executeReporte(sfWebRequest $request)
+  {
+    //~ $this->filter = new AgendaFormFilter();
+    $this->filter = new reporteForm();
+    $this->cirugias = AgendaQuery::create()
+      //->filterByArray(array($request->getParameters()->getArray()))
+      ->find();
+
+    //~ echo "<pre>";
+    //~ //print_r (get_class_methods($request));
+    //~ print_r (get_class_methods($this->filter));
+    //~ print_r ($request->getGetParameters());
+    //~ echo "</pre>";
+
+  } // executeReporte
 
 
 /*Actión para programar la cirugía*/
@@ -334,7 +369,7 @@ $mes['max'] = $fechafinal->format("Y-m-d");
     //$nombre = $this->Quirofano->getslug();
     $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($this->Quirofano->getid())
-      ->filterByLastTime(array('max' => $this->date, 'min' => strtotime(date('Y-m-d', $this->date).'- 1 day')))
+      ->filterByLastTime(array('min' => $this->date, 'max' => strtotime(date('Y-m-d', $this->date).'+ 1 day')))
       ->orderByStatus('asc')
       ->find();
   } // Mostramos la agenda para el dia actual
@@ -433,8 +468,9 @@ public function executeTransoperatorio(sfWebRequest $request)
   {
     $this->forward404Unless($request->hasParameter('id'));
     $agenda = AgendaQuery::create()->findPk($request->getParameter('id'));
-      $Quirofano = QuirofanoQuery::create()
-        ->findOneById($agenda->getQuirofanoid());
+    $Quirofano = QuirofanoQuery::create()
+      ->findOneById($agenda->getQuirofanoid());
+
     if ($agenda->estaAtrasado() && !$agenda->esDiferido()) {
       $this->getUser()->setFlash('obligar', 'Esta cirugia tiene más de 24 Horas de atraso por lo que se debe marcar como diferida y especificar
       una causa, antes de poder reprogramarse');
@@ -485,7 +521,7 @@ public function executeTransoperatorio(sfWebRequest $request)
     }
   } // Cancelar la cirugía
 
-/*Busqeda por registro*/
+/*Busqueda por registro*/
  public function executeBusqueda(sfWebRequest $request) {
     $this->term = $request->getParameter('term');
     $this->cirugias = AgendaQuery::create()
