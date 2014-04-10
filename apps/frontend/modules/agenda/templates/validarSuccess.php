@@ -30,7 +30,7 @@
 
 <?php if(isset($cirugias)): ?>
     <div class="area cols12">
-      <table width="100%">
+      <table id="results" width="100%">
 <?php foreach($cirugias as $cx): ?>
         <tr class="<?php echo $cx->getClasses() ?>">
           <td><input type="radio" name="cirugia" value="<?php echo $cx->getId() ?>"></td>
@@ -39,8 +39,16 @@
           <td><?php echo $cx->getLastTime('d-m-Y H:i') ?> </td>
           <td><?php echo $cx->getEspecialidad() ?> </td>
           <td><?php echo $cx->getDiagnostico() ?> </td>
+<?php if($cx->getStatus() > 1): ?>
+          <td><a href="<?php echo url_for('agenda/reprogramar?id='.$cx->getId()) ?>">Reprogramar</a></td>
+<?php else: ?>
+          <td><a href="<?php echo url_for(sprintf('agenda/programar?slug=%s&cx=%s',$cx->getQuirofanoSlug(), $cx->getId())) ?>">Reintervenir</a></td>
+<?php endif; ?>
+
+<!--
           <td><?php echo $cx->getStatus() ?> </td>
           <td><?php echo $cx->getClasses() ?> </td>
+-->
         </tr>
 <?php endforeach; ?>
       </table>
@@ -53,3 +61,9 @@
   </form>
 </div>
 
+<script>
+  $('#results').on('click', 'tr', function() {
+    $(this).find('input').attr('selected', 'selected');
+
+  });
+</script>
