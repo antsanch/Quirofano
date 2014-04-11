@@ -381,12 +381,14 @@ class Agenda extends BaseAgenda {
 
   public function getPaciente(PropelPDO $con = null)
   {
-    if (parent::getPaciente()) {
-      return parent::getPaciente();
-    }
-    else {
+    /* Se comentan todas las lineas porque no hay tabla de pacientes disponible
+     * en un futuro cuando exista se actualizara la logica del metodo */
+    //~ if (parent::getPaciente()) {
+      //~ return parent::getPaciente();
+    //~ }
+    //~ else {
       return $this->getPacienteName();
-    }
+    //~ }
   }
 
   public function getVerboseStatus()

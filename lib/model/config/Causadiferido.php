@@ -19,4 +19,13 @@
  */
 class Causadiferido extends BaseCausadiferido
 {
+  /* functionname
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-10
+  */
+  public function getCodigos()
+  {
+    return $this->getCodigo().' - '.$this->getNombre();
+  }
+
 }

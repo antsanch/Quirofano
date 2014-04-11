@@ -19,4 +19,5 @@
  */
 class Especialidad extends BaseEspecialidad
 {
+
 }

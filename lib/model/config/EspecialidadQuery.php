@@ -19,4 +19,14 @@
  */
 class EspecialidadQuery extends BaseEspecialidadQuery
 {
+  /* functionname
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-10
+  */
+  public function filterByQuirurgicas()
+  {
+
+    return $this;
+  }
+
 }

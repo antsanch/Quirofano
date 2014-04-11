@@ -101,6 +101,7 @@ class agendaActions extends sfActions
     $this->quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug'));     //Obtenemos el Quirofano relacionado
     $this->forward404Unless($request->hasParameter('slug'));
     $this->form = new programarCirugiaForm();      //cargamos form
+    if ($request->getParameter('cx', null)) $this->form->getDatosPrevios($request->getParameter('cx'));
 
     //~ if ($request->isMethod('POST')) {
       //~ $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));

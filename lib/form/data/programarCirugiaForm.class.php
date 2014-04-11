@@ -11,6 +11,9 @@
 
 class programarCirugiaForm extends BaseAgendaForm
 {
+  // Cirugia previa relacionada con la nueva
+  protected $cx;
+
   public function configure()
   {
     $object = $this->getObject();
@@ -120,12 +123,12 @@ class programarCirugiaForm extends BaseAgendaForm
 
 
 
-        $this->widgetSchema['programacion'] = new sfWidgetFormInputText();
-        $this->widgetSchema['hora'] = new sfWidgetFormInputText();
-        $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
-        //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(
-      //'choices' => AgendaPeer::getDuracion()
-                //'id' => 'tiest'
+    $this->widgetSchema['programacion'] = new sfWidgetFormInputText();
+    $this->widgetSchema['hora'] = new sfWidgetFormInputText();
+    $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
+    //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(
+    //'choices' => AgendaPeer::getDuracion()
+      //'id' => 'tiest'
     //)));
 
     $this->widgetSchema['diagnostico_id'] = new sfWidgetFormInputHidden();
@@ -141,45 +144,56 @@ class programarCirugiaForm extends BaseAgendaForm
 //       $this->setWidget('tiempo_est', new sfWidgetFormChoice(array(
 //      'choices' => AgendaPeer::getDuracion()
 //    )));
+
         $this->widgetSchema['programacion']->setAttributes(array(
-                'id' => 'datepicker',
-                'placeholder' => 'año/mes/dia',
-                'class' => 'hasDatapicker'
-                //'data-source' => 'http://example.com/api/data'
+          'id' => 'datepicker',
+          'placeholder' => 'año/mes/dia',
+          'class' => 'hasDatapicker'
+          //'data-source' => 'http://example.com/api/data'
         ));
 
         $this->widgetSchema['tiempo_est']->setAttributes(array(
-                 'id' => 'tiest'
-
+           'id' => 'tiest'
         ));
         $this->widgetSchema['hora']->setAttributes(array(
-                'id' => 'datahora',
-
+          'id' => 'datahora',
         ));
 
         $this->widgetSchema['medico_name']->setAttributes(array(
           'planceholder' => 'Nombre del médico que programa la cirugia',
         ));
 
+        $this->setWidget('servicio', new sfWidgetFormPropelChoiceNestedSet(array(
+          'model' => 'Especialidad',
+          //'query_methods' => array('filterByQuirurgica'),
+          'criteria' => EspecialidadQuery::create()->filterByQuirurgica(true),
+          'label' => 'Especialidad:'
+        )));
+
         $this->widgetSchema['diagnostico']->setAttributes(array(
           'placeholder' => 'Diagnóstico del paciente o código CIE10',
-          'data-source' => 'http://example.com/api/data',
+          'data-source' => 'http://sigahu.com/api/clavecie',
           'data-field'  => 'diagnostico_id'
         ));
+
+        $this->setWidget('tipo_proc_id', new sfWidgetFormPropelChoice(array(
+          'model' => 'Procedimiento',
+        )));
+
         $this->widgetSchema->setLabels(array(
-                'paciente_name' => 'Nombre del Paciente:',
-                'diagnostico'   => 'Diágnostico',
-                'medico_name'   => 'Nombre del médico que programa la cirugía:',
-                'hora'          => 'Hora inicial',
-                'tipo_proc_id'  => 'Tipo de programación:',
-                'programacion'  => 'Programación',
-                'tiempo_est'    => 'Duración',
-                'riesgo_qx_pre' => 'Riesgo quirurgico:',
-                'req_insumos'   => 'Insumos indispensables:',
-                'req_anestesico'  => 'Requerimientos de Anestesiología:',
-                'req_hemoderiv'   => 'Hemoderivados Necesarios:',
-                'req_laboratorio' => 'Requisitos de laboratorio:',
-                'requerimiento'   => 'Otras necesidades:'
+          'paciente_name' => 'Nombre del Paciente:',
+          'diagnostico'   => 'Diágnostico',
+          'medico_name'   => 'Nombre del médico que programa la cirugía:',
+          'hora'          => 'Hora inicial',
+          'tipo_proc_id'  => 'Tipo de programación:',
+          'programacion'  => 'Programación',
+          'tiempo_est'    => 'Duración',
+          'riesgo_qx_pre' => 'Riesgo quirurgico:',
+          'req_insumos'   => 'Insumos indispensables:',
+          'req_anestesico'  => 'Requerimientos de Anestesiología:',
+          'req_hemoderiv'   => 'Hemoderivados Necesarios:',
+          'req_laboratorio' => 'Requisitos de laboratorio:',
+          'requerimiento'   => 'Otras necesidades:'
         ));
 
         //$this->widgetSchema['reintervencion'] = new sfWidgetFormChoice(array(
@@ -229,16 +243,11 @@ class programarCirugiaForm extends BaseAgendaForm
         $this->validatorSchema['req_anestesico']->setOption('required', true);
         $this->validatorSchema['req_anestesico']->setMessage('required','Falta anestesia');
     $this->getObject()->isNew() ?
-    $this->validatorSchema['programacion']->setOption('min', strtotime('today - 1 day')):
-    $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));
+      $this->validatorSchema['programacion']->setOption('min', strtotime('today - 1 day')):
+      $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));
     $this->validatorSchema['programacion']->setMessage('min','Fecha pasada');
     $this->validatorSchema['programacion']->setMessage('max','No se puede progrmar con mas de un mes de anticipación');
 
-$this->setWidget('tipo_proc_id' ,new sfWidgetFormPropelChoice(array(
-'model' => 'Procedimiento',
-
-        )
-));
   }
 
   public function setSalaWidget($quirofano) {
@@ -255,4 +264,31 @@ $this->setWidget('tipo_proc_id' ,new sfWidgetFormPropelChoice(array(
     return $this->widgetSchema['Procedimientocirugia']['newProcedimientocirugia'.$num];
     //return $this->widgetSchema['Procedimientocirugia'];
   }
+
+ /* getDatosPrevios Llena los datos de la cirugia con datos conocidos de cirugias pasadas
+  * @param:     $cx   Id de la cirugia anterior relacionada.
+  * @return:    El objeto para encadenamiento
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-10
+  */
+  public function getDatosPrevios($cx)
+  {
+    if (!$this->cx) $this->cx = AgendaQuery::create()->findPk($cx);
+    if ($this->cx) {
+      if (is_object($this->cx->getPaciente())) { // llenamos los valores desde el objeto ya existente
+        $this->widgetSchema['paciente_id']->setDefault($this->cx->getPaciente());
+        $this->widgetSchema['paciente_name']->setDefault($this->cx->getPaciente()->getNombre());
+      }
+      else { // llenamos los valores de los existentes en la cirugia previa
+        $this->widgetSchema['paciente_name']->setDefault($this->cx->getPacienteName());
+        $this->widgetSchema['edad']->setDefault($this->cx->getEdad());
+        $this->widgetSchema['genero']->setDefault($this->cx->getGenero());
+        $this->widgetSchema['registro']->setDefault($this->cx->getRegistro());
+      }
+      $this->widgetSchema['reintervencion']->setDefault(true); // Se marca como reintervención
+    }
+
+    return $this;
+  }
+
 }
