@@ -19,8 +19,10 @@
  */
 class AgendaPeer extends BaseAgendaPeer
 {
-
-
+  static public function getCirugiasSolapadas($array) {
+    
+  }
+  
   static $labels = array(
     'programacion' => 'Fecha:',
     'ingreso' => 'Ingreso a quirófano:',

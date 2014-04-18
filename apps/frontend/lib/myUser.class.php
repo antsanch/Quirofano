@@ -3,6 +3,23 @@
 //class myUser extends sfBasicSecurityUser
 class myUser extends sfGuardSecurityUser
 {
+  
+  /* functionname
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-16
+  */
+  public function setQuirofano($value)
+  {
+    $this->setAttribute('quirofano', $value, 'options');
+    return $this;
+  }
+  
+  public function getQuirofano($default = null)
+  {
+    return $this->getAttribute('quirofano', $default, 'options');
+  }
+  
+  
  /* hasBasicProfile
   * verifica que el usuario tenga completo un perfil basico
   * @autor: Antonio Sanchez Uresti

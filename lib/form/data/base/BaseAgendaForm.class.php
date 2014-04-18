@@ -79,6 +79,7 @@ abstract class BaseAgendaForm extends BaseFormPropel
       'sumary'                => new sfWidgetFormTextarea(),
       'created_at'            => new sfWidgetFormDateTime(),
       'updated_at'            => new sfWidgetFormDateTime(),
+      'version'               => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -147,6 +148,7 @@ abstract class BaseAgendaForm extends BaseFormPropel
       'sumary'                => new sfValidatorString(array('required' => false)),
       'created_at'            => new sfValidatorDateTime(array('required' => false)),
       'updated_at'            => new sfValidatorDateTime(array('required' => false)),
+      'version'               => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('agenda[%s]');

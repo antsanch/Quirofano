@@ -5,27 +5,23 @@
 <!-- Para poner calendario-->
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
-    //$( "#format" ).change(function() {
-    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-    //});
+    $( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
   });
   </script> 
 <!-- Para poner calendario-->
 
 <!-- Para poner reloj-->
 <script type="text/javascript">
-        $(document).ready(function(){
-            // find the input fields and apply the time select to them.
-            $("#datahora").ptTimeSelect();
-        });
+  $(document).ready(function(){
+      // find the input fields and apply the time select to them.
+      $("#datahora").ptTimeSelect();
+  });
 </script>
 
 <script type="text/javascript">
-$(function()
-{
-            $("#tiest").timepicker({ 'timeFormat': 'H:i:s' });
-});
+  $(function() {
+      $("#tiest").timepicker({ 'timeFormat': 'H:i:s' });
+  });
 </script>
 
 

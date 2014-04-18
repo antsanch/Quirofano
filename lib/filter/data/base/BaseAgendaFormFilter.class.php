@@ -76,6 +76,7 @@ abstract class BaseAgendaFormFilter extends BaseFormFilterPropel
       'sumary'                => new sfWidgetFormFilterInput(),
       'created_at'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'updated_at'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'version'               => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -143,6 +144,7 @@ abstract class BaseAgendaFormFilter extends BaseFormFilterPropel
       'sumary'                => new sfValidatorPass(array('required' => false)),
       'created_at'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'updated_at'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'version'               => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('agenda_filters[%s]');
@@ -225,6 +227,7 @@ abstract class BaseAgendaFormFilter extends BaseFormFilterPropel
       'sumary'                => 'Text',
       'created_at'            => 'Date',
       'updated_at'            => 'Date',
+      'version'               => 'Number',
     );
   }
 }

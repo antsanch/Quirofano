@@ -51,10 +51,10 @@ class agendaActions extends sfActions
 /*Actión para mostrar todos los quirofanos*/
 
   // Actión de prueba
-  //~ public function executeNew(sfWebRequest $request)
-  //~ {
-    //~ $this->form = new AgendaForm();
-  //~ } // Actión de prueba
+  public function executeNew(sfWebRequest $request)
+  {
+    $this->form = new AgendaForm();
+  } // Actión de prueba
 
   /* executeValidar Valida los datos antes de iniciar la captura de una nueva cirugia
   * @autor: Antonio Sanchez Uresti
@@ -72,7 +72,6 @@ class agendaActions extends sfActions
         ->find();
     }
   }
-
 
  /* executeReporte
   * @autor: Antonio Sanchez Uresti
@@ -98,24 +97,13 @@ class agendaActions extends sfActions
 /*Actión para programar la cirugía*/
   public function executeProgramar(sfWebRequest $request)
   {
-    $this->quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug'));     //Obtenemos el Quirofano relacionado
-    $this->forward404Unless($request->hasParameter('slug'));
+    $this->quirofano = $this->getQuirofano();     //Obtenemos el Quirofano relacionado
     $this->form = new programarCirugiaForm();      //cargamos form
     if ($request->getParameter('cx', null)) $this->form->getDatosPrevios($request->getParameter('cx'));
 
-    //~ if ($request->isMethod('POST')) {
-      //~ $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-      //~ if ($this->form->isValid()) {
-        //~ $horapropuesta = $this->form->getValue("hora");
-        //~ $salaselecc = $this->form->getValue("sala_id");
-        //~ $fechaselecc['max'] = $this->form->getValue("programacion");
-        //~ $fechaselecc['min'] = date("Y-m-d",strtotime($fechaselecc['max'].' -1 day'));
-        //~ $tiempo_est = $this->form->getValue("tiempo_est");
-        //~ $identificacion = NULL;
-
     if ($request->isMethod('POST')) {
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-
+      
       if ($this->form->isValid()) {  //comprobamos si es valido
 
         /*Tomamos los valores del form enviado
@@ -134,7 +122,7 @@ class agendaActions extends sfActions
         Con respecto al NULL es para que no se empalme con sigo misma, en reprogramación se envia el id de esa programación,
         en este caso como es nuevo se va como NULL */
 
-        $control = $this->emHoras($fechaselecc,$horapropuesta,$this->quirofano->getid(),$salaselecc,$tiempo_est,NULL);
+        $control = $this->emHoras($fechaselecc,$horapropuesta,$this->quirofano['Id'],$salaselecc,$tiempo_est,NULL);
 
         if ($control != NULL) {   //si es diferente a null quiere decir que se empalma con alguna programación anterior
           $text = 'Se empalma con la cirugia: '.$control;
@@ -143,19 +131,16 @@ class agendaActions extends sfActions
         else {   // si es null lo grabamos como debe ser
           //hay que descomentar las tres lineas de abajo
           $cirugia = $this->form->save();
-          $cirugia->setfechaestado($fechaselecc['max'])->sethoraestado($horapropuesta)->save();   //control de fecha para cada estados
+          //~ $cirugia->setfechaestado($fechaselecc['max'])->sethoraestado($horapropuesta)->save();   //control de fecha para cada estados
           $this->getUser()->setFlash('notice', sprintf('Programación exitosa'));
           $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
         }
       }
     }
 
-    //$this->quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug')); //Obtenemis el quirofano
-    $this->form->setSalaWidget($request->getParameter('slug'));                                //ponemos las salas del quirofano
-    $this->form->setDefault('quirofano_id', $this->quirofano->getId());                        //ponemos el id del quirofano
-    $request->hasParameter('sala') ? $this->form->setSalaDefault($request->getParameter('sala')): null;
-      //}
-    //}
+    $this->form->setSalaWidget($this->quirofano['Slug']);                                           //ponemos las salas del quirofano
+    $this->form->setDefault('quirofano_id', $this->quirofano['Id']);                                //ponemos el id del quirofano
+    //$request->hasParameter('sala') ? $this->form->setSalaDefault($request->getParameter('sala')): null;
   } /* Actión para programar la cirugía */
 
 
@@ -171,12 +156,12 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
     $estados['trans'] = 10;
     $estados['progr'] = 1;
     $agenda = AgendaQuery::create()                //filtramos por programaciones del dia actual y un dia anterior
-        ->filterByquirofanoid($Quiid)              //en caso de que continue la cirugia al dia de hoy
-        ->filterByfechaestado($fechaselecc)
-        ->filterBysalaid($salaselecc)
-        ->filterByStatus($estados)
-        ->filterByCancelada(false)
-        ->find();
+      ->filterByquirofanoid($Quiid)                //en caso de que continue la cirugia al dia de hoy
+      ->filterByfechaestado($fechaselecc)
+      ->filterBysalaid($salaselecc)
+      ->filterByStatus($estados)
+      ->filterByCancelada(false)
+      ->find();
 
     //datos de la cirugia que se trata programar
     $tiempo1 = strtotime("".$fechaselecc['max']."".$horapropuesta);
@@ -203,12 +188,11 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
         }else{
           //para el mismo dia
           if( $hora1 <= $hora2 && $hora2 <= $hora3)
-            {
-
-               // $control = $identificacion;
-              //$control = strtotime($fechaselecc);
-             $control = $agendas->getId();
-            }
+          {
+            // $control = $identificacion;
+            //$control = strtotime($fechaselecc);
+            $control = $agendas->getId();
+          }
         }
      }else
      {
@@ -361,19 +345,44 @@ $mes['max'] = $fechafinal->format("Y-m-d");
 // Mostramos la agenda para el dia actual
   public function executeShow(sfWebRequest $request)
   {
-    $this->Quirofano = QuirofanoQuery::create()
-      ->findOneBySlug($request->getParameter('slug'));
-    //$offset = $request->getParameter('offset', 0) * 3600;
+    $this->Quirofano = $this->getQuirofano();    
     $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
-    //$hinicio = $request->getParameter('hora');
-    //$hfinal = $request->getParameter('tiempo_est');
-    //$nombre = $this->Quirofano->getslug();
+        
     $this->Cirugias = AgendaQuery::create()
-      ->filterByquirofanoid($this->Quirofano->getid())
+      ->filterByquirofanoid($this->Quirofano['Id'])
       ->filterByLastTime(array('min' => $this->date, 'max' => strtotime(date('Y-m-d', $this->date).'+ 1 day')))
       ->orderByStatus('asc')
+      //~ Joins para minimizar las busquedas
+      ->joinWith('Personalcirugia', Criteria::LEFT_JOIN)
+      ->joinWith('Salaquirurgica', Criteria::LEFT_JOIN)
+      ->joinWith('Procedimientocirugia', Criteria::LEFT_JOIN)
       ->find();
   } // Mostramos la agenda para el dia actual
+  
+  public function executeClearuser(sfWebRequest $request) {
+    $this->getUser()->getAttributeHolder()->clear();
+  }
+  
+  private function getQuirofano() {
+    $user = $this->getUser();
+    $request = $this->getRequest();
+    if ($request->getParameter('slug', null)) {
+      $quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug'));
+      if ($quirofano) {
+        $user->setQuirofano($quirofano->toArray());
+        return $quirofano->toArray();
+      }
+    }
+    else {
+      if ($this->getUser()->getQuirofano(null)) {
+        return $user->getQuirofano();
+      }
+    }
+    //~ print_r(get_class_methods($request));
+    //~ die($request->getUri());
+    $user->setAttribute('referer', $request->getUri(), 'options');
+    $this->redirect('quirofano/select');
+  }
 
 /*Mostrar las diferentes salas del quirofano*/
 public function executeInspeccionar(sfWebRequest $request)
@@ -389,23 +398,24 @@ public function executeInspeccionar(sfWebRequest $request)
 
 
 /*Mostrar todas las cirugias diferidas de un quirofano*/
- public function executeDiferidas(sfWebRequest $request)
+  public function executeDiferidas(sfWebRequest $request)
   {
-   $this->Quirofano = QuirofanoQuery::create()
-      ->findOneBySlug($request->getParameter('slug'));
- $offset = $request->getParameter('offset', 0) * 3600;
- $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
-/* from HEAD
- $hinicio = $request->getParameter('hora');
- $hfinal = $request->getParameter('tiempo_est');
- $date = $this->date;
- */
+    //~ $this->Quirofano = QuirofanoQuery::create()
+        //~ ->findOneBySlug($request->getParameter('slug'));
+    $this->Quirofano = $this->getQuirofano();
+    $offset = $request->getParameter('offset', 0) * 3600;
+    $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
+    /* from HEAD
+    $hinicio = $request->getParameter('hora');
+    $hfinal = $request->getParameter('tiempo_est');
+    $date = $this->date;
+    */
 
- //$hinicio = $request->getParameter('hora');
- //$hfinal = $request->getParameter('tiempo_est');
- $date = $this->date;
- $qui = $this->Quirofano->getid();
- $this->Cirugias = AgendaQuery::create()
+    //$hinicio = $request->getParameter('hora');
+    //$hfinal = $request->getParameter('tiempo_est');
+    $date = $this->date;
+    $qui = $this->Quirofano['Id'];
+    $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($qui)
       ->filterBystatus(-50)
       ->find();
@@ -497,8 +507,8 @@ public function executeTransoperatorio(sfWebRequest $request)
              }else{
              //$this->form->save();
              $cirugia = $this->form->save();
-             $cirugia->setfechaestado($fechaselecc['max'])->save();                  //control de fecha para cada estados
-             $cirugia->sethoraestado($horapropuesta)->save();                        //control de fecha para cada estados
+             //~ $cirugia->setfechaestado($fechaselecc['max'])->save();                  //control de fecha para cada estados
+             //~ $cirugia->sethoraestado($horapropuesta)->save();                        //control de fecha para cada estados
              $this->getUser()->setFlash('notice', sprintf('Programación exitosa'));
              $this->redirect('agenda/show?slug='.$request->getParameter('slug'));
          }
@@ -654,37 +664,36 @@ return $regreso;
   }
 /*Mostrar calendario*/
 
-/*Mostramos todas las cirugías del mes canceladas de  un cierto quirofano*/
-public function executeCanceladas(sfWebRequest $request)
-{
- $this->Quirofano = QuirofanoQuery::create()
-      ->findOneBySlug($request->getParameter('slug'));
+/* Mostramos todas las cirugías del mes canceladas de  un cierto quirofano*/
+  public function executeCanceladas(sfWebRequest $request)
+  {
+    //~ $this->Quirofano = QuirofanoQuery::create()
+      //~ ->findOneBySlug($request->getParameter('slug'));
+    $this->Quirofano = $this->getQuirofano();
+          
+    $fechainicial = new DateTime();
+    $fechainicial->modify('first day of this month');
+    $mes['min'] =  $fechainicial->format('Y-m-d');
 
+    $fechafinal = new DateTime();
+    $fechafinal->modify('last day of this month');
+    $mes['max'] = $fechafinal->format("Y-m-d");
 
-$fechainicial = new DateTime();
-$fechainicial->modify('first day of this month');
-$mes['min'] =  $fechainicial->format('Y-m-d');
+    $qui = $this->Quirofano['Id'];
+    $offset = $request->getParameter('offset', 0) * 3600;
+    $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
 
-$fechafinal = new DateTime();
-$fechafinal->modify('last day of this month');
-$mes['max'] = $fechafinal->format("Y-m-d");
+    //$hinicio = $request->getParameter('hora');
+    //$hfinal = $request->getParameter('tiempo_est');
+    $date = $this->date;
 
- $qui = $this->Quirofano->getid();
- $offset = $request->getParameter('offset', 0) * 3600;
- $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
-
- //$hinicio = $request->getParameter('hora');
- //$hfinal = $request->getParameter('tiempo_est');
- $date = $this->date;
-
- $this->Cirugias = AgendaQuery::create()
+    $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($qui)
       ->filterByprogramacion($mes)
       ->filterByCancelada(true)
       //->orderByStatus('asc')
       ->find();
-}
-/*Mostramos todas las cirugías del mes canceladas de un cierto quirofano*/
+  } // Mostramos todas las cirugías del mes canceladas de un cierto quirofano
 
 
 

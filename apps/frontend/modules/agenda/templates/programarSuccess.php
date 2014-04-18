@@ -26,10 +26,10 @@
 <!-- Para poner calendario-->
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
-    //$( "#format" ).change(function() {
-    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-    //});
+    $( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+    //~ //$( "#format" ).change(function() {
+    //~ $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
+    //~ //});
   });
   </script>
 <!-- Para poner calendario-->
@@ -53,7 +53,7 @@ $(function()
 <!-- Para poner reloj-->
 
 <div class="menubar">
-  <a href="<?php echo url_for('agenda/show?slug='.$quirofano->getSlug()) ?>">Agenda de <?php echo $quirofano ?></a>
+  <a href="<?php echo url_for('agenda/show?slug='.$quirofano['Slug']) ?>">Agenda de <?php echo $quirofano['Nombre'] ?></a>
 </div>
 
 <div class="formulario clearfix">

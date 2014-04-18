@@ -8,6 +8,8 @@ propel:
 #Tabla referente a la programacion de cirugias
   hc_agenda:
     _attributes:          { phpName: Agenda, package: lib.model.data }
+    _propel_behaviors:
+      versionable:
     id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
 #    evento_id:
     programacion:         { type: date }
@@ -257,6 +259,17 @@ propel:
         onDelete:         setnull
         references:
           - { local: servicio, foreign: id }
+          
+  #~ hc_agenda_historico:
+    #~ _attributes:          { phpName: Agendahistorico, package: lib.model.data }
+    #~ id:
+    #~ agenda_id
+    #~ quirofano_id:
+    #~ sala_id:
+    #~ especialidad_id:
+    #~ programada:           { type: timestamp }
+    #~ medico:               { type: varchar(256) }
+    #~ created_at:
 
   siga_sala_log:
     _attributes:          { phpName: Registrosala, package: lib.model.data }

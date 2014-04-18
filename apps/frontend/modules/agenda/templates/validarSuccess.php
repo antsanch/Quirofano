@@ -51,7 +51,7 @@
           <td>En cirugia</td>
 <?php break ?>
 <?php case 100?>
-          <td><a href="<?php echo url_for(sprintf('agenda/programar?slug=%s&cx=%s',$cx->getQuirofanoSlug(), $cx->getId())) ?>">Reintervenir</a></td>
+          <td><a href="<?php echo url_for(sprintf('agenda/programar?cx=%s', $cx->getId())) ?>">Reintervenir</a></td>
 <?php endswitch; ?>
 <!--
           <td><?php echo $cx->getStatus() ?> </td>

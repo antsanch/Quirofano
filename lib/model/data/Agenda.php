@@ -26,9 +26,9 @@ class Agenda extends BaseAgenda {
     return $this->getId().' '.$this->getProgramacion('d-M-Y').' a las '.$this->getHora('h:i A');
   }
 
- /* doSave - Extiende las acciones de guardado nativas de la clase
-  */
-  public function doSave(PropelPDO $con) {
+  // doSave - Extiende las acciones de guardado nativas de la clase
+  public function doSave(PropelPDO $con) 
+  {
     switch ($this->getStatus()) {
       case 1:
       $this->setLastTime($this->getInicioTimestamp());
@@ -51,8 +51,17 @@ class Agenda extends BaseAgenda {
     }
 
     $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
+    
+    if (!$this->isNew()) {
+      //~ die('hay que guardar el historico');
+    }
     parent::doSave($con);
-  } /**/
+  } // doSave()
+  
+  public function isVersioningNecessary($con = null)
+  {
+    return $this->getStatus() <= 1 && parent::isVersioningNecessary();
+  }
 
  /* calculaRetrasoInicio  Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
   *                       si ya inicio se almacena en un campo.
@@ -74,7 +83,7 @@ class Agenda extends BaseAgenda {
   }
 
  /* calculaDuracion  Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
-  *                       si ya inicio se almacena en un campo.
+  *                  si ya inicio se almacena en un campo.
   * @autor: Antonio Sánchez Uresti
   * @date:  2014-04-06
   */

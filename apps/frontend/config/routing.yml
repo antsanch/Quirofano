@@ -7,12 +7,18 @@ homepage:
   param: { module: agenda, action: index }
 
 Programar:
-  url:   /:slug/programar/*
+  url:   /agenda/programar/:slug
   param: { module: agenda, action: programar }
 
 detallesCirugia:
   url:   /detalles/cirugia/:id
   param: { module: agenda, action: details }
+
+
+#http://quirofano.tsl/frontend_dev.php/agenda/show/slug/quirofanocentral/date/2014-04-17
+agendaPorQuirofano:
+  url:   /agenda/pordia/:slug/:date
+  param: { module: agenda, action: show }
 
 por_quirofano:
   url:   /agenda-quirofano/:quirofano/:date

@@ -7,6 +7,14 @@
     text-decoration: none;
     width: 700px;
   }
+  
+  .radio_list {
+    padding-left: 0;
+  }
+  
+  .ul {
+    padding-left: 0;
+  }
 
 <!--
   .formulario {
@@ -56,7 +64,7 @@ window.onload = start;
 
 <form id='target' method="POST" onsubmit="return pregunta();">
 <!-- <form method="POST" action="<?php //echo url_for('quirofano/programar?slug='.$Quirofano->getSlug()) ?>">   -->
-<div class="area cols03">
+  <div class="area cols03">
     <div class="label"><?php echo $form['sala_id']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['sala_id']->renderError() ?>
@@ -64,7 +72,7 @@ window.onload = start;
     </div>
   </div>
 
-<div class="area cols02">
+  <div class="area cols02">
     <div class="label"><?php echo $form['programacion']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['programacion']->renderError() ?>
@@ -72,8 +80,7 @@ window.onload = start;
     </div>
   </div>
 
-
-<div class="area cols02">
+  <div class="area cols02">
     <div class="label"><?php echo $form['hora']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['hora']->renderError() ?>
@@ -81,15 +88,13 @@ window.onload = start;
     </div>
   </div>
 
-
-<div class="area cols02">
+  <div class="area cols02">
     <div class="label"><?php echo $form['tiempo_est']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['tiempo_est']->renderError() ?>
       <?php echo $form['tiempo_est'] ?>
     </div>
   </div>
-
 
   <div class="area cols03">
     <div class="label"><?php echo $form['tipo_proc_id']->renderLabel() ?></div>
@@ -99,9 +104,13 @@ window.onload = start;
     </div>
   </div>
 
-
-
-
+  <div class="area cols03">
+    <div class="label"><?php echo $form['registro']->renderLabel() ?></div>
+    <div class="field">
+      <?php echo $form['registro']->renderError() ?>
+      <?php echo $form['registro'] ?>
+    </div>
+  </div>
 
   <div class="area cols09">
     <div class="label"><?php echo $form['paciente_name']->renderLabel() ?></div>
@@ -111,16 +120,13 @@ window.onload = start;
     </div>
   </div>
 
-
-<div class="area cols03">
+  <div class="area cols03">
     <div class="label"><?php echo $form['edad']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['edad']->renderError() ?>
       <?php echo $form['edad'] ?>
     </div>
   </div>
-
-
 
   <div class="area cols03">
     <div class="label"><?php echo $form['genero']->renderLabel() ?></div>
@@ -130,16 +136,13 @@ window.onload = start;
     </div>
   </div>
 
-
-<div class="area cols03">
+  <div class="area cols03">
     <div class="label"><?php echo $form['procedencia']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['procedencia']->renderError() ?>
       <?php echo $form['procedencia'] ?>
     </div>
   </div>
-
-
 
   <div class="area cols03">
     <div class="label"><?php echo $form['servicio']->renderLabel() ?></div>
@@ -149,25 +152,13 @@ window.onload = start;
     </div>
   </div>
 
-
-
-<div class="area cols02">
-    <div class="label"><?php echo $form['registro']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['registro']->renderError() ?>
-      <?php echo $form['registro'] ?>
-    </div>
-  </div>
-
-
-<div class="area cols06">
+  <div class="area cols06">
     <div class="label"><?php echo $form['diagnostico']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['diagnostico']->renderError() ?>
       <?php echo $form['diagnostico'] ?>
     </div>
   </div>
-
 
   <div class="area cols03 horizontal">
     <div class="label"><?php echo $form['protocolo']->renderLabel() ?></div>
@@ -202,7 +193,6 @@ window.onload = start;
     </div>
   </div>
 
-
 <!--Esperemos que funque-->
  <?php foreach ($form['Procedimientocirugia'] as $subform) :?>
   <div class="formCie9">
@@ -235,7 +225,7 @@ window.onload = start;
     </div>
   </div>
 
-<div class="area cols04">
+  <div class="area cols04">
     <div class="label"><?php echo $form['req_hemoderiv']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['req_hemoderiv']->renderError() ?>
@@ -270,11 +260,11 @@ window.onload = start;
 </div>
 -->
 
-<div class="area control">
-    <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Guardar">
-  </div>
-</form><!--Termina form-->
+  <div class="area control">
+      <?php echo $form->renderHiddenFields() ?>
+      <input type="submit" value="Guardar">
+    </div>
+  </form><!--Termina form-->
 
 <!--  <div class="area control">
     <?php //echo $form->renderHiddenFields() ?>

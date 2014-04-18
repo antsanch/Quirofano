@@ -4,10 +4,10 @@
 <?php use_stylesheet('/css/global/facebox.css')?>
 
 <?php slot('titulo') ?>
-  <title>Agenda de <?php echo $Quirofano->getNombre() ?> | SIGA-HU </title>
+  <title>Agenda de <?php echo $Quirofano['Nombre'] ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h1>Agenda de procedimientos en <?php echo $Quirofano->getNombre() ?></h1>
+<h1>Agenda de procedimientos en <?php echo $Quirofano['Nombre'] ?></h1>
 
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
@@ -54,7 +54,7 @@ window.onload = start;
   <?php echo print_head() ?>
   <?php $title = $cirugia->getStatus() ?>
 <?php endif; ?>
-<?php include_partial('agendaQuirofano', array('cirugia' => $cirugia, 'slug' => $Quirofano->getSlug())) ?>
+<?php include_partial('agendaQuirofano', array('cirugia' => $cirugia, 'slug' => $Quirofano['Slug'])) ?>
 <?php endif; ?>
 <?php endforeach; ?>
 
