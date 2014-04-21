@@ -42,7 +42,7 @@ window.onload = start;
   <?php echo print_head() ?>
   <?php $title = $cirugia->getStatus() ?>
 <?php endif; ?>
-<?php include_partial('agendaQuirofano', array('cirugia' => $cirugia, 'slug' => $Quirofano->getSlug())) ?>
+<?php include_partial('agendaQuirofano', array('cirugia' => $cirugia, 'slug' => $Quirofano['Slug'])) ?>
 <?php endif; ?>
 <?php endforeach; ?>
 

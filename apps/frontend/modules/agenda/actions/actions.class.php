@@ -18,6 +18,19 @@ class agendaActions extends sfActions
     }
   }
 
+  public function executeTest () {
+    $param = array(
+      'programacion' => '2014-04-18',
+      'hora' => '15:00:00',
+      'quirofano_id' => 1,
+      'sala_id' => 1
+    );
+    $this->Quirofano = $this->getQuirofano();
+    $this->date = time();
+    $this->Cirugias = AgendaPeer::getCirugiasSolapadas($param);
+    $this->setTemplate('show');
+  }
+
   /*Actión para el index inicial, filtra por quirofanos activos*/
   public function executeIndex(sfWebRequest $request)
   {
@@ -103,7 +116,7 @@ class agendaActions extends sfActions
 
     if ($request->isMethod('POST')) {
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
-      
+
       if ($this->form->isValid()) {  //comprobamos si es valido
 
         /*Tomamos los valores del form enviado
@@ -345,9 +358,9 @@ $mes['max'] = $fechafinal->format("Y-m-d");
 // Mostramos la agenda para el dia actual
   public function executeShow(sfWebRequest $request)
   {
-    $this->Quirofano = $this->getQuirofano();    
+    $this->Quirofano = $this->getQuirofano();
     $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
-        
+
     $this->Cirugias = AgendaQuery::create()
       ->filterByquirofanoid($this->Quirofano['Id'])
       ->filterByLastTime(array('min' => $this->date, 'max' => strtotime(date('Y-m-d', $this->date).'+ 1 day')))
@@ -358,11 +371,11 @@ $mes['max'] = $fechafinal->format("Y-m-d");
       ->joinWith('Procedimientocirugia', Criteria::LEFT_JOIN)
       ->find();
   } // Mostramos la agenda para el dia actual
-  
+
   public function executeClearuser(sfWebRequest $request) {
     $this->getUser()->getAttributeHolder()->clear();
   }
-  
+
   private function getQuirofano() {
     $user = $this->getUser();
     $request = $this->getRequest();
@@ -454,8 +467,8 @@ public function executeTransoperatorio(sfWebRequest $request)
         $hora = $this->form->getValue("ingreso");
         $cirugia = $this->form->save();
         $cirugia->setStatus(10)->save();
-        $cirugia->setfechaestado($fechaactual)->save();
-        $cirugia->sethoraestado($hora)->save();
+        //~ $cirugia->setfechaestado($fechaactual)->save();
+        //~ $cirugia->sethoraestado($hora)->save();
         $this->redirect('agenda/show?slug='.$cirugia->getQuirofano()->getSlug());
       }
     }
@@ -670,7 +683,7 @@ return $regreso;
     //~ $this->Quirofano = QuirofanoQuery::create()
       //~ ->findOneBySlug($request->getParameter('slug'));
     $this->Quirofano = $this->getQuirofano();
-          
+
     $fechainicial = new DateTime();
     $fechainicial->modify('first day of this month');
     $mes['min'] =  $fechainicial->format('Y-m-d');

@@ -18,7 +18,7 @@
     <?php endif ?>
 
     <td><?php echo $cirugia->getProgramacion('Y-m-d') ?></td></div></td>
-    <td><?php echo $cirugia->getHora('H:m')?></td>
+    <td><?php echo $cirugia->getHora('H:i')?></td>
     <td><?php echo $cirugia->getSalaquirurgica()->getNombre() ?></td>
     <td><?php echo $cirugia->getRegistro() ?></td>
     <td><?php echo $cirugia->getPacienteName() ?></td>

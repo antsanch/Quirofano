@@ -13,8 +13,8 @@
 <!-- Para poner reloj-->
 <script type="text/javascript">
   $(document).ready(function(){
-      // find the input fields and apply the time select to them.
-      $("#datahora").ptTimeSelect();
+    // find the input fields and apply the time select to them.
+    $("#datahora").ptTimeSelect();
   });
 </script>
 

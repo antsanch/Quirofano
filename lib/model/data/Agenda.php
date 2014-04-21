@@ -27,7 +27,7 @@ class Agenda extends BaseAgenda {
   }
 
   // doSave - Extiende las acciones de guardado nativas de la clase
-  public function doSave(PropelPDO $con) 
+  public function doSave(PropelPDO $con)
   {
     switch ($this->getStatus()) {
       case 1:
@@ -51,13 +51,13 @@ class Agenda extends BaseAgenda {
     }
 
     $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
-    
+
     if (!$this->isNew()) {
       //~ die('hay que guardar el historico');
     }
     parent::doSave($con);
   } // doSave()
-  
+
   public function isVersioningNecessary($con = null)
   {
     return $this->getStatus() <= 1 && parent::isVersioningNecessary();
@@ -480,5 +480,15 @@ class Agenda extends BaseAgenda {
   public function getDestinoPxText() {
     $values = AgendaPeer::getDestinoPx();
     return $values[$this->getDestinoPx()];
+  }
+
+  public function setFechaestado($v) {
+    //~ throw new Exception('setFechaestado(): El uso de este metodo esta Depreciado');
+//~
+    //~ return parent::setFechaestado($v);
+  }
+
+  public function setHoraestado($v) {
+
   }
 } // Agenda

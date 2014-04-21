@@ -19,8 +19,23 @@
  */
 class AgendaPeer extends BaseAgendaPeer
 {
-  static public function getCirugiasSolapadas($array) {
+  static public function getCirugiasSolapadas($param) {
+    $inicio = sprintf('%s %s', $param['programacion'], $param['hora']);
+    echo $inicio;
     
+    return AgendaQuery::create()
+      ->filterByStatus(array(-50, 1, 10))
+      ->filterByProgramacion(array('min' => strtotime('2014-04-18 15:00:00')))
+      ->filterByQuirofanoId($param['quirofano_id'])
+      ->filterBySalaId($param['sala_id'])
+      //~ Joins para minimizar las busquedas
+      ->joinWith('Personalcirugia', Criteria::LEFT_JOIN)
+      ->joinWith('Salaquirurgica', Criteria::LEFT_JOIN)
+      ->joinWith('Procedimientocirugia', Criteria::LEFT_JOIN)
+      ->orderByStatus('asc')
+      ->find();
+      
+      echo $inicio;
   }
   
   static $labels = array(
