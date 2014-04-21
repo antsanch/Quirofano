@@ -20,10 +20,10 @@ class agendaActions extends sfActions
 
   public function executeTest () {
     $param = array(
-      'programacion' => '2014-04-18',
-      'hora' => '15:00:00',
+      'programacion' => '2014-04-21',
+      'hora' => '07:00:00',
       'quirofano_id' => 1,
-      'sala_id' => 1
+      'sala_id' => 8
     );
     $this->Quirofano = $this->getQuirofano();
     $this->date = time();

@@ -12,7 +12,7 @@ propel:
       versionable:
     id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
 #    evento_id:
-    programacion:         { type: date }
+    programacion:         { type: timestamp }
 #    fechaestado:          { type: date }
     hora:                 { type: time }
     retraso_inicial:      { type: varchar(32) }

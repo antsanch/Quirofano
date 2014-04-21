@@ -19,25 +19,58 @@
  */
 class AgendaPeer extends BaseAgendaPeer
 {
+  /** Valor del estatus diferido */
+  const DIFERIDA_STATUS = -50;
+
+  /** Valor del estatus programada */
+  const PROGRAMADA_STATUS = 0;
+
+  /** Valor del estatus  */
+  const TRANSOPERATORIO_STATUS = 10;
+
+  /** Valor del estatus realizada */
+  const REALIZADA_STATUS = 100;
+
+  /** Valor del estatus bloqueada */
+  const BLOQUEADA_STATUS = 100;
+
+ /**
+  * getCirugiasSolapadas
+  * Funcion que busca que otras cirugias se solapan con la que estamos trabajando
+  * @param    Array de campos a filtrar
+  * @return   PropelObjectCollection con las cirugias encontradas
+  */
   static public function getCirugiasSolapadas($param) {
+
+    $query = AgendaQuery::create()->filterByStatus(
+      array(
+        AgendaPeer::DIFERIDA_STATUS,
+        AgendaPeer::PROGRAMADA_STATUS,
+        AgendaPeer::TRANSOPERATORIO_STATUS,
+        AgendaPeer::REALIZADA_STATUS
+      )
+    ); /**/
+
+    $param['programacion'] = (isset($param['programacion'])) ? $param['programacion'] : date('Y-m-d');
+    $param['hora'] = (isset($param['hora'])) ? $param['hora'] : '00:00:00';
+
     $inicio = sprintf('%s %s', $param['programacion'], $param['hora']);
-    echo $inicio;
-    
-    return AgendaQuery::create()
-      ->filterByStatus(array(-50, 1, 10))
-      ->filterByProgramacion(array('min' => strtotime('2014-04-18 15:00:00')))
-      ->filterByQuirofanoId($param['quirofano_id'])
-      ->filterBySalaId($param['sala_id'])
-      //~ Joins para minimizar las busquedas
+    $query->filterByProgramacion(array('min' => $inicio));
+
+    if (isset($param['quirofano_id'])) $query->filterByQuirofanoId($param['quirofano_id']);
+
+    if (isset($param['sala_id'])) $query->filterBySalaId($param['sala_id']);
+
+    return $query
+      //~ Joins para minimizar las busquedas, no tiene caso mantenerlo en la version final
       ->joinWith('Personalcirugia', Criteria::LEFT_JOIN)
       ->joinWith('Salaquirurgica', Criteria::LEFT_JOIN)
       ->joinWith('Procedimientocirugia', Criteria::LEFT_JOIN)
       ->orderByStatus('asc')
+      // Eliminar hasta aqui al terminar las pruebas
       ->find();
-      
-      echo $inicio;
   }
-  
+
   static $labels = array(
     'programacion' => 'Fecha:',
     'ingreso' => 'Ingreso a quirófano:',
@@ -99,11 +132,11 @@ class AgendaPeer extends BaseAgendaPeer
   }
 
   static $status = array(
-    '-50' => 'diferida',
-    '1'   => 'programada',
-    '10'  => 'transoperatorio',
-    '100' => 'realizadas',
-    '500' => 'Bloqueada por Sistema'
+    AgendaPeer::DIFERIDA_STATUS         => 'Diferida',
+    AgendaPeer::PROGRAMADA_STATUS       => 'Programada',
+    AgendaPeer::TRANSOPERATORIO_STATUS  => 'Transoperatorio',
+    AgendaPeer::REALIZADA_STATUS        => 'Realizadas',
+    AgendaPeer::BLOQUEADA_STATUS        => 'Bloqueada por Sistema'
   );
 
   static public function getStatus() {
