@@ -13,11 +13,11 @@ propel:
     id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
 #    evento_id:
     programacion:         { type: date }
-    fechaestado:          { type: date }
+#    fechaestado:          { type: date }
     hora:                 { type: time }
     retraso_inicial:      { type: varchar(32) }
     tiempo_total:         { type: varchar(32) }
-    horaestado:           { type: time }
+#    horaestado:           { type: time }
     inicio:               { type: timestamp }
     last_time:            { type: timestamp }
     ingreso:              { type: timestamp }
@@ -259,7 +259,7 @@ propel:
         onDelete:         setnull
         references:
           - { local: servicio, foreign: id }
-          
+
   #~ hc_agenda_historico:
     #~ _attributes:          { phpName: Agendahistorico, package: lib.model.data }
     #~ id:

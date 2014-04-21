@@ -16,11 +16,9 @@ abstract class BaseAgendaVersionForm extends BaseFormPropel
     $this->setWidgets(array(
       'id'                    => new sfWidgetFormInputHidden(),
       'programacion'          => new sfWidgetFormDate(),
-      'fechaestado'           => new sfWidgetFormDate(),
       'hora'                  => new sfWidgetFormTime(),
       'retraso_inicial'       => new sfWidgetFormInputText(),
       'tiempo_total'          => new sfWidgetFormInputText(),
-      'horaestado'            => new sfWidgetFormTime(),
       'inicio'                => new sfWidgetFormDateTime(),
       'last_time'             => new sfWidgetFormDateTime(),
       'ingreso'               => new sfWidgetFormDateTime(),
@@ -85,11 +83,9 @@ abstract class BaseAgendaVersionForm extends BaseFormPropel
     $this->setValidators(array(
       'id'                    => new sfValidatorPropelChoice(array('model' => 'Agenda', 'column' => 'id', 'required' => false)),
       'programacion'          => new sfValidatorDate(array('required' => false)),
-      'fechaestado'           => new sfValidatorDate(array('required' => false)),
       'hora'                  => new sfValidatorTime(array('required' => false)),
       'retraso_inicial'       => new sfValidatorString(array('max_length' => 32, 'required' => false)),
       'tiempo_total'          => new sfValidatorString(array('max_length' => 32, 'required' => false)),
-      'horaestado'            => new sfValidatorTime(array('required' => false)),
       'inicio'                => new sfValidatorDateTime(array('required' => false)),
       'last_time'             => new sfValidatorDateTime(array('required' => false)),
       'ingreso'               => new sfValidatorDateTime(array('required' => false)),

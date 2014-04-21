@@ -22,9 +22,9 @@ class programarCirugiaForm extends BaseAgendaForm
       'medico_name',
       'id',
       'programacion',
-      'fechaestado',
+      //~ 'fechaestado',
       'hora',
-      'horaestado',
+      //~ 'horaestado',
       //'evento_id',
       'sala_id',
       //'cie9mc',
@@ -250,6 +250,9 @@ class programarCirugiaForm extends BaseAgendaForm
 
   }
 
+ /*
+  * setSalaWidget Filtra las salas quirurgicas a un determinado quirofano
+  */
   public function setSalaWidget($quirofano) {
     //$choices = SalaquirurgicaPeer::getSalasActivasPorQuirofano($quirofano);
 

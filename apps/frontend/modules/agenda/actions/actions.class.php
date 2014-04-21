@@ -170,7 +170,8 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
     $estados['progr'] = 1;
     $agenda = AgendaQuery::create()                //filtramos por programaciones del dia actual y un dia anterior
       ->filterByquirofanoid($Quiid)                //en caso de que continue la cirugia al dia de hoy
-      ->filterByfechaestado($fechaselecc)
+      // hay que cambiar este filtro por el del nuevo campo
+      //->filterByfechaestado($fechaselecc)
       ->filterBysalaid($salaselecc)
       ->filterByStatus($estados)
       ->filterByCancelada(false)
@@ -311,8 +312,8 @@ return $text; */
 /*Mostramos todas las cirugías del mes actual cierto quirofano*/
 public function executeTodos(sfWebRequest $request)
 {
- $this->Quirofano = QuirofanoQuery::create()
-      ->findOneBySlug($request->getParameter('slug'));
+  $this->Quirofano = $this->getQuirofano();
+  //$this->Quirofano = QuirofanoQuery::create()->findOneBySlug($request->getParameter('slug'));
 
 
 $fechainicial = new DateTime();
@@ -323,7 +324,8 @@ $fechafinal = new DateTime();
 $fechafinal->modify('last day of this month');
 $mes['max'] = $fechafinal->format("Y-m-d");
 
- $qui = $this->Quirofano->getid();
+ $qui = $this->Quirofano['Id'];
+ //$qui = $this->Quirofano->getid();
  $offset = $request->getParameter('offset', 0) * 3600;
  $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
 /*

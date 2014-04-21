@@ -13,11 +13,9 @@ abstract class BaseAgendaVersionFormFilter extends BaseFormFilterPropel
   {
     $this->setWidgets(array(
       'programacion'          => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
-      'fechaestado'           => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'hora'                  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'retraso_inicial'       => new sfWidgetFormFilterInput(),
       'tiempo_total'          => new sfWidgetFormFilterInput(),
-      'horaestado'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'inicio'                => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'last_time'             => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'ingreso'               => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
@@ -80,11 +78,9 @@ abstract class BaseAgendaVersionFormFilter extends BaseFormFilterPropel
 
     $this->setValidators(array(
       'programacion'          => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
-      'fechaestado'           => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'hora'                  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'retraso_inicial'       => new sfValidatorPass(array('required' => false)),
       'tiempo_total'          => new sfValidatorPass(array('required' => false)),
-      'horaestado'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'inicio'                => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'last_time'             => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'ingreso'               => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -162,11 +158,9 @@ abstract class BaseAgendaVersionFormFilter extends BaseFormFilterPropel
     return array(
       'id'                    => 'ForeignKey',
       'programacion'          => 'Date',
-      'fechaestado'           => 'Date',
       'hora'                  => 'Date',
       'retraso_inicial'       => 'Text',
       'tiempo_total'          => 'Text',
-      'horaestado'            => 'Date',
       'inicio'                => 'Date',
       'last_time'             => 'Date',
       'ingreso'               => 'Date',

@@ -482,13 +482,12 @@ class Agenda extends BaseAgenda {
     return $values[$this->getDestinoPx()];
   }
 
-  public function setFechaestado($v) {
+  //~ public function setFechaestado($v) {
     //~ throw new Exception('setFechaestado(): El uso de este metodo esta Depreciado');
-//~
     //~ return parent::setFechaestado($v);
-  }
-
-  public function setHoraestado($v) {
-
-  }
+  //~ }
+//~
+  //~ public function setHoraestado($v) {
+//~
+  //~ }
 } // Agenda
