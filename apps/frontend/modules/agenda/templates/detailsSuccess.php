@@ -72,7 +72,7 @@
 switch ($cirugia->getStatus())
 {
 // Datos a mostrar cuando la cirugia esta finalizada
-  case 100:
+  case AgendaPeer::REALIZADA_STATUS:
     include_partial("detailsFinalizada", array('cirugia' => $cirugia));
 
 // Datos a mostrar cuando la cirugia este en transoperatorio

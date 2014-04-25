@@ -7,11 +7,11 @@
     text-decoration: none;
     width: 700px;
   }
-  
+
   .radio_list {
     padding-left: 0;
   }
-  
+
   .ul {
     padding-left: 0;
   }
@@ -72,14 +72,17 @@ window.onload = start;
     </div>
   </div>
 
-  <div class="area cols02">
+<!--
+  <div class="area cols04">
     <div class="label"><?php echo $form['programacion']->renderLabel() ?></div>
-    <div class="field">
+-->
       <?php echo $form['programacion']->renderError() ?>
       <?php echo $form['programacion'] ?>
-    </div>
+<!--
   </div>
+-->
 
+<!--
   <div class="area cols02">
     <div class="label"><?php echo $form['hora']->renderLabel() ?></div>
     <div class="field">
@@ -87,6 +90,7 @@ window.onload = start;
       <?php echo $form['hora'] ?>
     </div>
   </div>
+-->
 
   <div class="area cols02">
     <div class="label"><?php echo $form['tiempo_est']->renderLabel() ?></div>

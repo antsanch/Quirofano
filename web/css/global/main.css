@@ -199,7 +199,7 @@
 .formulario select {
   font-size: 0.9em;
   height: 22px;
-  margin-bottom: 0px;
+  margin-bottom: 1px;
   width: 100%;
 }
 
@@ -570,7 +570,7 @@ ul#navTabs a:hover { /* settings for hover effect */
     box-shadow: 5px 5px 10px #666;
     color: #bf2222;
  /*   float:right;*/
-    float:left;	
+    float:left;
     font-weight: bold;
     padding: 1px 4px;
   }
@@ -738,7 +738,7 @@ textarea {
 .flash_notice
 {
   font-size: 13px;
-  font-weight: 300; 
+  font-weight: 300;
   background-color:#FFFF99;
   border: 1px solid #999;
   border-radius: 10px;

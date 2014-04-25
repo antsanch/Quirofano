@@ -23,7 +23,7 @@ class AgendaPeer extends BaseAgendaPeer
   const DIFERIDA_STATUS = -50;
 
   /** Valor del estatus programada */
-  const PROGRAMADA_STATUS = 0;
+  const PROGRAMADA_STATUS = 1;
 
   /** Valor del estatus  */
   const TRANSOPERATORIO_STATUS = 10;

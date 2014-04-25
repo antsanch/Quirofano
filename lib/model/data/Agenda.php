@@ -26,45 +26,61 @@ class Agenda extends BaseAgenda {
     return $this->getId().' '.$this->getProgramacion('d-M-Y').' a las '.$this->getHora('h:i A');
   }
 
-  // doSave - Extiende las acciones de guardado nativas de la clase
+ /**
+  * doSave
+  * Extiende las acciones de guardado nativas de la clase
+  */
   public function doSave(PropelPDO $con)
   {
-    switch ($this->getStatus()) {
-      case 1:
+    switch ($this->getStatus()) { # @flag Actualiza el campo 'last_date'
+    case 1:  # Programadas
       $this->setLastTime($this->getInicioTimestamp());
       break;
 
-      case 10:
+    case 10:  # En proceso
       $this->setLastTime($this->getIngreso());
       $this->setRetrasoInicial($this->calculaRetrasoInicio());
       break;
 
-      case 100:
+    case 100: # Realizadas
       $this->setLastTime($this->getEgreso());
       $this->setTiempoTotal($this->calculaDuracion());
       break;
     }
 
-    // Se asegura de calcular el retraso inicial para todas las cirugias les falte,
+    # @flag Se asegura de calcular el retraso inicial para todas las cirugias les falte,
     if ($this->getStatus() > 1 && $this->getRetrasoInicial() == '') {                  // Cirugias avanzadas con el campo vacio
       $this->setRetrasoInicial($this->calculaRetrasoInicio());
     }
 
+    # @flag Unifica la fecha y hora en el campo 'Programacion'
+    if (parent::getHora() && $this->getProgramacion('H:i') == '00:00') {
+      $this->setProgramacion($this->getProgramacion('Y-m-d').' '.parent::getHora());
+      parent::setHora(null);
+    }
+
+    # @flag Actualiza el campo 'Sumary'
     $this->setSumary(sprintf('%s | %s', $this->getRegistro(), $this->getPacienteName()));
 
     if (!$this->isNew()) {
-      //~ die('hay que guardar el historico');
+      //~ die('hay que guardar el historico'); //          [DEL]
     }
     parent::doSave($con);
   } // doSave()
 
+ /**
+  * Verifica si es necesario el versionado
+  * @todo Hay que definir mejor la condicion del versionado
+  */
   public function isVersioningNecessary($con = null)
   {
     return $this->getStatus() <= 1 && parent::isVersioningNecessary();
   }
 
- /* calculaRetrasoInicio  Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
-  *                       si ya inicio se almacena en un campo.
+ /**
+  * Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
+  * si ya inicio se almacena en un campo.
+  *
   * @autor: Antonio Sánchez Uresti
   * @date:  2014-04-06
   */
@@ -82,8 +98,10 @@ class Agenda extends BaseAgenda {
     }
   }
 
- /* calculaDuracion  Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
-  *                  si ya inicio se almacena en un campo.
+ /** calculaDuracion
+  * Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
+  * si ya inicio se almacena en un campo.
+  *
   * @autor: Antonio Sánchez Uresti
   * @date:  2014-04-06
   */
@@ -124,6 +142,20 @@ class Agenda extends BaseAgenda {
       return $i->format();
     }
     return $retraso;
+  }
+
+ /**
+  * Retorna la hora en la que esta programada la cirugia, se necesita por el cambio de estructura
+  * en la base de datos cuando se elimino el campo separado de 'Hora' y se integro al campo 'Programacion'
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-25
+  */
+  public function getHora($format = 'H:i:s')
+  {
+    if (method_exists(get_parent_class($this), 'getHora')) {   # Si el metodo existe en el padre
+      return parent::getHora() ? parent::getHora() : $this->getProgramacion($format);
+    }
+    return $this->getProgramacion($format);
   }
 
 
@@ -415,7 +447,10 @@ class Agenda extends BaseAgenda {
   }
 
   public function getInicioTimestamp($format = 'U') {
-    return date($format, strtotime(sprintf('%s %s', $this->getProgramacion('d-m-Y'), $this->getHora())));
+    if (parent::getHora() != '00:00:00') {
+      return date($format, strtotime(sprintf('%s %s', $this->getProgramacion('Y-m-d'), $this->getHora())));
+    }
+    return $this->getProgramacion('U');
   }
 
   public function writeProcedimientos() {
@@ -482,12 +517,4 @@ class Agenda extends BaseAgenda {
     return $values[$this->getDestinoPx()];
   }
 
-  //~ public function setFechaestado($v) {
-    //~ throw new Exception('setFechaestado(): El uso de este metodo esta Depreciado');
-    //~ return parent::setFechaestado($v);
-  //~ }
-//~
-  //~ public function setHoraestado($v) {
-//~
-  //~ }
 } // Agenda

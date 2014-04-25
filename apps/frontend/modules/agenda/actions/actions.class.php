@@ -14,6 +14,7 @@ class agendaActions extends sfActions
     $cirugias = AgendaQuery::create()->find();
 
     foreach ($cirugias as $cx) {
+      AgendaPeer::disableVersioning();
       $cx->save();
     }
   }
@@ -54,14 +55,14 @@ class agendaActions extends sfActions
   }
 /*Actión para mostrar quirofanos ambulatorios y activos*/
 
-/*Actión para mostrar todos los quirofanos*/
+/*Actión para mostrar la totalidad de los quirofanos*/
  public function executeTquirofanos(sfWebRequest $request)
   {
     $this->Quirofanos = QuirofanoQuery::create()->find(); //datos para los quirofanos
     $quirofano_id = $request->getParameter('quirofano');
     $date = $request->getParameter('date', 'today');
   }
-/*Actión para mostrar todos los quirofanos*/
+/*Actión para mostrar la totalidad de los quirofanos*/
 
   // Actión de prueba
   public function executeNew(sfWebRequest $request)
@@ -494,8 +495,8 @@ public function executeTransoperatorio(sfWebRequest $request)
   {
     $this->forward404Unless($request->hasParameter('id'));
     $agenda = AgendaQuery::create()->findPk($request->getParameter('id'));
-    $Quirofano = QuirofanoQuery::create()
-      ->findOneById($agenda->getQuirofanoid());
+    $Quirofano = $this->getQuirofano();
+    //~ $Quirofano = QuirofanoQuery::create()->findOneById($agenda->getQuirofanoid());
 
     if ($agenda->estaAtrasado() && !$agenda->esDiferido()) {
       $this->getUser()->setFlash('obligar', 'Esta cirugia tiene más de 24 Horas de atraso por lo que se debe marcar como diferida y especificar
@@ -513,7 +514,7 @@ public function executeTransoperatorio(sfWebRequest $request)
              $fechaselecc['min'] = date("Y-m-d",strtotime($fechaselecc['max'].' -1 day'));
              $tiempo_est = $this->form->getValue("tiempo_est");
              $identificacion = $this->form->getValue("id");
-             $control = $this->emHoras($fechaselecc,$horapropuesta,$Quirofano->getid(),$salaselecc,$tiempo_est,$identificacion);
+             $control = $this->emHoras($fechaselecc,$horapropuesta,$Quirofano['Id'],$salaselecc,$tiempo_est,$identificacion);
              if ($control != NULL)
              {
                 $text = 'Se empalma con la cirugia: '.$control;
