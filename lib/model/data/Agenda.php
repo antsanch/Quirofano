@@ -99,7 +99,7 @@ class Agenda extends BaseAgenda {
   }
 
  /** calculaDuracion
-  * Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.
+  * Retorna el atraso con el que inicio una cirugia, si aun no inicia se calcula en cada llamada.
   * si ya inicio se almacena en un campo.
   *
   * @autor: Antonio Sánchez Uresti
@@ -158,39 +158,43 @@ class Agenda extends BaseAgenda {
     return $this->getProgramacion($format);
   }
 
-
- /* getClasses - Genera classes para los renglones de la agenda principal
+ /**
+  * @flag getClasses: Genera classes para los renglones de la agenda principal
   */
   public function getClasses()
   {
-    $classes = array();
-    $string = '';
     $status = AgendaPeer::getStatus();
+    $classes = array(
+      'cxrow',
+      strtolower($status[$this->getStatus()]),
+      $this->getTipoProcId() ? 'cxtipo_'.$this->getTipoProcId() : '',
+      'convenio'.$this->getAtencionId(),
+    );
 
-    if ($this->getStatus() < 10) {
-      $classes['solicitado'] = $this->estaSolicitado() ? 'solicitado' : false;
+    if ($this->getStatus() == AgendaPeer::PROGRAMADA_STATUS) {
+      $retraso = $this->calculaRetrasoInicio();
+      $classes[] = $this->estaSolicitado() ? 'solicitado' : '';
 
-      if ($this->estaAtrasado()) {
-        $classes['diferido'] = 'atrasada';
-      }
-      else {
-        if ($this->getIntervaloAtraso() > 0 ) {
-          $classes['diferido'] = 'diferido'.$this->getTiempoDiferido(false);
-        }
+      if ($retraso > 0) {
+        $classes[] = $retraso >= 86400 ? 'atrasada' : 'diferido'.$this->getTiempoDiferido(false);
       }
     }
 
-    if ($this->getStatus() == -50) {
-      $classes['diferido'] = 'diferido';
-    }
-
-    $classes['agenda'] = 'cxrow';
-    $classes['tipocx'] = $this->getTipoProcId() ? 'cxtipo_'.$this->getTipoProcId() : false;
-    $classes['convenio'] = 'convenio'.$this->getAtencionId();
-    $classes['status'] = $status[$this->getStatus()];
+    if ($this->getStatus() == AgendaPeer::DIFERIDA_STATUS) $classes[] = 'diferido';
 
     return trim(implode(' ', $classes));
   } /* getClasses */
+
+ /**
+  * Regresa un string con el elemento <div> que representa la caratula del reloj con el atraso correspondiente
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-04-25
+  */
+  public function getCaratulaReloj()
+  {
+    return (!$this->getCancelada()) ? sprintf ('<div class="atraso" title="%s"></div>', $this->getTiempoDiferido()) : '';
+  }
+
 
   public function getQuirofanoSlug()
   {
@@ -199,7 +203,8 @@ class Agenda extends BaseAgenda {
 
   public function estaAtrasado()
   {
-    $time = $this->getIntervaloAtraso();
+    //~ $time = $this->getIntervaloAtraso();
+    $time = $this->calculaRetrasoInicio();  # ahora usaremos en metodo nuevo calculaRetrasoInicio
 
     if ($time < 0) {
       $return = false;
@@ -246,7 +251,7 @@ class Agenda extends BaseAgenda {
     return 0;
   }
 
-  protected function getIntervaloAtraso()
+  protected function getIntervaloAtraso() # @todo Revisar este metodo porque esta muy mal hecho
   {
     $hora = $this->getHora('H');
     $min = $this->getHora('i');

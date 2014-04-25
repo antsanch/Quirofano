@@ -32,7 +32,7 @@ class AgendaPeer extends BaseAgendaPeer
   const REALIZADA_STATUS = 100;
 
   /** Valor del estatus bloqueada */
-  const BLOQUEADA_STATUS = 100;
+  const BLOQUEADA_STATUS = 500;
 
  /**
   * getCirugiasSolapadas

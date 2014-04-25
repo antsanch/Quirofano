@@ -2,6 +2,7 @@
 <?php use_stylesheet('/css/global/styleAgenda.css')?>
 <?php use_javascript('/js/global/facebox.js')?>
 <?php use_stylesheet('/css/global/facebox.css')?>
+<?php use_helper('agenda') ?>
 
 <?php slot('titulo') ?>
   <title>Agenda de <?php echo $Quirofano['Nombre'] ?> | SIGA-HU </title>
@@ -11,7 +12,31 @@
 
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
+<!-- @flag Inicio de la nueva tabla de resultados -->
+<table id="agenda" border="0" width="100%" cellspacing="0">
+  <tbody>
+<?php foreach($Cirugias as $c): ?>
+      <?php
+        switch ($c->getStatus()) {
+        case AgendaPeer::PROGRAMADA_STATUS:
+          echo renderProgramada($c);
+          break;
+        case AgendaPeer::TRANSOPERATORIO_STATUS:
+          echo renderProgramada($c);
+          break;
+        case AgendaPeer::REALIZADA_STATUS:
+          echo renderProgramada($c);
+          break;
+        default:
 
+        }
+      ?>
+<?php endforeach; ?>
+  </tbody>
+</table>
+
+<hr/>
+<!-- @flag Aqui inicia el codigo original -->
 <div id="camasPanel">
   <table id="agenda" border="0" width="100%" cellspacing="0">
 </div>
