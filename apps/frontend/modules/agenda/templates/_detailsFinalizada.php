@@ -1,4 +1,4 @@
-  <div class="tableData detail realizada clearfix" >
+  <div class="tableData detail terminada clearfix" >
     <div class="head" >Detalles de la Cirugía</div>
 
 <!-- Primer Renglon -->

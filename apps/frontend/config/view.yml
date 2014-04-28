@@ -12,7 +12,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css,jquery-ui-1.10.3.custom]
+  stylesheets:    [main.css,jquery-ui-1.10.3.custom.css]
 
   javascripts:    [jquery-1.9.1.js,jquery-ui-1.10.3.custom.js]
 

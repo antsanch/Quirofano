@@ -1,5 +1,7 @@
   <div class="tableData trans detail clearfix" >
-    <div class="head" >Detalles del Transoperatorio</div>
+    <div class="head" >Detalles del Transoperatorio
+<?php if ($cirugia->getStatus() == 10) echo link_to('<div class="realizada" style="float:right;"></div>', 'agenda/postoperatorio?id='.$cirugia->getId(), array('title' => 'Terminar la cirugia')) ?>
+    </div>
 
 <?php if($cirugia->getStatus() == 10): ?>
     <div class="cellData cols12" >

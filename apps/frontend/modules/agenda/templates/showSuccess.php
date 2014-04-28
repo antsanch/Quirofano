@@ -13,31 +13,34 @@
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
 <!-- @flag Inicio de la nueva tabla de resultados -->
-<table id="agenda" border="0" width="100%" cellspacing="0">
-  <tbody>
+<div id="agenda">
+
+  <?php $currentStatus = null?>
+  <table border="0" width="100%" cellspacing="0">
+    <tbody>
 <?php foreach($Cirugias as $c): ?>
-      <?php
-        switch ($c->getStatus()) {
-        case AgendaPeer::DIFERIDA_STATUS:
-          echo renderProgramada($c);
-          break;
-        case AgendaPeer::PROGRAMADA_STATUS:
-          echo renderProgramada($c);
-          break;
-        case AgendaPeer::TRANSOPERATORIO_STATUS:
-          echo renderTransoperatorio($c);
-          break;
-        case AgendaPeer::REALIZADA_STATUS:
-          echo renderRealizada($c);
-          break;
-        default:
-
-        }
-      ?>
+        <?php
+          switch ($c->getStatus()) {
+          case AgendaPeer::DIFERIDA_STATUS:
+            echo renderProgramada($c);
+            break;
+          case AgendaPeer::PROGRAMADA_STATUS:
+            echo renderProgramada($c);
+            break;
+          case AgendaPeer::TRANSOPERATORIO_STATUS:
+            echo renderTransoperatorio($c);
+            break;
+          case AgendaPeer::REALIZADA_STATUS:
+            echo renderRealizada($c);
+            break;
+          default:
+            # No default
+          }
+        ?>
 <?php endforeach; ?>
-  </tbody>
-</table>
-
+    </tbody>
+  </table>
+</div>
 <hr/>
 <!-- @flag Aqui inicia el codigo original -->
 <div id="camasPanel">

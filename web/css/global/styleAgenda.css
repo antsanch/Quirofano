@@ -1,3 +1,7 @@
+/**
+ * Todas estas clases se activan al encontrar un contenedor con la clase agenda???
+ */
+
   #agenda th {
     /*background: lightgray; /**/
     border-bottom: 2px solid black;
@@ -28,7 +32,7 @@
     font-weight: bold;
     background-color: lightblue !important; /**/
   }
-  
+
   #agenda td {
   background: url('/images/gradientbg.png');
     border-bottom: 1px dashed #BBB; /**/
@@ -130,7 +134,7 @@
     width: 20px !important;
   }
 
-  #agenda .iniciar {
+  #agenda .iniciar, .iniciar {
     background-image: url('/images/tipos de cirugía.png') !important;
     background-position: 0px -160px;
     display: inline-block !important;
@@ -154,9 +158,17 @@
     width: 20px !important;
   }
 
-  #agenda .realizada {
+  #agenda .realizada, .realizada {
     background-image: url('/images/tipos de cirugía.png') !important;
     background-position: -20px -180px;
+    display: inline-block !important;
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  #agenda .detalles {
+    background-image: url('/images/cirugia.png') !important;
+    background-position: -20px -218px;
     display: inline-block !important;
     height: 20px !important;
     width: 20px !important;

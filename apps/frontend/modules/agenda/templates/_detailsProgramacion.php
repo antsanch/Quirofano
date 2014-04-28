@@ -5,6 +5,7 @@
   <div title="Programación" class="tableData program detail clearfix" >
     <div class="head">
       Datos de la programacion de la cirugia
+<?php if ($cirugia->getStatus() == 1) echo link_to('<div class="iniciar" style="float:right;"></div>', 'agenda/transoperatorio?id='.$cirugia->getId(), array('title' => 'Iniciar esta cirugia')) ?>
     </div>
 
 <?php if($cirugia->tieneRetraso()): ?>
@@ -43,14 +44,14 @@
       <div class='value'><?php echo $cirugia->getTiempoEst() ?> </div>
     </div>
 
-    <div class='cellData cols08'>
-      <div class='label'>Nombre del Paciente</div>
-      <div class='value'><?php echo $cirugia->getPacienteName() ?> </div>
-    </div>
-
     <div class='cellData cols02'>
       <div class='label'>Registro</div>
       <div class='value'><?php echo $cirugia->getRegistro() ?> </div>
+    </div>
+
+    <div class='cellData cols08'>
+      <div class='label'>Nombre del Paciente</div>
+      <div class='value'><?php echo $cirugia->getPacienteName() ?> </div>
     </div>
 
     <div class='cellData cols02'>

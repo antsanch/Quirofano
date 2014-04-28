@@ -37,7 +37,7 @@
       $c->getDiagnostico(),
       html_entity_decode($c->getListaProcedimientos()),
       $c->getPrograma(),
-      link_to('[D]', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
+      link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
       link_to('<div class="button"></div>', 'agenda/pxsolicitado?id='.$c->getId(), array('title' => 'Paciente en Preoperatorio')),
       link_to('<div class="modificar"></div>', 'agenda/reprogramar?id='.$c->getId(), array('title' => 'Reprogramar')),
       link_to('<div class="iniciar"></div>', 'agenda/transoperatorio?id='.$c->getId(), array('title' => 'Iniciar cirugía')),
@@ -82,9 +82,9 @@
       $c->getDiagnostico(),
       html_entity_decode($c->getListaProcedimientos()),
       $c->getPrograma(),
-      link_to('[D]', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
-      link_to('<div class="realizada"></div>', 'agenda/pxsolicitado?id='.$c->getId(), array('title' => 'Paciente en Preoperatorio')),
-      link_to('<div class="cambio"></div>', 'agenda/reprogramar?id='.$c->getId(), array('title' => 'Reprogramar'))
+      link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
+      link_to('<div class="realizada"></div>', 'agenda/postoperatorio?id='.$c->getId(), array('title' => 'Terminar Cirugía')),
+      link_to('<div class="cambio"></div>', 'agenda/agregarpersonal?id='.$c->getId(), array('title' => 'Agregar personal a la cirugia'))
     );
   }
 
@@ -124,6 +124,6 @@
       $c->getDiagnostico(),
       html_entity_decode($c->getListaProcedimientos()),
       $c->getPrograma(),
-      link_to('[D]', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles'))
+      link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles'))
     );
   }

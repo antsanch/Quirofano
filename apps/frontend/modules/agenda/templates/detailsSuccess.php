@@ -1,3 +1,4 @@
+<?php use_stylesheet('/css/global/styleAgenda.css')?>
 <?php slot('titulo') ?>
   <title>Detalles de la cirugia de <?php echo $cirugia->getPacienteName() ?> | SIGA-HU </title>
 <?php end_slot() ?>
@@ -16,7 +17,7 @@
     width: 100%;
   }
 
-  .realizada {
+  .terminada {
     background: lightblue;
   }
 
@@ -76,7 +77,7 @@ switch ($cirugia->getStatus())
     include_partial("detailsFinalizada", array('cirugia' => $cirugia));
 
 // Datos a mostrar cuando la cirugia este en transoperatorio
-  case 10:
+  case AgendaPeer::TRANSOPERATORIO_STATUS:
     include_partial("detailsTransoperatorio", array('cirugia' => $cirugia));
 
 // Datos a mostrar cuando la cirugia esta programada o diferida
