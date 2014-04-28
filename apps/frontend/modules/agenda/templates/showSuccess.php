@@ -18,14 +18,17 @@
 <?php foreach($Cirugias as $c): ?>
       <?php
         switch ($c->getStatus()) {
+        case AgendaPeer::DIFERIDA_STATUS:
+          echo renderProgramada($c);
+          break;
         case AgendaPeer::PROGRAMADA_STATUS:
           echo renderProgramada($c);
           break;
         case AgendaPeer::TRANSOPERATORIO_STATUS:
-          echo renderProgramada($c);
+          echo renderTransoperatorio($c);
           break;
         case AgendaPeer::REALIZADA_STATUS:
-          echo renderProgramada($c);
+          echo renderRealizada($c);
           break;
         default:
 

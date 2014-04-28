@@ -153,7 +153,7 @@ class Agenda extends BaseAgenda {
   public function getHora($format = 'H:i:s')
   {
     if (method_exists(get_parent_class($this), 'getHora')) {   # Si el metodo existe en el padre
-      return parent::getHora() ? parent::getHora() : $this->getProgramacion($format);
+      return parent::getHora() ? parent::getHora($format) : $this->getProgramacion($format);
     }
     return $this->getProgramacion($format);
   }
@@ -264,7 +264,8 @@ class Agenda extends BaseAgenda {
 
   public function getTiempoDiferido($useUnits = true)
   {
-    $time = $this->getIntervaloAtraso();
+    # $time = $this->getIntervaloAtraso();
+    $time = $this->calculaRetrasoInicio();
 
     if ($time > 0) {
       if ($useUnits) {
@@ -458,6 +459,9 @@ class Agenda extends BaseAgenda {
     return $this->getProgramacion('U');
   }
 
+ /**
+  * @flag Retorna una lista de procedimientos
+  */
   public function writeProcedimientos() {
     $result = '';  $i = 1;
     foreach ($this->getProcedimientocirugias() as $procedimiento) {
@@ -472,6 +476,17 @@ class Agenda extends BaseAgenda {
 
           }
     return $result;
+  }
+
+ /**
+  * @flag Retorna una lista de procedimientos
+  */
+  public function getListaProcedimientos() {
+    $lista = '<ol>';
+    foreach ($this->getProcedimientocirugias() as $p) {
+      $lista .= sprintf('<li>%s</li>', $p->getcie9mc() ?: 'No esta definido' );
+    }
+    return $lista.= '</ol>';
   }
 
  /* getProtocoloText
