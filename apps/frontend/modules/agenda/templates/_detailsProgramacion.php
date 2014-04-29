@@ -6,6 +6,7 @@
     <div class="head">
       Datos de la programacion de la cirugia
 <?php if ($cirugia->getStatus() == 1) echo link_to('<div class="iniciar" style="float:right;"></div>', 'agenda/transoperatorio?id='.$cirugia->getId(), array('title' => 'Iniciar esta cirugia')) ?>
+<?php if ($cirugia->getStatus() == -50) echo link_to('<div class="modificar" style="float:right;"></div>', 'agenda/reprogramar?id='.$cirugia->getId(), array('title' => 'Reprogramar')) ?>
     </div>
 
 <?php if($cirugia->tieneRetraso()): ?>
@@ -133,4 +134,39 @@
       <div class='label'>Otros insumos</div>
       <div class='value'><?php echo $cirugia->getRequerimiento() ?> </div>
     </div>
-  </div>
+
+<?php if($cirugia->countAgendaVersions() >= 0): ?>
+    <div class="head">
+      Historial de cambios
+    </div>
+<?php endif; ?>
+
+
+<?php foreach($cirugia->getAgendaVersions() as $version): ?>
+    <div class='cellData cols02'>
+      <div class='label'>Quirofano</div>
+      <div class='value'><?php echo $version->getQuirofano() ?></div>
+    </div>
+
+    <div class='cellData cols01'>
+      <div class='label'>Sala</div>
+      <div class='value'><?php echo $version->getSalaquirurgica() ?></div>
+    </div>
+
+    <div class='cellData cols03'>
+      <div class='label'>Tipo de Procedimiento</div>
+      <div class='value'><?php echo $version->getProcedimiento() ?> </div>
+    </div>
+
+    <div class='cellData cols02'>
+      <div class='label'>Fecha programada</div>
+      <div class='value'><?php echo $version->getProgramacion('d-M-Y') ?> </div>
+    </div>
+
+    <div class='cellData cols02'>
+      <div class='label'>Hora</div>
+      <div class='value'><?php echo $version->getHora('h:i A') ?> </div>
+    </div>
+<?php endforeach; ?>
+ </div>
+

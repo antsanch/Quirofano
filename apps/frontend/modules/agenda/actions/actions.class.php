@@ -167,8 +167,10 @@ public function emHoras($fechaselecc,$horapropuesta,$Quiid,$salaselecc,$tiempo_e
 {
      //Buscamos las posibles cirugias programadas que se pueden empalmar
     $control = NULL;
-    //~ $estados['trans'] = 10;
-    //~ $estados['progr'] = 1;
+    $estados = array(
+      //~ trans' => 10;
+      //~ progr' => 1;
+    );
     $agenda = AgendaQuery::create()                //filtramos por programaciones del dia actual y un dia anterior
       ->filterByquirofanoid($Quiid)                //en caso de que continue la cirugia al dia de hoy
       // hay que cambiar este filtro por el del nuevo campo

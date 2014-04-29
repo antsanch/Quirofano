@@ -126,7 +126,7 @@
     width: 20px !important;
   }
 
-  #agenda .modificar {
+  #agenda .modificar, .modificar {
     background-image: url('/images/tipos de cirugía.png') !important;
     background-position: 0px -180px;
     display: inline-block !important;

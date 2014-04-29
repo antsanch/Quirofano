@@ -1,6 +1,11 @@
 <?php use_stylesheet('/css/global/styleAgenda.css')?>
 <?php use_javascript('/js/global/facebox.js')?>
 <?php use_stylesheet('/css/global/facebox.css')?>
+<?php use_helper('agenda') ?>
+
+<?php slot('titulo') ?>
+  <title>Resultados de la búsqueda: <?php echo $term ?> | SIGA-HU </title>
+<?php end_slot() ?>
 
 <h1>Resultados de la búsqueda: <?php echo $term ?></h1>
 
@@ -14,9 +19,38 @@
 
 <?php if( count($cirugias) > 0 ): ?>
 
-<?php slot('titulo') ?>
-  <title>Resultados de la búsqueda: <?php echo $term ?> | SIGA-HU </title>
-<?php end_slot() ?>
+<!-- @flag Inicio de la nueva tabla de resultados -->
+<div id="agenda">
+
+  <?php $currentStatus = null?>
+  <table border="0" width="100%" cellspacing="0">
+    <tbody>
+<?php foreach($cirugias as $c): ?>
+        <?php
+          switch ($c->getStatus()) {
+          case AgendaPeer::DIFERIDA_STATUS:
+            echo renderProgramada($c);
+            break;
+          case AgendaPeer::PROGRAMADA_STATUS:
+            echo renderProgramada($c);
+            break;
+          case AgendaPeer::TRANSOPERATORIO_STATUS:
+            echo renderTransoperatorio($c);
+            break;
+          case AgendaPeer::REALIZADA_STATUS:
+            echo renderRealizada($c);
+            break;
+          default:
+            # No default
+          }
+        ?>
+<?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
+
+
+
 <?php use_stylesheet('/css/global/widescreen.css')?>
 
 <div id="camasPanel">

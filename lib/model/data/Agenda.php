@@ -74,8 +74,20 @@ class Agenda extends BaseAgenda {
   */
   public function isVersioningNecessary($con = null)
   {
-    return $this->getStatus() <= 1 && parent::isVersioningNecessary();
+    return $this->necesitaVersionado() && parent::isVersioningNecessary();
   }
+
+  /* functionname
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-04-28
+  */
+  public function necesitaVersionado()
+  {
+    //~ if ($this->isNew()) return false;
+    if ($this->getIngreso() == null) return true;
+
+  }
+
 
  /**
   * Retorna el atraso con el que inicio una cirugia, aun no inicia se calcula en cada llamada.

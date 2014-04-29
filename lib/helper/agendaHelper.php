@@ -83,8 +83,8 @@
       html_entity_decode($c->getListaProcedimientos()),
       $c->getPrograma(),
       link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
-      link_to('<div class="realizada"></div>', 'agenda/postoperatorio?id='.$c->getId(), array('title' => 'Terminar Cirugía')),
-      link_to('<div class="cambio"></div>', 'agenda/agregarpersonal?id='.$c->getId(), array('title' => 'Agregar personal a la cirugia'))
+      link_to('<div class="cambio"></div>', 'agenda/agregarpersonal?id='.$c->getId(), array('title' => 'Agregar personal a la cirugia')),
+      link_to('<div class="realizada"></div>', 'agenda/postoperatorio?id='.$c->getId(), array('title' => 'Terminar Cirugía'))
     );
   }
 
