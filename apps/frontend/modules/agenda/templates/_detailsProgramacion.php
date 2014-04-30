@@ -135,27 +135,26 @@
       <div class='value'><?php echo $cirugia->getRequerimiento() ?> </div>
     </div>
 
-<?php if($cirugia->countAgendaVersions() >= 0): ?>
+<?php if($cirugia->countAgendaVersions() > 0): ?>
     <div class="head">
       Historial de cambios
     </div>
-<?php endif; ?>
 
-
-<?php foreach($cirugia->getAgendaVersions() as $version): ?>
-    <div class='cellData cols02'>
+<?php # @todo Revisar como obtener los valores relacionados y no solo el id sin matar la BD con request
+foreach($cirugia->getAgendaVersions() as $version): ?>
+    <div class='cellData cols03'>
       <div class='label'>Quirofano</div>
-      <div class='value'><?php echo $version->getQuirofano() ?></div>
+      <div class='value'><?php //echo $version->getQuirofano() ?></div>
     </div>
 
-    <div class='cellData cols01'>
+    <div class='cellData cols02'>
       <div class='label'>Sala</div>
-      <div class='value'><?php echo $version->getSalaquirurgica() ?></div>
+      <div class='value'><?php //echo $version->getSalaquirurgica() ?></div>
     </div>
 
     <div class='cellData cols03'>
       <div class='label'>Tipo de Procedimiento</div>
-      <div class='value'><?php echo $version->getProcedimiento() ?> </div>
+      <div class='value'><?php //echo $version->getProcedimiento() ?> </div>
     </div>
 
     <div class='cellData cols02'>
@@ -168,5 +167,6 @@
       <div class='value'><?php echo $version->getHora('h:i A') ?> </div>
     </div>
 <?php endforeach; ?>
+<?php endif; ?>
  </div>
 
