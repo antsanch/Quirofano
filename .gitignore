@@ -2,3 +2,5 @@ config/databases.yml
 config/propel.ini
 cache/*
 log/*
+todoList.tsk.lock
+todoList.tsk.lock.*
