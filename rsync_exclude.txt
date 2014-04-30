@@ -1,0 +1,7 @@
+/config/databases.yml
+/config/propel.ini
+/lib/model/migration/*
+/web/uploads/*
+/cache/*
+/log/*
+/apps/frontend/config/settings.yml

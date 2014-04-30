@@ -39,4 +39,7 @@ Some common options used with rsync commands
 
 Paspo 4 - Con este comando se actualiza
 
-rsync -avzh * antsanch@148.234.140.6:/home/antsanch/webapps/quirofano.git/
+rsync -avzh --exclude-from=rsync_exclude.txt * antsanch@148.234.140.6:/home/antsanch/webapps/quirofano.git/
+
+Pendiente la parte de inclusiones y exclusiones de archivos
+http://www.esdebian.org/wiki/rsync-ssh-transporte-autenticacion-mediante-claves-sin-frase
