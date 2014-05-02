@@ -37,7 +37,8 @@
   <link rel="stylesheet" type="text/css" media="screen" href="/min/b=css/templates2/<?php echo $template ?>&f=default.css,styles.css,jquery-ui.custom.css " /> <!-- Hoja de estilos principal -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/default.css" /> <!-- Hoja de estilos principal -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/styles.css" />  <!-- Modificaciones del template -->
-  <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/jquery-ui.custom.css" />  <!-- Estilos de widgets -->
+  <!--   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/jquery-ui.custom.css" />  <!-- Estilos de widgets -->
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/jquery-ui-1.10.3.custom.css" />
 
   <!-- Hojas de estilo de utilidades -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/global/jquery.pnotify.default.css" /> <!-- Hoja de estilos de las Notificaciones -->
@@ -46,13 +47,15 @@
   <link rel="stylesheet" type="text/css" media="screen" href="/css/global/sprite.css"><!-- Incluye los iconos de famfamicons en modo viejo -->
 
   <!-- ======================== JAVASCRIPT ======================== -->
-  <!-- <script type="text/javascript" src="/js/global/jquery-1.7.1.min.js"></script>    <!-- 1.5.1 --><!-- 1.4.2 -->
-  <!-- <script type="text/javascript" src="/js/global/jquery-ui-1.8.20.custom.min.js"></script>    <!-- 1.8.2 -->
+  <script type="text/javascript" src="/js/jquery-1.9.1.js"></script> <!-- 1.7.1 --><!-- 1.5.1 --><!-- 1.4.2 -->
+  <script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.js"></script>    <!-- 1.8.20--><!-- 1.8.2 -->
   <script type="text/javascript" src="/js/global/ui.timepickr.js"></script>    <!-- 1.8.2 -->
   <script type="text/javascript" src="/js/global/datepickerPreferences.js"></script>
   <script type="text/javascript" src="/js/global/seekAttention.jquery.js"></script>   <!-- plugin para llamar la atencion de areas -->
   <script type="text/javascript" src="/js/global/jquery.timepicker.js"></script>
   <link rel="stylesheet" type="text/css" href="/css/global/jquery.timepicker.css" />
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 
 
   <!-- Estas lineas se deben agregar a cada modulo que realmente requiera usar las funciones de colapsado de cajas   -->

@@ -27,9 +27,6 @@
   <script>
   $(function() {
     $( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
-    //~ //$( "#format" ).change(function() {
-    //~ $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd");
-    //~ //});
   });
   </script>
 <!-- Para poner calendario-->
@@ -45,7 +42,7 @@
 <script type="text/javascript">
 $(function()
 {
-            $("#tiest").timepicker({ 'timeFormat': 'H:i:s' });
+  $("#tiest").timepicker({ 'timeFormat': 'H:i:s' });
 });
 </script>
 

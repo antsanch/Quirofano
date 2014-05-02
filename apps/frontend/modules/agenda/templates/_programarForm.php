@@ -286,12 +286,17 @@ if(!confirm(" Esta seguro ? "))
 <script>
   $('#add_newProcedimientocirugia_link').addClass('addLink');
   $(function() {
-    $('textarea').elastic();
+    console.log('Soporte CORS: ' + $.support.cors);
+
+    //~ $('textarea').elastic();
+
+    // @flag Habilita el autocompletado
     $('.searchable').each(function() {
       var $this = $(this),
-          source = '<?php echo url_for('@homepage', true)?>' + $this.data('url'),
+          source = $this.data('source'),   //'<?php echo url_for('@homepage', true)?>' + $this.data('url'),
           focus = $this.attr('id'),
           select = $this.data('select');
+      console.log($this);  // @flag Vemos si agarro algo
       $this.autocomplete({
       minLength: 2,
       delay: 350,
@@ -311,12 +316,14 @@ if(!confirm(" Esta seguro ? "))
           .appendTo( ul );
       }; /**/
     });
+
+
     $('.searchpx').each(function() {
       var $this = $(this),
-          source = '<?php echo url_for('@homepage', true)?>' + $this.data('url'),
+          source = $this.data('source'), //'<?php echo url_for('@homepage', true)?>' + $this.data('url'),
           focus = $this.attr('id'),
           select = $this.data('select');
-          /* console.log(select); /**/
+          //~ console.log(select); /**/
       $this.autocomplete({
         minLength: 2,
         delay: 350,
@@ -342,7 +349,7 @@ if(!confirm(" Esta seguro ? "))
     });
 
     // todo: migrar jquery a la version 1.7
-    $('.formCie9').live('keyup.autocomplete', function() {
+    $('.formCie9').on('keyup.autocomplete', function() {
       $(this).each(function() {
         var $target = $(this).find('.target');
 
