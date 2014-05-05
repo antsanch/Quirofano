@@ -286,17 +286,17 @@ if(!confirm(" Esta seguro ? "))
 <script>
   $('#add_newProcedimientocirugia_link').addClass('addLink');
   $(function() {
-    console.log('Soporte CORS: ' + $.support.cors);
+    $( ".datepicker" ).datepicker({ dateFormat: "dd-mm-yy" });
+    $("#tiest, #agenda_programacion_time").timepicker({ 'timeFormat': 'H:i' });
 
     //~ $('textarea').elastic();
-
     // @flag Habilita el autocompletado
     $('.searchable').each(function() {
       var $this = $(this),
           source = $this.data('source'),   //'<?php echo url_for('@homepage', true)?>' + $this.data('url'),
           focus = $this.attr('id'),
           select = $this.data('select');
-      console.log($this);  // @flag Vemos si agarro algo
+      //console.log($this);  // @flag Vemos si agarro algo
       $this.autocomplete({
       minLength: 2,
       delay: 350,

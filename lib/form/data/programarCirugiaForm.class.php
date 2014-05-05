@@ -129,6 +129,7 @@ class programarCirugiaForm extends BaseAgendaForm
     array(  # array de atributos
       'class'       => 'hasDatapicker',
       'date'        => array(
+        'class'       => 'datepicker',
         'placeholder' => 'Dia/Mes/Año',
       ),
       'id'          => 'datepicker',
@@ -188,7 +189,7 @@ class programarCirugiaForm extends BaseAgendaForm
           'class'       => 'searchable',
           'data-field'  => 'diagnostico_id',
           'data-select' => '1',
-          'data-source' => 'http://sigahu.com/api/clavecie',
+          'data-source' => 'http://sigahu.com/index.php/api/clavecie',
           'placeholder' => 'Diagnóstico del paciente o código CIE10',
         ));
 
@@ -305,11 +306,13 @@ class programarCirugiaForm extends BaseAgendaForm
     //return $this->widgetSchema['Procedimientocirugia'];
   }
 
- /* getDatosPrevios Llena los datos de la cirugia con datos conocidos de cirugias pasadas
+ /**
+  * getDatosPrevios
+  * Llena los datos de la cirugia con datos conocidos de cirugias pasadas
   * @param:     $cx   Id de la cirugia anterior relacionada.
   * @return:    El objeto para encadenamiento
-  * @autor: Antonio Sanchez Uresti
-  * @date:  2014-04-10
+  * @autor:     Antonio Sanchez Uresti
+  * @date:      2014-04-10
   */
   public function getDatosPrevios($cx)
   {
