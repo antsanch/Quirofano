@@ -8,6 +8,8 @@ class reporteForm extends AgendaFormFilter
   public function configure()
   {
     $this->useFields(array(
+      'quirofano_id',
+      'sala_id',
       'programacion',
       //~ 'status',
       //'last_time',
@@ -18,6 +20,8 @@ class reporteForm extends AgendaFormFilter
       'atencion_id',
       'reintervencion',
     ));
+    $this->widgetSchema['quirofano_id']->setOption('add_empty', 'Todos');
+    $this->widgetSchema['sala_id']->setOption('add_empty', 'Todas');
     $options = array('with_time' => false, 'date_order' => 'd-m-Y');
     $attributes = array('date' => array('class' => 'datepicker'));
     $this->widgetSchema['programacion'] = new sfWidgetFormFilterDate(array(
@@ -28,7 +32,7 @@ class reporteForm extends AgendaFormFilter
     ));
     $this->widgetSchema['medico_name'] = new sfWidgetFormInputText();
     $this->widgetSchema['servicio'] = new sfWidgetFormPropelChoiceNestedSet(array(
-      'add_empty'   =>  true,
+      'add_empty'   =>  'Todos',
       'criteria'    =>  EspecialidadQuery::create()->filterByQuirurgica(true),
       'model'       =>  'Especialidad',
     ));
@@ -45,5 +49,16 @@ class reporteForm extends AgendaFormFilter
       //~ 'choices'     => AgendaPeer::getStatus()
     //~ ));
   }
+
+  /* setQuirofanoDefault
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-05-07
+  */
+  public function setQuirofanoDefault()
+  {
+    $this->widgetSchema['quirofano_id']->setDefault(1);
+    return $this;
+  }
+
 
 }

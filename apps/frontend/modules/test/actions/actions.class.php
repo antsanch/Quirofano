@@ -49,4 +49,38 @@ class testActions extends sfActions
 
     $this->setLayout(false);
   }
+
+  /* functionname
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-05-07
+  */
+  public function executeReporte()
+  {
+    //~ $this->cirugias = AgendaQuery::create()
+      //~ ->setComment('Contamos las especialidades')
+      //~ ->join('Especialidad', Criteria::LEFT_JOIN)
+      //~ ->withColumn('Especialidad.Nombre', 'EspecialidadName')
+      //~ ->filterByProgramacion(array('min' => '2014-04-01', 'max' => '2014-05-30'))
+      //~ ->withColumn('count(Servicio)', 'PorEspecialidad')
+      //~ ->groupBy('Servicio')
+      //~ ->groupBy('SalaId')
+      //~ ->find();
+
+    $this->cirugias = AgendaQuery::create()
+      //~ ->select(array('Id', 'LastTime'))
+      //~ ->setComment('Contamos las especialidades')
+      //~ ->join('Especialidad', Criteria::LEFT_JOIN)
+      //~ ->withColumn('Especialidad.Nombre', 'EspecialidadName')
+      //~ ->groupBy('Servicio')
+      ->filterByProgramacion(array('min' => '2014-04-01', 'max' => '2014-05-30'))
+      ->join('Salaquirurgica')
+      ->withColumn('Salaquirurgica.Nombre', 'SalaName')
+      ->groupBy('SalaId')
+      ->withColumn('count(sala_id)', 'CountSala')
+      ->useQuery('Salaquirurgica')
+        ->orderById('Asc')
+      ->endUse()
+      ->find();
+  }
+
 }

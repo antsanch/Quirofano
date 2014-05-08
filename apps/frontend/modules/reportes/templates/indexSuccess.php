@@ -14,6 +14,33 @@
 </table>
 </form>
 
+<table border='1'>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>String</th>
+      <th>Quirofano</th>
+      <th>Sala</th>
+      <th>Médico</th>
+      <th>Servicio</th>
+      <th>Contaminacion</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach($cirugias as $result): ?>
+    <tr>
+      <td><?php echo $result->getId() ?></td>
+      <td><?php echo $result ?></td>
+      <td><?php echo $result->getQuirofano() ?></td>
+      <td><?php echo $result->getSalaquirurgica() ?></td>
+      <td><?php echo $result->getMedicoName() ?></td>
+      <td><?php echo $result->getEspecialidad() ?></td>
+      <td><?php echo $result->getContaminacionqx() ?></td>
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+</table>
+
 <pre>
 <?php
 
@@ -29,6 +56,8 @@
 ?>
 
 <?php //print_r(get_class_methods($filter)) ?>
+
+<?php if (isset($array)) print_r($array->getRawValue()) ?>
 </pre>
 
 <script>

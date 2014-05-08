@@ -20,7 +20,14 @@ class reportesActions extends sfActions
     $this->filter = new reporteForm;
     if ($request->getParameter('agenda_filters', null)) {
       $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
-
+      $this->array = $request->getParameter('agenda_filters');
+      //~ unset($this->array['_csrf_token']);
+      //~ $this->cirugias = $this->filter->buildCriteria($this->array);
+      //~ $this->cirugias->find();
+      //~ $this->filter->setQuirofanoDefault($this->getUser()->getQuirofano()['Id']);
+      $this->cirugias = AgendaQuery::create()
+        ->filterByRequestParameters($request->getParameter('agenda_filters'))
+        ->find();
     }
   }
 }
