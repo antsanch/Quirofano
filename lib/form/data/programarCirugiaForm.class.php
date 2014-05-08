@@ -73,9 +73,9 @@ class programarCirugiaForm extends BaseAgendaForm
 
     $this->widgetSchema['programa']['programa'] = new sfWidgetFormInputHidden();
 
-    //$this->widgetSchema['programacion'] = new sfWidgetFormJqueryDate(array(
-    //'config' => '{"option", "dateFormat", "yy-mm-dd"}',each(array)
-    //));
+    //$this->widgetSchema['programacion'] = new sfWidgetFormJqueryDate(array( //          [DEL]
+    //'config' => '{"option", "dateFormat", "yy-mm-dd"}',each(array) //          [DEL]
+    //)); //          [DEL]
 
   $this->widgetSchema['programa']['personal_nombre']
       ->setLabel('Nombre del Médico que programa:')
@@ -125,29 +125,31 @@ class programarCirugiaForm extends BaseAgendaForm
       'date_order'  => 'd-m-Y',
       'format'      => '<div class="area cols02"><div class="label">Fecha: </div><div class="field">%date%</div></div> <div class="area cols02"><div class="label">Hora:</div> <div class="field">%time%</div></div>',
       'with_time'   => true,
-      'time'        => array(
-        'label'     => 'Hora:',
-        'default'   => '7:00'
-      )
-    ), array(
+    ),
+    array(  # array de atributos
+      'class'       => 'hasDatapicker',
+      'date'        => array(
+        'class'       => 'datepicker',
+        'placeholder' => 'Dia/Mes/Año',
+      ),
       'id'          => 'datepicker',
-      'placeholder' => 'año/mes/dia',
-      'class'       => 'hasDatapicker'
+      'time'        => array(
+        'placeholder' => 'Hora:Minutos'
+      ),
       //'data-source' => 'http://example.com/api/data'
     ));
 
 
-    //$this->widgetSchema['hora'] = new sfWidgetFormInputText();  // eliminamos el campo de la hora          [DEL]
+    //$this->widgetSchema['hora'] = new sfWidgetFormInputText();  # @flag Eliminamos el campo de la hora          [DEL]
     $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
-    //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(
-    //'choices' => AgendaPeer::getDuracion()
-      //'id' => 'tiest'
-    //)));
+    //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(  //          [DEL]
+    //'choices' => AgendaPeer::getDuracion()    //          [DEL]
+      //'id' => 'tiest'   //          [DEL]
+    //)));    //          [DEL]
 
     $this->widgetSchema['diagnostico_id'] = new sfWidgetFormInputHidden();
-    // Ponemos un ID de diagnostico temporalmente, para poder salvar las cirugias */
+    # @flag Ponemos un ID de diagnostico temporalmente, para poder salvar las cirugias //          [DEL]
     $this->widgetSchema['diagnostico_id']->setAttribute('value', 'R14');
-    // Ponemos un ID de diagnostico temporalmente, para poder salvar las cirugias */
 
         $this->setWidget('status', new sfWidgetFormInputHidden());
         $this->widgetSchema['status']->setAttribute('value', 1);
@@ -184,9 +186,11 @@ class programarCirugiaForm extends BaseAgendaForm
         )));
 
         $this->widgetSchema['diagnostico']->setAttributes(array(
+          'class'       => 'searchable',
+          'data-field'  => 'diagnostico_id',
+          'data-select' => '1',
+          'data-source' => 'http://sigahu.com/index.php/api/clavecie',
           'placeholder' => 'Diagnóstico del paciente o código CIE10',
-          'data-source' => 'http://sigahu.com/api/clavecie',
-          'data-field'  => 'diagnostico_id'
         ));
 
         $this->setWidget('tipo_proc_id', new sfWidgetFormPropelChoice(array(
@@ -226,7 +230,7 @@ class programarCirugiaForm extends BaseAgendaForm
         # @flag Usamos el nuevo validador 'sfValidatorTextDateTime'
         $this->validatorSchema['programacion'] = new sfValidatorTextDateTime(
           array(
-          'date_order' => 'd-m-Y',
+          'date_order'  => 'd-m-Y',
           'required'    => true,
           ),
           array(  # @flag Array con los mensajes
@@ -302,11 +306,13 @@ class programarCirugiaForm extends BaseAgendaForm
     //return $this->widgetSchema['Procedimientocirugia'];
   }
 
- /* getDatosPrevios Llena los datos de la cirugia con datos conocidos de cirugias pasadas
+ /**
+  * getDatosPrevios
+  * Llena los datos de la cirugia con datos conocidos de cirugias pasadas
   * @param:     $cx   Id de la cirugia anterior relacionada.
   * @return:    El objeto para encadenamiento
-  * @autor: Antonio Sanchez Uresti
-  * @date:  2014-04-10
+  * @autor:     Antonio Sanchez Uresti
+  * @date:      2014-04-10
   */
   public function getDatosPrevios($cx)
   {
