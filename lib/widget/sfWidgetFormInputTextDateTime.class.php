@@ -64,14 +64,15 @@ class sfWidgetFormInputTextDateTime extends sfWidgetForm
     $default = array('year' => null,'month' => null,'day' => null, 'hour' => null,'minute' => null,'second' => '00');
 
     // Convertimos el valor recibido en un timestring
-    if (null == $value) {                       # @flag Si el valor es null
-      $date = null;
-      $time = null;
-    }
-    else {
+    if (null != $value) {                       # @flag Si el valor es null
       if (is_array($value)) {                   # @flag Si el valor es un array
         if (isset($value['date'])) {
-          $value = $this->getOption('with_time') ? strtotime($value['date'].' '.$value['time']) : strtotime($value['date']);
+          if ($value['date'] != null) {
+            $value = $this->getOption('with_time') ? strtotime($value['date'].' '.$value['time']) : strtotime($value['date']);
+          }
+          else {
+            $value = null;
+          }
         }
         else {
           $value += $default;
@@ -95,9 +96,9 @@ class sfWidgetFormInputTextDateTime extends sfWidgetForm
       elseif (is_numeric($value)) {
         $value = strtotime(date('Y-m-d H:i:s', $value));
       }
-      $date = date($this->getOption('date_order'), $value);
-      $time = date('H:i', $value);
     }
+    $date = $value ? date($this->getOption('date_order'), $value) : null;
+    $time = $value ? date('H:i', $value) : null;
 
     // render al widget
     $dateWidget = $this->getDateWidget($attributes)->render($name."[date]", $date);
