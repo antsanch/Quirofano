@@ -40,6 +40,8 @@ class AgendaQuery extends BaseAgendaQuery
 
     if ($param['contaminacionqx_id'] != null) $this->filterByContaminacionqxId($param['contaminacionqx_id'])->joinWith('Contaminacionqx', Criteria::LEFT_JOIN);
 
+    if ($param['tipo_proc_id'] != null) $this->filterByTipoProcId($param['tipo_proc_id'])->joinWith('Procedimiento', Criteria::LEFT_JOIN);
+
     if (isset($param['reintervencion'])) $this->filterByReintervencion($param['reintervencion']);
 
     return $this;

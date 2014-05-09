@@ -24,6 +24,7 @@
       <th>Médico</th>
       <th>Servicio</th>
       <th>Contaminacion</th>
+      <th>Procedimiento</th>
     </tr>
   </thead>
   <tbody>
@@ -36,6 +37,7 @@
       <td><?php echo $result->getMedicoName() ?></td>
       <td><?php echo $result->getEspecialidad() ?></td>
       <td><?php echo $result->getContaminacionqx() ?></td>
+      <td><?php echo $result->getProcedimiento() ?></td>
     </tr>
 <?php endforeach; ?>
   </tbody>
@@ -57,6 +59,7 @@
 
 <?php //print_r(get_class_methods($filter)) ?>
 
+<?php if (isset($array)) echo serialize(array('agenda_filters' => $array->getRawValue())) ?>
 <?php if (isset($array)) print_r($array->getRawValue()) ?>
 </pre>
 

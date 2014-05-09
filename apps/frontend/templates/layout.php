@@ -38,7 +38,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/default.css" /> <!-- Hoja de estilos principal -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/styles.css" />  <!-- Modificaciones del template -->
   <!--   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/jquery-ui.custom.css" />  <!-- Estilos de widgets -->
-  <link rel="stylesheet" type="text/css" media="screen" href="/css/jquery-ui-1.10.3.custom.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/jquery-ui-1.10.4.custom.css" />
 
   <!-- Hojas de estilo de utilidades -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/global/jquery.pnotify.default.css" /> <!-- Hoja de estilos de las Notificaciones -->

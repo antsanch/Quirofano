@@ -23,7 +23,7 @@ class reporteForm extends AgendaFormFilter
     $this->widgetSchema['quirofano_id']->setOption('add_empty', 'Todos');
     $this->widgetSchema['sala_id']->setOption('add_empty', 'Todas');
 
-    $options = array('with_time' => false, 'date_order' => 'd-m-Y');
+    $options = array('with_time' => false, 'date_order' => 'd-m-Y', 'date' => array('type' => 'search'));
     $attributes = array('date' => array('class' => 'datepicker'));
     $this->widgetSchema['programacion'] = new sfWidgetFormFilterDate(array(
       'from_date'   =>  new sfWidgetFormInputTextDateTime($options, $attributes),
@@ -51,12 +51,24 @@ class reporteForm extends AgendaFormFilter
     $this->widgetSchema['atencion_id']->setOption('add_empty', 'Todos');
 
     $groupBy = new sfForm();
-    $groupBy->widgetSchema['quirofano_id'] = new sfWidgetFormInputCheckbox();
+    $groupBy->setWidgets(array(
+      'quirofano_id'        =>  new sfWidgetFormInputCheckbox(),
+      'sala_id'             =>  new sfWidgetFormInputCheckbox(),
+      'servicio'            =>  new sfWidgetFormInputCheckbox(),
+      'contaminacionqx_id'  =>  new sfWidgetFormInputCheckbox(),
+      'tipo_proc_id'        =>  new sfWidgetFormInputCheckbox(),
+      'atencion_id'         =>  new sfWidgetFormInputCheckbox(),
+    ));
 
+    $groupBy->setValidators(array(
+      'quirofano_id'        =>  new sfValidatorPass(),
+      'sala_id'             =>  new sfValidatorPass(),
+      'servicio'            =>  new sfValidatorPass(),
+      'contaminacionqx_id'  =>  new sfValidatorPass(),
+      'tipo_proc_id'        =>  new sfValidatorPass(),
+      'atencion_id'         =>  new sfValidatorPass(),
+    ));
     $this->embedForm('groupBy', $groupBy);
-    //~ $this->widgetSchema['groupBy']['quirofano_id']
-    //~ $this->widgetSchema['groupBY']['quirofano_id'] = new sfWidgetFormInputCheckbox();
-
     //~ $this->widgetSchema['status'] = new sfWidgetFormChoice(array(
       //~ 'add_empty'   => true,
       //~ 'choices'     => AgendaPeer::getStatus()
