@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?taskcoach release="1.3.38" tskversion="37"?>
+<?taskcoach release="1.3.36" tskversion="37"?>
 
 <tasks>
 <task actualstartdate="2014-04-30 12:40:15.391267" completiondate="2014-04-30 12:59:29.268421" creationDateTime="2014-04-30 12:29:39.258655" id="01ee0360-d08d-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:59:29.268154" percentageComplete="100" status="1" subject="Ambulatorio Cambiar link programar por validar" />
 <task creationDateTime="2014-04-30 12:22:33.224414" id="03fe57b4-d08c-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Ajustar el historial de reprogramaciones" />
 <task creationDateTime="2014-04-30 12:36:55.995803" id="063ecf48-d08e-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Ajustar el formato y los textos" />
-<task creationDateTime="2014-05-08 19:51:19.612641" id="08ad1fbe-d714-11e3-91db-e06995d80c00" modificationDateTime="2014-05-08 19:51:37.350528" priority="1" status="1" subject="Crear el formulario de agrupamiento" />
 <task completiondate="2014-05-05 14:43:53.398185" creationDateTime="2014-05-02 11:58:50.334296" id="08b60aaa-d21b-11e3-bbf4-e06995d80c00" modificationDateTime="2014-05-05 14:43:53.397918" percentageComplete="100" status="1" subject="Placeholder para Fecha y Hora" />
 <task creationDateTime="2014-04-30 18:20:38.480491" id="0a343f04-d0be-11e3-ad2e-e06995d80c00" modificationDateTime="2014-04-30 18:21:17.225904" status="1" subject="Agrgar mas datos al panel superior del paciente (amarillo)" />
 <task creationDateTime="2014-04-30 12:08:28.205021" id="0c529daa-d08a-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Quitar boton de comentarios" />
@@ -25,8 +24,11 @@ Otros
 </description>
 <effort id="e1ae89ee-d087-11e3-ab75-e06995d80c00" start="2014-04-30 11:52:57" status="1" stop="2014-04-30 11:53:01" />
 </task>
-<task completiondate="2014-05-08 19:29:10.066394" creationDateTime="2014-04-30 21:36:04.906994" id="57b2ef44-d0d9-11e3-908d-0013e82da06d" modificationDateTime="2014-05-08 19:29:10.066061" percentageComplete="100" status="1" subject="Crear el modulo de reportes" />
+<<<<<<< HEAD
+<task creationDateTime="2014-04-30 21:36:04.906994" id="57b2ef44-d0d9-11e3-908d-0013e82da06d" modificationDateTime="2014-04-30 21:36:17.936047" status="1" subject="Crear el modulo de reportes" />
+=======
 <task creationDateTime="2014-05-05 14:42:24.478538" id="61a39ec4-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:42:34.927422" status="1" subject="Dar formato a las opciones" />
+>>>>>>> 176143f4142209b68ebd4985a5198b6873878dcd
 <task actualstartdate="2014-04-30 12:26:55.674504" completiondate="2014-04-30 12:59:20.039388" creationDateTime="2014-04-30 12:25:31.159970" id="6e0d27a2-d08c-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:59:20.039116" percentageComplete="100" status="1" subject="Cambiar link programar a validar cx" />
 <task creationDateTime="2014-04-30 12:04:10.751816" id="72de5ff6-d089-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Acomodar Boton Menu Superior" />
 <task creationDateTime="2014-05-02 11:47:44.447531" id="7bcfc99c-d219-11e3-bbf4-e06995d80c00" modificationDateTime="2014-05-02 11:48:09.241653" status="1" subject="Crear un Slot para colocar los JS propios de cada action" />
@@ -51,8 +53,13 @@ Otros
 <category creationDateTime="2014-04-30 18:30:57.360441" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="7b15d57e-d0bf-11e3-ad2e-e06995d80c00" modificationDateTime="2014-04-30 18:31:09.355126" status="1" subject="Apps Externas">
 <category categorizables="a15b8df0-d088-11e3-9a5a-e06995d80c00" creationDateTime="2014-04-30 18:31:09.354833" expandedContexts="('categoryviewerintaskeditor',)" id="823c0850-d0bf-11e3-ad2e-e06995d80c00" modificationDateTime="2014-04-30 18:31:12.843921" status="1" subject="SIGAHU" />
 </category>
+<<<<<<< HEAD
+<category creationDateTime="2014-04-30 12:26:26.123608" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="8ecff064-d08c-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:26:33.204414" status="1" subject="Modulos">
+<category creationDateTime="2014-04-30 11:48:06.690050" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="343e366a-d087-11e3-ab75-e06995d80c00" modificationDateTime="2014-04-30 21:31:19.694205" status="1" subject="Agenda">
+=======
 <category creationDateTime="2014-04-30 12:26:26.123608" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="8ecff064-d08c-11e3-a5ff-e06995d80c00" modificationDateTime="2014-05-05 14:42:14.648452" status="1" subject="Modulos">
 <category creationDateTime="2014-04-30 11:48:06.690050" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="343e366a-d087-11e3-ab75-e06995d80c00" modificationDateTime="2014-04-30 18:20:23.759992" status="1" subject="Agenda">
+>>>>>>> 176143f4142209b68ebd4985a5198b6873878dcd
 <description>
 Cambios a la accion Agenda/Programar
 </description>
@@ -61,8 +68,12 @@ Cambios a la accion Agenda/Programar
 <category categorizables="01ee0360-d08d-11e3-a5ff-e06995d80c00 6e0d27a2-d08c-11e3-a5ff-e06995d80c00" creationDateTime="2014-04-30 12:24:00.221006" expandedContexts="('categoryviewerintaskeditor',)" id="37d8f850-d08c-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:59:08.529652" status="1" subject="00 Index (Lista Qx)" />
 <category creationDateTime="2014-04-30 11:50:34.787169" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="8c840cfa-d087-11e3-ab75-e06995d80c00" modificationDateTime="2014-04-30 11:54:08.444539" status="1" subject="30 Terminar" />
 <category categorizables="72de5ff6-d089-11e3-a5ff-e06995d80c00" creationDateTime="2014-04-30 11:50:38.621373" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="8ecd1a7e-d087-11e3-ab75-e06995d80c00" modificationDateTime="2014-04-30 11:54:11.516554" status="1" subject="20 Transoperatorio" />
+<<<<<<< HEAD
 <category categorizables="15b3bb8c-d089-11e3-a5ff-e06995d80c00 4e7d817a-d087-11e3-ab75-e06995d80c00 7bd38524-d088-11e3-9a5a-e06995d80c00" creationDateTime="2014-04-30 11:50:47.234181" expandedContexts="('categoryviewerintaskeditor',)" id="93ef51a2-d087-11e3-ab75-e06995d80c00" modificationDateTime="2014-04-30 11:54:05.092685" status="1" subject="10 Programar CX" />
 <category categorizables="57b2ef44-d0d9-11e3-908d-0013e82da06d" creationDateTime="2014-04-30 21:31:19.693727" expandedContexts="('categoryviewerintaskeditor',)" id="adb2db80-d0d8-11e3-908d-0013e82da06d" modificationDateTime="2014-04-30 21:31:51.971830" status="1" subject="99 Reportes" />
+=======
+<category categorizables="08b60aaa-d21b-11e3-bbf4-e06995d80c00 15b3bb8c-d089-11e3-a5ff-e06995d80c00 4e7d817a-d087-11e3-ab75-e06995d80c00 7bd38524-d088-11e3-9a5a-e06995d80c00" creationDateTime="2014-04-30 11:50:47.234181" expandedContexts="('categoryviewerintaskeditor',)" id="93ef51a2-d087-11e3-ab75-e06995d80c00" modificationDateTime="2014-04-30 11:54:05.092685" status="1" subject="10 Programar CX" />
+>>>>>>> 176143f4142209b68ebd4985a5198b6873878dcd
 <category categorizables="063ecf48-d08e-11e3-a5ff-e06995d80c00 109d3b78-d08e-11e3-a5ff-e06995d80c00 3db2107a-d08e-11e3-a5ff-e06995d80c00 8cb49f74-d090-11e3-a5ff-e06995d80c00 a70c4c50-d090-11e3-a5ff-e06995d80c00 d098fc20-d091-11e3-a5ff-e06995d80c00 f877590c-d08d-11e3-a5ff-e06995d80c00" creationDateTime="2014-04-30 12:36:16.471084" expandedContexts="('categoryviewerintaskeditor',)" id="eeafd0de-d08d-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:36:24.911483" status="1" subject="08 Validar Cx" />
 <category categorizables="03fe57b4-d08c-11e3-a5ff-e06995d80c00 fca3cdc8-d08b-11e3-a5ff-e06995d80c00" creationDateTime="2014-04-30 12:22:02.973311" expandedContexts="('categoryviewerintaskeditor',)" id="f1f66444-d08b-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:22:14.035339" status="1" subject="40 Detalles cirugia" />
 </category>
@@ -70,7 +81,7 @@ Cambios a la accion Agenda/Programar
 <category categorizables="61a39ec4-d48d-11e3-9827-d7efbdd0bc9c" creationDateTime="2014-05-05 14:42:17.617433" expandedContexts="('categoryviewerintaskeditor',)" id="5d8cf902-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:42:20.898805" status="1" subject="Select" />
 </category>
 <category creationDateTime="2014-05-04 19:53:44.949919" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="b5aa312a-d3ef-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:42:43.513590" status="1" subject="Reportes">
-<category categorizables="08ad1fbe-d714-11e3-91db-e06995d80c00 810792de-d48d-11e3-9827-d7efbdd0bc9c" creationDateTime="2014-05-05 14:42:43.507818" expandedContexts="('categoryviewerintaskeditor',)" filtered="True" id="6cfb4a6a-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:43:09.761147" status="1" subject="filter" />
+<category categorizables="810792de-d48d-11e3-9827-d7efbdd0bc9c" creationDateTime="2014-05-05 14:42:43.507818" expandedContexts="('categoryviewerintaskeditor',)" id="6cfb4a6a-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:43:09.761147" status="1" subject="filter" />
 </category>
 </category>
 <category categorizables="0c529daa-d08a-11e3-a5ff-e06995d80c00 155e5c00-d219-11e3-bbf4-e06995d80c00 7bcfc99c-d219-11e3-bbf4-e06995d80c00 a15b8df0-d088-11e3-9a5a-e06995d80c00" creationDateTime="2014-04-30 11:59:02.622958" expandedContexts="('categoryviewerintaskeditor',)" id="bb35a486-d088-11e3-9a5a-e06995d80c00" modificationDateTime="2014-04-30 11:59:06.987318" status="1" subject="Globales" />

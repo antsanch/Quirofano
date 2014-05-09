@@ -22,6 +22,7 @@ class reporteForm extends AgendaFormFilter
     ));
     $this->widgetSchema['quirofano_id']->setOption('add_empty', 'Todos');
     $this->widgetSchema['sala_id']->setOption('add_empty', 'Todas');
+
     $options = array('with_time' => false, 'date_order' => 'd-m-Y');
     $attributes = array('date' => array('class' => 'datepicker'));
     $this->widgetSchema['programacion'] = new sfWidgetFormFilterDate(array(
@@ -44,10 +45,23 @@ class reporteForm extends AgendaFormFilter
       'class'       =>  'horizontal',
       'style'       =>  'float: left; list-style: none outside none; padding-left: 0;'
     ));
+
+    $this->widgetSchema['contaminacionqx_id']->setOption('add_empty', 'Todos');
+    $this->widgetSchema['tipo_proc_id']->setOption('add_empty', 'Todas');
+    $this->widgetSchema['atencion_id']->setOption('add_empty', 'Todos');
+
+    $groupBy = new sfForm();
+    $groupBy->widgetSchema['quirofano_id'] = new sfWidgetFormInputCheckbox();
+
+    $this->embedForm('groupBy', $groupBy);
+    //~ $this->widgetSchema['groupBy']['quirofano_id']
+    //~ $this->widgetSchema['groupBY']['quirofano_id'] = new sfWidgetFormInputCheckbox();
+
     //~ $this->widgetSchema['status'] = new sfWidgetFormChoice(array(
       //~ 'add_empty'   => true,
       //~ 'choices'     => AgendaPeer::getStatus()
     //~ ));
+    $this->disableLocalCSRFProtection();
   }
 
   /* setQuirofanoDefault

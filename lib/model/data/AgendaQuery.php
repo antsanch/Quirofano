@@ -31,7 +31,7 @@ class AgendaQuery extends BaseAgendaQuery
 
     if ($param['programacion'] != null) {
       if ($param['programacion']['from']['date'] != null) $this->filterByProgramacion(array('min' => $param['programacion']['from']['date']));
-      if ($param['programacion']['to']['date'] != null) $this->filterByProgramacion(array('max' => $param['programacion']['to']['date']));
+      if ($param['programacion']['to']['date'] != null) $this->filterByProgramacion(array('max' => strtotime($param['programacion']['to']['date'].'+ 1 day - 1 second')));
     }
 
     if ($param['medico_name'] != null) $this->filterByMedicoName('%'.$param['medico_name'].'%');
@@ -39,6 +39,8 @@ class AgendaQuery extends BaseAgendaQuery
     if ($param['servicio'] != null) $this->filterByServicio($param['servicio'])->joinWith('Especialidad', Criteria::LEFT_JOIN);
 
     if ($param['contaminacionqx_id'] != null) $this->filterByContaminacionqxId($param['contaminacionqx_id'])->joinWith('Contaminacionqx', Criteria::LEFT_JOIN);
+
+    if (isset($param['reintervencion'])) $this->filterByReintervencion($param['reintervencion']);
 
     return $this;
   }

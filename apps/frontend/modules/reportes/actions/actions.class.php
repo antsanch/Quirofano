@@ -18,6 +18,7 @@ class reportesActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->filter = new reporteForm;
+    $this->filter->disableLocalCSRFProtection();
     if ($request->getParameter('agenda_filters', null)) {
       $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
       $this->array = $request->getParameter('agenda_filters');
