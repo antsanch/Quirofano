@@ -18,6 +18,7 @@ class reporteForm extends AgendaFormFilter
       'contaminacionqx_id',
       'tipo_proc_id',
       'atencion_id',
+      'causa_diferido_id',
       'reintervencion',
     ));
     $this->widgetSchema['quirofano_id']->setOption('add_empty', 'Todos');
@@ -48,7 +49,14 @@ class reporteForm extends AgendaFormFilter
 
     $this->widgetSchema['contaminacionqx_id']->setOption('add_empty', 'Todos');
     $this->widgetSchema['tipo_proc_id']->setOption('add_empty', 'Todas');
+
+    $this->widgetSchema['causa_diferido_id'] = new sfWidgetFormPropelChoice(array(
+      'model' =>  'Causadiferido',
+      'method' => 'getCodigos',
+    ));
     $this->widgetSchema['atencion_id']->setOption('add_empty', 'Todos');
+
+    $this->widgetSchema->setLabels(AgendaPeer::getLabels());
 
     $groupBy = new sfForm();
     $groupBy->setWidgets(array(

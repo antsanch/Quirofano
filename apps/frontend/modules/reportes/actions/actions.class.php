@@ -46,7 +46,7 @@ class reportesActions extends sfActions
 
     if ($request->getParameter('agenda_filters', null)) {
       $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
-      $this->array = $request->getParameter('agenda_filters');
+      //~ $this->array = $request->getParameter('agenda_filters');
       $this->cirugias = AgendaQuery::create()
         ->filterByRequestParameters($request->getParameter('agenda_filters'))
         ->find();
