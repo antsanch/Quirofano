@@ -55,5 +55,15 @@ class reportesActions extends sfActions
 
   }
 
+  /* functionname
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-05-11
+  */
+  public function executeTest()
+  {
+
+
+  }
+
 
 }

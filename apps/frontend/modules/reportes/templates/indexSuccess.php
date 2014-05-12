@@ -1,14 +1,9 @@
 <?php use_stylesheet('/css/global/widescreen.css')?>
-<?php use_javascript('/EasyUI/jquery.easyui.min.js')?>
-<?php use_stylesheet('/EasyUI/themes/ProAzul/easyui.css')?>
+<?php //use_javascript('/EasyUI/jquery.easyui.min.js')?>
+<?php //use_stylesheet('/EasyUI/themes/ProAzul/easyui.css')?>
 
-<div class="0easyui-layout" data-options="fit:true" style="">
-  <div data-options="region:'west', collapsible:true, split:true" title="Menú" style="width: 150px">
-    Izquierda
-  </div>
+<?php include_partial('form', array('filter' => $filter)) ?>
 
-  <div data-options="region:'center', collapsible:false, split:false" title="Reporte" style="">
-    <p>Descargar</p>
     <table border='1' width='100%'>
       <thead>
         <tr>
@@ -38,28 +33,6 @@
       </tbody>
     </table>
 
-  </div>
-
-  <!-- @flag Panel Inferior (Sur)-->
-  <div data-options="region:'south', collapsible:true, split:false" title="Filtros" style="height:350px">
-
-    <form method='GET'>
-    <table>
-      <tbody>
-    <?php echo $filter ?>
-      <tr>
-        <td colspan='2'>
-          <input type='submit' value='Buscar Registros'>
-          <input type='reset' value='Limpiar Campos'>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    </form>
-
-  </div>
-
-</div>
 
 <script>
   $(function() {

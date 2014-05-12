@@ -25,16 +25,16 @@
   <!-- ======================== STYLESHEET ======================== -->
   <!-- Combinamos y minimizamos multiples hojas de estilo usando Minify [https://code.google.com/p/minify/] -->
   <!-- <link rel="stylesheet" type="text/css" media="screen" href="/min/b=css/global&f=reset.css,common.css,960gs-16-fixed.css,main.css" /> <!-- Hoja combinada -->
-  <link rel="stylesheet" type="text/css" media="screen" href="/min/g=basic" /> <!-- Hoja combinada -->
+  <link rel="stylesheet" type="text/css" media="screen" href="/min/?g=basic" /> <!-- Hoja combinada -->
 
   <!-- Hojas de estilo global todas reciden en /css/global/  -->
   <!-- <link rel="stylesheet" type="text/css" media="screen" href="/css/global/reset.css" /> <!-- Elimina los estilos por default -->
-  <link rel="stylesheet" type="text/css" media="screen" href="/css/global/common.css" />  <!-- Marcado basico para elementos mas comunes -->
-  <link rel="stylesheet" type="text/css" media="screen" href="/css/global/960gs-16-fixed.css" /> <!-- Permite el uso de 960 grid System a 16 columnas -->
-  <link rel="stylesheet" type="text/css" media="screen" href="/css/global/main.css" /> <!-- Da formato basico a los formularios -->
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/css/global/common.css" />  <!-- Marcado basico para elementos mas comunes -->
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/css/global/960gs-16-fixed.css" /> <!-- Permite el uso de 960 grid System a 16 columnas -->
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/css/global/main.css" /> <!-- Da formato basico a los formularios -->
 
   <!-- Hoja de Estilos del Template estan en /css/templates/$nombredeplantilla-->
-  <link rel="stylesheet" type="text/css" media="screen" href="/min/b=css/templates2/<?php echo $template ?>&f=default.css,styles.css,jquery-ui.custom.css " /> <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" type="text/css" media="screen" href="/min/?b=css/templates2/<?php echo $template ?>&f=default.css,styles.css,jquery-ui.custom.css " /> <!-- Hoja de estilos principal -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/default.css" /> <!-- Hoja de estilos principal -->
   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/styles.css" />  <!-- Modificaciones del template -->
   <!--   <link rel="stylesheet" type="text/css" media="screen" href="/css/templates2/<?php echo $template ?>/jquery-ui.custom.css" />  <!-- Estilos de widgets -->

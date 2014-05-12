@@ -60,12 +60,12 @@ class reporteForm extends AgendaFormFilter
 
     $groupBy = new sfForm();
     $groupBy->setWidgets(array(
-      'quirofano_id'        =>  new sfWidgetFormInputCheckbox(),
-      'sala_id'             =>  new sfWidgetFormInputCheckbox(),
-      'servicio'            =>  new sfWidgetFormInputCheckbox(),
-      'contaminacionqx_id'  =>  new sfWidgetFormInputCheckbox(),
-      'tipo_proc_id'        =>  new sfWidgetFormInputCheckbox(),
-      'atencion_id'         =>  new sfWidgetFormInputCheckbox(),
+      'quirofano_id'        =>  new sfWidgetFormChoice(array('choices' => array('No', 'Si'))),
+      'sala_id'             =>  new sfWidgetFormChoice(array('choices' => array('No', 'Si'))),
+      'servicio'            =>  new sfWidgetFormChoice(array('choices' => array('No', 'Si'))),
+      'contaminacionqx_id'  =>  new sfWidgetFormChoice(array('choices' => array('No', 'Si'))),
+      'tipo_proc_id'        =>  new sfWidgetFormChoice(array('choices' => array('No', 'Si'))),
+      'atencion_id'         =>  new sfWidgetFormChoice(array('choices' => array('No', 'Si'))),
     ));
 
     $groupBy->setValidators(array(
@@ -76,7 +76,10 @@ class reporteForm extends AgendaFormFilter
       'tipo_proc_id'        =>  new sfValidatorPass(),
       'atencion_id'         =>  new sfValidatorPass(),
     ));
-    $this->embedForm('groupBy', $groupBy);
+    foreach ($groupBy as $field) {
+      $field->getWidget()->setLabel('Totales');
+    }
+    $this->embedForm('totales', $groupBy);
     //~ $this->widgetSchema['status'] = new sfWidgetFormChoice(array(
       //~ 'add_empty'   => true,
       //~ 'choices'     => AgendaPeer::getStatus()

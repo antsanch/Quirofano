@@ -581,6 +581,7 @@ input[type=text],
 input[type=password],
 input[type=submit],
 input[type=search],
+input[type=reset],
 textarea {
     color: #333333;
     font: 0.9em/1.4 tahoma,verdana,arial,helvetica,sans-serif;
