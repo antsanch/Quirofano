@@ -450,7 +450,9 @@ public function executeDiferir(sfWebRequest $request)
       if ($this->form->isValid()) {
         $agenda = $this->form->save();
         //$this->cirugia->setStatus(3)->save();
-        $this->redirect('agenda/show?slug='.$agenda->getQuirofano()->getSlug());
+        $request->hasParameter('reprogramar') ?
+          $this->redirect('agenda/reprogramar?id='.$agenda->getId()) :
+          $this->redirect('agenda/show?slug='.$agenda->getQuirofano()->getSlug());
       }
     }
   }
@@ -503,7 +505,7 @@ public function executeTransoperatorio(sfWebRequest $request)
     if ($agenda->estaAtrasado() && !$agenda->esDiferido()) {
       $this->getUser()->setFlash('obligar', 'Esta cirugia tiene más de 24 Horas de atraso por lo que se debe marcar como diferida y especificar
       una causa, antes de poder reprogramarse');
-      $this->redirect('agenda/diferir?id='.$agenda->getId());
+      $this->redirect('agenda/diferir?id='.$agenda->getId().'&reprogramar=1');
     }
     $this->form = new programarCirugiaForm($agenda);
     if ($request->getMethod() == 'POST') {

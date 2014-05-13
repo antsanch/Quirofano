@@ -14,6 +14,10 @@ detallesCirugia:
   url:   /detalles/cirugia/:id
   param: { module: agenda, action: details }
 
+diferir&reprogramar:
+  url:   /diferir+reprogramar/:id/:reprogramar
+  param: { module: agenda, action: diferir }
+  requirements: { reprogramar: 1 }
 
 #http://quirofano.tsl/frontend_dev.php/agenda/show/slug/quirofanocentral/date/2014-04-17
 agendaPorQuirofano:

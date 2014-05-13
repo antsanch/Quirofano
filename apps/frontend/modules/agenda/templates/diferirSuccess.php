@@ -25,15 +25,10 @@
   <title>Diferir cirugia | SIGA-HU </title>
 <?php end_slot() ?>
 
-
-
 <div id="idTag">
   <div class="name"><?php echo $cirugia->getPacienteName() ?></div>
-  <div><span class="label">Registro: </span><span><?php echo "registro del pasciente" ?></span></div>
+  <div><span class="label">Registro: </span><span><?php echo "registro del paciente" ?></span></div>
 </div>
-
-
-
 
 <div id="alert">
 <?php echo $sf_user->getFlash('obligar')?>
