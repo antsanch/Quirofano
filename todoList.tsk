@@ -70,7 +70,7 @@ Cambios a la accion Agenda/Programar
 <category categorizables="61a39ec4-d48d-11e3-9827-d7efbdd0bc9c" creationDateTime="2014-05-05 14:42:17.617433" expandedContexts="('categoryviewerintaskeditor',)" id="5d8cf902-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:42:20.898805" status="1" subject="Select" />
 </category>
 <category creationDateTime="2014-05-04 19:53:44.949919" expandedContexts="('categoryviewer', 'categoryviewerintaskeditor')" id="b5aa312a-d3ef-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:42:43.513590" status="1" subject="Reportes">
-<category categorizables="08ad1fbe-d714-11e3-91db-e06995d80c00 810792de-d48d-11e3-9827-d7efbdd0bc9c" creationDateTime="2014-05-05 14:42:43.507818" expandedContexts="('categoryviewerintaskeditor',)" filtered="True" id="6cfb4a6a-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:43:09.761147" status="1" subject="filter" />
+<category categorizables="08ad1fbe-d714-11e3-91db-e06995d80c00 810792de-d48d-11e3-9827-d7efbdd0bc9c" creationDateTime="2014-05-05 14:42:43.507818" expandedContexts="('categoryviewerintaskeditor',)" id="6cfb4a6a-d48d-11e3-9827-d7efbdd0bc9c" modificationDateTime="2014-05-05 14:43:09.761147" status="1" subject="filter" />
 </category>
 </category>
 <category categorizables="0c529daa-d08a-11e3-a5ff-e06995d80c00 155e5c00-d219-11e3-bbf4-e06995d80c00 7bcfc99c-d219-11e3-bbf4-e06995d80c00 a15b8df0-d088-11e3-9a5a-e06995d80c00" creationDateTime="2014-04-30 11:59:02.622958" expandedContexts="('categoryviewerintaskeditor',)" id="bb35a486-d088-11e3-9a5a-e06995d80c00" modificationDateTime="2014-04-30 11:59:06.987318" status="1" subject="Globales" />

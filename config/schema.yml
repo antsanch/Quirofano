@@ -271,6 +271,17 @@ propel:
     #~ medico:               { type: varchar(256) }
     #~ created_at:
 
+# Almacena los reportes de quirofano
+  hc_agenda_reporte:
+    _attributes:          { phpName: Reporteqx, package: lib.model.data }
+    _propel_behaviors:
+      sluggable:
+    id:
+    nombre:               { type: varchar, size: 128, required: true, primaryString: true }
+    querystring:          { type: longvarchar }
+    quirofano_id:
+    created_at:
+
   siga_sala_log:
     _attributes:          { phpName: Registrosala, package: lib.model.data }
     id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
@@ -491,4 +502,3 @@ propel:
     nombre:               { type: varchar(128), required: true, primaryString: true }
     descripcion:          { type: longvarchar }
     activo:               { type: boolean, default: true }
-

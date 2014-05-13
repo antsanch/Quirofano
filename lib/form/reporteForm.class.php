@@ -21,15 +21,15 @@ class reporteForm extends AgendaFormFilter
       'causa_diferido_id',
       'reintervencion',
     ));
-    $this->widgetSchema['quirofano_id']->setOption('add_empty', 'Todos');
+    $this->widgetSchema['quirofano_id']->setOption('add_empty', 'Todos')->setAttributes(array());
     $this->widgetSchema['sala_id']->setOption('add_empty', 'Todas');
 
     $options = array('with_time' => false, 'date_order' => 'd-m-Y', 'date' => array('type' => 'search'));
-    $attributes = array('date' => array('class' => 'datepicker'));
+    $template = "<div style='width:50%; float:left'>%from_date%</div><div style='width:50%; float:left;'>%to_date%</div>";
     $this->widgetSchema['programacion'] = new sfWidgetFormFilterDate(array(
-      'from_date'   =>  new sfWidgetFormInputTextDateTime($options, $attributes),
-      'to_date'     =>  new sfWidgetFormInputTextDateTime($options, $attributes),
-      'template'    =>  'Desde: %from_date% Hasta: %to_date%',
+      'from_date'   =>  new sfWidgetFormInputTextDateTime($options, array('date' => array('class' => 'datepicker', 'placeholder' => 'Desde: dd-mm-aaaa'))),
+      'to_date'     =>  new sfWidgetFormInputTextDateTime($options, array('date' => array('class' => 'datepicker', 'placeholder' => 'Hasta: dd-mm-aaaa'))),
+      'template'    =>  $template, //'Desde: %from_date% Hasta: %to_date%',
       'with_empty'  =>  false,
     ));
     $this->widgetSchema['medico_name'] = new sfWidgetFormInputText();
@@ -50,9 +50,10 @@ class reporteForm extends AgendaFormFilter
     $this->widgetSchema['contaminacionqx_id']->setOption('add_empty', 'Todos');
     $this->widgetSchema['tipo_proc_id']->setOption('add_empty', 'Todas');
 
-    $this->widgetSchema['causa_diferido_id'] = new sfWidgetFormPropelChoice(array(
-      'model' =>  'Causadiferido',
-      'method' => 'getCodigos',
+    $this->widgetSchema['causa_diferido_id'] = new sfWidgetFormPropelChoiceNestedSet(array(
+      'add_empty' =>  'Ninguna',
+      'model'     =>  'Causadiferido',
+      'method'    =>  'getCodigos',
     ));
     $this->widgetSchema['atencion_id']->setOption('add_empty', 'Todos');
 
@@ -80,10 +81,7 @@ class reporteForm extends AgendaFormFilter
       $field->getWidget()->setLabel('Totales');
     }
     $this->embedForm('totales', $groupBy);
-    //~ $this->widgetSchema['status'] = new sfWidgetFormChoice(array(
-      //~ 'add_empty'   => true,
-      //~ 'choices'     => AgendaPeer::getStatus()
-    //~ ));
+
     $this->disableLocalCSRFProtection();
   }
 
