@@ -7,11 +7,9 @@
   <!-- @flag Panel Izquierdo -->
   <div title="Menú" data-options="region:'west'" style="width:180px">
     <ul>
-      <li>Cirugias por mes</li>
-      <li>Cirugias por sala</li>
-      <li>Cirugias por servicio</li>
-      <li>Cirugias por tipo</li>
-      <li>Cirugias por sala</li>
+<?php foreach($reportes as $reporte): ?>
+      <li><a href="<?php echo url_for('reportes/stored?slug='.$reporte->getSlug()) ?>"><?php echo $reporte->getNombre() ?></a></li>
+<?php endforeach; ?>
     </ul>
   </div>
 

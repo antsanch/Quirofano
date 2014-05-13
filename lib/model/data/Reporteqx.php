@@ -19,4 +19,13 @@
  */
 class Reporteqx extends BaseReporteqx
 {
+  /* functionname
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-05-13
+  */
+  public function getQuerystringArray()
+  {
+    return unserialize($this->getQuerystring());
+  }
+
 }

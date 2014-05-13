@@ -113,8 +113,9 @@
       </div>
     </div>
 
-    <div class="area control">
+    <div class="area cols06">
       <input type="submit" value="Ver Reporte" />
+      <input type="submit" name='save_reporte' value="Guardar Reporte" />
     </div>
 
   </form>

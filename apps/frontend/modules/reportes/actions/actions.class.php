@@ -18,52 +18,84 @@ class reportesActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->filter = new reporteForm;
-    $this->filter->disableLocalCSRFProtection();
 
-    if ($request->getParameter('saved', null)) {
-      $array = array(
-        'agenda_filters' => array (
-          'quirofano_id'        => '1',
-          'sala_id'             => '',
-          'programacion'        => array (
-            'from'              => array ('date'  =>  '01-04-2014'),
-            'to'                => array ('date'  =>  '30-04-2014'),
-            ),
-          'medico_name'         =>  '',
-          'servicio'            =>  '2',
-          'contaminacionqx_id'  =>  '',
-          'tipo_proc_id'        =>  '',
-          'groupBy'             =>  array(
-            'sala_id'           =>  true,
-            'servicio'          =>  true,
-          )
-        )
-      );
-      $this->redirect('reportes/index?'.http_build_query($array));
-
-      //~ agenda_filters%5Bquirofano_id%5D=1&agenda_filters%5Bsala_id%5D=&agenda_filters%5Bprogramacion%5D%5Bfrom%5D%5Bdate%5D=01-04-2014&agenda_filters%5Bprogramacion%5D%5Bto%5D%5Bdate%5D=30-04-2014&agenda_filters%5Bmedico_name%5D=&agenda_filters%5Bservicio%5D=&agenda_filters%5Bcontaminacionqx_id%5D=&agenda_filters%5Btipo_proc_id%5D=&agenda_filters%5Batencion_id%5D=
+    if ($request->getParameter('save_reporte')) {
+      $this->forward('reportes','save');
     }
+
+    $this->reportes = ReporteqxQuery::create()->find();
 
     if ($request->getParameter('agenda_filters', null)) {
       $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
-      //~ $this->array = $request->getParameter('agenda_filters');
       $this->cirugias = AgendaQuery::create()
         ->filterByRequestParameters($request->getParameter('agenda_filters'))
         ->find();
     }
-
-
   }
 
-  /* functionname
+ /**
   * @autor: Antonio Sánchez Uresti
   * @date:  2014-05-11
   */
   public function executeTest()
   {
-
-
+    //~ die();
   }
 
+ /**
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-05-13
+  */
+  public function executeSave($request)
+  {
+    $this->form = new ReporteqxForm;
+    $this->filter = new reporteForm;
+    if ($request->getParameter('agenda_filters', null)) {
+      $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
+
+      if ($request->getParameter('reporteqx',  null)) {
+        //~ $reporteform = $request->getParameter('reporteqx');
+        //~ $reporteform['querystring'] = http_build_query(array('agenda_filters' => $request->getParameter('agenda_filters')));
+        $request->setParameter('reporteqx', array_merge($request->getParameter('reporteqx'), array('querystring' => serialize($request->getParameter('agenda_filters')))));
+        $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+        if ($this->form->isValid()) {
+          $this->form->save();
+        }
+      }
+    }
+  }
+
+ /**
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-05-13
+  */
+  public function executeEdit($request)
+  {
+    $reporte = ReporteqxQuery::create()->findPk($request->getParameter('id'));
+    $this->form = new ReporteqxForm($reporte);
+    $this->filter = new reporteForm;
+    $this->filter->setDefaults($reporte->getQuerystringArray());
+    if ($request->getParameter('reporteqx',  null)) {
+      $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+      if ($this->form->isValid()) {
+        $this->form->save();
+      }
+    }
+    $this->setTemplate('save');
+  }
+
+
+  /* functionname
+  * @autor: Antonio Sánchez Uresti
+  * @date:  2014-05-13
+  */
+  public function executeStored($request)
+  {
+    $query = ReporteqxQuery::create();
+    if ($request->getParameter('id', null)) $query->filterById($request->getParameter('id'));
+    if ($request->getParameter('slug', null)) $query->filterBySlug($request->getParameter('slug'));
+    $reporte = $query->findOne();
+    $this->redirect('reportes/index?'.http_build_query(array('agenda_filters' => $reporte->getQuerystringArray())));
+  }
 
 }
