@@ -19,7 +19,7 @@ class programarCirugiaForm extends BaseAgendaForm
     $object = $this->getObject();
 
     $this->useFields(array(
-      'medico_name',
+      //'medico_name',
       'id',
       'programacion',
       //~ 'fechaestado',
@@ -60,67 +60,20 @@ class programarCirugiaForm extends BaseAgendaForm
       'protocolo'
     ));
 
-    $programa = $object->getMedicoPrograma();
+/**
+ * Ajustes a los widgets creados por default
+ * ===================================================================== */
 
-    if ($programa->isNew()) {
-      $programa->setAgenda($this->getObject());
-      $programa->fromArray(array( 'Tipo' => 'cirujano', 'Agenda'  =>  $this->getObject(), 'Status'  =>  0, 'Programa' => true ));
-    }
-
-    $progForm = new PersonalcirujanoForm($programa);
-    unset( $progForm['inicia'], $progForm['transoperatorio'] );
-    $this->embedForm('programa', $progForm);
-
-    $this->widgetSchema['programa']['programa'] = new sfWidgetFormInputHidden();
-
-    //$this->widgetSchema['programacion'] = new sfWidgetFormJqueryDate(array( //          [DEL]
-    //'config' => '{"option", "dateFormat", "yy-mm-dd"}',each(array) //          [DEL]
-    //)); //          [DEL]
-
-  $this->widgetSchema['programa']['personal_nombre']
-    ->setLabel('Nombre del Médico que programa:')
-    ->setAttributes(array(
-      'class' => 'searchable',
-      'data-url' => 'profile/json',
-      #'data-select' => '#agenda_programa_personal_id'
-    ));
-
-
-   if($object->countProcedimientocirugias() == 0) {
-      $object->addProcedimientocirugia(new Procedimientocirugia());
-      //      $object->addProcedimientocirugia(new Procedimientocirugia());
-      //      $object->addProcedimientocirugia(new Procedimientocirugia());
-      //      $object->addProcedimientocirugia(new Procedimientocirugia());
-
-    }
-
-   $this->embedRelation('Procedimientocirugia', array(
-      //'remove_fields'       =>  'region',
-      'title'               =>  'Procedimientos a realizar',
-      'embedded_form_class' =>  'ProcedimientocirugiaForm',
-      //'formatter_name'      =>  'personalizado',
-  //  Opciones para el Eliminado
-      'delete_name'         =>  'Eliminar',
-      'alert_text'          =>  '¿Esta seguro que desea eliminar este procedimiento?\n Ya no se podrá recuperar',
-      'parent_level'        =>  4,
-  //  Opciones para agregar nuevos
-      'add_link'            =>  'Agregar otro Procedimiento',
-      'max_additions'       =>  4
-    ));
-
-    $this->widgetSchema['reintervencion'] = new sfWidgetFormChoice(array(
-      'choices' => array('0' => 'No', '1' => 'Si'),
-      'expanded' => true
-    ));
-    $this->widgetSchema['protocolo'] = new sfWidgetFormChoice(array(
-      'choices' => array('0' => 'No', '1' => 'Si'),
-      'expanded' => true
-    ));
-
-
-    $this->widgetSchema['quirofano_id'] = new sfWidgetFormInputHidden();
+  # @flag Configura el campo ['id'] como oculto
     $this->widgetSchema['id'] = new sfWidgetFormInputHidden();
 
+  # @flag Configuracion del campo del id de quirofano
+    $this->widgetSchema['quirofano_id'] = new sfWidgetFormInputHidden();
+
+  # @flag Configura el campo status y lo establece oculto
+    $this->setWidget('status', new sfWidgetFormInputHidden(array(), array('value' => '1')));
+
+  # @flag Configura los campos de fecha y hora para la programacion
     $this->widgetSchema['programacion'] = new sfWidgetFormInputTextDateTime(array(
       'date_order'  => 'd-m-Y',
       'format'      => '<div class="area cols02"><div class="label">Fecha: </div><div class="field">%date%</div></div> <div class="area cols02"><div class="label">Hora:</div> <div class="field">%time%</div></div>',
@@ -139,21 +92,116 @@ class programarCirugiaForm extends BaseAgendaForm
       //'data-source' => 'http://example.com/api/data'
     ));
 
+  # @flag Configura el campo de duracion (tiempo estimado)
+    $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
+
+  # @flag Configura el tipo de programacion
+    $this->setWidget('tipo_proc_id', new sfWidgetFormPropelChoice(array(
+      'model' => 'Procedimiento',
+    )));
+
+  # @flag Configurar el campo especialidad solo con áreas quirúrgicas
+    $this->setWidget('servicio', new sfWidgetFormPropelChoiceNestedSet(array(
+      'model' => 'Especialidad',
+      'criteria' => EspecialidadQuery::create()->filterByQuirurgica(true),
+      //~ 'label' => 'Especialidad:'
+    )));
+
+  # @flag Configurar el campo de 'diagnostico_id'
+    $this->widgetSchema['diagnostico_id'] = new sfWidgetFormInputHidden();
+    # @flag Ponemos un ID de diagnostico temporalmente, para poder salvar las cirugias //          [DEL]
+    $this->widgetSchema['diagnostico_id']->setAttribute('value', 'R14');
+
+  # @flag Configura las opciones del campo protocolo
+    $this->widgetSchema['protocolo'] = new sfWidgetFormChoice(array(
+      'choices' => array('0' => 'No', '1' => 'Si'),
+      'expanded' => true
+    ));
+
+  # @flag Configura las opciones al campo reintervencion
+    $this->widgetSchema['reintervencion'] = new sfWidgetFormChoice(array(
+      'choices' => array('0' => 'No', '1' => 'Si'),
+      'expanded' => true
+    ));
+
+  # @flag Configura el campo 'diagnostico'
+    $this->widgetSchema['diagnostico']->setAttributes(array(
+      'class'       => 'searchable',
+      'data-field'  => 'diagnostico_id',
+      'data-select' => '1',
+      'data-source' => 'http://sigahu.com/index.php/api/clavecie',
+      'placeholder' => 'Diagnóstico del paciente o código CIE10',
+    ));
+
+  # @flag Configura el campo 'riesgo quirurgico' como textarea
+    $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
+
+  # @flag Configura las etiquetas
+    $this->widgetSchema->setLabels(AgendaPeer::getLabels());
+
+
+/**
+ * Integrar el formulario para asignar el medico que programa la Cirgia
+ * ===================================================================== */
+    $programa = $object->getMedicoPrograma();
+
+    if ($programa->isNew()) {
+      $programa->setAgenda($this->getObject());
+      $programa->fromArray(array( 'Tipo' => 'cirujano', 'Agenda'  =>  $this->getObject(), 'Status'  =>  0, 'Programa' => true ));
+    }
+
+    $progForm = new PersonalcirujanoForm($programa);
+    unset( $progForm['inicia'], $progForm['transoperatorio'] );
+    $this->embedForm('programa', $progForm);
+
+    $this->widgetSchema['programa']['programa'] = new sfWidgetFormInputHidden();
+
+    $this->widgetSchema['programa']['personal_nombre']
+      ->setLabel('Nombre del Médico que programa:')
+      ->setAttributes(array(
+        'class' => 'searchable',
+        'data-url' => 'profile/json',
+        #'data-select' => '#agenda_programa_personal_id'
+      ));
+
+/**
+ * Integrar la relacion de los procedimientos a realizar
+ * ===================================================================== */
+
+   if($object->countProcedimientocirugias() == 0) {
+      $object->addProcedimientocirugia(new Procedimientocirugia());
+      //      $object->addProcedimientocirugia(new Procedimientocirugia());
+      //      $object->addProcedimientocirugia(new Procedimientocirugia());
+      //      $object->addProcedimientocirugia(new Procedimientocirugia());
+    }
+
+    $this->embedRelation('Procedimientocirugia', array(
+        //'remove_fields'       =>  'region',
+        'title'               =>  'Procedimientos a realizar',
+        'embedded_form_class' =>  'ProcedimientocirugiaForm',
+        //'formatter_name'      =>  'personalizado',
+      # Opciones para el Eliminado
+        'delete_name'         =>  'Eliminar',
+        'alert_text'          =>  '¿Esta seguro que desea eliminar este procedimiento?\n Ya no se podrá recuperar',
+        'parent_level'        =>  4,
+      # Opciones para agregar nuevos
+        'add_link'            =>  'Agregar otro Procedimiento',
+        'max_additions'       =>  4
+    ));
+
+
+
+
+
 
     //$this->widgetSchema['hora'] = new sfWidgetFormInputText();  # @flag Eliminamos el campo de la hora          [DEL]
-    $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
     //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(  //          [DEL]
     //'choices' => AgendaPeer::getDuracion()    //          [DEL]
       //'id' => 'tiest'   //          [DEL]
     //)));    //          [DEL]
 
-    $this->widgetSchema['diagnostico_id'] = new sfWidgetFormInputHidden();
-    # @flag Ponemos un ID de diagnostico temporalmente, para poder salvar las cirugias //          [DEL]
-    $this->widgetSchema['diagnostico_id']->setAttribute('value', 'R14');
 
-        $this->setWidget('status', new sfWidgetFormInputHidden());
-        $this->widgetSchema['status']->setAttribute('value', 1);
-        $this->widgetSchema->setLabels(AgendaPeer::getLabels());
+
 
 
 //       $this->setWidget('tiempo_est', new sfWidgetFormChoice(array(
@@ -167,53 +215,33 @@ class programarCirugiaForm extends BaseAgendaForm
           //~ //'data-source' => 'http://example.com/api/data'
         //~ ));
 
-        $this->widgetSchema['tiempo_est']->setAttributes(array(
-           'id' => 'tiest'
-        ));
-        $this->widgetSchema['hora']->setAttributes(array(
-          'id' => 'datahora',
-        ));
+        //~ $this->widgetSchema['tiempo_est']->setAttributes(array(
+           //~ 'id' => 'tiest'
+        //~ ));
+        //~ $this->widgetSchema['hora']->setAttributes(array(
+          //~ 'id' => 'datahora',
+        //~ ));
 
-        $this->widgetSchema['medico_name']->setAttributes(array(
-          'planceholder' => 'Nombre del médico que programa la cirugia',
-        ));
+        //~ $this->widgetSchema['medico_name']->setAttributes(array(
+          //~ 'planceholder' => 'Nombre del médico que programa la cirugia',
+        //~ ));
 
-        $this->setWidget('servicio', new sfWidgetFormPropelChoiceNestedSet(array(
-          'model' => 'Especialidad',
-          //'query_methods' => array('filterByQuirurgica'),
-          'criteria' => EspecialidadQuery::create()->filterByQuirurgica(true),
-          'label' => 'Especialidad:'
-        )));
 
-        $this->widgetSchema['diagnostico']->setAttributes(array(
-          'class'       => 'searchable',
-          'data-field'  => 'diagnostico_id',
-          'data-select' => '1',
-          'data-source' => 'http://sigahu.com/index.php/api/clavecie',
-          'placeholder' => 'Diagnóstico del paciente o código CIE10',
-        ));
-
-        $this->setWidget('tipo_proc_id', new sfWidgetFormPropelChoice(array(
-          'model' => 'Procedimiento',
-        )));
-
-        $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
-
-        $this->widgetSchema->setLabels(array(
-          'paciente_name' => 'Nombre del Paciente:',
-          'diagnostico'   => 'Diágnostico',
-          'medico_name'   => 'Nombre del médico que programa la cirugía:',
-          'hora'          => 'Hora inicial',
-          'tipo_proc_id'  => 'Tipo de programación:',
-          'programacion'  => 'Programación',
-          'tiempo_est'    => 'Duración',
-          'riesgo_qx_pre' => 'Riesgo quirurgico:',
-          'req_insumos'   => 'Insumos indispensables:',
-          'req_anestesico'  => 'Requerimientos de Anestesiología:',
-          'req_hemoderiv'   => 'Hemoderivados Necesarios:',
-          'req_laboratorio' => 'Requisitos de laboratorio:',
-          'requerimiento'   => 'Otras necesidades:'
-        ));
+        //~ $this->widgetSchema->setLabels(array(
+          //~ 'paciente_name' => 'Nombre del Paciente:',
+          //~ 'diagnostico'   => 'Diágnostico',
+          //~ 'medico_name'   => 'Nombre del médico que programa la cirugía:',
+          //~ 'hora'          => 'Hora inicial',
+          //~ 'tipo_proc_id'  => 'Tipo de programación:',
+          //~ 'programacion'  => 'Programación',
+          //~ 'tiempo_est'    => 'Duración',
+          //~ 'riesgo_qx_pre' => 'Riesgo quirurgico:',
+          //~ 'req_insumos'   => 'Insumos indispensables:',
+          //~ 'req_anestesico'  => 'Requerimientos de Anestesiología:',
+          //~ 'req_hemoderiv'   => 'Hemoderivados Necesarios:',
+          //~ 'req_laboratorio' => 'Requisitos de laboratorio:',
+          //~ 'requerimiento'   => 'Otras necesidades:'
+        //~ ));
 
         //$this->widgetSchema['reintervencion'] = new sfWidgetFormChoice(array(
          //  'choices' => array('0' => 'No', '1' => 'Si'),
@@ -287,9 +315,10 @@ class programarCirugiaForm extends BaseAgendaForm
 
   }
 
- /*
-  * setSalaWidget Filtra las salas quirurgicas a un determinado quirofano
-  */
+ /**
+  * setSalaWidget
+  * Filtra las salas quirurgicas a un determinado quirofano
+  * ==================================================================== */
   public function setSalaWidget($quirofano) {
     //$choices = SalaquirurgicaPeer::getSalasActivasPorQuirofano($quirofano);
 
@@ -300,7 +329,6 @@ class programarCirugiaForm extends BaseAgendaForm
     );
   }
 
-
  /**
   * Render de la form
   */
@@ -310,14 +338,14 @@ class programarCirugiaForm extends BaseAgendaForm
   }
 
  /**
-  * getDatosPrevios
+  * setDatosPrevios
   * Llena los datos de la cirugia con datos conocidos de cirugias pasadas
   * @param:     $cx   Id de la cirugia anterior relacionada.
   * @return:    El objeto para encadenamiento
   * @autor:     Antonio Sanchez Uresti
   * @date:      2014-04-10
   */
-  public function getDatosPrevios($cx)
+  public function setDatosPrevios($cx)
   {
     if (!$this->cx) $this->cx = AgendaQuery::create()->findPk($cx);
     if ($this->cx) {

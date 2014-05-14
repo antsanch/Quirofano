@@ -113,7 +113,7 @@ class agendaActions extends sfActions
   {
     $this->quirofano = $this->getQuirofano();     //Obtenemos el Quirofano relacionado
     $this->form = new programarCirugiaForm();      //cargamos form
-    if ($request->getParameter('cx', null)) $this->form->getDatosPrevios($request->getParameter('cx'));
+    if ($request->getParameter('cx', null)) $this->form->setDatosPrevios($request->getParameter('cx'));
 
     if ($request->isMethod('POST')) {
       $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));

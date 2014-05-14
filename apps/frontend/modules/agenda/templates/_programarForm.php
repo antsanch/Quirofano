@@ -256,10 +256,10 @@ window.onload = start;
 
 <!--
 <div class="area cols07">
-    <div class="label"><?php echo $form['medico_name']->renderLabel() ?></div>
+    <div class="label"><?php //echo $form['medico_name']->renderLabel() ?></div>
     <div class="field">
-      <?php echo $form['medico_name']->renderError() ?>
-      <?php echo $form['medico_name'] ?>
+      <?php //echo $form['medico_name']->renderError() ?>
+      <?php //echo $form['medico_name'] ?>
     </div>
 </div>
 -->
@@ -287,7 +287,7 @@ if(!confirm(" Esta seguro ? "))
   $('#add_newProcedimientocirugia_link').addClass('addLink');
   $(function() {
     $( ".datepicker" ).datepicker({ dateFormat: "dd-mm-yy" });
-    $("#tiest, #agenda_programacion_time").timepicker({ 'timeFormat': 'H:i' });
+    $("#agenda_tiempo_est, #agenda_programacion_time").timepicker({ 'timeFormat': 'H:i' });
 
     //~ $('textarea').elastic();
     // @flag Habilita el autocompletado

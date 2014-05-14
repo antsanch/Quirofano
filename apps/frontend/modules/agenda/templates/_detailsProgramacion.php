@@ -37,7 +37,7 @@
 
     <div class='cellData cols02'>
       <div class='label'>Hora</div>
-      <div class='value'><?php echo $cirugia->getHora('h:i A') ?> </div>
+      <div class='value'><?php echo $cirugia->getHora('H:i') ?></div>
     </div>
 
     <div class='cellData cols02'>
@@ -169,4 +169,3 @@ foreach($cirugia->getAgendaVersions() as $version): ?>
 <?php endforeach; ?>
 <?php endif; ?>
  </div>
-
