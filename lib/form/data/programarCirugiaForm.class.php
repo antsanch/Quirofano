@@ -78,12 +78,12 @@ class programarCirugiaForm extends BaseAgendaForm
     //)); //          [DEL]
 
   $this->widgetSchema['programa']['personal_nombre']
-      ->setLabel('Nombre del Médico que programa:')
-      ->setAttributes(array(
-        'class' => 'searchable',
-        'data-url' => 'profile/json',
-        #'data-select' => '#agenda_programa_personal_id'
-      ));
+    ->setLabel('Nombre del Médico que programa:')
+    ->setAttributes(array(
+      'class' => 'searchable',
+      'data-url' => 'profile/json',
+      #'data-select' => '#agenda_programa_personal_id'
+    ));
 
 
    if($object->countProcedimientocirugias() == 0) {
@@ -197,6 +197,8 @@ class programarCirugiaForm extends BaseAgendaForm
           'model' => 'Procedimiento',
         )));
 
+        $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
+
         $this->widgetSchema->setLabels(array(
           'paciente_name' => 'Nombre del Paciente:',
           'diagnostico'   => 'Diágnostico',
@@ -267,14 +269,15 @@ class programarCirugiaForm extends BaseAgendaForm
         //$this->validatorSchema['medico_name']->setOption('required', true);
         //$this->validatorSchema['medico_name']->setMessage('required','Falta nombre');
 
-        $this->validatorSchema['riesgo_qx_pre']->setOption('required', true);
-        $this->validatorSchema['riesgo_qx_pre']->setMessage('required','Falta riesgo');
+        # @flag Comentamos los requerimientos que estaban marcados como indispensables          //          [DEL]
+        //~ $this->validatorSchema['riesgo_qx_pre']->setOption('required', true);               //          [DEL]
+        //~ $this->validatorSchema['riesgo_qx_pre']->setMessage('required','Falta riesgo');     //          [DEL]
 
-        $this->validatorSchema['req_insumos']->setOption('required', true);
-        $this->validatorSchema['req_insumos']->setMessage('required','Falta insumos');
+        //~ $this->validatorSchema['req_insumos']->setOption('required', true);                 //          [DEL]
+        //~ $this->validatorSchema['req_insumos']->setMessage('required','Falta insumos');      //          [DEL]
 
-        $this->validatorSchema['req_anestesico']->setOption('required', true);
-        $this->validatorSchema['req_anestesico']->setMessage('required','Falta anestesia');
+        //~ $this->validatorSchema['req_anestesico']->setOption('required', true);              //          [DEL]
+        //~ $this->validatorSchema['req_anestesico']->setMessage('required','Falta anestesia'); //          [DEL]
 
         $this->getObject()->isNew() ? # @todo Revisar esta condicion porque no me gusta
           $this->validatorSchema['programacion']->setOption('min', strtotime('today - 1 day')):

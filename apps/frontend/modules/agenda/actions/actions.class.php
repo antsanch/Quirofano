@@ -441,7 +441,7 @@ public function executeInspeccionar(sfWebRequest $request)
 /*Mostrar todas las cirugias diferidas de un quirofano*/
 
 /*Diferir una cirugía*/
-public function executeDiferir(sfWebRequest $request)
+  public function executeDiferir(sfWebRequest $request)
   {
     $this->cirugia = AgendaQuery::create()->joinWith('Quirofano')->findPk($request->getParameter('id'));
     $this->form = New diferirCirugiaForm($this->cirugia);
@@ -459,7 +459,7 @@ public function executeDiferir(sfWebRequest $request)
 /*Diferir una cirugía*/
 
 /* Iniciar la cirugía*/
-public function executeTransoperatorio(sfWebRequest $request)
+  public function executeTransoperatorio(sfWebRequest $request)
   {
     $this->cirugia = AgendaQuery::create()->findPk($request->getParameter('id'));
     $this->form = new TransoperatorioQuirofanoForm($this->cirugia);
