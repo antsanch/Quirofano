@@ -370,10 +370,12 @@ $mes['max'] = $fechafinal->format("Y-m-d");
       ->filterByquirofanoid($this->Quirofano['Id'])
       ->filterByLastTime(array('min' => $this->date, 'max' => strtotime(date('Y-m-d', $this->date).'+ 1 day')))
       ->orderByStatus('asc')
+      ->orderBySalaId('asc')
       //~ Joins para minimizar las busquedas
       ->joinWith('Personalcirugia', Criteria::LEFT_JOIN)
       ->joinWith('Salaquirurgica', Criteria::LEFT_JOIN)
       ->joinWith('Procedimientocirugia', Criteria::LEFT_JOIN)
+      ->joinWith('Atencion', Criteria::LEFT_JOIN)
       ->find();
   } // Mostramos la agenda para el dia actual
 
@@ -381,7 +383,8 @@ $mes['max'] = $fechafinal->format("Y-m-d");
     $this->getUser()->getAttributeHolder()->clear();
   }
 
-  private function getQuirofano() {
+  private function getQuirofano()
+  {
     $user = $this->getUser();
     $request = $this->getRequest();
     if ($request->getParameter('slug', null)) {
@@ -402,17 +405,17 @@ $mes['max'] = $fechafinal->format("Y-m-d");
     $this->redirect('quirofano/select');
   }
 
-/*Mostrar las diferentes salas del quirofano*/
-public function executeInspeccionar(sfWebRequest $request)
-{
-      $this->salas = SalaquirurgicaQuery::create()
-      ->joinWith('Quirofano')
-      ->useQuery('Quirofano')
-        ->filterBySlug($request->getParameter('slug'))
-      ->endUse()
-      ->find();
-}
-/*Mostrar las diferentes salas del quirofano*/
+  /*Mostrar las diferentes salas del quirofano*/
+  public function executeInspeccionar(sfWebRequest $request)
+  {
+        $this->salas = SalaquirurgicaQuery::create()
+        ->joinWith('Quirofano')
+        ->useQuery('Quirofano')
+          ->filterBySlug($request->getParameter('slug'))
+        ->endUse()
+        ->find();
+  }
+  /*Mostrar las diferentes salas del quirofano*/
 
 
 /*Mostrar todas las cirugias diferidas de un quirofano*/
@@ -554,11 +557,16 @@ public function executeInspeccionar(sfWebRequest $request)
 
 /*Busqueda por registro*/
  public function executeBusqueda(sfWebRequest $request) {
-    $this->term = $request->getParameter('term');
+    //$this->term = $request->getParameter('term');
     $this->cirugias = AgendaQuery::create()
-      ->filterBySumary('%'.$this->term.'%')
+      ->filterBySumary('%'.$request->getParameter('term').'%')
       ->filterByCancelada(false)
       ->orderByStatus()
+      ->orderBySalaId('asc')
+      ->joinWith('Atencion')
+      ->joinWith('Personalcirugia')
+      ->joinWith('Salaquirurgica')
+      ->joinWith('Procedimientocirugia')
       ->find();
   }
 /*Busqueda por registro*/

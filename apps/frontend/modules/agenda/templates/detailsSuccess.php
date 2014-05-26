@@ -1,4 +1,7 @@
 <?php use_stylesheet('/css/global/styleAgenda.css')?>
+<?php use_stylesheet('/min/?f=EasyUI/themes/default/easyui.css', '', array('raw_name' => true))?>
+<?php use_javascript('/EasyUI/jquery.easyui.min.js')?>
+
 <?php slot('titulo') ?>
   <title>Detalles de la cirugia de <?php echo $cirugia->getPacienteName() ?> | SIGA-HU </title>
 <?php end_slot() ?>
@@ -69,6 +72,7 @@
   <a href="<?php echo url_for('agenda/show?slug='.$cirugia->getQuirofano()->getSlug()) ?>">Agenda de <?php echo $cirugia->getQuirofano() ?></a>
 </div>
 
+<div class="easyui-tabs" data-options="fit:false">
 <?php
 switch ($cirugia->getStatus())
 {
@@ -85,4 +89,5 @@ switch ($cirugia->getStatus())
   case 1:
     include_partial("detailsProgramacion", array('cirugia' => $cirugia));
 }
-
+?>
+</div>
