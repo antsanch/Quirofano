@@ -490,6 +490,29 @@ class Agenda extends BaseAgenda {
     return $result;
   }
 
+ /* resetTransoperatorio
+  * Elimina los valores guardados en el transoperatorio y regresa al paciente al estado de programado
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-05-27
+  */
+  public function resetTransoperatorio()
+  {
+    $this->removePersonalcirugia($this->getCirujanoInicial());
+    $this->removePersonalcirugia($this->getCirujanoSupInicial());
+    $this->removePersonalcirugia($this->getAnestesiologoInicial());
+    $this->removePersonalcirugia($this->getAnestesiologoSupInicial());
+    $this->removePersonalcirugia($this->getCirculanteInicial());
+    $this->removePersonalcirugia($this->getInstrumentistaInicial());
+
+    return $this
+      ->setInicio(null)
+      ->setRetrasoInicial(null)
+      ->setTiempoFuera(null)
+      ->setStatus(AgendaPeer::PROGRAMADA_STATUS)
+      ;
+  }
+
+
  /**
   * @flag Retorna una lista de procedimientos
   */

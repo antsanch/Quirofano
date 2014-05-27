@@ -281,6 +281,18 @@ return $text; */
     $this->form = new AgendaForm($Agenda);
   }
 
+ /* executeFalsoinicio
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-05-27
+  */
+  public function executeFalsoinicio(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id', null);
+    $cx = AgendaQuery::create()->joinWith('Personalcirugia')->findPk($id);
+    $this->form = new TransoperatorioQuirofanoForm($cx);
+  }
+
+
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));

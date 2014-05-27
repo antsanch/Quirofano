@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?taskcoach release="1.3.38" tskversion="37"?>
+<?taskcoach release="1.3.40" tskversion="37"?>
 
 <tasks>
 <task actualstartdate="2014-04-30 12:40:15.391267" completiondate="2014-04-30 12:59:29.268421" creationDateTime="2014-04-30 12:29:39.258655" id="01ee0360-d08d-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 12:59:29.268154" percentageComplete="100" status="1" subject="Ambulatorio Cambiar link programar por validar" />
@@ -12,7 +12,7 @@
 <task creationDateTime="2014-04-30 12:08:28.205021" id="0c529daa-d08a-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Quitar boton de comentarios" />
 <task creationDateTime="2014-04-30 12:37:13.391829" id="109d3b78-d08e-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Igualar a los tonos que se usan en la agenda global" />
 <task creationDateTime="2014-05-02 11:44:52.576593" id="155e5c00-d219-11e3-bbf4-e06995d80c00" modificationDateTime="2014-05-02 11:45:21.996098" priority="1" status="1" subject="Cambiar el orden de carga de los JavaScript en el Layout" />
-<task creationDateTime="2014-04-30 12:01:34.444253" id="15b3bb8c-d089-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Widgets de apoyo en campos Fecha, Hora y Duracion" />
+<task actualstartdate="2014-05-26 15:47:49.948670" completiondate="2014-05-26 15:47:55.049417" creationDateTime="2014-04-30 12:01:34.444253" id="15b3bb8c-d089-11e3-a5ff-e06995d80c00" modificationDateTime="2014-05-26 15:47:55.049125" percentageComplete="100" status="1" subject="Widgets de apoyo en campos Fecha, Hora y Duracion" />
 <task completiondate="2014-04-30 18:30:31.754952" creationDateTime="2014-04-30 12:09:32.260317" id="3280adaa-d08a-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 18:30:31.754674" percentageComplete="100" priority="2" status="1" subject="Boton Programar Cx primero debe validar Cx" />
 <task creationDateTime="2014-04-30 12:38:29.025830" id="3db2107a-d08e-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Cambiar los textos por botones bonitos" />
 <task creationDateTime="2014-04-30 12:02:47.237397" id="411715da-d089-11e3-a5ff-e06995d80c00" modificationDateTime="2014-04-30 13:04:37.181374" status="1" subject="Quitar botones Cx Cancelada y Cx Canc x Mes" />
