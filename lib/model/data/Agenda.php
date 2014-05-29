@@ -503,6 +503,8 @@ class Agenda extends BaseAgenda {
     $this->removePersonalcirugia($this->getAnestesiologoSupInicial());
     $this->removePersonalcirugia($this->getCirculanteInicial());
     $this->removePersonalcirugia($this->getInstrumentistaInicial());
+    //~ $this->cxInicia = null;
+    //~ $this->cxSupInicia = null;
 
     return $this
       ->setInicio(null)

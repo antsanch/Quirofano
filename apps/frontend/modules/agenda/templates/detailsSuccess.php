@@ -67,6 +67,7 @@
   .menubar a:hover {
     background: lightgray;
   }
+
 </style>
 <div class="menubar clearfix">
   <a href="<?php echo url_for('agenda/show?slug='.$cirugia->getQuirofano()->getSlug()) ?>">Agenda de <?php echo $cirugia->getQuirofano() ?></a>

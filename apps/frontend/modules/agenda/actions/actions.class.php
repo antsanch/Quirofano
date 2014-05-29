@@ -288,8 +288,11 @@ return $text; */
   public function executeFalsoinicio(sfWebRequest $request)
   {
     $id = $request->getParameter('id', null);
-    $cx = AgendaQuery::create()->joinWith('Personalcirugia')->findPk($id);
-    $this->form = new TransoperatorioQuirofanoForm($cx);
+    $this->cx = AgendaQuery::create()->joinWith('Personalcirugia')->findPk($id);
+    //~ $this->form = new TransoperatorioQuirofanoForm($cx);
+    $this->form = new ConfirmacionFrom();
+    $this->form->setAceptacionLabel('Selecciona esta casilla y presiona "Aceptar" para eliminar los datos mostrados y regresar esta cirugia
+    al estado de programada, para regresar a la lista general sin modificar nada presiona "Cancelar"');
   }
 
 
