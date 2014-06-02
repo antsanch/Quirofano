@@ -288,13 +288,18 @@ return $text; */
   public function executeFalsoinicio(sfWebRequest $request)
   {
     $id = $request->getParameter('id', null);
-    $this->cx = AgendaQuery::create()->joinWith('Personalcirugia')->findPk($id);
-    //~ $this->form = new TransoperatorioQuirofanoForm($cx);
+    $this->cx = isset($id) ? AgendaQuery::create()->joinWith('Personalcirugia')->findPk($id) : null;
+    $this->forward404Unless($this->cx, sprintf('No existe una cirugia con id (%s).', $request->getParameter('id')));
     $this->form = new ConfirmacionFrom();
+    if ($request->getMethod() == 'POST') {
+      if ($request->getParameter('button', null) == 'Aceptar' && $request->getParameter('aceptacion', null) == 'on') {
+        $this->cx->resetTransoperatorio()->save();
+
+      }
+    }
     $this->form->setAceptacionLabel('Selecciona esta casilla y presiona "Aceptar" para eliminar los datos mostrados y regresar esta cirugia
     al estado de programada, para regresar a la lista general sin modificar nada presiona "Cancelar"');
   }
-
 
   public function executeUpdate(sfWebRequest $request)
   {
