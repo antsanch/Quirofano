@@ -68,7 +68,7 @@
         <td>%s</td>
         <td>%s</td>
         <td>%s</td>
-        <td nowrap>%s %s %s</td>
+        <td nowrap>%s %s %s %s</td>
       </tr>',
       $c->getClasses(),
       $c->getTipoProcId(),
@@ -84,7 +84,8 @@
       $c->getPrograma(),
       link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
       link_to('<div class="cambio"></div>', 'agenda/agregarpersonal?id='.$c->getId(), array('title' => 'Agregar personal a la cirugia')),
-      link_to('<div class="realizada"></div>', 'agenda/postoperatorio?id='.$c->getId(), array('title' => 'Terminar Cirugía'))
+      link_to('<div class="realizada"></div>', 'agenda/postoperatorio?id='.$c->getId(), array('title' => 'Terminar Cirugía')),
+      link_to('[Revertir]', 'agenda/falsoinicio?id='.$c->getId(), array('title' => 'Terminar Cirugía'))
     );
   }
 

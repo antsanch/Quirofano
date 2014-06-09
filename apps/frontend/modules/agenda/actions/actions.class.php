@@ -294,7 +294,10 @@ return $text; */
     if ($request->getMethod() == 'POST') {
       if ($request->getParameter('button', null) == 'Aceptar' && $request->getParameter('aceptacion', null) == 'on') {
         $this->cx->resetTransoperatorio()->save();
-
+        $this->redirect('agenda/show?date='.$this->cx->getProgramacion('d-m-Y'));
+      }
+      elseif ($request->getParameter('button', null) == 'Cancelar') {
+        $this->redirect('agenda/show?date='.$this->cx->getProgramacion('d-m-Y'));
       }
     }
     $this->form->setAceptacionLabel('Selecciona esta casilla y presiona "Aceptar" para eliminar los datos mostrados y regresar esta cirugia

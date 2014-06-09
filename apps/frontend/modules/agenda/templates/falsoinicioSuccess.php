@@ -81,6 +81,6 @@
 
 <?php $cx->resetTransoperatorio() ?>
 <pre>
-<?php echo print_r(get_class_methods($cx->getCirujanoInicial()->getRawValue())) ?>
+<?php //echo print_r(get_class_methods($cx->getCirujanoInicial()->getRawValue())) ?>
 </pre>
 <?php //include_partial('detailsTransoperatorio', array('cirugia' => $cx)) ?>
