@@ -189,20 +189,11 @@ class programarCirugiaForm extends BaseAgendaForm
         'max_additions'       =>  4
     ));
 
-
-
-
-
-
     //$this->widgetSchema['hora'] = new sfWidgetFormInputText();  # @flag Eliminamos el campo de la hora          [DEL]
     //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(  //          [DEL]
     //'choices' => AgendaPeer::getDuracion()    //          [DEL]
       //'id' => 'tiest'   //          [DEL]
     //)));    //          [DEL]
-
-
-
-
 
 //       $this->setWidget('tiempo_est', new sfWidgetFormChoice(array(
 //      'choices' => AgendaPeer::getDuracion()
@@ -225,7 +216,6 @@ class programarCirugiaForm extends BaseAgendaForm
         //~ $this->widgetSchema['medico_name']->setAttributes(array(
           //~ 'planceholder' => 'Nombre del médico que programa la cirugia',
         //~ ));
-
 
         //~ $this->widgetSchema->setLabels(array(
           //~ 'paciente_name' => 'Nombre del Paciente:',
