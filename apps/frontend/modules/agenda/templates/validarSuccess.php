@@ -19,6 +19,10 @@
   }
 </style>
 
+<?php slot('titulo') ?>
+  <title>Validar cirugia:  <?php echo $search ?> | SIGA-HU </title>
+<?php end_slot() ?>
+
 <div class="formulario clearfix">
 <h1 style="color:#FFFFFF;">Programar Cirugia</h1>
   <form action="<?php echo url_for('agenda/validar') ?> " method="get">

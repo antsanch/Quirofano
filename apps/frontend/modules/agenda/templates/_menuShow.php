@@ -22,8 +22,10 @@ HEAD;
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/index') ?>">&nbsp;&nbsp;Lista general de quirofanos&nbsp;&nbsp;</a>
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/validar')?>" rel="facebox">&nbsp;&nbsp;Programar Cirugia&nbsp;&nbsp;</a>
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/diferidas')?>">&nbsp;&nbsp;Cirugias Diferidas&nbsp;&nbsp;</a>
+<!--
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/canceladas')?>">&nbsp;&nbsp;Cirugias Canceladas del mes&nbsp;&nbsp;</a>
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/todos?date='.date('Y-m-d', strtotime("now")))?>">&nbsp;&nbsp;Cirugias del mes&nbsp;&nbsp;</a>
+-->
 <a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/show?date='.date('Y-m-d', strtotime("now")))?>">&nbsp;&nbsp;Agenda del día&nbsp;&nbsp;</a>
 
 <form action="<?php echo url_for('agenda/show') ?>" style="display:inline;">
