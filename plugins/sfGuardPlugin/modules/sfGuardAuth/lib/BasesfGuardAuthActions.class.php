@@ -64,6 +64,8 @@ class BasesfGuardAuthActions extends sfActions
         return $this->redirect($module.'/'.sfConfig::get('sf_login_action'));
       }
     }
+
+    $this->setLayout(false);
   }
 
   public function executeSignout($request)
