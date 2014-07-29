@@ -54,7 +54,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN LOGO -->
 <div class="logo">
   <a href="index.html">
-    <img src="/assets/img/logo-big.png" alt=""/>
+    <h2>SIGA - <span class="danger">Qx</span></h2>
+    <!-- <img src="/assets/img/logo-big.png" alt=""/> -->
   </a>
 </div>
 <!-- END LOGO -->
@@ -63,7 +64,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="content">
 
   <!-- BEGIN LOGIN FORM -->
-  <form class="login-form" action="index.html" method="post">
+  <form class="login-form" action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
     <h3 class="form-title">Iniciar Sesión de Usuario</h3>
     <div class="alert alert-danger display-hide">
       <button class="close" data-close="alert"></button>
@@ -71,27 +72,41 @@ License: You must have a valid license purchased only from themeforest(the above
          Enter any username and password.
       </span>
     </div>
+
     <div class="form-group">
       <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
       <label class="control-label visible-ie8 visible-ie9">Usuario</label>
       <div class="input-icon">
         <i class="fa fa-user"></i>
+<!--
         <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Usuario" name="username"/>
+-->
+        <?php echo $form['username'] ?>
       </div>
     </div>
+
     <div class="form-group">
       <label class="control-label visible-ie8 visible-ie9">Contraseña</label>
       <div class="input-icon">
         <i class="fa fa-lock"></i>
+<!--
         <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" name="password"/>
+-->
+        <?php echo $form['password'] ?>
       </div>
     </div>
+
     <div class="form-actions">
+      <?php echo $form['remember'] ?>
+      <?php echo $form['remember']->renderLabel('Recordarme', array('class' => 'checkbox')) ?>
+<!--
       <label class="checkbox">
       <input type="checkbox" name="remember" value="1"/> Recordarme  </label>
+-->
       <button type="submit" class="btn green pull-right">
       Iniciar Sesión <i class="m-icon-swapright m-icon-white"></i>
       </button>
+      <?php echo $form->renderHiddenFields()?>
     </div>
 <!--
     <div class="login-options">
@@ -116,16 +131,20 @@ License: You must have a valid license purchased only from themeforest(the above
       </ul>
     </div>
 -->
+<!-- Olvidar contraseña
     <div class="forget-password">
       <h4>¿Olvidaste tu contraseña?</h4>
       <p>
-         has, click
+         has
         <a href="javascript:;" id="forget-password">
-           aqui
+          click aqui
         </a>
          para cambiarla.
       </p>
     </div>
+-->
+
+<!-- Registrarse
     <div class="create-account">
       <p>
          ¿No estas registrado?&nbsp;
@@ -135,9 +154,11 @@ License: You must have a valid license purchased only from themeforest(the above
       </p>
     </div>
   </form>
+-->
   <!-- END LOGIN FORM -->
 
   <!-- BEGIN FORGOT PASSWORD FORM -->
+<!--
   <form class="forget-form" action="index.html" method="post">
     <h3>¿Olvidaste tu contraseña?</h3>
     <p>
@@ -157,9 +178,11 @@ License: You must have a valid license purchased only from themeforest(the above
       </button>
     </div>
   </form>
+-->
   <!-- END FORGOT PASSWORD FORM -->
 
   <!-- BEGIN REGISTRATION FORM -->
+<!--
   <form class="register-form" action="index.html" method="post">
     <h3>Registarse</h3>
     <p>
@@ -173,7 +196,7 @@ License: You must have a valid license purchased only from themeforest(the above
       </div>
     </div>
     <div class="form-group">
-      <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+      <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that- ->
       <label class="control-label visible-ie8 visible-ie9">Correo electrónico</label>
       <div class="input-icon">
         <i class="fa fa-envelope"></i>
@@ -181,21 +204,21 @@ License: You must have a valid license purchased only from themeforest(the above
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label visible-ie8 visible-ie9">Address</label>
+      <label class="control-label visible-ie8 visible-ie9">Dirección</label>
       <div class="input-icon">
         <i class="fa fa-check"></i>
-        <input class="form-control placeholder-no-fix" type="text" placeholder="Address" name="address"/>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="Dirección" name="address"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label visible-ie8 visible-ie9">City/Town</label>
+      <label class="control-label visible-ie8 visible-ie9">Departamento/Servicio</label>
       <div class="input-icon">
         <i class="fa fa-location-arrow"></i>
-        <input class="form-control placeholder-no-fix" type="text" placeholder="City/Town" name="city"/>
+        <input class="form-control placeholder-no-fix" type="text" placeholder="Departamento/Servicio" name="city"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label visible-ie8 visible-ie9">Country</label>
+      <label class="control-label visible-ie8 visible-ie9">País</label>
       <select name="country" id="select2_sample4" class="select2 form-control">
         <option value=""></option>
         <option value="AF">Afghanistan</option>
@@ -436,40 +459,40 @@ License: You must have a valid license purchased only from themeforest(the above
       </select>
     </div>
     <p>
-       Enter your account details below:
+      Introcude los datos de tu cuenta:
     </p>
     <div class="form-group">
-      <label class="control-label visible-ie8 visible-ie9">Username</label>
+      <label class="control-label visible-ie8 visible-ie9">Usuario</label>
       <div class="input-icon">
         <i class="fa fa-user"></i>
-        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Usuario" name="username"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label visible-ie8 visible-ie9">Password</label>
+      <label class="control-label visible-ie8 visible-ie9">Contraseña</label>
       <div class="input-icon">
         <i class="fa fa-lock"></i>
-        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password"/>
+        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Contraseña" name="password"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>
+      <label class="control-label visible-ie8 visible-ie9">Confirmar Contraseña</label>
       <div class="controls">
         <div class="input-icon">
           <i class="fa fa-check"></i>
-          <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword"/>
+          <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Confirmar Contraseña" name="rpassword"/>
         </div>
       </div>
     </div>
     <div class="form-group">
       <label>
-      <input type="checkbox" name="tnc"/> I agree to the
+      <input type="checkbox" name="tnc"/> Acepto los
       <a href="#">
-         Terms of Service
+         Términos de Servicio
       </a>
-       and
+       y
       <a href="#">
-         Privacy Policy
+         Politica de Privacidad
       </a>
       </label>
       <div id="register_tnc_error">
@@ -477,12 +500,13 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
     <div class="form-actions">
       <button id="register-back-btn" type="button" class="btn">
-      <i class="m-icon-swapleft"></i> Back </button>
+      <i class="m-icon-swapleft"></i> Regresar </button>
       <button type="submit" id="register-submit-btn" class="btn green pull-right">
-      Sign Up <i class="m-icon-swapright m-icon-white"></i>
+      Registrar <i class="m-icon-swapright m-icon-white"></i>
       </button>
     </div>
   </form>
+-->
   <!-- END REGISTRATION FORM -->
 
 </div>
