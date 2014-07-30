@@ -7,22 +7,22 @@ var Login = function () {
               errorClass: 'help-block', // default input error message class
               focusInvalid: false, // do not focus the last invalid input
               rules: {
-                  signin_username: {
+                  "signin[username]": {
                       required: true
                   },
-                  signin_password: {
+                  "signin[password]": {
                       required: true
                   },
-                  signin_remember: {
+                  "signin[remember]": {
                       required: false
                   }
               },
 
               messages: {
-                  signin_username: {
+                  "signin[username]": {
                       required: "Este campo es requerido."
                   },
-                  signin_password: {
+                  "signin[password]": {
                       required: "La contraseña es requerida."
                   }
               },

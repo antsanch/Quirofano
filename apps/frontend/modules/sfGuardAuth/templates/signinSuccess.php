@@ -66,10 +66,17 @@ License: You must have a valid license purchased only from themeforest(the above
   <!-- BEGIN LOGIN FORM -->
   <form class="login-form" action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
     <h3 class="form-title">Iniciar Sesión de Usuario</h3>
+    <?php if($form['username']->hasError()): ?>
+    <div class="alert alert-danger">
+      <button class="close" data-close="alert"></button>
+        <?php echo $form['username']->renderError(array('id' => 'test')) ?>
+    </div>
+    <?php endif; ?>
+
     <div class="alert alert-danger display-hide">
       <button class="close" data-close="alert"></button>
       <span>
-         Enter any username and password.
+         Se han encontrado algunos errores.
       </span>
     </div>
 

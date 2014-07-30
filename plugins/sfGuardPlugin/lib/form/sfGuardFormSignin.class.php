@@ -24,7 +24,11 @@ class sfGuardFormSignin extends BasesfGuardFormSignin
       'remember' => new sfValidatorBoolean(),
     ));
 
-    $this->validatorSchema->setPostValidator(new sfGuardValidatorUser());
+    $this->validatorSchema->setPostValidator(new sfGuardValidatorUser(array(),
+      array(
+        'invalid' =>  'El nombre de usuario o la contraseña son invalidos.'
+      )
+    ));
 
     $this->widgetSchema->setNameFormat('signin[%s]');
   }
