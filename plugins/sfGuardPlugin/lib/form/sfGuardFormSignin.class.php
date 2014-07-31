@@ -5,8 +5,16 @@ class sfGuardFormSignin extends BasesfGuardFormSignin
   public function configure()
   {
     $this->setWidgets(array(
-      'username' => new sfWidgetFormInput(),
-      'password' => new sfWidgetFormInput(array('type' => 'password')),
+      'username' => new sfWidgetFormInput(array(), array(
+        'class'         =>  'form-control placeholder-no-fix',
+        'placeholder'   =>  'Usuario',
+        'autocomplete'  =>  'off'
+      )),
+      'password' => new sfWidgetFormInput(array('type' => 'password'), array(
+        'class'         =>  'form-control placeholder-no-fix',
+        'placeholder'   =>  'Contraseña',
+        'autocomplete'  =>  'off'
+      )),
       'remember' => new sfWidgetFormInputCheckbox(),
     ));
 
@@ -16,7 +24,11 @@ class sfGuardFormSignin extends BasesfGuardFormSignin
       'remember' => new sfValidatorBoolean(),
     ));
 
-    $this->validatorSchema->setPostValidator(new sfGuardValidatorUser());
+    $this->validatorSchema->setPostValidator(new sfGuardValidatorUser(array(),
+      array(
+        'invalid' =>  'El nombre de usuario o la contraseña son invalidos.'
+      )
+    ));
 
     $this->widgetSchema->setNameFormat('signin[%s]');
   }

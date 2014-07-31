@@ -71,35 +71,50 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="content">
 
   <!-- BEGIN LOGIN FORM -->
-  <form class="login-form" action="index.html" method="post">
-    <h3 class="form-title">Login to your account</h3>
+  <form class="login-form" action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
+    <h3 class="form-title">Iniciar Sesión de Usuario</h3>
+    <?php if ($form['username']->hasError()): ?>
+    <div class="alert alert-danger">
+      <button class="close" data-close="alert"></button>
+      <span>
+        <?php echo $form['username']->renderError() ?>
+      </span>
+    </div>
+    <?php endif; ?>
     <div class="alert alert-danger display-hide">
       <button class="close" data-close="alert"></button>
       <span>
-      Enter any username and password. </span>
+        Se han encontrado algunos errores.
+      </span>
     </div>
     <div class="form-group">
       <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
       <label class="control-label visible-ie8 visible-ie9">Username</label>
       <div class="input-icon">
         <i class="fa fa-user"></i>
-        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+<!--      <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/> -->
+        <?php echo $form['username'] ?>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label visible-ie8 visible-ie9">Password</label>
       <div class="input-icon">
         <i class="fa fa-lock"></i>
-        <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
+<!-- <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/> -->
+        <?php echo $form['password']->render() ?>
       </div>
     </div>
     <div class="form-actions">
+        <?php echo $form['remember']->render() ?>  <?php echo $form['remember']->renderLabel() ?>
+<!--
       <label class="checkbox">
-      <input type="checkbox" name="remember" value="1"/> Remember me </label>
+      <input type="checkbox" name="remember" value="1"/> Recordarme</label>
+-->
       <button type="submit" class="btn green pull-right">
-      Login <i class="m-icon-swapright m-icon-white"></i>
+      Iniciar Sesión <i class="m-icon-swapright m-icon-white"></i>
       </button>
     </div>
+    <?php echo $form->renderHiddenFields()?>
 
 <!--
     <div class="login-options">
