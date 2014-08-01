@@ -65,7 +65,7 @@ class BasesfGuardAuthActions extends sfActions
       }
     }
 
-    $this->setLayout(false);
+    $this->setLayout('plainLayout');
   }
 
   public function executeSignout($request)
