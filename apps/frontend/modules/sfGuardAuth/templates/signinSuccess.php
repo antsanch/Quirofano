@@ -105,7 +105,7 @@ License: You must have a valid license purchased only from themeforest(the above
       </div>
     </div>
     <div class="form-actions">
-        <?php echo $form['remember']->render() ?>  <?php echo $form['remember']->renderLabel() ?>
+        <?php echo $form['remember']->render() ?>  <?php echo $form['remember']->renderLabel('Recordarme') ?>
 <!--
       <label class="checkbox">
       <input type="checkbox" name="remember" value="1"/> Recordarme</label>
