@@ -3,7 +3,6 @@
 <?php end_slot() ?>
 
   <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
   <h3 class="page-title">Quirofanos Activos</h3>
 
   <ul class="page-breadcrumb breadcrumb">

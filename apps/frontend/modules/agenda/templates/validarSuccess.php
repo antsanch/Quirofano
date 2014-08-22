@@ -23,6 +23,82 @@
   <title>Validar cirugia:  <?php echo $search ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
+  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+  <h3 class="page-title">Validar cirugía</h3>
+
+  <ul class="page-breadcrumb breadcrumb">
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="<?php echo url_for('@homepage') ?> ">Inicio</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+      <a href="<?php echo url_for('agenda/index') ?> ">Quirofanos</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>Programar</li>
+  </ul>
+  <!-- END PAGE TITLE & BREADCRUMB-->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="portlet box blue">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="fa fa-check-square-o"></i>
+          Validar
+        </div>
+      </div>
+      <div class="portlet-body form">
+        <form role="form">
+          <div class="form-body">
+            <div class="form-group">
+
+              <div class="input-group">
+                <div class="input-icon">
+                  <i class="fa fa-user"></i>
+                  <input class="form-control" id="search" name="search" type="text" value="<?php echo $search ?>" placeholder="Registro o nombre">
+                </div>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn blue">
+                    <i class="fa fa-check fa-fw"></i> Validar
+                  </button>
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form role="form">
+      <div class="form-body">
+        <div class="form-group">
+
+          <div class="input-group">
+            <div class="input-icon">
+              <i class="fa fa-user"></i>
+              <input class="form-control" id="search" name="search" type="text" value="<?php echo $search ?>" placeholder="Registro o nombre">
+            </div>
+            <span class="input-group-btn">
+              <button type="submit" class="btn blue">
+                <i class="fa fa-check fa-fw"></i> Validar
+              </button>
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="formulario clearfix">
 <h1 style="color:#FFFFFF;">Programar Cirugia</h1>
   <form action="<?php echo url_for('agenda/validar') ?> " method="get">
