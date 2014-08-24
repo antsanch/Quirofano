@@ -197,6 +197,20 @@ class Agenda extends BaseAgenda {
     return trim(implode(' ', $classes));
   } /* getClasses */
 
+ /* getStatusClass
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-08-24
+  */
+  public function getStatusClass()
+  {
+    switch ($this->getStatus()) {
+      case AgendaPeer::DIFERIDA_STATUS : return "danger";
+      case AgendaPeer::PROGRAMADA_STATUS : return "warning";
+      case AgendaPeer::TRANSOPERATORIO_STATUS : return "success";
+      case AgendaPeer::REALIZADA_STATUS : return "active";
+    }
+  }
+
  /**
   * Regresa un string con el elemento <div> que representa la caratula del reloj con el atraso correspondiente
   * @autor: Antonio Sanchez Uresti
