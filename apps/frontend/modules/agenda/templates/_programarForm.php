@@ -112,6 +112,7 @@ window.onload = start;
     <div class="label"><?php echo $form['registro']->renderLabel() ?></div>
     <div class="field">
       <?php echo $form['registro']->renderError() ?>
+
       <?php echo $form['registro'] ?>
     </div>
   </div>

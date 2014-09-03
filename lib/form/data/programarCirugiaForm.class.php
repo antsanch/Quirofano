@@ -115,13 +115,13 @@ class programarCirugiaForm extends BaseAgendaForm
   # @flag Configura las opciones del campo protocolo
     $this->widgetSchema['protocolo'] = new sfWidgetFormChoice(array(
       'choices' => array('0' => 'No', '1' => 'Si'),
-      'expanded' => true
+      'expanded' => false
     ));
 
   # @flag Configura las opciones al campo reintervencion
     $this->widgetSchema['reintervencion'] = new sfWidgetFormChoice(array(
       'choices' => array('0' => 'No', '1' => 'Si'),
-      'expanded' => true
+      'expanded' => false
     ));
 
   # @flag Configura el campo 'diagnostico'
