@@ -133,7 +133,6 @@ class programarCirugiaForm extends BaseAgendaForm
       'placeholder' => 'Diagnóstico del paciente o código CIE10',
     ));
 
-  # @flag Configura el campo 'riesgo quirurgico' como textarea
     $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
 
   # @flag Configura las etiquetas
@@ -258,7 +257,7 @@ class programarCirugiaForm extends BaseAgendaForm
           'invalid'     =>  'Mal formato de Fecha',
           'no_time'     =>  'Falta la hora',
           'min'         =>  'Fecha pasada',
-          'max'         =>  'No se puede progrmar con mas de un mes de anticipación'
+          'max'         =>  'No se puede progrmar con más de un mes de anticipación'
           )
         );
         # @flag Eliminamos la referencia al campo 'hora'
