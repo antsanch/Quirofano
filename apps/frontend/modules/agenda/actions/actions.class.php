@@ -386,6 +386,7 @@ $mes['max'] = $fechafinal->format("Y-m-d");
 // Mostramos la agenda para el dia actual
   public function executeShow(sfWebRequest $request)
   {
+    $this->action = $this->getActionName();
     $this->Quirofano = $this->getQuirofano();
     $this->date = strtotime($request->getParameter('date', date('Y-m-d')));
 

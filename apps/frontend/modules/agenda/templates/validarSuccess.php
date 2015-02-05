@@ -45,11 +45,6 @@
 </div>
 
 <?php if(isset($cirugias)): ?>
-<div class="row">
-  <div class="col-md-12">
-    <a class="btn blue" href="<?php echo url_for('agenda/programar') ?>">Programar Cirugia</a>
-  </div>
-</div>
 
 <div class="row">
   <div class="col-md-12">
@@ -95,8 +90,10 @@
       </table>
     </div>
 <?php else: # @flag No se encontraron cirugias en el historial del paciente?>
-    <p>No se han encontrado cirugias para ese paciente, puedes usar otro termino de busqueda como nombre completo, apellidos o registro</p>
-    <p>Tambien puedes <a href="<?php echo url_for('agenda/programar') ?>" class="btn blue">Programar cirugía </a></p>
+    <div class="alert alert-danger">  
+      <p>No se han encontrado cirugias para ese paciente, puedes usar otro termino de busqueda como nombre completo, apellidos o registro.</p>
+    </div>
+    <p>Tambien puedes <a href="<?php echo url_for('agenda/programar') ?>" >programar una cirugía.</a></p>
 <?php endif; ?>
   </div>
 </div>

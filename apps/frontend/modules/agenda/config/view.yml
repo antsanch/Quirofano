@@ -2,13 +2,13 @@
 
 diferidasSuccess:
  has_layout:     on
- layout:         layout_sn
+ layout:         layout
 todosSuccess:
  has_layout:     on
- layout:         layout_sn
+ layout:         layout
 showSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 busquedaSuccess:
   has_layout:     on
   layout:         layout_sn
@@ -20,7 +20,7 @@ busquedapersonalisadaSuccess:
   layout:         layout_sn
 canceladasSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 
 default:
   http_metas:

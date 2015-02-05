@@ -1,9 +1,3 @@
-<?php use_stylesheet('/css/global/widescreen.css')?>
-<?php use_stylesheet('/css/global/styleAgenda.css')?>
-<?php //use_javascript('/js/global/facebox.js')?>
-<?php //use_stylesheet('/css/global/facebox.css')?>
-<?php use_helper('agenda') ?>
-
 <?php slot('titulo') ?>
   <title>Agenda de <?php echo $Quirofano['Nombre'] ?> | SIGA-HU </title>
 <?php end_slot() ?>
@@ -35,56 +29,40 @@ window.onload = start;
 
 <?php endif; ?>
 <?php endif; ?>
-<!-- Mostrar alertas-->
-
-<h1>Agenda de procedimientos en <?php echo $Quirofano['Nombre'] ?></h1>
 
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
 <!-- @flag Inicio de la nueva tabla de resultados -->
 <div id="camasPanel">
-<?php $currentStatus = null?>
+  <?php $currentStatus = null?>
   <table id="agenda" border="0" width="100%" cellspacing="0">
     <tbody>
-<?php foreach($Cirugias as $c): ?>
-<?php
-  if($currentStatus != $c->getStatus()) {
-    echo sprintf ("<tr><th colspan='11'><h3 style='padding-top: 11px;'>%s</h3></th></tr>", $c->getVerboseStatus());
-    $currentStatus = $c->getStatus();
-  }
-?>
-<?php
-          switch ($c->getStatus()) {
-          case AgendaPeer::DIFERIDA_STATUS:
-            echo renderProgramada($c);
-            break;
-          case AgendaPeer::PROGRAMADA_STATUS:
-            echo renderProgramada($c);
-            break;
-          case AgendaPeer::TRANSOPERATORIO_STATUS:
-            echo renderTransoperatorio($c);
-            break;
-          case AgendaPeer::REALIZADA_STATUS:
-            echo renderRealizada($c);
-            break;
-          default:
-            # No default
-          }
-        ?>
-<?php endforeach; ?>
+    <?php foreach($Cirugias as $c): ?>
+    <?php
+      if($currentStatus != $c->getStatus()) {
+        echo sprintf ("<tr><th colspan='11'><h3 style='padding-top: 11px;'>%s</h3></th></tr>", $c->getVerboseStatus());
+        $currentStatus = $c->getStatus();
+      }
+    ?>
+    <?php
+              switch ($c->getStatus()) {
+              case AgendaPeer::DIFERIDA_STATUS:
+                echo renderProgramada($c);
+                break;
+              case AgendaPeer::PROGRAMADA_STATUS:
+                echo renderProgramada($c);
+                break;
+              case AgendaPeer::TRANSOPERATORIO_STATUS:
+                echo renderTransoperatorio($c);
+                break;
+              case AgendaPeer::REALIZADA_STATUS:
+                echo renderRealizada($c);
+                break;
+              default:
+                # No default
+              }
+            ?>
+    <?php endforeach; ?>
     </tbody>
   </table>
 </div>
-
-<script>
-  $(function(){
-    $('#datepicker').datepicker({
-      dateFormat: 'dd-mm-yy'
-    });
-
-  /*  $('a[rel*=facebox]').facebox({
-      overlay: true,
-      opacity: 0.75
-    }); /**/
-  });
-</script>

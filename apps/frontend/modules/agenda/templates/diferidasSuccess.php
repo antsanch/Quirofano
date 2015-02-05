@@ -1,9 +1,9 @@
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
 <div id="camasPanel">
-  <table id="agenda" border="0" width="100%" cellspacing="0">
 </div>
 
+<table id="agenda" border="0" width="100%" cellspacing="0">
 <!--Script para mostrar alertas-->
 <script type="text/javascript">
 function saludo() {alert('Programación Exitosa')}
