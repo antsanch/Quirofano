@@ -76,10 +76,10 @@ HEAD;
   <div class="row">
     <ul class="nav nav-tabs nav-justified">
       <!--<li><a href="<?php echo url_for('agenda/validar')?>">Programar Cirugía</a></li>-->
-      <li><a href="<?php echo url_for('agenda/show?date='.date('Y-m-d', strtotime(" now ")))?>">Agenda del día</a></li>
-      <li><a href="<?php echo url_for('agenda/diferidas')?>">Cirugias diferidas</a></li>
-      <li><a href="<?php echo url_for('agenda/canceladas')?>">Cirugias canceladas del mes</a></li>
-      <li><a href="<?php echo url_for('agenda/todos?date='.date('Y-m-d', strtotime("now")))?>">Cirugias del mes</a></li>
+      <li id="agendaDelDia"><a href="<?php echo url_for('agenda/show?date='.date('Y-m-d', strtotime(" now ")))?>">Agenda del día</a></li>
+      <li id="diferidas"><a href="<?php echo url_for('agenda/diferidas')?>">Cirugias diferidas</a></li>
+      <li id="canceladas"><a href="<?php echo url_for('agenda/canceladas')?>">Cirugias canceladas del mes</a></li>
+      <li id="delMes"><a href="<?php echo url_for('agenda/todos?date='.date('Y-m-d', strtotime("now")))?>">Cirugias del mes</a></li>
     </ul>
   </div>
 </div>

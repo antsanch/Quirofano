@@ -1,8 +1,8 @@
 <?php
-  use_stylesheet('/css/global/styleAgenda.css');
+  /*use_stylesheet('/css/global/styleAgenda.css');
   use_stylesheet('/css/global/facebox.css');
   use_stylesheet('/css/global/widescreen.css');
-  use_javascript('/js/global/facebox.js');
+  use_javascript('/js/global/facebox.js');*/
   use_helper('agenda');
 
   $term = $sf_request->getParameter('term')
@@ -12,13 +12,36 @@
   <title>Resultados de la búsqueda: <?php echo $term ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h1>Resultados de la búsqueda: <?php echo $term ?></h1>
+<h3>Resultados de la búsqueda: <?php echo $term ?></h3>
 
-<div id="headtable">
-<a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/index') ?>">&nbsp;&nbsp;Lista general de quirofanos&nbsp;&nbsp;</a>
+<ul class="page-breadcrumb breadcrumb">
+    <li class="btn-group">
+    </li>
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="/index.php/ ">Inicio</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+      <a href="/index.php/ ">Quirofanos</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>Busqueda</li>
+</ul>
+
+<div class="row">
 <form action="<?php echo url_for('agenda/busqueda') ?>" style="display:inline; float:right;">
-  <input type="text" id="busqueda" name="term" placeholder="Buscar" value="<?php echo $term ?>" style="width:120px">
-  <input type="submit" value=">>">
+  <div class="form-group">
+        <div class="input-group">
+          <div class="input-icon">
+            <i class="icon-magnifier"></i>
+            <input class="form-control" type="text" id="busqueda" name="term" placeholder="Nombre o Registro">
+          </div>
+          <span class="input-group-btn">
+            <input class="btn btn-primary" type="submit" value="Buscar">
+          </span>
+        </div>
+      </div>
 </form>
 </div>
 
@@ -70,9 +93,9 @@
 </div>
 
 <?php else: ?>
-<?php slot('titulo') ?>
-  <title>Sin coincidencias para  <?php echo $term ?> | SIGA-HU </title>
-<?php end_slot() ?>
-  <p>No se encontraron coincidencias, verifica los datos y vuelve a intentarlo </p>
-
+<div class="row">
+  <div class="alert alert-danger">
+    <p>No se encontraron coincidencias para <strong><?php echo $term?></strong>, verifica los datos y vuelve a intentarlo.</p>
+  </div>
+</div>
 <?php endif; ?>
