@@ -26,23 +26,9 @@
   <title>Programar Cirugía | SIGA-Qx </title>
 <?php end_slot() ?>
 
-  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
   <h3 class="page-title">Programar cirugía</h3>
-
-  <ul class="page-breadcrumb breadcrumb">
-    <li>
-      <i class="fa fa-home"></i>
-      <a href="<?php echo url_for('@homepage') ?> ">Inicio</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-      <a href="<?php echo url_for('agenda/index') ?> ">Quirofanos</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>Programar</li>
-  </ul>
-  <!-- END PAGE TITLE & BREADCRUMB-->
+  <?php include_partial('qbreadcrumb', array('locacion' => 'Programar')) ?>
 
 <div class="row">
   <a href="<?php echo url_for('agenda/show?slug='.$quirofano['Slug']) ?>" class="btn btn-circle blue-madison">Agenda de <?php echo $quirofano['Nombre'] ?></a>

@@ -17,22 +17,6 @@ HEAD;
   }
 ?>
 
-<h3>Agenda de procedimientos en <?php echo $Quirofano['Nombre'] ?></h3>
-<ul class="page-breadcrumb breadcrumb">
-    <li class="btn-group">
-    </li>
-    <li>
-      <i class="fa fa-home"></i>
-      <a href="/index.php/ ">Inicio</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-      <a href="/index.php/ ">Quirofanos</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li> <?php echo $Quirofano['Nombre'] ?></li>
-</ul>
-
 <div>
   <div class="row">
     <div class="col-xs-2">

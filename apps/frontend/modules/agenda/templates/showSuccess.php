@@ -30,6 +30,8 @@ window.onload = start;
 <?php endif; ?>
 <?php endif; ?>
 
+<h3>Agenda de procedimientos en <?php echo $Quirofano['Nombre'] ?></h3>
+<?php include_partial('qbreadcrumb', array('locacion' => $Quirofano['Nombre'])) ?>
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
 <!-- @flag Inicio de la nueva tabla de resultados -->

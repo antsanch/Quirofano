@@ -2,48 +2,8 @@
   <title>Lista Quirofanos Activos | SIGA-Qx </title>
 <?php end_slot() ?>
 
-  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-  <h3 class="page-title">Quirofanos Activos</h3>
-
-  <ul class="page-breadcrumb breadcrumb">
-    <li class="btn-group">
-
-<!--
-      <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
-      <span>Actions</span><i class="fa fa-angle-down"></i>
-      </button>
-      <ul class="dropdown-menu pull-right" role="menu">
-        <li>
-          <a href="#">Action</a>
-        </li>
-        <li>
-          <a href="#">Another action</a>
-        </li>
-        <li>
-          <a href="#">Something else here</a>
-        </li>
-        <li class="divider">
-        </li>
-        <li>
-          <a href="#">Separated link</a>
-        </li>
-      </ul>
--->
-
-    </li>
-    <li>
-      <i class="fa fa-home"></i>
-      <a href="<?php echo url_for('@homepage') ?> ">Inicio</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-      <a href="<?php echo url_for('agenda/index') ?> ">Quirofanos</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>Activos</li>
-  </ul>
-  <!-- END PAGE TITLE & BREADCRUMB-->
-
+<h3 class="page-title">Quirofanos Activos</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Activos')) ?>
 
 <div class="tabbable tabbable-custom">
 

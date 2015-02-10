@@ -2,23 +2,8 @@
   <title>Validar cirugia:  <?php echo $search ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
-  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
-  <h3 class="page-title">Validar cirugía</h3>
-
-  <ul class="page-breadcrumb breadcrumb">
-    <li>
-      <i class="fa fa-home"></i>
-      <a href="<?php echo url_for('@homepage') ?> ">Inicio</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-      <a href="<?php echo url_for('agenda/index') ?> ">Quirofanos</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>Validar</li>
-  </ul>
-  <!-- END PAGE TITLE & BREADCRUMB-->
+<h3 class="page-title">Validar cirugía</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Validar')) ?>
 
 <div class="row">
   <div class="col-md-12">

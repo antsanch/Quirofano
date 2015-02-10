@@ -3,22 +3,9 @@
 <?php end_slot() ?>
 
 
-  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
   <h3 class="page-title">Lista de Quirofanos Inactivos</h3>
+  <?php include_partial('qbreadcrumb', array('locacion' => 'Inactivos')) ?>
 
-  <ul class="page-breadcrumb breadcrumb">
-    <li>
-      <i class="fa fa-home"></i>
-      <a href="<?php echo url_for('@homepage') ?> ">Inicio</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>
-      <a href="<?php echo url_for('agenda/index') ?> ">Quirofanos</a>
-      <i class="fa fa-angle-right"></i>
-    </li>
-    <li>Ambulatorios</li>
-  </ul>
-  <!-- END PAGE TITLE & BREADCRUMB-->
 
   <div class="tabbable tabbable-custom">
 
