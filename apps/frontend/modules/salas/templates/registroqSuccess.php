@@ -1,24 +1,16 @@
-<html>
-<style>
-/* Mientras podemos hacer botones con jQueryUI usamos css */
+<h3>Registrar Quirofano</h3>
+<ul class="page-breadcrumb breadcrumb">
+    <li class="btn-group">
+    </li>
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="/index.php/ ">Inicio</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+      <a href="/salas/registroq ">Registrar Quirofano</a>
+    </li>
+    <li> <?php echo $Quirofano['Nombre'] ?></li>
+</ul>
 
-.menubar a {
-  background: white;
-  border: 1px solid black;
-  color: blue;
-  margin: 0 0 3px 0;
-  padding: 2px 4px;
-  text-decoration: none;
-}
-
-.menubar a:hover {
-  background: lightgray;
-}
-</style>
-<div class="formulario clearfix">
-<h1 style="color:#FFFFFF;">Registrar Quirofano</h1>
 <?php include_partial('registroqForm', array('form' => $form)) ?>
-</div>
-
-
-</html>

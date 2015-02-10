@@ -66,7 +66,7 @@ HEAD;
             <input class="form-control" type="text" id="busqueda" name="term" placeholder="Nombre o Registro">
           </div>
           <span class="input-group-btn">
-            <input class="btn btn-secondary" type="submit" value="Buscar">
+            <input class="btn btn-primary" type="submit" value="Buscar">
           </span>
         </div>
       </div>
