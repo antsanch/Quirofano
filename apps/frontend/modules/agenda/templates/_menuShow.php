@@ -36,7 +36,7 @@ HEAD;
 <div>
   <div class="row">
     <div class="col-xs-2">
-    <form action="<?php echo url_for('agenda/show') ?>" style="display:inline;">
+    <form action="<?php echo url_for('agenda/show') ?>" style="display:inline;"> <!--remplazar este display:inline por form-inline-->
       <!--<input type="hidden" name="slug" value="<?php echo $Quirofano['Slug'] ?>">-->
       <div class="form-group">
         <div class="input-group">

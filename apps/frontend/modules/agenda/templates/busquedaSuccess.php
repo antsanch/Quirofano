@@ -12,7 +12,7 @@
   <title>Resultados de la búsqueda: <?php echo $term ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h3>Resultados de la búsqueda: <?php echo $term ?></h3>
+<h3 class="page-title">Resultados de la búsqueda</h3>
 
 <ul class="page-breadcrumb breadcrumb">
     <li class="btn-group">

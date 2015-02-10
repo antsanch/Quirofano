@@ -2,20 +2,28 @@
 <?php use_javascript('/js/global/facebox.js')?>
 <?php use_stylesheet('/css/global/facebox.css')?>
 
-<h3>Resultados de la búsqueda: </h3>
+<h3 class="page-title">Resultados de la búsqueda</h3>
 
-
-<div id="headtable">
-<a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/index') ?>">&nbsp;&nbsp;Lista general de quirofanos&nbsp;&nbsp;</a>
-
-</div>
-
+<ul class="page-breadcrumb breadcrumb">
+    <li class="btn-group">
+    </li>
+    <li>
+      <i class="fa fa-home"></i>
+      <a href="/index.php/ ">Inicio</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>
+      <a href="/index.php/ ">Quirofanos</a>
+      <i class="fa fa-angle-right"></i>
+    </li>
+    <li>Busqueda Personalizada</li>
+</ul>
 
 
 <?php if( count($cirugias) > 0 ): ?>
 
 <?php slot('titulo') ?>
-  <title>Resultados de la búsqueda: <?php echo $term ?> | SIGA-HU </title>
+  <title>Resultados de la búsqueda <?php echo $term ?> | SIGA-HU </title>
 <?php end_slot() ?>
 <?php use_stylesheet('/css/global/widescreen.css')?>
 
@@ -124,6 +132,8 @@
 <?php slot('titulo') ?>
   <title>Sin coincidencias para  <?php echo $term ?> | SIGA-HU </title>
 <?php end_slot() ?>
-  <p>No se encontraron coincidencias, verifica los datos y vuelve a intentarlo </p>
-
+<div class="alert alert-danger">
+  <p>No se encontraron coincidencias para el termino <strong><?php echo $term ?></strong> verifica los datos y vuelve a intentarlo.</p>
+</div>
+<p>Puedes ir a la <a href="<?php echo url_for('agenda/index') ?>">lista general de quirofanos.</a></p>
 <?php endif; ?>
