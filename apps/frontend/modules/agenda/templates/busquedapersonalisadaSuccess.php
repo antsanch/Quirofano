@@ -2,7 +2,7 @@
 <?php use_javascript('/js/global/facebox.js')?>
 <?php use_stylesheet('/css/global/facebox.css')?>
 
-<h1>Resultados de la búsqueda: </h1>
+<h3>Resultados de la búsqueda: </h3>
 
 
 <div id="headtable">
@@ -119,15 +119,6 @@
 
 <?php endforeach; ?>
 </table>
-
-<script>
-  /*$(function(){
-    $('a[rel*=facebox]').facebox({
-      overlay: true,
-      opacity: 0.75
-    });
-  }); /**/
-</script>
 
 <?php else: ?>
 <?php slot('titulo') ?>

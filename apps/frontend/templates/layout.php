@@ -154,7 +154,7 @@ License: You must have a valid license purchased only from themeforest(the above
               Programar Cirugía</a>
             </li>
             <li>
-              <a href="index_3.html">
+              <a href="/agenda/pbusqueda">
               <i class="icon-magnifier"></i>
               Busqueda Personalizada</a>
             </li>

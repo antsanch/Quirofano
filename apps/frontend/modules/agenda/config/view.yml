@@ -17,7 +17,7 @@ calendarSuccess:
   layout:         layout_sn
 busquedapersonalisadaSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 canceladasSuccess:
   has_layout:     on
   layout:         layout
