@@ -1,3 +1,5 @@
+<?php use_helper('agenda') ?>
+
 <?php slot('titulo') ?>
   <title>Agenda de <?php echo $Quirofano['Nombre'] ?> | SIGA-HU </title>
 <?php end_slot() ?>
