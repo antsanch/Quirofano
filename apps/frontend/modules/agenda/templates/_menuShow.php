@@ -1,26 +1,7 @@
-<?php function print_head() {
-$head = <<<HEAD
-   <tr>
-    <th colspan="2">Iconos</th>
-    <th>Fecha</th>
-    <th>Hora</th>
-    <th>Sala</th>
-    <th>Registro</th>
-    <th>Paciente</th>
-    <th>Diagnóstico</th>
-    <th>Procedimiento / Cirugía</th>
-    <th>Médico que programo</th>
-    <th>Acciones</th>
-  </tr>
-HEAD;
-    return $head;
-  }
-?>
-
 <div>
   <div class="row">
     <div class="col-xs-2">
-    <form action="<?php echo url_for('agenda/show') ?>" style="display:inline;"> <!--remplazar este display:inline por form-inline-->
+    <form action="<?php echo url_for('agenda/show') ?>" style="display:inline;"> <!-- TODO: remplazar este display:inline por form-inline-->
       <!--<input type="hidden" name="slug" value="<?php echo $Quirofano['Slug'] ?>">-->
       <div class="form-group">
         <div class="input-group">

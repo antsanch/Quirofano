@@ -22,10 +22,14 @@ License: You must have a valid license purchased only from themeforest(the above
 <?php if (!include_slot('titulo')): ?>
   <title>SIGA - Qx</title>
 <?php endif; ?>
+<?php include_stylesheets() ?>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
+
+<script src="/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -65,7 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
       <a href="index.html">
       <img src="/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
       </a>
-      <div class="menu-toggler sidebar-toggler ">
+      <div class="menu-toggler sidebar-toggler">
         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
       </div>
     </div>
@@ -974,7 +978,6 @@ Salir</a>
 <script src="/assets/global/plugins/respond.min.js"></script>
 <script src="/assets/global/plugins/excanvas.min.js"></script>
 <![endif]-->
-<script src="/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 <script src="/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>

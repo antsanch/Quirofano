@@ -22,7 +22,6 @@
               </button>
             </span>
           </div>
-
         </div>
       </div>
     </form>
@@ -51,7 +50,7 @@
         <tr class="<?php echo $cx->getStatusClass() ?>">
           <td style="white-space:nowrap"><?php echo $cx->getRegistro() ?> </td>
           <td style="white-space:nowrap"><?php echo $cx->getPacienteName() ?> </td>
-          <td style="white-space:nowrap"><?php echo $cx->getLastTime('d-m-Y H:i') ?></td>
+          <td style="white-space:nowrap"><strong><?php echo $cx->getLastTime('d-m-Y H:i') ?></strong></td>
           <td><?php echo $cx->getDiagnostico() ?> </td>
           <td style="white-space:nowrap"><?php echo $cx->getEspecialidad() ?> </td>
           <td><?php

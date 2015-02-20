@@ -4,3 +4,4 @@ cache/*
 log/*
 todoList.tsk.lock
 todoList.tsk.lock.*
+.DS_Store

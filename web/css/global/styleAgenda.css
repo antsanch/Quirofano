@@ -2,42 +2,22 @@
  * Todas estas clases se activan al encontrar un contenedor con la clase agenda???
  */
 
-  #agenda th {
-    /*background: lightgray; /**/
-    border-bottom: 2px solid black;
-    padding-left: 3px;
-  }
-
-  #agenda td {
-    /* background: #eeeeee; /**/
-    /* border-radius: 5px;  /**/
-    /* text-align: center;  /**/
+#agenda td {
+  padding-top: 1.2em;
 }
 
-  #agenda .solicitado {
-    /* border: 1px solid yellow !important; /**/
-    /* background: /**/
-  }
+#agenda ul {
+  padding-left: 0px;
+} 
 
-  #agenda .solicitado td {
-    border-bottom: 1px solid green !important; /*#8200d4*/
-  }
+#agenda ul li {
+  display: inline;
+}
 
-  #agenda .transoperatorio td {
-    font-weight: bold;
-    background-color: #d0e42b !important; /**/
-  }
+#agenda div.convenio {
+  margin-left: 10px
+}
 
-  #agenda .realizadas td {
-    font-weight: bold;
-    background-color: lightblue !important; /**/
-  }
-
-  #agenda td {
-  background: url('/images/gradientbg.png');
-    border-bottom: 1px dashed #BBB; /**/
-    padding: 2px;
-  }
 
   #agenda .icons {
     width: 42px;
@@ -104,19 +84,6 @@
   #agenda .diferido23 div.atraso { background-position: 0px -460px; }
   #agenda .diferido div.atraso   { background-position: 0px -480px; }
   #agenda .atrasada div.atraso   { background-position: 0px -460px; }
-
-  #agenda tr.diferido {
-    /* background: #d40000; /**/
-    background: #c40000; /**/
-    color: white;
-    font-weight: Bold;
-  }
-  #agenda tr.atrasada {
-    /* background: #d40000; /**/
-    background: #e52222; /**/
-    color: white;
-    font-weight: Bold;
-  }
 
   #agenda .button {
     background-image: url('/images/tipos de cirugía.png') !important;

@@ -1,50 +1,68 @@
 <?php
-
-
 /**
  * Retorna un renglon de la tabla de resultados, formateado de acuerdo al status de la cirugia
  */
-  function renderProgramada($c) {
+  function print_head() {
+  $head = <<< HEAD
+    <thead>
+       <tr>
+        <th colspan="2">Iconos</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Sala</th>
+        <th>Registro</th>
+        <th>Paciente</th>
+        <th>Diagnóstico</th>
+        <th>Procedimiento / Cirugía</th>
+        <th>Médico que programó</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+HEAD;
+    return $head;
+  }
 
-    return sprintf('
-      <tr class="%s" cellspacing="0">
-        <td style="width: 42px">
-          <div class="icons clearfix">
-            <div class="tipocx" title="%s"></div>
-            <div class="convenio" title="%s"></div>
+  function renderProgramada($c) {
+    $caratula = html_entity_decode($c->getCaratulaReloj());
+    $procedimientos = html_entity_decode($c->getListaProcedimientos());
+    $linkDetalles = link_to('<span class="detalles"></span>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles'));
+    $linkPreoperatorio = link_to('<span class="button"></span>', 'agenda/pxsolicitado?id='.$c->getId(), array('title' => 'Paciente en Preoperatorio'));
+    $linkReprogramar = link_to('<span class="modificar"></span>', 'agenda/reprogramar?id='.$c->getId(), array('title' => 'Reprogramar'));
+    $linkIniciar = link_to('<span class="iniciar"></span>', 'agenda/transoperatorio?id='.$c->getId(), array('title' => 'Iniciar cirugía'));
+    $linkDiferir = link_to('<span class="diferir"></span>', 'agenda/diferir?id='.$c->getId(), array('title' => 'Diferir cirugía'));
+    $linkCancelar = link_to('<span class="cancelar"></span>', 'agenda/cancelar?id='.$c->getId(), array('title' => 'Cancelación'));
+
+    $html = <<< HTML
+    <tr class="{$c->getClasses()}">
+        <td width:"5%">
+          <div>
+            <div class="tipocx" title="{$c->getTipoProcId()}"></div>
+            <div class="convenio" title="{$c->getatencion()}"></div>
           </div>
         </td>
-        <td>%s</td>
-        <td nowrap>%s</td>
-        <td nowrap>%s</td>
-        <td nowrap>%s</td>
-        <td nowrap>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td nowrap>%s %s %s %s %s %s</td>
-      </tr>',
-      $c->getClasses(),
-      $c->getTipoProcId(),
-      $c->getatencion(),
-      html_entity_decode($c->getCaratulaReloj()),
-      $c->getProgramacion('d-m-Y'),
-      $c->getProgramacion('H:i'),
-      $c->getSalaquirurgica(),
-      $c->getRegistro(),
-      $c->getPacienteName(),
-      $c->getDiagnostico(),
-      html_entity_decode($c->getListaProcedimientos()),
-      $c->getPrograma(),
-      link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles')),
-      link_to('<div class="button"></div>', 'agenda/pxsolicitado?id='.$c->getId(), array('title' => 'Paciente en Preoperatorio')),
-      link_to('<div class="modificar"></div>', 'agenda/reprogramar?id='.$c->getId(), array('title' => 'Reprogramar')),
-      link_to('<div class="iniciar"></div>', 'agenda/transoperatorio?id='.$c->getId(), array('title' => 'Iniciar cirugía')),
-      link_to('<div class="diferir"></div>', 'agenda/diferir?id='.$c->getId(), array('title' => 'Diferir cirugía')),
-      link_to('<div class="cancelar"></div>', 'agenda/cancelar?id='.$c->getId(), array('title' => 'Cancelación'))
-    );
-  }
+        <td>{$caratula}</td>
+        <td>{$c->getProgramacion('d-m-Y')}</td>
+        <td>{$c->getProgramacion('H:i')}</td>
+        <td>{$c->getSalaquirurgica()}</td>
+        <td >{$c->getRegistro()}</td>
+        <td><strong>{$c->getPacienteName()}<strong></td>
+        <td>{$c->getDiagnostico()}</td>
+        <td>{$procedimientos}</td>
+        <td>{$c->getPrograma()}</td>
+        <td>
+          <ul>
+            <li>{$linkDetalles}</li>
+            <li>{$linkPreoperatorio}</li>
+            <li>{$linkReprogramar}</li>
+            <li>{$linkIniciar}</li>
+            <li>{$linkDiferir}</li>
+            <li>{$linkCancelar}</li>
+          </ul>
+        </td>
+    </tr>
+HTML;
+    return $html;
+}
 
 /**
  * Retorna un renglon de la tabla de resultados, formateado de acuerdo al status de la cirugia
