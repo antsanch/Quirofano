@@ -41,7 +41,7 @@ window.onload = start;
     <?php foreach($Cirugias as $c): ?>
     <?php
       if($currentStatus != $c->getStatus()) {
-        //echo sprintf ("<tr><th colspan='11'><h3 style='padding-top: 11px;'>%s</h3></th></tr>", $c->getVerboseStatus());
+        // echo sprintf ("<tr><th><h3 style='padding-top: 11px;'>%s</h3></th></tr>", $c->getVerboseStatus());
         echo print_head();
         $currentStatus = $c->getStatus();
       }

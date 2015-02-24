@@ -1,6 +1,3 @@
-<!-- # @flag codigo nuevo -->
-
-<!-- # @flag codigo antiguo -->
 <?php if($cirugia->getCancelada() == false): ?>
   <tr class="<?php echo $cirugia->getClasses() ?>">
 <?php else: ?>
