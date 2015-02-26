@@ -1,12 +1,3 @@
-  <style type="text/css">
-  .head {
-    border-bottom: 1px solid black;
-    font-size: large;
-    text-align: center;
-    border-color: #DDD;
-  }
-</style>
-
 <!-- Mostrar los avisos en un solo div, quizas se pueda hacer mejor con la ayuda de un helper -->
 <?php 
   $avisos = array();
@@ -25,13 +16,12 @@
   }
 ?>
 
+<div class="tab-pane active" id="detallesProg">
  <div class="head">
     <?php if ($cirugia->getStatus() == 1) echo link_to('<div class="iniciar" style="float:right;"></div>', 'agenda/transoperatorio?id='.$cirugia->getId(), array('title' => 'Iniciar esta cirugia')) ?>
     <?php if ($cirugia->getStatus() == -50) echo link_to('<div class="modificar" style="float:right;" ></div>', 'agenda/reprogramar?id='.$cirugia->getId(), array('title' => 'Reprogramar')) ?>
-    <h3><?php echo $cirugia->getPacienteName() ?></h3>
-</div>
-
-<div class="detalles" >
+    <h3>Detalles de la Programación</h3>
+  </div>
 
   <!-- Primer renglon -->
   <div class="row">
@@ -173,7 +163,6 @@
 
   <!-- Cuarto Renglon -->
   <div class="row">
-
       <div class='col-md-4'>
         <div class="form-group">
           <label>Médico que programa</label>
@@ -279,8 +268,8 @@
           </div>
       </div>
   </div>
-
 </div>
+
 <?php if($cirugia->countAgendaVersions() > 1): ?> <!-- mayor a uno para que no se muestre la version 1 --> 
     <div>
       Historial de cambios

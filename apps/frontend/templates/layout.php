@@ -207,7 +207,8 @@ Salir</a>
             <div class="modal-body">
 <!-- ############################################## Contenido del Modulo Symfony ############################################## -->
         <div id="sf_content" class="col-md-12">
-          <?php echo $sf_content ?>
+          <?php //echo $sf_content ?> <!-- @flag: no tengo idea de porque se repite dos veces esta instrucción pero si la dejo las tabs
+          de bootstrap no funcionan para nada, creo que ya se puede quitar, lo dejo por si esto le llega a pegar a algo más -->
         </div>
 <!-- ########################################## Fin del contenido del Modulo Symfony ###########################################-->           </div>
             <div class="modal-footer">
