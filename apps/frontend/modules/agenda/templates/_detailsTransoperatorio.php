@@ -1,18 +1,3 @@
-<!-- Avisos -->
-<?php if($cirugia->getStatus() == 10): ?>
-  <div class="alert alert-danger" >
-      <p>- Esta cirugía tiene una duracion de <?php echo $cirugia->getTiempoTotal('format') ?>.</p>
-  </div>
-<?php endif; ?>
-
-<!-- @todo: debido a que detailsProg esta como activa por default, poner como activas
-  las dos pestañas mostrara las dos al mismo tiempo, aplicar un script para que transoperatorio
-  se muestre primero -->
-<ul class="nav nav-tabs nav-justified">
-  <li><a href="#detallesTrans" data-toggle="tab">Transoperatorio</a></li>
-  <li class="active"><a href="#detallesProg" data-toggle="tab">Programación</a></li>
-</ul>
-
 <div class="tab-pane" id="detallesTrans">
   <div class="head" >
     <?php if ($cirugia->getStatus() == 10) echo link_to('<div class="realizada" style="float:right;"></div>', 'agenda/postoperatorio?id='.$cirugia->getId(), array('title' => 'Terminar la cirugia')) ?>

@@ -1,3 +1,4 @@
+<?php use_helper('agenda') ?>
 <?php use_stylesheet('global/styleAgenda.css')?>
 
 <?php slot('titulo') ?>
@@ -5,7 +6,7 @@
 <?php end_slot() ?>
 
 <style>
-  .detail {
+  /*.detail {
     border: 1px solid black;
     margin: 0 0 5px 0;
     padding: 3px;
@@ -20,8 +21,8 @@
   }
   .label {
     font-weight: bold;
-    /* border-bottom: 1px dashed darkgray; /**/
-  }
+    // border-bottom: 1px dashed darkgray;
+  }*/
   .head {
     border-bottom: 1px solid black;
     font-size: large;
@@ -32,6 +33,23 @@
 
 <h3 class="page-title">Detalles de la cirugía</h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Detalles de la cirugía')) ?>
+
+<?php
+  $avisos = generarAvisos($cirugia);
+  if (count($avisos)) {
+    echo "<div class='alert alert-danger'>";
+    foreach($avisos as $aviso)
+      echo "{$aviso}";
+    echo "</div>";
+  }
+?>
+
+<!-- @todo: desactivar las tabs dependiendo del estado de la cirugia -->
+<ul class="nav nav-tabs nav-justified">
+  <li><a href="#detallesProg" data-toggle="tab">Programación</a></li>
+  <li><a href="#detallesTrans" data-toggle="tab">Transoperatorio</a></li>
+  <li><a href="#detallesFin" data-toggle="tab">Finalizada</a></li>
+</ul>
 
 <div class="tab-content">
 <?php

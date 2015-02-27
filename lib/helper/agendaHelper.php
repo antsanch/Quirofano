@@ -146,3 +146,21 @@ HTML;
       link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles'))
     );
   }
+
+/**
+ * Regresa un arreglo que contenga todos los avisos que una cirugia pueda tener
+ */
+
+  function generarAvisos($cirugia) {
+    $avisos = array();
+    if ($cirugia->estaSolicitado() && $cirugia->getStatus() == 1) {
+      array_push($avisos, "Este paciente <strong>YA</strong> esta en preoperatorio");
+    }
+    if($cirugia->tieneRetraso()) {
+      array_push($avisos, "Esta cirugia tiene {$cirugia->getRetrasoInicial('format')} de retraso");
+    }
+    if($cirugia->getStatus() == 10) {
+      array_push($avisos, "Esta cirugía tiene una duracion de {$cirugia->getTiempoTotal('format')}");
+    }
+    return $avisos;
+  } 

@@ -1,22 +1,4 @@
-<!-- Mostrar los avisos en un solo div, quizas se pueda hacer mejor con la ayuda de un helper -->
-<?php 
-  $avisos = array();
-  if ($cirugia->estaSolicitado() && $cirugia->getStatus() == 1) {
-    array_push($avisos, "<p>- Este paciente <strong>YA</strong> esta en preoperatorio.</p>");
-  }
-  if($cirugia->tieneRetraso()) {
-    array_push($avisos, "<p>- Esta cirugia tiene {$cirugia->getRetrasoInicial('format')} de retraso.</p>");
-  }
-
-  if (count($avisos)) {
-    echo "<div class='alert alert-danger'>";
-    foreach($avisos as $aviso)
-      echo $aviso;
-    echo "</div>";
-  }
-?>
-
-<div class="tab-pane active" id="detallesProg">
+<div class="tab-pane" id="detallesProg">
  <div class="head">
     <?php if ($cirugia->getStatus() == 1) echo link_to('<div class="iniciar" style="float:right;"></div>', 'agenda/transoperatorio?id='.$cirugia->getId(), array('title' => 'Iniciar esta cirugia')) ?>
     <?php if ($cirugia->getStatus() == -50) echo link_to('<div class="modificar" style="float:right;" ></div>', 'agenda/reprogramar?id='.$cirugia->getId(), array('title' => 'Reprogramar')) ?>
