@@ -39,15 +39,15 @@ window.onload = start;
 
 <!-- Mostrar alertas-->
 <?php $title = null ?>
-<?php foreach($Cirugias as $cirugia): ?>
+<?php foreach($Cirugias as $c): ?>
 
-<?php if ($cirugia->getCancelada() != 1): ?>
-<?php if ($cirugia->getStatus() != $title): ?>
-<?php echo print_head() ?>
-  <td colspan="11"><h3 style="padding-top: 11px;"><?php echo $cirugia->getVerboseStatus() ?></h3></td>
-  <?php $title = $cirugia->getStatus() ?>
+<?php if ($c->getCancelada() != 1): ?>
+<?php if ($c->getStatus() != $title): ?>
+<?php echo print_head($c) ?>
+  <td colspan="11"><h3 style="padding-top: 11px;"><?php echo $c->getVerboseStatus() ?></h3></td>
+  <?php $title = $c->getStatus() ?>
 <?php endif; ?>
-<?php include_partial('agendaQuirofano', array('cirugia' => $cirugia, 'slug' => $Quirofano['Slug'])) ?>
+<?php include_partial('agendaQuirofano', array('cirugia' => $c, 'slug' => $Quirofano['Slug'])) ?>
 <?php endif; ?>
 <?php endforeach; ?>
 

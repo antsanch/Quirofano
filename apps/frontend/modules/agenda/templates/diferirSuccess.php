@@ -2,28 +2,30 @@
   <title>Diferir cirugia | SIGA-HU </title>
 <?php end_slot() ?>
 
-<div id="idTag">
+<div>
   <div class="name"><?php echo $cirugia->getPacienteName() ?></div>
-  <div><span class="label">Registro: </span><span><?php echo "registro del paciente" ?></span></div>
+  <div>Registro: <?php echo "registro del paciente" ?></div>
 </div>
 
-<div id="alert">
-<?php echo $sf_user->getFlash('obligar')?>
+<div class="alert alert-danger">
+  <?php echo $sf_user->getFlash('obligar')?>
 </div>
+
+<h3 class="page-title">Diferir Cirugia</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Diferir cirugía')) ?>
 
 <div class="formulario clearfix">
   <form action="" method="POST">
-  <h1>Diferir Cirugia</h1>
   <div class="area cols12">
-    <div class="label">
+    <div>
       <?php echo $form['causa_diferido_id']->renderLabel() ?>
       <?php echo $form['causa_diferido_id']->renderError() ?>
     </div>
-    <div class="field"><?php echo $form['causa_diferido_id'] ?></div>
+    <div><?php echo $form['causa_diferido_id'] ?></div>
   </div>
   <div class="area control">
     <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Aceptar" />
+    <input type="submit" class="btn btn-primary" value="Diferir" />
 
   </div>
   </form>

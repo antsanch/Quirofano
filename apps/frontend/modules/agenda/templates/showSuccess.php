@@ -13,6 +13,13 @@ function verificar() {alert('Verificar la hora')}
 <?php if ($sf_user->hasFlash('notice')): ?> <!--Mostrar alertas-->
 <?php if ($sf_user->getFlash('notice') == 'Verificar la hora' ):?>
 
+<style>
+  .status {
+    background-color: #FFFFFF !i
+mportant;
+  }
+</style>
+
 <script type="text/javascript">
 function start() {verificar()}
 window.onload = start;
@@ -34,15 +41,14 @@ window.onload = start;
 <?php include_partial('qbreadcrumb', array('locacion' => $Quirofano['Nombre'])) ?>
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
-<div id="camasPanel" class="table-responsive">
+<div class="table-responsive">
   <?php $currentStatus = null?>
   <table id="agenda" class="table table-hover table-striped">
     <tbody>
     <?php foreach($Cirugias as $c): ?>
     <?php
       if($currentStatus != $c->getStatus()) {
-        //echo sprintf ("<tr><th><h3 style='padding-top: 11px;'>%s</h3></th></tr>", $c->getVerboseStatus());
-        echo print_head();
+        echo print_head($c->getVerboseStatus());
         $currentStatus = $c->getStatus();
       }
     ?>

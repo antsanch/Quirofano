@@ -163,3 +163,11 @@
     <?php endforeach; ?>
 </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // un poco sucio pero es para controlar la visibilidad de los botones para cambiar de tabs
+   $("#detallesTabs").append("<li id='detallesFin-tab'><a href='#detallesFin' data-toggle='tab'>Finalizada</a></li>");
+   $("#detallesFin-tab a").click();
+});
+</script>

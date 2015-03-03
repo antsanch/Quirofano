@@ -308,7 +308,7 @@ Salir</a>
     </div>
   </div>
   <!-- END CONTENT -->
-  <!-- BEGIN QUICK SIDEBAR -->
+  <!-- BEGIN QUICK SIDEBAR
   <a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-close"></i></a>
   <div class="page-quick-sidebar-wrapper">
     <div class="page-quick-sidebar">
@@ -958,7 +958,7 @@ Salir</a>
       </div>
     </div>
   </div>
-  <!-- END QUICK SIDEBAR -->
+  END QUICK SIDEBAR -->
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->

@@ -1,10 +1,11 @@
 <?php
 /**
- * Retorna un renglon de la tabla de resultados, formateado de acuerdo al status de la cirugia
+ * Retorna el encabezado de las tablas y al estado al que pertenecen
  */
-  function print_head() {
+  function print_head($status) {
   $head = <<< HEAD
-    <thead>
+  <thead>
+       <tr><td colspan='12'><h3 class='text-center'>{$status}</h3></td></tr>
        <tr>
         <th colspan="2">Iconos</th>
         <th>Fecha</th>
@@ -17,7 +18,7 @@
         <th>Médico que programó</th>
         <th>Acciones</th>
       </tr>
-    </thead>
+  </thead>
 HEAD;
     return $head;
   }

@@ -296,3 +296,9 @@ foreach($cirugia->getAgendaVersions() as $version): ?>
 <?php endforeach; ?>
 <?php endif; ?>
  </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+   $("#detallesProg-tab a").click();
+});
+</script>

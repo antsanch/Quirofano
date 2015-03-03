@@ -163,3 +163,11 @@
   </div>
 </div>
 
+<script type="text/javascript">
+$(document).ready(function() {
+  // un poco sucio pero es para controlar la visibilidad de los botones para cambiar de tabs
+   $("#detallesTabs").append(" <li id='detallesTrans-tab'><a href='#detallesTrans' data-toggle='tab'>Transoperatorio</a></li>");
+   $("#detallesTrans-tab a").click();
+});
+</script>
+
