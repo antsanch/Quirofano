@@ -33,9 +33,14 @@
 <div id="camasPanel">
   <?php $currentStatus = null ?>
   <table id='agenda' class="table table-hover table-striped">
-    <?php echo print_head() ?>
     <tbody>
       <?php foreach($cirugias as $c): ?>
+            <?php
+            if($currentStatus != $c->getStatus()) {
+              echo print_head($c->getVerboseStatus());
+              $currentStatus = $c->getStatus();
+            }
+          ?>
               <?php
                 switch ($c->getStatus()) {
                 case AgendaPeer::DIFERIDA_STATUS:

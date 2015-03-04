@@ -8,7 +8,6 @@
   .head {
     border-bottom: 1px solid black;
     font-size: large;
-    text-align: center;
     border-color: #DDD;
   }
 </style>

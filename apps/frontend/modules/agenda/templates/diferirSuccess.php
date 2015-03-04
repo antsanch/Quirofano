@@ -1,32 +1,47 @@
 <?php slot('titulo') ?>
-  <title>Diferir cirugia | SIGA-HU </title>
+  <title>Diferir cirugía | SIGA-HU </title>
 <?php end_slot() ?>
 
-<div>
-  <div class="name"><?php echo $cirugia->getPacienteName() ?></div>
-  <div>Registro: <?php echo "registro del paciente" ?></div>
-</div>
-
-<div class="alert alert-danger">
-  <?php echo $sf_user->getFlash('obligar')?>
-</div>
-
-<h3 class="page-title">Diferir Cirugia</h3>
+<h3 class="page-title">Diferir Cirugía</h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Diferir cirugía')) ?>
 
-<div class="formulario clearfix">
-  <form action="" method="POST">
-  <div class="area cols12">
-    <div>
+<?php
+  $aviso = $sf_user->getFlash('obligar');
+  if($aviso) {
+    echo "<div class='alert alert-danger'>";
+    echo $aviso;
+    echo '</div>';
+  }
+?>
+
+<div class="row">
+  <form action="" method="post" class="form-horizontal">
+    <div style="padding-left: 1.2em;">
       <?php echo $form['causa_diferido_id']->renderLabel() ?>
       <?php echo $form['causa_diferido_id']->renderError() ?>
     </div>
-    <div><?php echo $form['causa_diferido_id'] ?></div>
-  </div>
-  <div class="area control">
+    <div class="col-md-4">
+      <?php echo $form['causa_diferido_id'] ?> <!-- class form-control -->
+    </div>
     <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" class="btn btn-primary" value="Diferir" />
-
-  </div>
+    <div class="col-md-2">
+      <input type="submit" class="btn btn-primary" value="Diferir"/>
+    </div>
   </form>
+</div>
+</br>
+<div class="panel-group accordion" id="acordDetalles">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordDetalles" href="#collapseDetallesProg" aria-expanded="false">
+      Detalles de la programación de <?php echo $cirugia->getPacienteName() ?></a>
+      </h4>
+    </div>
+    <div id="collapseDetallesProg" class="panel-collapse collapse" aria-expanded="false">
+      <div class="panel-body">
+        <?php include_partial("detailsProgramacion", array('cirugia' => $cirugia)); ?>                    
+      </div>
+    </div>
+  </div>                              
 </div>

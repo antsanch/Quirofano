@@ -13,13 +13,6 @@ function verificar() {alert('Verificar la hora')}
 <?php if ($sf_user->hasFlash('notice')): ?> <!--Mostrar alertas-->
 <?php if ($sf_user->getFlash('notice') == 'Verificar la hora' ):?>
 
-<style>
-  .status {
-    background-color: #FFFFFF !i
-mportant;
-  }
-</style>
-
 <script type="text/javascript">
 function start() {verificar()}
 window.onload = start;

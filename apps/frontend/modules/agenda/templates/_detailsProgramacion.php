@@ -2,7 +2,7 @@
  <div class="head">
     <?php if ($cirugia->getStatus() == 1) echo link_to('<div class="iniciar" style="float:right;"></div>', 'agenda/transoperatorio?id='.$cirugia->getId(), array('title' => 'Iniciar esta cirugia')) ?>
     <?php if ($cirugia->getStatus() == -50) echo link_to('<div class="modificar" style="float:right;" ></div>', 'agenda/reprogramar?id='.$cirugia->getId(), array('title' => 'Reprogramar')) ?>
-    <h3>Detalles de la Programación</h3>
+    <h3 class="text-center">Detalles de la Programación</h3>
   </div>
 
   <!-- Primer renglon -->

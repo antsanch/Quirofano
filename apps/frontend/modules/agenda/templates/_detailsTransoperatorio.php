@@ -1,7 +1,7 @@
 <div class="tab-pane" id="detallesTrans">
   <div class="head" >
     <?php if ($cirugia->getStatus() == 10) echo link_to('<div class="realizada" style="float:right;"></div>', 'agenda/postoperatorio?id='.$cirugia->getId(), array('title' => 'Terminar la cirugia')) ?>
-    <h3>Detalles del Transoperatorio</h3>
+    <h3 class="text-center">Detalles del Transoperatorio</h3>
   </div>
 
   <!-- Primer Renglon -->

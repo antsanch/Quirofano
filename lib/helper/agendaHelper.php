@@ -1,6 +1,7 @@
 <?php
 /**
- * Retorna el encabezado de las tablas y al estado al que pertenecen
+ * Retorna el encabezado de las tablas e imprime el status verbose al
+ * que pertenecen las cirugias
  */
   function print_head($status) {
   $head = <<< HEAD

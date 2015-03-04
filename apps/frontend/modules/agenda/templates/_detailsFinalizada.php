@@ -1,6 +1,6 @@
 <div class="tab-pane" id="detallesFin">
   <div class="head" >
-    <h3>Detalles de Cirugía Finalizada</h3>
+    <h3 class="text-center">Detalles de Cirugía Finalizada</h3>
   </div>
 
   <!-- Primer Renglon -->

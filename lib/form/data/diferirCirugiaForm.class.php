@@ -25,7 +25,7 @@ class diferirCirugiaForm extends AgendaForm
     $this->widgetSchema['paciente_id'] = new sfWidgetFormInputHidden();
     $this->widgetSchema['status'] = new sfWidgetFormInputHidden();
     $this->widgetSchema['show_in_index'] = new sfWidgetFormInputHidden();
-    $this->widgetSchema['causa_diferido_id'] = new sfWidgetFormPropelChoiceNestedSet(array('model'=>'CausaDiferido', 'method' => 'getCodigos'));
+    $this->widgetSchema['causa_diferido_id'] = new sfWidgetFormPropelChoiceNestedSet($options = array('model'=>'CausaDiferido', 'method' => 'getCodigos'), $attibutes = array('class' =>'form-control'));
 
     $this->widgetSchema['status']->setAttribute('value', '-50');
 
