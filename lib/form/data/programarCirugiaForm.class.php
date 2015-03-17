@@ -208,7 +208,7 @@ class programarCirugiaForm extends BaseAgendaForm
     $this->widgetSchema['programa']['programa'] = new sfWidgetFormInputHidden();
 
     $this->widgetSchema['programa']['personal_nombre']
-      ->setLabel('Nombre del médico que programa:')
+      ->setLabel('Nombre del médico que programa')
       ->setAttributes(array(
         'class' => 'searchable',
         'data-url' => 'profile/json',
