@@ -74,7 +74,7 @@ class programarCirugiaForm extends BaseAgendaForm
     $this->setWidget('status', new sfWidgetFormInputHidden(array(), array('value' => '1')));
 
   # @flag Configura los campos de fecha y hora para la programacion
-    $this->widgetSchema['programacion'] = new sfWidgetFormInputTextDateTime(array(
+    /*$this->widgetSchema['programacion'] = new sfWidgetFormInputTextDateTime(array(
       'date_order'  => 'd-m-Y',
       'format'      => '<div class="area cols02"><div class="label">Fecha: </div><div class="field">%date%</div></div> <div class="area cols02"><div class="label">Hora:</div> <div class="field">%time%</div></div>',
       'with_time'   => true,
@@ -83,14 +83,14 @@ class programarCirugiaForm extends BaseAgendaForm
       'class'       => 'hasDatapicker',
       'date'        => array(
         'class'       => 'datepicker',
-        'placeholder' => 'Dia/Mes/Año',
+        'placeholder' => 'Día/Mes/Año',
       ),
       'id'          => 'datepicker',
       'time'        => array(
         'placeholder' => 'Hora:Minutos'
       ),
       //'data-source' => 'http://example.com/api/data'
-    ));
+    ));*/
 
   # @flag Configura el campo de duracion (tiempo estimado)
     $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
@@ -133,10 +133,62 @@ class programarCirugiaForm extends BaseAgendaForm
       'placeholder' => 'Diagnóstico del paciente o código CIE10',
     ));
 
-    $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
-
   # @flag Configura las etiquetas
     $this->widgetSchema->setLabels(AgendaPeer::getLabels());
+
+
+/**
+ * Establecer placeholders
+ * ===================================================================== */
+
+    $this->widgetSchema['tiempo_est']->setAttributes(array(
+      'placeholder' => 'Tiempo estimado'
+      ));
+
+    $this->widgetSchema['registro']->setAttributes(array(
+      'placeholder' => '# de registro'
+      ));
+
+    $this->widgetSchema['paciente_name']->setAttributes(array(
+      'placeholder' => 'Nombre del paciente'
+      ));
+
+    $this->widgetSchema['edad']->setAttributes(array(
+      'placeholder' => 'Edad del paciente'
+      ));
+
+    $this->widgetSchema['genero']->setAttributes(array(
+      'placeholder' => 'Género del paciente'
+      ));
+
+    $this->widgetSchema['procedencia']->setAttributes(array(
+      'placeholder' => 'Procedencia del paciente'
+      ));
+
+    $this->widgetSchema['riesgo_qx_pre']->setAttributes(array(
+      'placeholder' => 'Riesgo quirúrgico'
+      ));
+
+    $this->widgetSchema['req_insumos']->setAttributes(array(
+      'placeholder' => 'Insumos'
+      ));
+
+    $this->widgetSchema['req_anestesico']->setAttributes(array(
+      'placeholder' => 'Medidas de anestesia'
+      ));
+
+    $this->widgetSchema['req_hemoderiv']->setAttributes(array(
+      'placeholder' => 'Hemoderivados necesarios'
+      ));
+
+    $this->widgetSchema['req_laboratorio']->setAttributes(array(
+      'placeholder' => 'Requerimientos de laboratorio'
+      ));
+
+    $this->widgetSchema['requerimiento']->setAttributes(array(
+      'placeholder' => 'Otras necesidades'
+      ));
+
 
 
 /**
@@ -156,11 +208,12 @@ class programarCirugiaForm extends BaseAgendaForm
     $this->widgetSchema['programa']['programa'] = new sfWidgetFormInputHidden();
 
     $this->widgetSchema['programa']['personal_nombre']
-      ->setLabel('Nombre del Médico que programa:')
+      ->setLabel('Nombre del médico que programa:')
       ->setAttributes(array(
         'class' => 'searchable',
         'data-url' => 'profile/json',
-        #'data-select' => '#agenda_programa_personal_id'
+        #'data-select' => '#agenda_programa_personal_id',
+        'placeholder' => 'Nombre del médico'
       ));
 
 /**
@@ -187,6 +240,7 @@ class programarCirugiaForm extends BaseAgendaForm
         'add_link'            =>  'Agregar otro Procedimiento',
         'max_additions'       =>  4
     ));
+
 
     //$this->widgetSchema['hora'] = new sfWidgetFormInputText();  # @flag Eliminamos el campo de la hora          [DEL]
     //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(  //          [DEL]

@@ -2,10 +2,9 @@
   <title>Programar Cirugía | SIGA-Qx </title>
 <?php end_slot() ?>
 
-
 <h3 class="page-title">Programar cirugía</h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Programar')) ?>
-<div class="row">
+<div>
   <div class="portlet box blue">
     <div class="portlet-title">
       <div class="caption">
@@ -30,8 +29,21 @@
 
             <div class="col-sm-6 col-md-3">
               <div class="form-group">
-                <?php echo $form['programacion']->renderLabel() ?>
-                <?php echo $form['programacion']->render(array('class' => 'form-control')) ?>
+                <label>Fecha</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  <input class="form-control datepicker" placeholder="DD-MM-AAAA" type="text" name="agenda[programacion][date]">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group bootstrap-timepicker">
+                <label>Hora</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                  <input class="form-control timepicker" placeholder="HH:MM" type="text" name="agenda[programacion][time]">
+                </div>
               </div>
             </div>
 
@@ -45,15 +57,6 @@
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group">
-                <?php echo $form['tipo_proc_id']->renderLabel() ?>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-check-square-o"></i></span>
-                <?php echo $form['tipo_proc_id']->render(array('class' => 'form-control')) ?>
-                </div>
-              </div>
-            </div>
           </div> <!-- Cierre del row01 -->
 
           <div class="row"><!-- Segunda fila de campos (row02) -->
@@ -67,12 +70,22 @@
               </div>
             </div>
 
-            <div class="col-sm-6 col-md-9">
+            <div class="col-sm-6 col-md-6">
               <div class="form-group">
                 <?php echo $form['paciente_name']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
                   <?php echo $form['paciente_name']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['tipo_proc_id']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-check-square-o"></i></span>
+                <?php echo $form['tipo_proc_id']->render(array('class' => 'form-control')) ?>
                 </div>
               </div>
             </div>
@@ -238,7 +251,7 @@
 
             <div class="col-sm-6 col-md-4">
               <div class="form-group">
-                <?php echo $form['req_anestesico']->renderLabel('Requerimientos de Anestésia') ?>
+                <?php echo $form['req_anestesico']->renderLabel('Requerimientos de anestesia') ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-spinner"></i></span>
                 <?php echo $form['req_anestesico']->render(array('class' => 'form-control')) ?>

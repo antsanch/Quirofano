@@ -565,22 +565,22 @@ class Agenda extends BaseAgenda {
 
   public function getReqHemoderiv()
   {
-    return parent::getReqHemoderiv() ? parent::getReqHemoderiv() : 'Ninguno';
+    return parent::getReqHemoderiv() ? parent::getReqHemoderiv() : null;
   }
 
   public function getReqLaboratorio()
   {
-    return parent::getReqLaboratorio() ? parent::getReqLaboratorio() : 'Ninguno';
+    return parent::getReqLaboratorio() ? parent::getReqLaboratorio() : null;
   }
 
   public function getRequerimiento()
   {
-    return parent::getRequerimiento() ? parent::getRequerimiento() : 'Ninguno';
+    return parent::getRequerimiento() ? parent::getRequerimiento() : null;
   }
 
   public function getProcedencia()
   {
-    return parent::getProcedencia() ? parent::getProcedencia() : 'Desconocido';
+    return parent::getProcedencia() ? parent::getProcedencia() : null;
   }
 
   public function getDestinoPxText() {

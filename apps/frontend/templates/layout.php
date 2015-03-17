@@ -45,6 +45,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <link href="/assets/admin/layout/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
 <link href="/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+<link href="/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
 </head>
@@ -990,6 +991,7 @@ Salir</a>
 <script src="/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
@@ -1004,6 +1006,7 @@ Salir</a>
           format: 'dd-mm-yyyy'
           });
       });
+        $('.timepicker').timepicker();
    </script>
 <!-- END JAVASCRIPTS -->
 </body>

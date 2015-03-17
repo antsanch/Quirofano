@@ -24,7 +24,7 @@ class ProcedimientocirugiaForm extends BaseProcedimientocirugiaForm
 
     $this->setWidget('cie9mc_id', new sfWidgetFormInputHidden());
     $this->setWidget('region', new sfWidgetFormChoice(array(
-      'choices' => array('' => 'Escoje una','1' => 'Derecha', '2' => 'Izquierda', '3' => 'Bilateral', '4' =>'Unica'),
+      'choices' => array('' => 'Escoje una','1' => 'Derecha', '2' => 'Izquierda', '3' => 'Bilateral', '4' =>'Única'),
       'expanded' => false
     )));
 
@@ -36,9 +36,9 @@ class ProcedimientocirugiaForm extends BaseProcedimientocirugiaForm
     $this->widgetSchema['servicio_id']->setAttribute('class', 'cols02');
 
     $this->widgetSchema->setLabels(array(
-      'cie9mc'    => 'Procedimiento o cirugia Planeado:',
-      'region'    => 'Región:',
-      'detalles'  => 'Detalles adicionales:'
+      'cie9mc'    => 'Procedimiento o cirugía planeado',
+      'region'    => 'Región',
+      'detalles'  => 'Detalles adicionales'
     ));
    // $this->getWidgetSchema()->setDefaultFormFormatterName('personalizado');
 

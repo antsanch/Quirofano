@@ -1,43 +1,3 @@
-<style>
-  .addLink{
-    display: inline;
-    float: right;
-    font-size: 0.9em;
-    margin-right: 10px;
-    text-decoration: none;
-    width: 700px;
-  }
-
-  .radio_list {
-    padding-left: 0;
-  }
-
-  .ul {
-    padding-left: 0;
-  }
-
-<!--
-  .formulario {
-    float: left;
-    background:#ebf4fb;;
-  }
-
-  .formulario .area {
-    float: left;
-  }
-
-  .formulario .label {
-    float: left;
-    font-size: bold;
-  }
-
-  .formulario .field {
-    margin:0px 0 0px 0px;
-    float: left;
-  }
--->
-</style>
-
 <!-- scripts para mostrar alertas-->
 <script type="text/javascript">
   function pregunta(){
@@ -61,8 +21,7 @@ window.onload = start;
 <?php endif;?>
 <!-- Mostrar alerta-->
 
-
-<form id='target' method="POST" onsubmit="return pregunta();">
+  <form id='target' method="post" onsubmit="return pregunta();">
 <!-- <form method="POST" action="<?php //echo url_for('quirofano/programar?slug='.$Quirofano->getSlug()) ?>">   -->
   <div class="area cols03">
     <div class="label"><?php echo $form['sala_id']->renderLabel() ?></div>
