@@ -1006,7 +1006,9 @@ Salir</a>
           format: 'dd-mm-yyyy'
           });
       });
-        $('.timepicker').timepicker();
+        $('.timepicker').timepicker({
+          showMeridian: false
+        });
    </script>
 <!-- END JAVASCRIPTS -->
 </body>

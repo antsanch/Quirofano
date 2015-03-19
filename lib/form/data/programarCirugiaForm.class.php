@@ -83,11 +83,11 @@ class programarCirugiaForm extends BaseAgendaForm
       'class'       => 'hasDatapicker',
       'date'        => array(
         'class'       => 'datepicker',
-        'placeholder' => 'Día/Mes/Año',
+        'placeholder' => 'DD/MM/AAAA',
       ),
       'id'          => 'datepicker',
       'time'        => array(
-        'placeholder' => 'Hora:Minutos'
+        'placeholder' => 'HH:MM'
       ),
       //'data-source' => 'http://example.com/api/data'
     ));*/
@@ -132,6 +132,8 @@ class programarCirugiaForm extends BaseAgendaForm
       'data-source' => 'http://sigahu.com/index.php/api/clavecie',
       'placeholder' => 'Diagnóstico del paciente o código CIE10',
     ));
+
+    $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
 
   # @flag Configura las etiquetas
     $this->widgetSchema->setLabels(AgendaPeer::getLabels());
