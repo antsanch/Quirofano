@@ -1,329 +1,259 @@
-<!-- scripts para mostrar alertas-->
-<script type="text/javascript">
-  function pregunta(){
-    return confirm('¿Estas seguro de enviar este registro?');
-  }
-  function saludo() {alert('Programación Exitosa')}
-  function verificar() {alert('Verificar la hora')}
-</script>
-<!-- Scripts para mostrar alertas-->
+<div>
+  <div class="portlet box blue">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="fa fa-file"></i>
+        Programar Cirugía
+      </div>
+    </div>
+    <div class="portlet-body form">
+      <form id="target" method="post">
+        <div class="form-body">
 
-<!-- Mostrar alerta-->
-<?php if ($sf_user->hasFlash('notice')): ?>
-    <div class="flash_notice"><?php echo $sf_user->getFlash('notice') ?></div>
+          <div class="row"><!-- Primer fila de campos (row01) -->
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['sala_id']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-h-square"></i></span>
+                  <?php echo $form['sala_id']->render(array('class' => 'form-control')); ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <label>Fecha</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  <input class="form-control datepicker" placeholder="DD-MM-AAAA" type="text" name="agenda[programacion][date]">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group bootstrap-timepicker">
+                <label>Hora</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                  <input class="form-control timepicker" placeholder="HH:MM" type="text" name="agenda[programacion][time]">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['tiempo_est']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-retweet"></i></span>
+                  <?php echo $form['tiempo_est']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- Cierre del row01 -->
+
+          <div class="row"><!-- Segunda fila de campos (row02) -->
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['registro']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-file-text"></i></span>
+                  <?php echo $form['registro']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+              <div class="form-group">
+                <?php echo $form['paciente_name']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  <?php echo $form['paciente_name']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['tipo_proc_id']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-check-square-o"></i></span>
+                <?php echo $form['tipo_proc_id']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Cierre del row02 -->
+
+          <div class="row"><!-- Tercer fila de campos (row03) -->
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['edad']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <?php echo $form['edad']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['genero']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                  <?php echo $form['genero']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['procedencia']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                <?php echo $form['procedencia']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
 
 
-<script type="text/javascript">
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['servicio']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-medkit"></i></span>
+                <?php echo $form['servicio']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Cierre del row03 -->
 
-function start() {verificar()}
-window.onload = start;
-</script>
-<?php endif;?>
-<!-- Mostrar alerta-->
+          <div class="row"><!-- Cuarta fila de campos (row04) -->
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group">
+                <?php echo $form['diagnostico']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
+                <?php echo $form['diagnostico']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['protocolo']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-file-text-o"></i></span>
+                <?php echo $form['protocolo']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
 
-  <form id='target' method="post" onsubmit="return pregunta();">
-<!-- <form method="POST" action="<?php //echo url_for('quirofano/programar?slug='.$Quirofano->getSlug()) ?>">   -->
-  <div class="area cols03">
-    <div class="label"><?php echo $form['sala_id']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['sala_id']->renderError() ?>
-      <?php echo $form['sala_id'] ?>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['reintervencion']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-repeat"></i></span>
+                  <?php echo $form['reintervencion']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Cierre del row04 -->
+
+          <div class="row"><!-- Quinta fila de campos (row05) -->
+            <div class="col-sm-6 col-md-9">
+              <div class="form-group">
+                <?php echo $form['programa']['personal_nombre']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                  <?php echo $form['programa']['personal_nombre']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
+                <?php echo $form['atencion_id']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-chain"></i></span>
+                <?php echo $form['atencion_id']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Cierre del row05 -->
+
+        <!-- Subformulario para agregar procedimientos -->
+         <?php foreach ($form['Procedimientocirugia'] as $subform) :?>
+          <div class="formCie9">
+          <?php echo $subform;?>
+          </div>
+          <?php endforeach; ?>
+
+          <div class="row"><!-- Sexta fila de campos (row06) -->
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <?php echo $form['riesgo_qx_pre']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                <?php echo $form['riesgo_qx_pre']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <?php echo $form['req_insumos']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-archive"></i></span>
+                <?php echo $form['req_insumos']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <?php echo $form['req_anestesico']->renderLabel('Requerimientos de anestesia') ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-spinner"></i></span>
+                <?php echo $form['req_anestesico']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <?php echo $form['req_hemoderiv']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-tint"></i></span>
+                <?php echo $form['req_hemoderiv']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <?php echo $form['req_laboratorio']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-flask"></i></span>
+                <?php echo $form['req_laboratorio']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+              <div class="form-group">
+                <?php echo $form['requerimiento']->renderLabel() ?>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-sort-amount-asc"></i></span>
+                <?php echo $form['requerimiento']->render(array('class' => 'form-control')) ?>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Cierre del row06 -->
+          <?php echo $form->renderHiddenFields() ?>
+        </div>
+        <div class="form-actions right">
+          <input type="submit" class="btn btn-primary">
+        </div>
+      </form>
     </div>
   </div>
-
-<!--
-  <div class="area cols04">
-    <div class="label"><?php echo $form['programacion']->renderLabel() ?></div>
--->
-      <?php echo $form['programacion']->renderError() ?>
-      <?php echo $form['programacion'] ?>
-<!--
-  </div>
--->
-
-<!--
-  <div class="area cols02">
-    <div class="label"><?php echo $form['hora']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['hora']->renderError() ?>
-      <?php echo $form['hora'] ?>
-    </div>
-  </div>
--->
-
-  <div class="area cols02">
-    <div class="label"><?php echo $form['tiempo_est']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['tiempo_est']->renderError() ?>
-      <?php echo $form['tiempo_est'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['tipo_proc_id']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['tipo_proc_id']->renderError() ?>
-      <?php echo $form['tipo_proc_id'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['registro']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['registro']->renderError() ?>
-
-      <?php echo $form['registro'] ?>
-    </div>
-  </div>
-
-  <div class="area cols09">
-    <div class="label"><?php echo $form['paciente_name']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['paciente_name']->renderError() ?>
-      <?php echo $form['paciente_name'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['edad']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['edad']->renderError() ?>
-      <?php echo $form['edad'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['genero']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['genero']->renderError() ?>
-      <?php echo $form['genero'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['procedencia']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['procedencia']->renderError() ?>
-      <?php echo $form['procedencia'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['servicio']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['servicio']->renderError() ?>
-      <?php echo $form['servicio'] ?>
-    </div>
-  </div>
-
-  <div class="area cols06">
-    <div class="label"><?php echo $form['diagnostico']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['diagnostico']->renderError() ?>
-      <?php echo $form['diagnostico'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03 horizontal">
-    <div class="label"><?php echo $form['protocolo']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['protocolo']->renderError() ?>
-      <?php echo $form['protocolo'] ?>
-    </div>
-  </div>
-
- <div class="area cols03 horizontal">
-    <div class="label"><?php echo $form['reintervencion']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['reintervencion']->renderError() ?>
-      <?php echo $form['reintervencion'] ?>
-    </div>
-  </div>
-<!-- personal -->
-
-  <div class="area cols09">
-    <div class="label"><?php echo $form['programa']['personal_nombre']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['programa']['personal_nombre']->renderError() ?>
-      <?php echo $form['programa']['personal_nombre'] ?>
-    </div>
-  </div>
-<!-- personal -->
-<div class="area cols03">
-    <div class="label"><?php echo $form['atencion_id']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['atencion_id']->renderError() ?>
-      <?php echo $form['atencion_id'] ?>
-    </div>
-  </div>
-
-<!--Esperemos que funque-->
- <?php foreach ($form['Procedimientocirugia'] as $subform) :?>
-  <div class="formCie9">
-  <?php echo $subform;?>
-  </div>
-  <?php endforeach; ?>
-<!--Esperemos que funque-->
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['riesgo_qx_pre']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['riesgo_qx_pre']->renderError() ?>
-      <?php echo $form['riesgo_qx_pre'] ?>
-    </div>
-  </div>
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['req_insumos']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['req_insumos']->renderError() ?>
-      <?php echo $form['req_insumos'] ?>
-    </div>
-  </div>
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['req_anestesico']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['req_anestesico']->renderError() ?>
-      <?php echo $form['req_anestesico'] ?>
-    </div>
-  </div>
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['req_hemoderiv']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['req_hemoderiv']->renderError() ?>
-      <?php echo $form['req_hemoderiv'] ?>
-    </div>
-  </div>
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['req_laboratorio']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['req_laboratorio']->renderError() ?>
-      <?php echo $form['req_laboratorio'] ?>
-    </div>
-  </div>
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['requerimiento']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['requerimiento']->renderError() ?>
-      <?php echo $form['requerimiento'] ?>
-    </div>
-  </div>
-
-
-<!--
-<div class="area cols07">
-    <div class="label"><?php //echo $form['medico_name']->renderLabel() ?></div>
-    <div class="field">
-      <?php //echo $form['medico_name']->renderError() ?>
-      <?php //echo $form['medico_name'] ?>
-    </div>
 </div>
--->
-
-  <div class="area control">
-      <?php echo $form->renderHiddenFields() ?>
-      <input type="submit" value="Guardar">
-    </div>
-  </form><!--Termina form-->
-
-<!--  <div class="area control">
-    <?php //echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Guardar">
-  </div>-->
-
-
-<script>
-$('#target').submit(function() {
-if(!confirm(" Esta seguro ? "))
-{
-}}
-</script>
-
-<script>
-  $('#add_newProcedimientocirugia_link').addClass('addLink');
-  $(function() {
-    $( ".datepicker" ).datepicker({ dateFormat: "dd-mm-yy" });
-    $("#agenda_tiempo_est, #agenda_programacion_time").timepicker({ 'timeFormat': 'H:i' });
-
-    //~ $('textarea').elastic();
-    // @flag Habilita el autocompletado
-    $('.searchable').each(function() {
-      var $this = $(this),
-          source = $this.data('source'),   //'<?php echo url_for('@homepage', true)?>' + $this.data('url'),
-          focus = $this.attr('id'),
-          select = $this.data('select');
-      //console.log($this);  // @flag Vemos si agarro algo
-      $this.autocomplete({
-      minLength: 2,
-      delay: 350,
-      source: source,
-      focus: function(event, ui) {
-        $this.val(ui.item.value);
-        return false;
-      },
-      select: function(event, ui) {
-        $(select).val(ui.item.id)
-      }
-      })
-      /*.data( "autocomplete" )._renderItem = function( ul, item ) {
-        return $( "<li></li>" )
-          .data( "item.autocomplete", item )
-          .append( "<a>" + item.label + "</a>" )
-          .appendTo( ul );
-      }; /**/
-    });
-
-
-    $('.searchpx').each(function() {
-      var $this = $(this),
-          source = $this.data('source'), //'<?php echo url_for('@homepage', true)?>' + $this.data('url'),
-          focus = $this.attr('id'),
-          select = $this.data('select');
-          //~ console.log(select); /**/
-      $this.autocomplete({
-        minLength: 2,
-        delay: 350,
-        source: source,
-        focus: function(event, ui) {
-          if ($this.attr('id') == 'agenda_registro') {
-            $this.val(ui.item.registro);
-          }
-          else {
-            $this.val(ui.item.value);
-          }
-          return false;
-        },
-        select: function(event, ui) {
-          $('#agenda_paciente_name').val(ui.item.name);
-          $('#agenda_edad').val(ui.item.edad);
-          $('#agenda_genero').val(ui.item.sexo);
-          $('#agenda_registro').val(ui.item.registro);
-          $('#agenda_paciente_id').val(ui.item.id);
-          return false;
-        }
-      })
-    });
-
-    // todo: migrar jquery a la version 1.7
-    $('.formCie9').on('keyup.autocomplete', function() {
-      $(this).each(function() {
-        var $target = $(this).find('.target');
-
-        $(this).find('.autocompleteCie9').autocomplete({
-          source: '<?php echo url_for('api/cie9mc', true)?>',
-          focus: function(event, ui) {
-            $(this).val(ui.item.value);
-            return false;
-          },
-          select: function(event, ui) {
-            $($target).val(ui.item.id)
-          }
-        });
-      });
-    });
-  });
-</script>
