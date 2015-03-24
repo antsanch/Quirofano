@@ -1,6 +1,12 @@
 /**
  * Todas estas clases se activan al encontrar un contenedor con la clase agenda???
  */
+ 
+.head {
+    border-bottom: 1px solid black;
+    font-size: large;
+    border-color: #DDD;
+  }
 
 #agenda td {
   padding-top: 1.2em;

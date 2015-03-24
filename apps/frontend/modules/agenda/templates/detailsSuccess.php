@@ -1,16 +1,9 @@
 <?php use_helper('agenda') ?>
+<?php use_stylesheet('global/styleAgenda.css') ?>
 
 <?php slot('titulo') ?>
   <title>Detalles de la cirugia de <?php echo $cirugia->getPacienteName() ?> | SIGA-HU</title>
 <?php end_slot() ?>
-
-<style>
-  .head {
-    border-bottom: 1px solid black;
-    font-size: large;
-    border-color: #DDD;
-  }
-</style>
 
 <h3 class="page-title">Detalles de la cirugía</h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Detalles de la cirugía')) ?>
