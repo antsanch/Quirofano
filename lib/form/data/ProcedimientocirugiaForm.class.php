@@ -26,12 +26,12 @@ class ProcedimientocirugiaForm extends BaseProcedimientocirugiaForm
       'choices' => array('' => 'Escoje una','1' => 'Derecha', '2' => 'Izquierda', '3' => 'Bilateral', '4' =>'Única'),
       'expanded' => false
     )));
-
-
+    
     $this->widgetSchema['cie9mc_id']->setAttribute('class', 'target');
     $this->widgetSchema['cie9mc']->setAttribute('class', 'form-control autocompleteCie9');
     $this->widgetSchema['region']->setAttribute('class', 'form-control');
-    $this->widgetSchema['detalles']->setAttribute('class', 'form-control');
+    $this->widgetSchema['detalles']->setAttributes(array('class' => 'form-control',
+                                                         'maxlength' => '250'));
     $this->widgetSchema['servicio_id']->setAttribute('class', 'form-control');
 
     $this->widgetSchema->setLabels(array(

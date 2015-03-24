@@ -67,3 +67,13 @@ window.onload = start;
     </tbody>
   </table>
 </div>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover',
+    html: true, 
+    delay: { "show": 0, "hide": 1 },
+    placement: 'auto top'
+  });
+});
+</script>
