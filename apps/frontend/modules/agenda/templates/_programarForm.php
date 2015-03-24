@@ -1,3 +1,4 @@
+<?php use_helper("programarCirugiaForm") ?>
 <div>
   <div class="portlet box blue">
     <div class="portlet-title">
@@ -22,31 +23,40 @@
             </div>
 
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['programacion']->hasError()) ?>">
                 <label>Fecha</label>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                  <input class="form-control datepicker" placeholder="DD-MM-AAAA" type="text" name="agenda[programacion][date]">
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['programacion']) ?>
+                    <input class="form-control datepicker" placeholder="DD-MM-AAAA" type="text" name="agenda[programacion][date]">
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6 col-md-3">
-              <div class="form-group bootstrap-timepicker">
+              <div class="<?php echo getClasesCss($form['hora']->hasError()) ?>">
                 <label>Hora</label>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                  <input class="form-control timepicker" placeholder="HH:MM" type="text" name="agenda[programacion][time]">
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['hora']) ?>
+                    <input class="form-control timepicker" placeholder="HH:MM" type="text" name="agenda[programacion][time]">
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['tiempo_est']->hasError()) ?>">
                 <?php echo $form['tiempo_est']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-retweet"></i></span>
-                  <?php echo $form['tiempo_est']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['tiempo_est']) ?>
+                    <?php echo $form['tiempo_est']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
@@ -55,21 +65,27 @@
 
           <div class="row"><!-- Segunda fila de campos (row02) -->
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['registro']->hasError()) ?>">
                 <?php echo $form['registro']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-file-text"></i></span>
-                  <?php echo $form['registro']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['registro']) ?>
+                    <?php echo $form['registro']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6 col-md-6">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['paciente_name']->hasError()) ?>">
                 <?php echo $form['paciente_name']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                  <?php echo $form['paciente_name']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['paciente_name']) ?>
+                    <?php echo $form['paciente_name']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,30 +103,39 @@
 
           <div class="row"><!-- Tercer fila de campos (row03) -->
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['edad']->hasError()) ?>">
                 <?php echo $form['edad']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                <?php echo $form['edad']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['edad']) ?>
+                    <?php echo $form['edad']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['genero']->hasError()) ?>">
                 <?php echo $form['genero']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                  <?php echo $form['genero']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['genero']) ?>
+                    <?php echo $form['genero']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['procedencia']->hasError()) ?>">
                 <?php echo $form['procedencia']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                <?php echo $form['procedencia']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['procedencia']) ?>
+                    <?php echo $form['procedencia']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
@@ -129,11 +154,14 @@
 
           <div class="row"><!-- Cuarta fila de campos (row04) -->
             <div class="col-sm-12 col-md-6">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['diagnostico']->hasError()) ?>">
                 <?php echo $form['diagnostico']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
-                <?php echo $form['diagnostico']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['diagnostico']) ?>
+                    <?php echo $form['diagnostico']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
@@ -160,17 +188,20 @@
 
           <div class="row"><!-- Quinta fila de campos (row05) -->
             <div class="col-sm-6 col-md-9">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['programa']->hasError()) ?>">
                 <?php echo $form['programa']['personal_nombre']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-                  <?php echo $form['programa']['personal_nombre']->render(array('class' => 'form-control')) ?>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['programa']['personal_nombre']) ?>
+                    <?php echo $form['programa']['personal_nombre']->render(array('class' => 'form-control')) ?>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="col-sm-6 col-md-3">
-              <div class="form-group">
+              <div class="<?php echo getClasesCss($form['atencion_id']->hasError()) ?>">
                 <?php echo $form['atencion_id']->renderLabel() ?>
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-chain"></i></span>
