@@ -49,7 +49,7 @@ HEAD;
         <td >{$c->getRegistro()}</td>
         <td><strong>{$c->getPacienteName()}<strong></td>
         <td>{$c->getDiagnostico()}</td>
-        <td><button type="button" class="btn btn-link" data-toggle="popover" title="Procedimientos" data-content="{$procedimientos}">Procedimientos</button></td>
+        <td><a href="#" data-toggle="popover" title="Procedimientos" data-content="{$procedimientos}">Procedimientos</a></td>
         <td>{$c->getPrograma()}</td>
         <td>
           <ul>
