@@ -1,4 +1,4 @@
-<?php use_helper("programarCirugiaForm") ?>
+<?php use_helper("metronicForm") ?>
 <div>
   <div class="portlet box blue">
     <div class="portlet-title">

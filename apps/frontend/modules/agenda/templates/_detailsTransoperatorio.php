@@ -140,7 +140,7 @@
       <div class="form-group">
         <label>Turno</label>
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-star-o"></i>
+          <span class="input-group-addon"><i class="fa fa-sun-o"></i>
           </span>
           <input class="form-control" placeholder="<?php echo $cirugia->getCirculanteInicial()->getTurno() ?>" readonly="">
         </div>
