@@ -108,7 +108,7 @@ HTML;
 HTML;
   return $html;
   }
-  
+
 /**
  * Retorna un renglon de la tabla de resultados, formateado de acuerdo al status de la cirugia
  */
