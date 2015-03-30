@@ -8,16 +8,16 @@
   <thead>
        <tr><td colspan='12'><h3 class='text-center'>{$status}</h3></td></tr>
        <tr>
-        <th colspan="2">Iconos</th>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Sala</th>
-        <th>Registro</th>
-        <th>Paciente</th>
-        <th>Diagnóstico</th>
-        <th>Procedimiento / Cirugía</th>
-        <th>Médico que programó</th>
-        <th>Acciones</th>
+        <th class="text-center" colspan="2">Iconos</th>
+        <th class="text-center">Fecha</th>
+        <th class="text-center">Hora</th>
+        <th class="text-center">Sala</th>
+        <th class="text-center">Registro</th>
+        <th class="text-center">Paciente</th>
+        <th class="text-center">Diagnóstico</th>
+        <th class="text-center">Procedimiento / Cirugía</th>
+        <th class="text-center"><span>Médico que programó</span></th>
+        <th class="text-center">Acciones</th>
       </tr>
   </thead>
 HEAD;
@@ -35,7 +35,7 @@ HEAD;
     $linkCancelar = link_to('<span class="cancelar"></span>', 'agenda/cancelar?id='.$c->getId(), array('title' => 'Cancelación'));
 
     $html = <<< HTML
-    <tr class="{$c->getClasses()}">
+    <tr class="text-center {$c->getClasses()}">
         <td width:"5%">
           <div>
             <div class="tipocx" title="{$c->getTipoProcId()}"></div>
@@ -78,9 +78,8 @@ HTML;
     $linkTerminar = link_to('<span class="realizada"></span>', 'agenda/postoperatorio?id='.$c->getId(), array('title' => 'Terminar Cirugía'));
     $linkRevertir = link_to('[Revertir]', 'agenda/falsoinicio?id='.$c->getId(), array('title' => 'Terminar Cirugía'));
 
-
     $html = <<< HTML
-    <tr class="{$c->getClasses()}">
+    <tr class="text-center {$c->getClasses()}">
       <td width:"5%">
         <div>
           <div class="tipocx" title="{$c->getTipoProcId()}"></div>
