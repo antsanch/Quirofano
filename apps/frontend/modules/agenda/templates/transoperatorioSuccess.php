@@ -1,21 +1,10 @@
 <?php use_helper("metronicForm") ?>
-
 <?php slot('titulo') ?>
   <title>Transoperatorio | SIGA-HU </title>
 <?php end_slot() ?>
 
 <h3 class="page-title">Transoperatorio</h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Transoperatorio')) ?>
-
-<script type="text/javascript" src="/js/global/jquery.ptTimeSelect.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/global/jquery.ptTimeSelect.css" />
-
-<script type="text/javascript">
-        $(document).ready(function(){
-            // find the input fields and apply the time select to them.
-            $("#datahora").ptTimeSelect();
-        });
-</script>
 
 <?php $quirofano = $form->getObject()->getQuirofano() ?>
 
@@ -59,7 +48,7 @@
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 <div class="input-icon right">
                   <?php renderErrorIcon($form['ingreso']) ?>
-                  <?php echo $form['ingreso']->render(array('class' => 'form-control')); ?>
+                  <?php echo $form['ingreso']->render(array('class' => 'form-control timepicker')); ?>
                 </div>
               </div>
             </div>
