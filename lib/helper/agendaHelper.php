@@ -112,41 +112,36 @@ HTML;
  * Retorna un renglon de la tabla de resultados, formateado de acuerdo al status de la cirugia
  */
   function renderRealizada($c) {
+    $caratula = html_entity_decode($c->getCaratulaReloj());
+    $procedimientos = html_entity_decode($c->getListaProcedimientos());
+    $linkDetalles = link_to('<span class="detalles"></span>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles'));
 
-    return sprintf('
-      <tr class="%s" cellspacing="0">
-        <td style="width: 42px">
-          <div class="icons clearfix">
-            <div class="tipocx" title="%s"></div>
-            <div class="convenio" title="%s"></div>
-          </div>
-        </td>
-        <td>%s</td>
-        <td nowrap>%s</td>
-        <td nowrap>%s</td>
-        <td nowrap>%s</td>
-        <td nowrap>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td nowrap>%s</td>
-      </tr>',
-      $c->getClasses(),
-      $c->getTipoProcId(),
-      $c->getatencion(),
-      html_entity_decode($c->getCaratulaReloj()),
-      $c->getProgramacion('d-m-Y'),
-      $c->getProgramacion('H:i'),
-      $c->getSalaquirurgica(),
-      $c->getRegistro(),
-      $c->getPacienteName(),
-      $c->getDiagnostico(),
-      html_entity_decode($c->getListaProcedimientos()),
-      $c->getPrograma(),
-      link_to('<div class="detalles"></div>', 'agenda/details?id='.$c->getId(), array('title' => 'Ver detalles'))
-    );
-  }
+    $html = <<< HTML
+    <tr class="text-center {$c->getClasses()}">
+      <td width:"5%">
+        <div>
+          <div class="tipocx" title="{$c->getTipoProcId()}"></div>
+          <div class="convenio" title="{$c->getatencion()}"></div>
+        </div>
+      </td>
+      <td>{$caratula}</td>
+      <td>{$c->getProgramacion('d-m-Y')}</td>
+      <td>{$c->getProgramacion('H:i')}</td>
+      <td>{$c->getSalaquirurgica()}</td>
+      <td>{$c->getRegistro()}</td>
+      <td><strong>{$c->getPacienteName()}</strong></td>
+      <td>{$c->getDiagnostico()}</td>
+      <td><a href="#" data-toggle='popover' title="Procedimientos" data-content="{$procedimientos}">Procedimientos</a></td>
+      <td>{$c->getPrograma()}</td>
+      <td>
+        <ul>
+          <li>{$linkDetalles}</li>
+        </ul>
+      </td>
+    </tr>
+HTML;
+  return $html;
+}
 
 /**
  * Regresa un arreglo que contenga todos los avisos que una cirugia pueda tener
