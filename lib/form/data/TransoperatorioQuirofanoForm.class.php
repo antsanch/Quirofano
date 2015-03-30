@@ -102,31 +102,33 @@ class transoperatorioQuirofanoForm extends AgendaForm
   $this->widgetSchema->setLabels(AgendaPeer::getLabels());
     /* Ajustes a los validadores */
 
-/*
+
     $this->validatorSchema['ingreso']->setOption('required', true);
     $this->validatorSchema['ingreso']->setMessage('required','Falta hora');
 
-    $this->validatorSchema['realiza']->setOption('required', true);
-    $this->validatorSchema['realiza']->setMessage('required','Falta nombre de cirujano');
+    $this->validatorSchema['cxInicial']['personal_nombre']->setOption('required', true);
+    $this->validatorSchema['cxInicial']['personal_nombre']->setMessage('required', 'Falta nombre de médico');
 
-    $this->validatorSchema['anestesiologo_qx']->setOption('required', true);
-    $this->validatorSchema['anestesiologo_qx']->setMessage('required','Falta nombre de anestesiologo');
+    $this->validatorSchema['cxSupInicial']['personal_nombre']->setOption('required', true);
+    $this->validatorSchema['cxSupInicial']['personal_nombre']->setMessage('required', 'Falta nombre de cirujano');
+
+    $this->validatorSchema['anesInicia']['personal_nombre']->setOption('required', true);
+    $this->validatorSchema['anesInicia']['personal_nombre']->setMessage('required', 'Falta nombre de anestesiólogo');
+
+    $this->validatorSchema['anesSupInicia']['personal_nombre']->setOption('required', true);
+    $this->validatorSchema['anesSupInicia']['personal_nombre']->setMessage('required', 'Falta nombre de anestesiólogo');    
+
+    $this->validatorSchema['instrumentistaInicial']['personal_nombre']->setOption('required', true);
+    $this->validatorSchema['instrumentistaInicial']['personal_nombre']->setMessage('required', 'Falta nombre de instrumentista');
+
+    $this->validatorSchema['circulanteInicial']['personal_nombre']->setOption('required', true);
+    $this->validatorSchema['circulanteInicial']['personal_nombre']->setMessage('required', 'Falta nombre de circulante');
 
     $this->validatorSchema['anestesia_empleada']->setOption('required', true);
-    $this->validatorSchema['anestesia_empleada']->setMessage('required','Falta tipo de anestesia');
+    $this->validatorSchema['anestesia_empleada']->setMessage('required','Falta tipo de anestesia');    
 
-    $this->validatorSchema['instrumentista']->setOption('required', true);
-    $this->validatorSchema['instrumentista']->setMessage('required','Falta nombre de instrumentista');
-
-    $this->validatorSchema['turno_ii_id']->setOption('required', true);
-    $this->validatorSchema['turno_ii_id']->setMessage('required','Falta hora');
-
-    $this->validatorSchema['circulante']->setOption('required', true);
-    $this->validatorSchema['circulante']->setMessage('required','Falta nombre de circulante');
-
-    $this->validatorSchema['turno_ci_id']->setOption('required', true);
-    $this->validatorSchema['turno_ci_id']->setMessage('required','Falta hora'); */
-
+    $this->validatorSchema['observaciones']->setOption('required', true);
+    $this->validatorSchema['observaciones']->setMessage('required','Faltan observaciones');
   }
 
   public function embedPersonalForm($personal, $name, $values)
