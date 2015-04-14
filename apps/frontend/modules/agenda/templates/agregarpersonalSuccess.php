@@ -40,33 +40,30 @@
                     <span class="input-group-addon"><i class="fa fa-file-text-o"></i>
                     </span>
                     <div class="input-icon right">
-                      <?php renderErrorIcon($form[ 'tipo']) ?>
                       <?php echo $form[ 'tipo']->render(array('class' => 'form-control')) ?>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-sm-6 col-md-12">
+              <div class="col-sm-6 col-md-6">
                 <div class="<?php echo getClasesCss($form['status']->hasError()) ?>">
                   <?php echo $form[ 'status']->renderLabel() ?>
                   <div class="input-group">
                     </span>
                     <div class="input-icon right">
-                      <?php renderErrorIcon($form[ 'status']) ?>
                       <?php echo $form[ 'status']->render(array('class' => 'form-control')) ?>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-sm-6 col-md-12">
+              <div class="col-sm-6 col-md-6">
                 <div class="<?php echo getClasesCss($form['turno']->hasError()) ?>">
                   <?php echo $form[ 'turno']->renderLabel() ?>
                   <div class="input-group">
                     </span>
                     <div class="input-icon right">
-                      <?php renderErrorIcon($form[ 'turno']) ?>
                       <?php echo $form[ 'turno']->render(array('class' => 'form-control')) ?>
                     </div>
                   </div>
@@ -75,7 +72,7 @@
             </div>
             <div class="form-actions right">
               <?php echo $form->renderHiddenFields() ?>
-              <input class="btn btn-primary" type="submit" value="Agregar">
+              <input class="btn btn-primary btn-block" type="submit" value="Agregar">
             </div>
 
           </div>
@@ -132,6 +129,12 @@
     </div>
   </div>                              
 </div>
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
 <script>
 $(function(){

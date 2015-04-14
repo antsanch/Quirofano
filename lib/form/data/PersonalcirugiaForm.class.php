@@ -34,7 +34,7 @@ class PersonalcirugiaForm extends BasePersonalcirugiaForm
       $this->widgetSchema['transoperatorio']->setAttribute('value', true);
 
   	$this->widgetSchema['personal_nombre'] 
-  	->setLabel('Nombre del Personal:')
+  	->setLabel('Nombre del Personal')
   	->setAttributes(array(
           'class' => 'searchable',
           'data-url' => 'profile/json',
