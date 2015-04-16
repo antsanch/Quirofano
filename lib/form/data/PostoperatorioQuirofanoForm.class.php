@@ -31,7 +31,7 @@ class postoperatorioQuirofanoForm extends AgendaForm
   $this->widgetSchema['status']->setAttribute('value', '100');
   $this->setWidget('destino_px', new sfWidgetFormChoice(array(
     'choices' => AgendaPeer::getDestinoPx(),
-    'expanded' => true
+    'expanded' => false
   )));
   $this->setWidget('clasificacionqx', new sfWidgetFormChoice(array(
     'choices' => array(null, 'Mayor', 'Menor'),

@@ -9,10 +9,10 @@
 
 <div class="row">
   <div class="col-sm-6 col-md-6">
-    <div class="portlet box blue">
+    <div class="portlet paddingless">
       <div class="portlet-title">
         <div class="caption">
-          <i class="fa fa-file"></i> Agregar Personal
+          <i class="fa fa-plus"></i> Agregar Personal
         </div>
       </div>
       <div class="portlet-body form formulario">
@@ -50,7 +50,6 @@
                 <div class="<?php echo getClasesCss($form['status']->hasError()) ?>">
                   <?php echo $form[ 'status']->renderLabel() ?>
                   <div class="input-group">
-                    </span>
                     <div class="input-icon right">
                       <?php echo $form[ 'status']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -62,7 +61,6 @@
                 <div class="<?php echo getClasesCss($form['turno']->hasError()) ?>">
                   <?php echo $form[ 'turno']->renderLabel() ?>
                   <div class="input-group">
-                    </span>
                     <div class="input-icon right">
                       <?php echo $form[ 'turno']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -87,9 +85,9 @@
         <div class="caption"><i class="fa fa-user-md"></i>Personal actual</div>
       </div>
 
-      <div class="tab-content">
+      <div>
         <div>
-          <div id="scrollable">
+          <div class="scrollable">
             <?php foreach ($cirugia->getPersonalTransoperatorio() as $key => $medico): ?>
             <div class='row'>
               <div class="col-md-6 ">
@@ -138,7 +136,7 @@ $(function () {
 
 <script>
 $(function(){
-    $('#scrollable').slimScroll({
+    $('.scrollable').slimScroll({
         height: '250px'
     });
 });
