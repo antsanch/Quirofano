@@ -2,7 +2,7 @@
   <title>Diferir cirugía | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h3 class="page-title">Diferir Cirugía</h3>
+<h3 class="page-title">Diferir cirugía</h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Diferir cirugía')) ?>
 
 <?php
