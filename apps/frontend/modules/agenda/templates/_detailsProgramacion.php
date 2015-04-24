@@ -175,7 +175,7 @@
         </div>
       </div>
 
-      <div class='col-md-2'>
+      <div class='col-md-4'>
         <div class="form-group">
           <label>En atención a</label>
           <div class="input-group">
@@ -252,48 +252,58 @@
   </div>
 </div>
 
-<?php if($cirugia->countAgendaVersions() > 1): ?> <!-- mayor a uno para que no se muestre la version 1 --> 
-    <div>
-      Historial de cambios
+<?php if($cirugia->countAgendaVersions() > 1): ?>
+  <div class="panel-group accordion" id="acordVersiones">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordVersiones" href="#collapseVersiones" aria-expanded="false">
+      Historial de cambios</a>
+      </h4>
     </div>
+    <div id="collapseVersiones" class="panel-collapse collapse" aria-expanded="false">
+      <div class="panel-body">
+        <?php # @todo Revisar como obtener los valores relacionados y no solo el id sin matar la BD con request
+            foreach($cirugia->getAgendaVersions() as $version): ?>
+                <div class='col-md-3'>
+                  <div>Quirofano</div>
+                  <div class='value'><?php // echo $version->getQuirofano() ?></div>
+                </div>
 
-<?php # @todo Revisar como obtener los valores relacionados y no solo el id sin matar la BD con request
-foreach($cirugia->getAgendaVersions() as $version): ?>
-    <div class='col-md-3'>
-      <div>Quirofano</div>
-      <div class='value'><?php // echo $version->getQuirofano() ?></div>
-    </div>
+                <div class='col-md-2'>
+                  <div>Sala</div>
+                  <div class='value'><?php // echo $version->getSalaquirurgica() ?></div>
+                </div>
 
-    <div class='col-md-2'>
-      <div>Sala</div>
-      <div class='value'><?php // echo $version->getSalaquirurgica() ?></div>
-    </div>
+                <div class='col-md-3'>
+                  <div>Tipo de Procedimiento</div>
+                  <div class='value'><?php // echo $version->getProcedimiento() ?> </div>
+                </div>
 
-    <div class='col-md-3'>
-      <div>Tipo de Procedimiento</div>
-      <div class='value'><?php // echo $version->getProcedimiento() ?> </div>
-    </div>
+                <div class='col-md-2'>
+                  <div class="form-group">
+                    <label>Fecha programada</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                      <input class="form-control" placeholder="<?php echo $version->getProgramacion('d-M-Y') ?>" readonly="">
+                    </div>
+                  </div>
+                </div>
 
-    <div class='col-md-2'>
-      <div class="form-group">
-        <label>Fecha programada</label>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          <input class="form-control" placeholder="<?php echo $version->getProgramacion('d-M-Y') ?>" readonly="">
-        </div>
+                <div class='col-md-2'>
+                  <div class="form-group">
+                    <label>Hora</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                      <input class="form-control" placeholder="<?php echo $version->getHora('H:i') ?>" readonly="">
+                    </div>
+                  </div>
+                </div>
+      <?php endforeach; ?>                    
       </div>
     </div>
-
-    <div class='col-md-2'>
-      <div class="form-group">
-        <label>Hora</label>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-          <input class="form-control" placeholder="<?php echo $version->getHora('H:i') ?>" readonly="">
-        </div>
-      </div>
-    </div>
-<?php endforeach; ?>
+  </div>                              
+</div>
 <?php endif; ?>
  </div>
 

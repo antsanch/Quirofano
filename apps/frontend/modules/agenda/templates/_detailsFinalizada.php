@@ -109,11 +109,20 @@
       </div>
     </div>
 </div>
+</br>
 <!-- Personal -->
-<div class="row">
-<h4 class="text-center">Personal</h4>
-    <?php foreach ($cirugia->getPersonalcirugias() as $personal): ?>
-      <?php if($personal->getFinaliza()): ?>
+<div class="panel-group accordion" id="acordPersonal">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordPersonal" href="#collapsePersonal" aria-expanded="false">
+      Personal</a>
+      </h4>
+    </div>
+    <div id="collapsePersonal" class="panel-collapse collapse" aria-expanded="false">
+      <div class="panel-body">
+          <?php foreach ($cirugia->getPersonalcirugias() as $personal): ?>
+          <?php if($personal->getFinaliza()): ?>
           <div class='col-md-6'>
             <div class="form-group">
               <label>Nombre</label>
@@ -160,7 +169,10 @@
           </div>
       <?php endif; ?>
       <?php endif; ?>
-    <?php endforeach; ?>
+    <?php endforeach; ?>       
+      </div>
+    </div>
+  </div>                              
 </div>
 </div>
 
