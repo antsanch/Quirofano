@@ -1,6 +1,6 @@
 <?php use_helper("metronicForm") ?>
 <div>
-  <div class="portlet box blue">
+  <div class="portlet padingless">
     <div class="portlet-title">
       <div class="caption">
         <i class="fa fa-file"></i>
