@@ -8,7 +8,7 @@
 
 <?php $quirofano = $form->getObject()->getQuirofano() ?>
 
-<div class="portlet box blue">
+<div class="portlet padingless">
   <div class="portlet-title">
     <div class="caption">
       <i class="fa fa-file"></i>
@@ -58,7 +58,7 @@
             <div class="<?php echo getClasesCss($form['tiempo_fuera']->hasError()) ?>">
               <?php echo $form['tiempo_fuera']->renderLabel() ?>
               <div class="input-group">
-                <?php echo $form['tiempo_fuera']->render() ?>
+                <?php echo $form['tiempo_fuera']->render(array('class' => 'form-control')) ?>
               </div>
             </div>
           </div>

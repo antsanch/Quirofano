@@ -55,7 +55,7 @@ class transoperatorioQuirofanoForm extends AgendaForm
     $this->widgetSchema['observaciones'] = new sfWidgetFormTextarea();
     $this->widgetSchema['tiempo_fuera'] = new sfWidgetFormChoice(array(
       'choices' => array('No', 'Si'),
-      'expanded' => true
+      'expanded' => false
     ));
 
   $transPersonal = $object->getPersonalTransoperatorio();
