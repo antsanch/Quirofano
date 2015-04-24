@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-sm-6 col-md-6">
-            <div class="<?php echo getClasesCss($form['clasificacionqx']->hasError()) ?>">
+                <div class="<?php echo getClasesCss($form['clasificacionqx']->hasError()) ?>">
                 <?php echo $form['clasificacionqx']->renderLabel() ?>
                 <div class="input-group">
                     <div class="input-icon right">
@@ -96,7 +96,7 @@
 
     <div class="row"> <!-- INICIO ROW 4 -->
         <div class="col-sm-6 col-md-6">
-            <div class="form-group">
+            <div class="<?php echo getClasesCss($form['ev_adversos_anestesia']->hasError()) ?>">
             <?php echo $form['ev_adversos_anestesia']->renderLabel() ?>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-eye"></i></span>
@@ -106,7 +106,7 @@
         </div>
 
         <div class="col-sm-6 col-md-6">
-            <div class="form-group">
+            <div class="<?php echo getClasesCss($form['complicaciones']->hasError()) ?>">
             <?php echo $form['complicaciones']->renderLabel() ?>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-warning"></i></span>

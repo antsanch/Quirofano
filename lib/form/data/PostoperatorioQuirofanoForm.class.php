@@ -40,6 +40,10 @@ class postoperatorioQuirofanoForm extends AgendaForm
   $this->widgetSchema->setLabels(AgendaPeer::getLabels());
     /* Ajustes a los validadores */
   $this->validatorSchema['egreso']->setOption('required', true);
+  $this->validatorSchema['ev_adversos_anestesia']->setOption('required', true);
+  $this->validatorSchema['complicaciones']->setOption('required', true);
+  $this->validatorSchema['contaminacionqx_id']->setOption('required', true);
+  $this->validatorSchema['destino_px']->setOption('required', true);
   $this->validatorSchema['egreso']->setMessage('required','Falta hora');
   $this->widgetSchema['egreso']->setAttributes(array(
     'id' => 'datahora',
