@@ -3,7 +3,7 @@
 <?php include_partial('qbreadcrumb', array('locacion' => 'Búsqueda Personalizada')) ?>
 
 <div class="col-md-12">
-<div class="portlet box blue">
+<div class="portlet padingless">
   <div class="portlet-title">
   <div class="caption">
       <i class="fa fa-search"></i> Busqueda Personalizada
