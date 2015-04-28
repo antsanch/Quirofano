@@ -29,6 +29,7 @@
 <?php
   // siempre mostrar la programación de la cirugia
   include_partial("detailsProgramacion", array('cirugia' => $cirugia));
+
   switch ($cirugia->getStatus()) {
       // Datos a mostrar cuando la cirugia este en transoperatorio (status 10)
       case AgendaPeer::TRANSOPERATORIO_STATUS:
@@ -36,7 +37,9 @@
         break;
       // Datos a mostrar cuando la cirugia esta finalizada (status 100)
       case AgendaPeer::REALIZADA_STATUS:
+        include_partial("detailsTransoperatorio", array('cirugia' => $cirugia)); // incluir transoperatorio
         include_partial("detailsFinalizada", array('cirugia' => $cirugia));
+        break;
     }
 ?>
 </div>
