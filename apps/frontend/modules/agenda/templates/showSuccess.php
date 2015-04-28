@@ -36,7 +36,7 @@ window.onload = start;
 
 <div class="table-responsive">
   <?php $currentStatus = null?>
-  <table id="agenda" class="table table-hover table-striped">
+  <table id="agenda" class="table table-hover">
     <tbody>
     <?php foreach($Cirugias as $c): ?>
     <?php
@@ -48,7 +48,7 @@ window.onload = start;
     <?php
               switch ($c->getStatus()) {
               case AgendaPeer::DIFERIDA_STATUS:
-                echo renderProgramada($c);
+                echo renderDiferida($c);
                 break;
               case AgendaPeer::PROGRAMADA_STATUS:
                 echo renderProgramada($c);

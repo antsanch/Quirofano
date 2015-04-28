@@ -40,7 +40,7 @@ function verificar() {alert('Verificar la hora')}
 <?php $title = null ?>
 
 <div class="table-responsive">
-	<table id="agenda" class="table table-hover table-striped">
+	<table id="agenda" class="table table-hover">
     	<tbody>
 		<?php foreach($Cirugias as $c): ?>
 			<?php if ($c->getCancelada() != 1): ?>
@@ -48,7 +48,7 @@ function verificar() {alert('Verificar la hora')}
 			<?php echo print_head($c->getVerboseStatus()) ?>
 		  	<?php $title = $c->getStatus() ?>
 			<?php endif; ?>
-		<?php echo renderProgramada($c); ?>
+		<?php echo renderDiferida($c); ?>
 		<?php endif; ?>
 		<?php endforeach; ?>
 		</tbody>
