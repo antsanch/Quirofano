@@ -10,20 +10,22 @@
 
 <?php include_partial('qbreadcrumb', array('locacion' => 'Búsqueda')) ?>
 
-<div class="row col-md-12">
-<form action="<?php echo url_for('agenda/busqueda') ?>" style="display:inline; float:right;">
-  <div class="form-group">
-        <div class="input-group">
-          <div class="input-icon">
-            <i class="icon-magnifier"></i>
-            <input class="form-control" type="text" id="busqueda" name="term" placeholder="Nombre o Registro">
-          </div>
-          <span class="input-group-btn">
-            <input class="btn btn-primary" type="submit" value="Buscar">
-          </span>
+<div class="row">
+ <div class="col-md-5 pull-right">
+    <form action="<?php echo url_for('agenda/busqueda') ?>">
+      <div class="form-group">
+            <div class="input-group">
+              <div class="input-icon">
+                <i class="icon-magnifier"></i>
+                <input class="form-control" type="text" value="<?php echo $term ?>" id="busqueda" name="term" placeholder="Nombre o Registro">
+              </div>
+              <span class="input-group-btn">
+                <input class="btn btn-primary" type="submit" value="Buscar">
+              </span>
+            </div>
         </div>
-      </div>
-</form>
+    </form>
+  </div>
 </div>
 
 <?php if( count($cirugias) > 0 ): ?>
@@ -71,3 +73,15 @@
   </div>
 </div>
 <?php endif; ?>
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover',
+    html: true, 
+    delay: { "show": 0, "hide": 1 },
+    placement: 'auto top'
+  });
+});
+</script>
+
