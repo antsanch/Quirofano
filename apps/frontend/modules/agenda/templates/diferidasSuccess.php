@@ -5,7 +5,7 @@
   <title>Agenda de <?php echo $Quirofano['Nombre'] ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h3>Agenda de procedimientos en <?php echo $Quirofano['Nombre'] ?></h3>
+<h3 class="page-title">Agenda de procedimientos en <?php echo $Quirofano['Nombre'] ?></h3>
 <?php include_partial('qbreadcrumb', array('locacion' => 'Cirugías diferidas')) ?>
 <?php include_partial('menuShow', array('Cirugias' => $Cirugias, 'Quirofano' => $Quirofano, "date" => $date)) ?>
 
