@@ -116,6 +116,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
       <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordPersonal" href="#collapsePersonal" aria-expanded="false">
+      <i class="fa fa-plus"></i>
       Personal</a>
       </h4>
     </div>

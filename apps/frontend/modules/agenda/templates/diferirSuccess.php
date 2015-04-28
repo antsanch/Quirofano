@@ -35,6 +35,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
       <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordDetalles" href="#collapseDetallesProg" aria-expanded="false">
+      <i class="fa fa-plus"></i>
       Detalles de la programación de <?php echo $cirugia->getPacienteName() ?></a>
       </h4>
     </div>

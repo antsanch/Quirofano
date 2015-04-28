@@ -258,6 +258,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
       <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordVersiones" href="#collapseVersiones" aria-expanded="false">
+      <i class="fa fa-plus"></i>
       Historial de cambios</a>
       </h4>
     </div>
