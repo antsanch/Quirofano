@@ -19,8 +19,9 @@
   <div class="col-xs-5">
     <ul class="nav nav-pills">
       <li><a href="<?php echo url_for('agenda/show?slug='.$Quirofano['Slug'].'&date='.date('Y-m-d', $date - 86400))?>" title="<?php echo $date==strtotime('today') ? 'Ayer': date('Y-m-d', $date-86400) ?>"><</a></li>
-          <li><a href="<?php echo url_for('agenda/show?slug='.$Quirofano['Slug'].'&date='.date('Y-m-d', $date + 86400))?>" title="<?php echo $date==strtotime('today') ? 'Mañana': date('Y-m-d', $date+86400) ?>">></a></li>
-      </ul>
+      <li><a href="<?php echo url_for('agenda/show?slug='.$Quirofano['Slug'].'&date='.date('Y-m-d', strtotime('today')))?>">Hoy</a></li>
+      <li><a href="<?php echo url_for('agenda/show?slug='.$Quirofano['Slug'].'&date='.date('Y-m-d', $date + 86400))?>" title="<?php echo $date==strtotime('today') ? 'Mañana': date('Y-m-d', $date+86400) ?>">></a></li>
+   </ul>
   </div>
   <div class="col-xs-5">
     <form action="<?php echo url_for('agenda/busqueda') ?>">
@@ -28,7 +29,7 @@
         <div class="input-group">
           <div class="input-icon">
             <i class="icon-magnifier"></i>
-            <input class="form-control" type="text" id="busqueda" name="term" placeholder="Nombre o Registro">
+            <input class="form-control pull-right" type="text" id="busqueda" name="term" placeholder="Nombre o Registro">
           </div>
           <span class="input-group-btn">
             <input class="btn btn-primary" type="submit" value="Buscar">
