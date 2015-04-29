@@ -117,11 +117,6 @@ HTML;
             'data-placement' => 'auto top'
         ));
 
-    $linkDiferir = link_to('<span class="diferir"></span>', 'agenda/diferir?id='.$c->getId(),
-      array('data-title' => 'Diferir cirugía',
-            'data-toggle' => 'tooltip',
-            'data-placement' => 'auto top'
-        ));
     $linkCancelar = link_to('<span class="cancelar"></span>', 'agenda/cancelar?id='.$c->getId(), 
       array('data-title' => 'Cancelación',
             'data-toggle' => 'tooltip',
@@ -150,7 +145,6 @@ HTML;
             <li>{$linkDetalles}</li>
             <li>{$linkReprogramar}</li>
             <li>{$linkIniciar}</li>
-            <li>{$linkDiferir}</li>
             <li>{$linkCancelar}</li>
           </ul>
         </td>
