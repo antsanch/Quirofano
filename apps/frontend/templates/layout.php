@@ -965,7 +965,6 @@ Salir</a>
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
   <div class="page-footer-inner">
-    <p>Francisco I. Madero, 3501 Mitras Centro, Monterrey, Nuevo León.  Tel: 01 81 8123 2663.</p>
   </div>
   <div class="page-footer-tools">
     <span class="go-top">
