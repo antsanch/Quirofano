@@ -313,7 +313,7 @@ class programarCirugiaForm extends BaseAgendaForm
           'invalid'     =>  'Mal formato de Fecha',
           'no_time'     =>  'Falta la hora',
           'min'         =>  'Fecha pasada',
-          'max'         =>  'No se puede progrmar con más de un mes de anticipación'
+          'max'         =>  'No se puede programar con más de un mes de anticipación'
           )
         );
         # @flag Eliminamos la referencia al campo 'hora'
@@ -352,12 +352,14 @@ class programarCirugiaForm extends BaseAgendaForm
         //~ $this->validatorSchema['req_anestesico']->setOption('required', true);              //          [DEL]
         //~ $this->validatorSchema['req_anestesico']->setMessage('required','Falta anestesia'); //          [DEL]
 
+        /* Prevé programar cirugias en días pasados y en un perido máximo de 30 días */
+        $this->validatorSchema['programacion']->setOption('min', strtotime('today'));
+        $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));
+
+        /*
         $this->getObject()->isNew() ? # @todo Revisar esta condicion porque no me gusta
           $this->validatorSchema['programacion']->setOption('min', strtotime('today - 1 day')):
-          $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));
-        //~ $this->validatorSchema['programacion']->setMessage('min','Fecha pasada');
-        //~ $this->validatorSchema['programacion']->setMessage('max','No se puede progrmar con mas de un mes de anticipación');
-
+          $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));*/
   }
 
  /**
