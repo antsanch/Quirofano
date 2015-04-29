@@ -12,8 +12,10 @@
   $avisos = generarAvisos($cirugia);
   if (count($avisos)) {
     echo "<div class='alert alert-danger'>";
+    echo "<ul>";
     foreach($avisos as $aviso)
-      echo "{$aviso}";
+      echo "<li>{$aviso}.</li>";
+    echo "</ul>";
     echo "</div>";
   }
 ?>
