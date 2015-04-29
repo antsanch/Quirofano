@@ -132,7 +132,7 @@
         <div class="task-content">
           <div>
             <div class="scrollable">
-              <ul class="task-list">
+              <ul class="task-list" id="listaDoctores">
                   <?php foreach ($form['temporal'] as $formulario):?>
                     <!-- <div ><?php echo $formulario['finaliza']->renderLabel($formulario['personal_nombre']->getValue()) ?></div> -->
                     <li>
@@ -149,6 +149,7 @@
             </div>
           </div>
         </div>
+        <input type="button" class="btn btn-link" value="Marcar todos" onclick="marcarTodos()"/>
       </div>
     </div>
 </div>
@@ -162,16 +163,26 @@
 
 </div>
 
-<script>
-$(function(){
-    $('.scrollable').slimScroll({
-        height: '250px'
+<script type="text/javascript">
+    // marcar todos los médicos
+    function marcarTodos() {
+    $("#listaDoctores input[name*='agenda']").each(function(){
+        $(this).parent().addClass('checked');
+        $(this).prop('checked', true);
     });
+}
+</script>
 
-    $('.timepickermr').timepicker({
-        showMeridian: true
+<script type="text/javascript">
+    $(function(){
+        $('.scrollable').slimScroll({
+            height: '250px'
+        });
+
+        $('.timepickermr').timepicker({
+            showMeridian: true
+        });
+
     });
-
-});
 </script>
 
