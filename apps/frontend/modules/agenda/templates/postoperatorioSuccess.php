@@ -149,7 +149,7 @@
             </div>
           </div>
         </div>
-        <input type="button" class="btn btn-link" value="Marcar todos" onclick="marcarTodos()"/>
+        <input id="marcarTodosBtn" type="button" class="btn btn-link" value="Marcar todos" />
       </div>
     </div>
 </div>
@@ -181,6 +181,10 @@
 
         $('.timepickermr').timepicker({
             showMeridian: true
+        });
+
+        $("#marcarTodosBtn").click(function(){
+            marcarTodos()
         });
 
     });
