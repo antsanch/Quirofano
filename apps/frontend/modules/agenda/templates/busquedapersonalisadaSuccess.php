@@ -119,7 +119,7 @@
   <title>Sin coincidencias para  <?php echo $term ?> | SIGA-HU </title>
 <?php end_slot() ?>
 <div class="alert alert-danger">
-  <p>No se encontraron coincidencias para el termino <strong><?php echo $term ?></strong> verifica los datos y vuelve a intentarlo.</p>
+  <p>No se encontraron coincidencias para el termino <strong>"<?php echo $term ?>"</strong>, verifica los datos y vuelve a intentarlo.</p>
 </div>
 <p>Puedes ir a la <a href="<?php echo url_for('agenda/index') ?>">lista general de quirofanos.</a></p>
 <?php endif; ?>

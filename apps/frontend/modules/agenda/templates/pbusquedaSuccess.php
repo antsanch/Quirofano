@@ -1,12 +1,12 @@
-<h3 class="page-title">Búsqueda Personalizada</h3>
+<h3 class="page-title">Búsqueda personalizada</h3>
 
-<?php include_partial('qbreadcrumb', array('locacion' => 'Búsqueda Personalizada')) ?>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Búsqueda personalizada')) ?>
 
-<div class="col-md-12">
-<div class="portlet padingless">
+<div class="col-md-6 col-sm-offset-3">
+<div class="portlet box blue">
   <div class="portlet-title">
   <div class="caption">
-      <i class="fa fa-search"></i> Busqueda Personalizada
+      <i class="fa fa-search"></i> Busqueda personalizada
   </div>
 </div>
 <div class="portlet-body form">

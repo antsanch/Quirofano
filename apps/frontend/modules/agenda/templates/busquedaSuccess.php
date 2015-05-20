@@ -69,7 +69,7 @@
 <?php else: ?>
 <div class="row col-md-12">
   <div class="alert alert-danger">
-    <p>No se encontraron coincidencias para <strong><?php echo $term?></strong>, verifica los datos y vuelve a intentarlo.</p>
+    <p>No se encontraron coincidencias para <strong>"<?php echo $term?>"</strong>, verifica los datos y vuelve a intentarlo.</p>
   </div>
 </div>
 <?php endif; ?>
