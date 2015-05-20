@@ -996,28 +996,13 @@ Salir</a>
 <script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
-<script>
-      jQuery(document).ready(function() {
-        Metronic.init(); // init metronic core components
-        Layout.init(); // init current layout
-        QuickSidebar.init() // init quick sidebar
-        $('.datepicker').datepicker({
-          format: 'dd-mm-yyyy',
-          todayBtn: 'linked',
-          todayHighlight: true,
-          startDate: 'today'
-          });
-      });
-        $('.timepicker').timepicker({
-          showMeridian: false
-        });
-
-        $('.durationpicker').timepicker({
-          showMeridian: false,
-          defaultTime: '1:00:00',
-          showSeconds: true
-        });
-   </script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  Metronic.init(); // init metronic core components
+  Layout.init(); // init current layout
+  QuickSidebar.init() // init quick sidebar
+});
+</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

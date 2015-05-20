@@ -282,12 +282,33 @@
           <?php echo $form->renderHiddenFields() ?>
         </div>
         <div class="form-actions right">
-          <input type="submit" class="btn btn-primary">
+          <input type="submit" class="btn btn-primary" value="Enviar">
         </div>
       </form>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  $('.datepicker').datepicker({
+    format: 'dd-mm-yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+    startDate: 'today'
+  });
+
+  $('.timepicker').timepicker({
+    showMeridian: false
+  });
+
+  $('.durationpicker').timepicker({
+    showMeridian: false,
+    defaultTime: '1:00:00',
+    showSeconds: true
+  });
+});
+</script>
 
 <script type="text/javascript">
 $(function () {
