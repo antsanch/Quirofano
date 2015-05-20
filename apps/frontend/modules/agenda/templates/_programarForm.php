@@ -307,11 +307,7 @@ jQuery(document).ready(function() {
     defaultTime: '1:00:00',
     showSeconds: true
   });
-});
-</script>
 
-<script type="text/javascript">
-$(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
