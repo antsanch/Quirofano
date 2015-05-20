@@ -1002,11 +1002,20 @@ Salir</a>
         Layout.init(); // init current layout
         QuickSidebar.init() // init quick sidebar
         $('.datepicker').datepicker({
-          format: 'dd-mm-yyyy'
+          format: 'dd-mm-yyyy',
+          todayBtn: 'linked',
+          todayHighlight: true,
+          startDate: 'today'
           });
       });
         $('.timepicker').timepicker({
           showMeridian: false
+        });
+
+        $('.durationpicker').timepicker({
+          showMeridian: false,
+          defaultTime: '1:00:00',
+          showSeconds: true
         });
    </script>
 <!-- END JAVASCRIPTS -->

@@ -55,7 +55,7 @@
                   <span class="input-group-addon"><i class="fa fa-retweet"></i></span>
                   <div class="input-icon right">
                     <?php renderErrorIcon($form['tiempo_est']) ?>
-                    <?php echo $form['tiempo_est']->render(array('class' => 'form-control')) ?>
+                    <?php echo $form['tiempo_est']->render(array('class' => 'form-control durationpicker')) ?>
                   </div>
                 </div>
               </div>
