@@ -1,23 +1,57 @@
-<?php use_stylesheet('/min/?f=css/global/widescreen.css', '', array('raw_name' => true))?>
-<?php use_stylesheet('/min/?f=EasyUI/themes/default/easyui.css', '', array('raw_name' => true))?>
-<?php use_javascript('/EasyUI/jquery.easyui.min.js')?>
+<?php slot('titulo') ?>
+  <title>Reportes | SIGA-HU </title>
+<?php end_slot() ?>
 
-<div class="easyui-layout" data-options="fit:true" style="width:720px; height:700px; ">
+<h3 class="page-title">Reportes</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Reportes')) ?>
 
-  <!-- @flag Panel Izquierdo -->
-  <div title="Menú" data-options="region:'west'" style="width:180px">
-    <ul>
-<?php foreach($reportes as $reporte): ?>
-      <li><a href="<?php echo url_for('reportes/stored?slug='.$reporte->getSlug()) ?>"><?php echo $reporte->getNombre() ?></a></li>
-<?php endforeach; ?>
-    </ul>
+<div class="panel-group accordion" id="acordFiltros">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordFiltros" href="#collapseFiltros" aria-expanded="false">
+      <i class="fa fa-plus"></i>
+      Filtros</a>
+      </h4>
+    </div>
+    <div id="collapseFiltros" class="panel-collapse collapse" aria-expanded="false">
+      <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <?php include_partial('form', array('filter' => $filter)) ?>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+
+              <div class="portlet paddingless tasks-widget">
+                <div class="portlet-title">
+                  <div class="caption">
+                    <i class="fa fa-file"></i>Filtros guardados
+                  </div>
+                </div>
+
+              <div class="portlet-body">
+                <ul class="list-unstyled">
+                  <?php foreach($reportes as $reporte): ?>
+                    <li>
+                      <a href="<?php echo url_for('reportes/stored?slug='.$reporte->getSlug()) ?>">
+                        <?php echo $reporte->getNombre() ?>
+                      </a>
+                    </li>
+                  <?php endforeach; ?>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <!-- @flag Panel central -->
-  <div title="Reporte" data-options="region: 'center'">
-
-<?php if(isset($cirugias)): ?>
-    <table border='1' width='100%'>
+<div>
+  <?php if(isset($cirugias)): ?>
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th>Id</th>
@@ -30,33 +64,20 @@
         </tr>
       </thead>
       <tbody>
-    <?php foreach($cirugias as $result): ?>
-        <tr>
-          <td><?php echo $result->getId() ?></td>
-          <td><?php echo $result->getQuirofano() ?></td>
-          <td><?php echo $result->getSalaquirurgica() ?></td>
-          <td><?php echo $result->getMedicoName() ?></td>
-          <td><?php echo $result->getEspecialidad() ?></td>
-          <td><?php echo $result->getContaminacionqx() ?></td>
-          <td><?php echo $result->getProcedimiento() ?></td>
-        </tr>
-    <?php endforeach; ?>
+        <?php foreach($cirugias as $result): ?>
+          <tr>
+            <td><?php echo $result->getId() ?></td>
+            <td><?php echo $result->getQuirofano() ?></td>
+            <td><?php echo $result->getSalaquirurgica() ?></td>
+            <td><?php echo $result->getMedicoName() ?></td>
+            <td><?php echo $result->getEspecialidad() ?></td>
+            <td><?php echo $result->getContaminacionqx() ?></td>
+            <td><?php echo $result->getProcedimiento() ?></td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
-<?php else: ?>
-  <p>Selecciona un filtro</p>
-<?php endif; ?>
-
-  </div>
-
-  <!-- @flag Panel del filtro-->
-  <div title="Filtro" data-options="region:'east', split:false, collapsed:true" style="width: 360px;">
-<?php include_partial('form', array('filter' => $filter)) ?>
-  </div>
+  <?php endif; ?>
 </div>
 
-<script>
-  $(function() {
-    $('.datepicker').datepicker({ dateFormat: "dd-mm-yy" });
-  });
-</script>
+<input type="button" class="btn btn-primary btn-block" value="Exportar a PDF">
