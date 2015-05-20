@@ -58,7 +58,7 @@ HEAD;
             'data-placement' => 'auto top'
         ));
     $linkCancelar = link_to('<span class="cancelar"></span>', 'agenda/cancelar?id='.$c->getId(), 
-      array('data-title' => 'Cancelación',
+      array('data-title' => 'Cancelar',
             'data-toggle' => 'tooltip',
             'data-placement' => 'auto top'
             ));
@@ -118,7 +118,7 @@ HTML;
         ));
 
     $linkCancelar = link_to('<span class="cancelar"></span>', 'agenda/cancelar?id='.$c->getId(), 
-      array('data-title' => 'Cancelación',
+      array('data-title' => 'Cancelar',
             'data-toggle' => 'tooltip',
             'data-placement' => 'auto top'
             ));
