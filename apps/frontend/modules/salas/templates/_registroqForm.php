@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-6 col-md-offset-3">
 <div class="portlet box blue">
   <div class="portlet-title">
   <div class="caption">
@@ -11,7 +11,7 @@
 <div class="form-group">
     <label class="col-md-3 control-label"><?php echo $form['nombre']->renderLabel() ?></label>
     <div class="col-md-9">
-      <?php echo $form['nombre'] ?>
+      <?php echo $form['nombre']->render(array('class' => 'form-control')) ?>
       <?php echo $form['nombre']->renderError() ?>
     </div>
 </div>
@@ -19,7 +19,7 @@
 <div class="form-group">
     <label class="col-md-3 control-label"><?php echo $form['permisos']->renderLabel() ?></label>
     <div class="col-md-9">
-      <?php echo $form['permisos'] ?>
+      <?php echo $form['permisos']->render(array('class' => 'form-control')) ?>
       <?php echo $form['permisos']->renderError() ?>
     </div>
 </div>
