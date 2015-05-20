@@ -55,7 +55,7 @@
       <div class="form-group">
         <label>Infección del Sitio Quirurgico</label>
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-info"></i>
+          <span class="input-group-addon"><i class="fa fa-exclamation"></i>
           </span>
           <input class="form-control" placeholder="<?php echo $cirugia->getRiesgoqx() ?>" readonly="">
         </div>
@@ -66,7 +66,7 @@
       <div class="form-group">
         <label>Evento adverso</label>
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-exclamation"></i>
+          <span class="input-group-addon"><i class="fa fa-warning"></i>
           </span>
           <input class="form-control" placeholder="<?php echo $cirugia->getEventoqx() ?>" readonly="">
         </div>
@@ -102,7 +102,7 @@
       <div class="form-group">
         <label>Complicaciones</label>
         <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-eye"></i>
+          <span class="input-group-addon"><i class="fa fa-meh-o"></i>
           </span>
           <textarea class="form-control" placeholder="<?php echo $cirugia->getComplicaciones() ?>" readonly=""></textarea>
         </div>

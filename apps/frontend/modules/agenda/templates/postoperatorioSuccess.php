@@ -38,6 +38,7 @@
                 <div class="<?php echo getClasesCss($form['clasificacionqx']->hasError()) ?>">
                 <?php echo $form['clasificacionqx']->renderLabel() ?>
                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-question"></i></span>
                     <div class="input-icon right">
                         <?php echo $form['clasificacionqx']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -51,6 +52,7 @@
             <div class="<?php echo getClasesCss($form['riesgoqx_id']->hasError()) ?>">
                 <?php echo $form['riesgoqx_id']->renderLabel() ?>
                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
                     <div class="input-icon right">
                         <?php echo $form['riesgoqx_id']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -62,6 +64,7 @@
             <div class="<?php echo getClasesCss($form['eventoqx_id']->hasError()) ?>">
                 <?php echo $form['eventoqx_id']->renderLabel() ?>
                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-warning"></i></span>
                     <div class="input-icon right">
                         <?php echo $form['eventoqx_id']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -75,6 +78,7 @@
             <div class="<?php echo getClasesCss($form['contaminacionqx_id']->hasError()) ?>">
                 <?php echo $form['contaminacionqx_id']->renderLabel() ?>
                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lemon-o"></i></span>
                     <div class="input-icon right">
                         <?php echo $form['contaminacionqx_id']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -86,6 +90,7 @@
             <div class="<?php echo getClasesCss($form['destino_px']->hasError()) ?>">
                 <?php echo $form['destino_px']->renderLabel() ?>
                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-send-o"></i></span>
                     <div class="input-icon right">
                         <?php echo $form['destino_px']->render(array('class' => 'form-control')) ?>
                     </div>
@@ -109,7 +114,7 @@
             <div class="<?php echo getClasesCss($form['complicaciones']->hasError()) ?>">
             <?php echo $form['complicaciones']->renderLabel() ?>
                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-meh-o"></i></span>
                     <?php echo $form['complicaciones']->render(array('class' => 'form-control')) ?>
                 </div>
             </div>
