@@ -77,7 +77,6 @@
         <?php endforeach; ?>
       </tbody>
     </table>
+    <input type="button" class="btn btn-primary btn-block" value="Exportar a PDF">
   <?php endif; ?>
 </div>
-
-<input type="button" class="btn btn-primary btn-block" value="Exportar a PDF">
