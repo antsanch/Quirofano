@@ -67,13 +67,22 @@ window.onload = start;
     </tbody>
   </table>
 </div>
+
 <script type="text/javascript">
-$(function () {
+jQuery(document).ready(function() {
   $('[data-toggle="popover"]').popover({
     trigger: 'hover',
     html: true, 
     delay: { "show": 0, "hide": 1 },
     placement: 'auto top'
+  });
+
+  $('[data-toggle="tooltip"]').tooltip();
+
+  $('.datepicker').datepicker({
+    format: 'dd-mm-yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
   });
 });
 </script>
