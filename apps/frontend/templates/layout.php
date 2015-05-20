@@ -133,7 +133,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <li class="start active open">
           <a href="javascript:;">
-          <i class="icon-speech"></i>
+          <i class="icon-home"></i>
           <span class="title">Quirófanos</span>
           <span class="selected"></span>
           <span class="arrow open"></span>
@@ -145,15 +145,6 @@ License: You must have a valid license purchased only from themeforest(the above
               Lista de Quirófanos</a>
             </li>
             <li>
-              <a href="<?php echo url_for('salas/registroq') ?> ">
-              <i class="icon-pencil"></i>
-              Agregar Quirofanos</a>
-            </li>
-            <li>
-              <a href="index_2.html">
-              <i class="icon-book-open"></i>
-              Registrar salas</a>
-            </li><li>
               <a href="/agenda/validar">
               <i class="icon-calendar"></i>
               Programar Cirugía</a>
@@ -163,31 +154,36 @@ License: You must have a valid license purchased only from themeforest(the above
               <i class="icon-magnifier"></i>
               Busqueda Personalizada</a>
             </li>
+            <li>
+              <a href="<?php echo url_for('salas/registroq') ?> ">
+              <i class="icon-pencil"></i>
+              Agregar Quirofanos</a>
+            </li>
           </ul>
         </li>
         <li>
           <a href="javascript:;">
-          <i class="icon-question"></i>
+          <i class="icon-paper-clip"></i>
           <span class="title">Referencia</span>
           <span class="arrow "></span>
           </a>
           <ul class="sub-menu">
             <li>
-              <a href="ecommerce_index.html">
-              <i class="icon-home"></i>
+              <a href="#">
+              <i class="icon-link"></i>
               Clasificación CIE9MC</a>
             </li>
             <li>
-              <a href="ecommerce_orders.html">
-              <i class="icon-basket"></i>
+              <a href="#">
+              <i class="icon-link"></i>
               Clasificación CIE10</a>
             </li>
           </ul>
         </li>
         <li>
           <a href="/logout">
-          <i class="fa fa-sign-out"></i>
-Salir</a>
+            <i class="fa fa-sign-out"></i>Salir
+          </a>
         </li>
       </ul>
       <!-- END SIDEBAR MENU -->
