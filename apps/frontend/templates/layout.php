@@ -67,8 +67,8 @@ License: You must have a valid license purchased only from themeforest(the above
   <div class="page-header-inner">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
-      <a href="index.html">
-      <img src="/assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
+      <a href="/">
+      <img src="/assets/admin/layout/img/hu.png" alt="logo" class="logo-default"/>
       </a>
       <div class="menu-toggler sidebar-toggler hide">
         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -157,7 +157,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <li>
               <a href="<?php echo url_for('salas/registroq') ?> ">
               <i class="icon-pencil"></i>
-              Agregar Quirofanos</a>
+              Agregar Quirofano</a>
             </li>
           </ul>
         </li>
