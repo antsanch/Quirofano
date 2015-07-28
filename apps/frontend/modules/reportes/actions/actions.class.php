@@ -25,6 +25,10 @@ class reportesActions extends sfActions
 
     $this->reportes = ReporteqxQuery::create()->find();
 
+    $this->fechas = array('desde' => $request->getParameter('agenda_filters')['programacion']['from']['date'],
+                          'hasta' => $request->getParameter('agenda_filters')['programacion']['to']['date']
+    );
+
     if ($request->getParameter('agenda_filters', null)) {
       $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
       $this->cirugias = AgendaQuery::create()
@@ -98,4 +102,36 @@ class reportesActions extends sfActions
     $this->redirect('reportes/index?'.http_build_query(array('agenda_filters' => $reporte->getQuerystringArray())));
   }
 
+  /*
+  * Executes generarReporte action
+  * @autor: 
+  * @date: 2015-05-25
+  * @param sfRequest $request A request object
+  */
+  public function executeGenerarReporte($request)
+  {
+    require_once 'lib/vendor/sigahu_reporte/SigaReporte_include.php';
+    $this->forward404Unless($request->isXmlHttpRequest());
+
+    if ($request->getPostParameter('html')) {
+      $html = $request->getPostParameter('html');
+      $reporte = new SigaReporte("Reporte", "Cirugias del mes de Junio");
+      $reporte->agregarSeccionHTML("Tabla de resultados", $html);
+      $reporte->agregarSeccionHTML("Tabla de resultados 2", $html);
+      $reporte->generarPDF();
+    }
+
+    die();
+  }
+
+  /*
+  * Executes descargarReporte action
+  * @autor: 
+  * @date: 2015-05-25
+  * @param sfRequest $request A request object
+  */
+  public function executeDescargarReporte($request)
+  {
+
+  }
 }

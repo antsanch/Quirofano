@@ -51,16 +51,20 @@
 
 <div>
   <?php if(isset($cirugias)): ?>
-    <table class="table table-bordered">
+  <div id="reporte">
+    <div class="alert alert-info">
+      <p><strong>Desde <?php echo "{$fechas['desde']} hasta {$fechas['hasta']}" ?></strong></p>
+    </div>
+    <table class="table table-bordered text-center">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Quirofano</th>
-          <th>Sala</th>
-          <th>Médico</th>
-          <th>Servicio</th>
-          <th>Contaminacion</th>
-          <th>Procedimiento</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Quirofano</th>
+          <th class="text-center">Sala</th>
+          <th class="text-center">Médico que programa</th>
+          <th class="text-center">Especialidad</th>
+          <th class="text-center">Contaminacion</th>
+          <th class="text-center">Procedimiento</th>
         </tr>
       </thead>
       <tbody>
@@ -69,7 +73,7 @@
             <td><?php echo $result->getId() ?></td>
             <td><?php echo $result->getQuirofano() ?></td>
             <td><?php echo $result->getSalaquirurgica() ?></td>
-            <td><?php echo $result->getMedicoName() ?></td>
+            <td><?php echo $result->getPrograma() ?></td>
             <td><?php echo $result->getEspecialidad() ?></td>
             <td><?php echo $result->getContaminacionqx() ?></td>
             <td><?php echo $result->getProcedimiento() ?></td>
@@ -77,6 +81,32 @@
         <?php endforeach; ?>
       </tbody>
     </table>
-    <input type="button" class="btn btn-primary btn-block" value="Exportar a PDF">
+  </div>
+    <input type="button" class="btn btn-primary btn-block" value="Exportar" id="exportarBtn">
   <?php endif; ?>
 </div>
+
+<script type="text/javascript">
+  function exportarHTML() {
+    var tablaHTML = $("#reporte").html();
+    $.ajax({
+      type: "post",
+      url: "reportes/generarReporte", 
+      data: ({"html": tablaHTML})
+    });
+  }
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  $('.datepicker').datepicker({
+    format: 'dd-mm-yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+  });
+
+  $('#exportarBtn').click(function(){
+    exportarHTML();
+  });
+});
+</script>
