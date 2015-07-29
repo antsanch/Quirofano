@@ -104,7 +104,7 @@ class reportesActions extends sfActions
 
   /*
   * Executes generarReporte action
-  * @autor: 
+  * @autor:
   * @date: 2015-05-25
   * @param sfRequest $request A request object
   */
@@ -115,9 +115,8 @@ class reportesActions extends sfActions
 
     if ($request->getPostParameter('html')) {
       $html = $request->getPostParameter('html');
-      $reporte = new SigaReporte("Reporte", "Cirugias del mes de Junio");
-      $reporte->agregarSeccionHTML("Tabla de resultados", $html);
-      $reporte->agregarSeccionHTML("Tabla de resultados 2", $html);
+      $reporte = new SigaReporte("Reporte general", date('Y-m-d H:i:s'));
+      $reporte->agregarSeccionHTML("Resultados", $html);
       $reporte->generarPDF();
     }
 
@@ -126,12 +125,11 @@ class reportesActions extends sfActions
 
   /*
   * Executes descargarReporte action
-  * @autor: 
+  * @autor:
   * @date: 2015-05-25
   * @param sfRequest $request A request object
   */
   public function executeDescargarReporte($request)
   {
-
   }
 }
