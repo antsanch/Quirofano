@@ -1,0 +1,3 @@
+Para generar gifs, TCPDF necesita la libreria gd.
+
+http://php.net/manual/es/book.image.php
