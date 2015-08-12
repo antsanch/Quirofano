@@ -107,6 +107,9 @@ class reportesActions extends sfActions
   * @autor:
   * @date: 2015-05-25
   * @param sfRequest $request A request object
+  * Genera un reporte y lo guarda en la carpeta /web/pdf.
+  * Regresa una cadena JSON con el timestamp de la fecha de creación del pdf
+  * para su posterior descarga.
   */
   public function executeGenerarReporte($request)
   {
@@ -118,9 +121,12 @@ class reportesActions extends sfActions
       $reporte = new SigaReporte("Reporte general", date('Y-m-d H:i:s'));
       $reporte->agregarSeccionHTML("Resultados", $html);
       $reporte->generarPDF();
+
+      $json = array('pdfTimestamp' => $reporte->getPdfTimestamp());
+      return $this->renderText(json_encode($json));
     }
 
-    die();
+    //die();
   }
 
   /*
@@ -131,5 +137,20 @@ class reportesActions extends sfActions
   */
   public function executeDescargarReporte($request)
   {
+    //$this->forward404Unless($request->isXmlHttpRequest());
+    $this->forward404Unless($request->getParameter('pdfTimestamp'));
+
+    if ($request->getParameter('pdfTimestamp')) {
+      $pdfNombre = $request->getParameter('pdfTimestamp') . 'reporte.pdf';
+      $fullPath = realpath('./pdf/' . $pdfNombre);
+      if (file_exists($fullPath)) {
+        header('Content-type: application/pdf');
+        readfile($fullPath);
+        unlink($fullPath); // eliminar PDF
+      }
+      else {
+        $this->forward404();
+      }
+    }
   }
 }

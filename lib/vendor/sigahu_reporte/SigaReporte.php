@@ -76,6 +76,13 @@ class SigaReporte
     {
       $date = date_create();
       $name = date_timestamp_get($date);
-      $this->pdf->Output(__DIR__."/{$this->pdfTimestamp}reporte.pdf", 'F');
+      /* El reporte se guarda en la carpeta /web/pdf. Quizas sea buena idea
+       * expresar la ruta de una manera más sencilla
+       */
+      $this->pdf->Output(__DIR__."/../../../web/pdf/{$this->pdfTimestamp}reporte.pdf", 'F');
+    }
+
+    public function getPdfTimestamp() {
+      return $this->pdfTimestamp;
     }
 }

@@ -83,16 +83,32 @@
     </table>
   </div>
     <input type="button" class="btn btn-primary btn-block" value="Exportar" id="exportarBtn">
+    <a id="downloadLink"></a>
   <?php endif; ?>
 </div>
 
 <script type="text/javascript">
+
+  function descargarPDF(jsonData, status, jqXHR) {
+    /*
+       El atributo download no es compatible con varios navegadores.
+       http://caniuse.com/#feat=download.
+       Esto no significa que el script tronara, si no que en navegadores como
+       Safari e IE habra una redirección mientras que en Chrome un cuadro de
+       diálogo nos preguntara alegremente donde queremos guardar nuestro pdf.
+    */
+    var uri = "/reportes/descargarReporte?pdfTimestamp=" + jsonData.pdfTimestamp;
+    $("#downloadLink").attr({href: uri, download: 'reporte.pdf'})[0].click();
+  }
+
   function exportarHTML() {
     var tablaHTML = $("#reporte").html();
     $.ajax({
       type: "post",
-      url: "reportes/generarReporte", 
-      data: ({"html": tablaHTML})
+      url: "reportes/generarReporte",
+      data: ({"html": tablaHTML}),
+      dataType: "json",
+      success: descargarPDF
     });
   }
 </script>
