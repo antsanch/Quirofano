@@ -1,123 +1,148 @@
+<?php use_helper("metronicForm") ?>
 <?php slot('titulo')?>
   <title>Agregar personal | SIGA - HU</title>
 <?php end_slot() ?>
 
-<style>
-  #idTag {
-    background: #e1e279;
-    border-radius: 5px;
-    /*border: 1px solid black;*/
-    box-shadow: 10px 10px 10px #999;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-
-  #idTag div {
-    margin: 0px 5px;
-  }
-
-  #idTag .name {
-    font-size: 1.8em;
-  }
-
-  #idTag .label {
-    font-weight: bold;
-  }
-
-</style>
+<h3 class="page-title">Agregar personal</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Agregar personal')) ?>
 
 
+<div class="row">
+  <div class="col-sm-6 col-md-6">
+    <div class="portlet paddingless">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="fa fa-plus"></i> Agregar Personal
+        </div>
+      </div>
+      <div class="portlet-body form formulario">
+        <form method="post">
+          <div class="form-body">
+            <div class="row">
+              <div class="col-sm-6 col-md-12">
+                <div class="<?php echo getClasesCss($form['personal_nombre']->hasError()) ?>">
+                  <?php echo $form[ 'personal_nombre']->renderLabel() ?>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user-md"></i>
+                    </span>
+                    <div class="input-icon right">
+                      <?php renderErrorIcon($form[ 'personal_nombre']) ?>
+                      <?php echo $form[ 'personal_nombre']->render(array('class' => 'form-control')) ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-<div id="idTag">
-  <div class="name"><?php echo $cirugia->getpacientename() ?></div>
-  <div><span class="label">Registro: </span><span><?php echo $cirugia->getRegistro() ?></span></div>
+              <div class="col-sm-6 col-md-12">
+                <div class="<?php echo getClasesCss($form['tipo']->hasError()) ?>">
+                  <?php echo $form[ 'tipo']->renderLabel() ?>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-file-text-o"></i>
+                    </span>
+                    <div class="input-icon right">
+                      <?php echo $form[ 'tipo']->render(array('class' => 'form-control')) ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-6">
+                <div class="<?php echo getClasesCss($form['status']->hasError()) ?>">
+                  <?php echo $form[ 'status']->renderLabel() ?>
+                  <div class="input-group">
+                    <div class="input-icon right">
+                      <?php echo $form[ 'status']->render(array('class' => 'form-control')) ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-6">
+                <div class="<?php echo getClasesCss($form['turno']->hasError()) ?>">
+                  <?php echo $form[ 'turno']->renderLabel() ?>
+                  <div class="input-group">
+                    <div class="input-icon right">
+                      <?php echo $form[ 'turno']->render(array('class' => 'form-control')) ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <?php echo $form->renderHiddenFields() ?>
+              <input class="btn btn-primary btn-block" type="submit" value="Agregar">
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-6">
+    <div class="portlet paddingless">
+      <div class="portlet-title line">
+        <div class="caption"><i class="fa fa-user-md"></i>Personal actual</div>
+      </div>
+
+      <div>
+        <div>
+          <div class="scrollable">
+            <?php foreach ($cirugia->getPersonalTransoperatorio() as $key => $medico): ?>
+            <div class='row'>
+              <div class="col-md-6 ">
+                <div class="details">
+                  <div>
+                    <a href="#">
+                      <?php echo ucfirst($medico) ?>
+                    </a>
+                  </div>
+                  <div>
+                    <?php echo ucfirst($medico->getTipo()) ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<style>
-/* Mientras podemos hacer botones con jQueryUI usamos css */
 
-.menubar a {
-  background: white;
-  border: 1px solid black;
-  color: blue;
-  margin: 0 0 3px 0;
-  padding: 2px 4px;
-  text-decoration: none;
-}
-
-.menubar a:hover {
-  background: lightgray;
-}
-</style>
-
-<?php $quirofano = $cirugia->getQuirofano() ?>
-<div class="menubar">
-  <a href="<?php echo url_for('agenda/show?slug='.$quirofano->getSlug()) ?>">Agenda de <?php echo $quirofano ?></a>
+<div class="panel-group accordion" id="acordDetalles">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordDetalles" href="#collapseDetallesProg" aria-expanded="false">
+      <i class="fa fa-plus"></i>
+      Detalles de la programación de <?php echo $cirugia->getPacienteName() ?></a>
+      </h4>
+    </div>
+    <div id="collapseDetallesProg" class="panel-collapse collapse" aria-expanded="false">
+      <div class="panel-body">
+        <?php include_partial("detailsProgramacion", array('cirugia' => $cirugia)); ?>                    
+      </div>
+    </div>
+  </div>                              
 </div>
 
-<div class="formulario clearfix">
-  <h1>Añadir Cambio de Personal </h1>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
-  <h2>Personal actualmente en la cirugia</h2>
-  <?php foreach($cirugia->getPersonalTransoperatorio() as $personal):?>
-    <div class="area cols07"><?php echo $personal ?></div>
-    <div class="area cols04"><?php echo $personal->getTipo() ?></div>
-<HR width="100%">
-  <?php endforeach; ?>
+<script>
+$(function(){
+    $('.scrollable').slimScroll({
+        height: '250px'
+    });
+});
+</script>
 
-<form method="POST">
-
-<!--  <div class="area cols12">
-    <?php //echo $form['Personalcirugia'] ?>
-    <?php //echo $form ?>
--->
-
-  <div class="area cols06">
-    <div class="label"><?php echo $form['personal_nombre']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['personal_nombre']->renderError() ?>
-      <?php echo $form['personal_nombre'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['tipo']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['tipo']->renderError() ?>
-      <?php echo $form['tipo'] ?>
-    </div>
-  </div>
-
-
-   <div class="area cols04">
-    <div class="label"><?php echo $form['status']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['status']->renderError() ?>
-      <?php echo $form['status'] ?>
-    </div>
-  </div>
-
-  <div class="area cols04">
-    <div class="label"><?php echo $form['turno']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['turno']->renderError() ?>
-      <?php echo $form['turno'] ?>
-    </div>
-  </div>
-
-
-<!--
-  </div>
--->
-
-  <div class="area control">
-    <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Agregar nuevo personal">
-  </div>
-
-</form>
-
-</div>
 <script>
   $(function(){
 
@@ -198,11 +223,8 @@
 
   });
 })(jQuery);
-
-
 </script>
 <script>
-
   $(function() {
     $('textarea').elastic();
 
@@ -227,6 +249,4 @@
 
     });
  });
-
-
 </script>

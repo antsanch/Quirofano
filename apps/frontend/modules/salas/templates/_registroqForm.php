@@ -1,58 +1,51 @@
-<style>
-  .addLink{
-    display: inline;
-    float: right;
-    font-size: 0.9em;
-    margin-right: 10px;
-    text-decoration: none;
-    width: 700px;
-  }
-</style>
-
-<script type="text/javascript">
-  function pregunta(){
-    return confirm('¿Estas seguro de enviar este registro?');
-  }
-</script>
-<form id='target' method="POST" onsubmit="return pregunta();">
-
-<div class="area cols05">
-    <div class="label"><?php echo $form['nombre']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['nombre']->renderError() ?>
-      <?php echo $form['nombre'] ?>
-    </div>
-</div>
-
-<div class="area cols03">
-    <div class="label"><?php echo $form['permisos']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['permisos']->renderError() ?>
-      <?php echo $form['permisos'] ?>
-    </div>
-</div>
-
-<div class="area cols03">
-    <div class="label"><?php echo $form['activo']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['activo']->renderError() ?>
-      <?php echo $form['activo'] ?>
-    </div>
-</div>
-
-<div class="area cols03">
-    <div class="label"><?php echo $form['ambulatorio']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['ambulatorio']->renderError() ?>
-      <?php echo $form['ambulatorio'] ?>
-    </div>
-</div>
-
-
-
-<div class="area control">
-    <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Guardar">
+<div class="col-md-6 col-md-offset-3">
+<div class="portlet box blue">
+  <div class="portlet-title">
+  <div class="caption">
+      <i class="fa fa-sliders"></i> Agregar Quirofano
   </div>
+</div>
+<div class="portlet-body form">
+<form id="target" method="post" class="form-horizontal">
+<div class="form-body">
+<div class="form-group">
+    <label class="col-md-3 control-label"><?php echo $form['nombre']->renderLabel() ?></label>
+    <div class="col-md-9">
+      <?php echo $form['nombre']->render(array('class' => 'form-control')) ?>
+      <?php echo $form['nombre']->renderError() ?>
+    </div>
+</div>
 
+<div class="form-group">
+    <label class="col-md-3 control-label"><?php echo $form['permisos']->renderLabel() ?></label>
+    <div class="col-md-9">
+      <?php echo $form['permisos']->render(array('class' => 'form-control')) ?>
+      <?php echo $form['permisos']->renderError() ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-3 control-label"><?php echo $form['activo']->renderLabel() ?></label>
+    <div class="col-md-9">
+      <?php echo $form['activo'] ?>
+      <?php echo $form['activo']->renderError() ?>
+    </div>
+</div>
+
+<div class="form-group">
+      <label class="col-md-3 control-label"><?php echo $form['ambulatorio']->renderLabel() ?></label>
+      <div class="col-md-9">
+      <?php echo $form['ambulatorio'] ?>
+      <?php echo $form['ambulatorio']->renderError() ?>
+    </div>
+</div>
+
+<div class="form-actions">
+    <?php echo $form->renderHiddenFields() ?>
+    <input type="submit" class="btn btn-primary btn-block" value="Agregar">
+</div>
+</div>
 </form>
+</div>
+</div>
+</div>

@@ -19,7 +19,7 @@ abstract class BasePersonalcirugiaForm extends BaseFormPropel
       'agenda_id'       => new sfWidgetFormPropelChoice(array('model' => 'Agenda', 'add_empty' => true)),
       'personal_nombre' => new sfWidgetFormInputText(),
       'especialidad_id' => new sfWidgetFormPropelChoice(array('model' => 'Especialidad', 'add_empty' => true)),
-      'tipo'            => new sfWidgetFormChoice(array('choices' => array (  '' => '',  'cirujano' => 'cirujano',  'anestesista' => 'anestesista',  'enfermeria' => 'enfermeria',  'otro' => 'otro',))),
+      'tipo'            => new sfWidgetFormChoice(array('choices' => array (  '' => '',  'cirujano' => 'Cirujano',  'anestesista' => 'Anestesista',  'enfermeria' => 'Enfermería',  'otro' => 'Otro'))),
       'status'          => new sfWidgetFormInputText(),
       'programa'        => new sfWidgetFormInputCheckbox(),
       'inicia'          => new sfWidgetFormInputCheckbox(),
@@ -33,9 +33,9 @@ abstract class BasePersonalcirugiaForm extends BaseFormPropel
       'id'              => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'personal_id'     => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id', 'required' => false)),
       'agenda_id'       => new sfValidatorPropelChoice(array('model' => 'Agenda', 'column' => 'id', 'required' => false)),
-      'personal_nombre' => new sfValidatorString(array('max_length' => 256, 'required' => false)),
+      'personal_nombre' => new sfValidatorString(array('max_length' => 256, 'required' => true)),
       'especialidad_id' => new sfValidatorPropelChoice(array('model' => 'Especialidad', 'column' => 'id', 'required' => false)),
-      'tipo'            => new sfValidatorChoice(array('choices' => array (  0 => 'cirujano',  1 => 'anestesista',  2 => 'enfermeria',  3 => 'otro',), 'required' => false)),
+      'tipo'            => new sfValidatorChoice(array('choices' => array (  0 => 'cirujano',  1 => 'anestesista',  2 => 'enfermeria',  3 => 'otro',), 'required' => true)),
       'status'          => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'programa'        => new sfValidatorBoolean(array('required' => false)),
       'inicia'          => new sfValidatorBoolean(array('required' => false)),
@@ -44,6 +44,8 @@ abstract class BasePersonalcirugiaForm extends BaseFormPropel
       'turno'           => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'created_at'      => new sfValidatorDateTime(array('required' => false)),
     ));
+
+    $this->validatorSchema['personal_nombre']->setMessage('required', 'Falta nombre de médico');    
 
     $this->widgetSchema->setNameFormat('personalcirugia[%s]');
 

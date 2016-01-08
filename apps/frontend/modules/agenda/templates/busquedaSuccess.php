@@ -1,25 +1,31 @@
-<?php
-  use_stylesheet('/css/global/styleAgenda.css');
-  use_stylesheet('/css/global/facebox.css');
-  use_stylesheet('/css/global/widescreen.css');
-  use_javascript('/js/global/facebox.js');
-  use_helper('agenda');
-
-  $term = $sf_request->getParameter('term')
-?>
+<?php use_stylesheet('global/styleAgenda.css') ?>
+<?php use_helper('agenda') ?>
+<?php $term = $sf_request->getParameter('term') ?>
 
 <?php slot('titulo') ?>
   <title>Resultados de la búsqueda: <?php echo $term ?> | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h1>Resultados de la búsqueda: <?php echo $term ?></h1>
+<h3 class="page-title">Resultados de la búsqueda</h3>
 
-<div id="headtable">
-<a class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only ui-state-hover" href="<?php echo url_for('agenda/index') ?>">&nbsp;&nbsp;Lista general de quirofanos&nbsp;&nbsp;</a>
-<form action="<?php echo url_for('agenda/busqueda') ?>" style="display:inline; float:right;">
-  <input type="text" id="busqueda" name="term" placeholder="Buscar" value="<?php echo $term ?>" style="width:120px">
-  <input type="submit" value=">>">
-</form>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Búsqueda')) ?>
+
+<div class="row">
+ <div class="col-md-5 pull-right">
+    <form action="<?php echo url_for('agenda/busqueda') ?>">
+      <div class="form-group">
+            <div class="input-group">
+              <div class="input-icon">
+                <i class="icon-magnifier"></i>
+                <input class="form-control" type="text" value="<?php echo $term ?>" id="busqueda" name="term" placeholder="Nombre o Registro">
+              </div>
+              <span class="input-group-btn">
+                <input class="btn btn-primary" type="submit" value="Buscar">
+              </span>
+            </div>
+        </div>
+    </form>
+  </div>
 </div>
 
 <?php if( count($cirugias) > 0 ): ?>
@@ -27,52 +33,55 @@
 <!-- @flag Inicio de la nueva tabla de resultados -->
 
 <div id="camasPanel">
-  <?php $currentStatus = null?>
-  <table id='agenda' border="0" width="100%" cellspacing="0">
-    <thead>
-     <tr>
-      <th colspan="2">Iconos</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <!-- <th>Quirofano</th> -->
-      <th>Sala</th>
-      <th>Registro</th>
-      <th>Paciente</th>
-      <th>Diagnóstico</th>
-      <th>Procedimiento / Cirugía</th>
-      <th>Médico que programo</th>
-      <th>Acciones</th>
-    </tr>
-    </thead>
+  <?php $currentStatus = null ?>
+  <table id='agenda' class="table table-hover table-striped">
     <tbody>
-<?php foreach($cirugias as $c): ?>
-        <?php
-          switch ($c->getStatus()) {
-          case AgendaPeer::DIFERIDA_STATUS:
-            echo renderProgramada($c);
-            break;
-          case AgendaPeer::PROGRAMADA_STATUS:
-            echo renderProgramada($c);
-            break;
-          case AgendaPeer::TRANSOPERATORIO_STATUS:
-            echo renderTransoperatorio($c);
-            break;
-          case AgendaPeer::REALIZADA_STATUS:
-            echo renderRealizada($c);
-            break;
-          default:
-            # No default
-          }
-        ?>
-<?php endforeach; ?>
+      <?php foreach($cirugias as $c): ?>
+            <?php
+            if($currentStatus != $c->getStatus()) {
+              echo print_head($c->getVerboseStatus());
+              $currentStatus = $c->getStatus();
+            }
+          ?>
+              <?php
+                switch ($c->getStatus()) {
+                case AgendaPeer::DIFERIDA_STATUS:
+                  echo renderProgramada($c);
+                  break;
+                case AgendaPeer::PROGRAMADA_STATUS:
+                  echo renderProgramada($c);
+                  break;
+                case AgendaPeer::TRANSOPERATORIO_STATUS:
+                  echo renderTransoperatorio($c);
+                  break;
+                case AgendaPeer::REALIZADA_STATUS:
+                  echo renderRealizada($c);
+                  break;
+                default:
+                  # No default
+                }
+              ?>
+      <?php endforeach; ?>
     </tbody>
   </table>
 </div>
 
 <?php else: ?>
-<?php slot('titulo') ?>
-  <title>Sin coincidencias para  <?php echo $term ?> | SIGA-HU </title>
-<?php end_slot() ?>
-  <p>No se encontraron coincidencias, verifica los datos y vuelve a intentarlo </p>
-
+<div class="row col-md-12">
+  <div class="alert alert-danger">
+    <p>No se encontraron coincidencias para <strong>"<?php echo $term?>"</strong>, verifica los datos y vuelve a intentarlo.</p>
+  </div>
+</div>
 <?php endif; ?>
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover({
+    trigger: 'hover',
+    html: true, 
+    delay: { "show": 0, "hide": 1 },
+    placement: 'auto top'
+  });
+});
+</script>
+

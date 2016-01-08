@@ -74,7 +74,7 @@ class programarCirugiaForm extends BaseAgendaForm
     $this->setWidget('status', new sfWidgetFormInputHidden(array(), array('value' => '1')));
 
   # @flag Configura los campos de fecha y hora para la programacion
-    $this->widgetSchema['programacion'] = new sfWidgetFormInputTextDateTime(array(
+    /*$this->widgetSchema['programacion'] = new sfWidgetFormInputTextDateTime(array(
       'date_order'  => 'd-m-Y',
       'format'      => '<div class="area cols02"><div class="label">Fecha: </div><div class="field">%date%</div></div> <div class="area cols02"><div class="label">Hora:</div> <div class="field">%time%</div></div>',
       'with_time'   => true,
@@ -83,14 +83,14 @@ class programarCirugiaForm extends BaseAgendaForm
       'class'       => 'hasDatapicker',
       'date'        => array(
         'class'       => 'datepicker',
-        'placeholder' => 'Dia/Mes/Año',
+        'placeholder' => 'DD/MM/AAAA',
       ),
       'id'          => 'datepicker',
       'time'        => array(
-        'placeholder' => 'Hora:Minutos'
+        'placeholder' => 'HH:MM'
       ),
       //'data-source' => 'http://example.com/api/data'
-    ));
+    ));*/
 
   # @flag Configura el campo de duracion (tiempo estimado)
     $this->widgetSchema['tiempo_est'] = new sfWidgetFormInputText();
@@ -115,13 +115,13 @@ class programarCirugiaForm extends BaseAgendaForm
   # @flag Configura las opciones del campo protocolo
     $this->widgetSchema['protocolo'] = new sfWidgetFormChoice(array(
       'choices' => array('0' => 'No', '1' => 'Si'),
-      'expanded' => true
+      'expanded' => false
     ));
 
   # @flag Configura las opciones al campo reintervencion
     $this->widgetSchema['reintervencion'] = new sfWidgetFormChoice(array(
       'choices' => array('0' => 'No', '1' => 'Si'),
-      'expanded' => true
+      'expanded' => false
     ));
 
   # @flag Configura el campo 'diagnostico'
@@ -133,11 +133,64 @@ class programarCirugiaForm extends BaseAgendaForm
       'placeholder' => 'Diagnóstico del paciente o código CIE10',
     ));
 
-  # @flag Configura el campo 'riesgo quirurgico' como textarea
     $this->setWidget('riesgo_qx_pre', new sfWidgetFormTextarea());
 
   # @flag Configura las etiquetas
     $this->widgetSchema->setLabels(AgendaPeer::getLabels());
+
+
+/**
+ * Establecer placeholders
+ * ===================================================================== */
+
+    $this->widgetSchema['tiempo_est']->setAttributes(array(
+      'placeholder' => 'Tiempo estimado'
+      ));
+
+    $this->widgetSchema['registro']->setAttributes(array(
+      'placeholder' => '# de registro'
+      ));
+
+    $this->widgetSchema['paciente_name']->setAttributes(array(
+      'placeholder' => 'Nombre del paciente'
+      ));
+
+    $this->widgetSchema['edad']->setAttributes(array(
+      'placeholder' => 'Edad del paciente'
+      ));
+
+    $this->widgetSchema['genero']->setAttributes(array(
+      'placeholder' => 'Género del paciente'
+      ));
+
+    $this->widgetSchema['procedencia']->setAttributes(array(
+      'placeholder' => 'Procedencia del paciente'
+      ));
+
+    $this->widgetSchema['riesgo_qx_pre']->setAttributes(array(
+      'placeholder' => 'Riesgo quirúrgico'
+      ));
+
+    $this->widgetSchema['req_insumos']->setAttributes(array(
+      'placeholder' => 'Insumos'
+      ));
+
+    $this->widgetSchema['req_anestesico']->setAttributes(array(
+      'placeholder' => 'Medidas de anestesia'
+      ));
+
+    $this->widgetSchema['req_hemoderiv']->setAttributes(array(
+      'placeholder' => 'Hemoderivados necesarios'
+      ));
+
+    $this->widgetSchema['req_laboratorio']->setAttributes(array(
+      'placeholder' => 'Requerimientos de laboratorio'
+      ));
+
+    $this->widgetSchema['requerimiento']->setAttributes(array(
+      'placeholder' => 'Otras necesidades'
+      ));
+
 
 
 /**
@@ -157,11 +210,12 @@ class programarCirugiaForm extends BaseAgendaForm
     $this->widgetSchema['programa']['programa'] = new sfWidgetFormInputHidden();
 
     $this->widgetSchema['programa']['personal_nombre']
-      ->setLabel('Nombre del Médico que programa:')
+      ->setLabel('Nombre del médico que programa')
       ->setAttributes(array(
         'class' => 'searchable',
         'data-url' => 'profile/json',
-        #'data-select' => '#agenda_programa_personal_id'
+        #'data-select' => '#agenda_programa_personal_id',
+        'placeholder' => 'Nombre del médico'
       ));
 
 /**
@@ -188,6 +242,7 @@ class programarCirugiaForm extends BaseAgendaForm
         'add_link'            =>  'Agregar otro Procedimiento',
         'max_additions'       =>  4
     ));
+
 
     //$this->widgetSchema['hora'] = new sfWidgetFormInputText();  # @flag Eliminamos el campo de la hora          [DEL]
     //$this->setWidget('tiempo_est', new sfWidgetFormChoice(array(  //          [DEL]
@@ -258,7 +313,7 @@ class programarCirugiaForm extends BaseAgendaForm
           'invalid'     =>  'Mal formato de Fecha',
           'no_time'     =>  'Falta la hora',
           'min'         =>  'Fecha pasada',
-          'max'         =>  'No se puede progrmar con mas de un mes de anticipación'
+          'max'         =>  'No se puede programar con más de un mes de anticipación'
           )
         );
         # @flag Eliminamos la referencia al campo 'hora'
@@ -297,12 +352,14 @@ class programarCirugiaForm extends BaseAgendaForm
         //~ $this->validatorSchema['req_anestesico']->setOption('required', true);              //          [DEL]
         //~ $this->validatorSchema['req_anestesico']->setMessage('required','Falta anestesia'); //          [DEL]
 
+        /* Prevé programar cirugias en días pasados y en un perido máximo de 30 días */
+        $this->validatorSchema['programacion']->setOption('min', strtotime('today'));
+        $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));
+
+        /*
         $this->getObject()->isNew() ? # @todo Revisar esta condicion porque no me gusta
           $this->validatorSchema['programacion']->setOption('min', strtotime('today - 1 day')):
-          $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));
-        //~ $this->validatorSchema['programacion']->setMessage('min','Fecha pasada');
-        //~ $this->validatorSchema['programacion']->setMessage('max','No se puede progrmar con mas de un mes de anticipación');
-
+          $this->validatorSchema['programacion']->setOption('max', strtotime('today + 30 days'));*/
   }
 
  /**

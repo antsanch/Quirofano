@@ -197,6 +197,20 @@ class Agenda extends BaseAgenda {
     return trim(implode(' ', $classes));
   } /* getClasses */
 
+ /* getStatusClass
+  * @autor: Antonio Sanchez Uresti
+  * @date:  2014-08-24
+  */
+  public function getStatusClass()
+  {
+    switch ($this->getStatus()) {
+      case AgendaPeer::DIFERIDA_STATUS : return "danger";
+      case AgendaPeer::PROGRAMADA_STATUS : return "warning";
+      case AgendaPeer::TRANSOPERATORIO_STATUS : return "success";
+      case AgendaPeer::REALIZADA_STATUS : return "active";
+    }
+  }
+
  /**
   * Regresa un string con el elemento <div> que representa la caratula del reloj con el atraso correspondiente
   * @autor: Antonio Sanchez Uresti
@@ -551,22 +565,22 @@ class Agenda extends BaseAgenda {
 
   public function getReqHemoderiv()
   {
-    return parent::getReqHemoderiv() ? parent::getReqHemoderiv() : 'Ninguno';
+    return parent::getReqHemoderiv() ? parent::getReqHemoderiv() : null;
   }
 
   public function getReqLaboratorio()
   {
-    return parent::getReqLaboratorio() ? parent::getReqLaboratorio() : 'Ninguno';
+    return parent::getReqLaboratorio() ? parent::getReqLaboratorio() : null;
   }
 
   public function getRequerimiento()
   {
-    return parent::getRequerimiento() ? parent::getRequerimiento() : 'Ninguno';
+    return parent::getRequerimiento() ? parent::getRequerimiento() : null;
   }
 
   public function getProcedencia()
   {
-    return parent::getProcedencia() ? parent::getProcedencia() : 'Desconocido';
+    return parent::getProcedencia() ? parent::getProcedencia() : null;
   }
 
   public function getDestinoPxText() {

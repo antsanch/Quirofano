@@ -1,179 +1,197 @@
-<script type="text/javascript" src="/js/global/jquery.ptTimeSelect.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/global/jquery.ptTimeSelect.css" />
+<?php use_helper('metronicForm') ?>
+<?php use_stylesheet('admin/css/tasks.css') ?>
+<?php use_javascript('admin/scripts/tasks.js') ?>
 
-
-<style>
-  #idTag {
-    background: #e1e279;
-    border-radius: 5px;
-    /*border: 1px solid black;*/
-    box-shadow: 10px 10px 10px #999;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-
-  #idTag div {
-    margin: 0px 5px;
-  }
-
-  #idTag .name {
-    font-size: 1.8em;
-  }
-
-  #idTag .label {
-    font-weight: bold;
-  }
-</style>
-
-<!- Aqui va el paciente ->
-
-<div id="idTag">
-  <div class="name"><?php echo "Nombre del paciente: ".$form->getObject()->getPacienteName() ?></div>
-  </div>
-
-
-<!- Aqui va el paciente ->
-
-<style>
-/* Mientras podemos hacer botones con jQueryUI usamos css */
-.menubar a {
-  background: white;
-  border: 1px solid black;
-  color: blue;
-  margin: 0 0 3px 0;
-  padding: 2px 4px;
-  text-decoration: none;
-}
-
-.menubar a:hover {
-  background: lightgray;
-}
-</style>
-
-
-    <script type="text/javascript">
-      $(document).ready(function(){
-          // find the input fields and apply the time select to them.
-          $("#datahora").ptTimeSelect();
-      });
-    </script>
-
-
-
-<?php $quirofano = $form->getObject()->getQuirofano() ?>
-<div class="menubar">
-  <a href="<?php echo url_for('agenda/show?slug='.$quirofano->getSlug()) ?>">Agenda de <?php echo $quirofano ?></a>
-</div>
-
-<div class="formulario clearfix">
 <?php slot('titulo') ?>
   <title>Postoperatorio | SIGA-HU </title>
 <?php end_slot() ?>
 
-<h1>Postoperatorio</h1>
+<h3 class="page-title">Postoperatorio</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Postoperatorio')) ?>
 
-<form method="POST">
+<div class="formulario">
 
-  <div class="area cols03">
-    <div class="label"><?php echo $form['egreso']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['egreso']->renderError() ?>
-      <?php echo $form['egreso'] ?>
+<form method="post">
+
+<div class="col-md-6 col-sm-6">
+
+  <div class="portlet paddingless">
+    <div class="portlet-title line">
+      <div class="caption"><i class="fa fa-info"></i>Detalles Postoperatorio</div>
     </div>
+
+    <div class="row"> <!-- INICIO ROW 1 -->
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['egreso']->hasError()) ?>">
+                <label>Hora</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                  <div class="input-icon right">
+                    <?php renderErrorIcon($form['egreso']) ?>
+                    <input class="form-control timepickermr" placeholder="HH:MM" type="text" name="agenda[egreso]">
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+                <div class="<?php echo getClasesCss($form['clasificacionqx']->hasError()) ?>">
+                <?php echo $form['clasificacionqx']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-question"></i></span>
+                    <div class="input-icon right">
+                        <?php echo $form['clasificacionqx']->render(array('class' => 'form-control')) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- FIN ROW 1-->
+
+    <div class="row"> <!-- INICIO ROW 2 -->
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['riesgoqx_id']->hasError()) ?>">
+                <?php echo $form['riesgoqx_id']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-exclamation"></i></span>
+                    <div class="input-icon right">
+                        <?php echo $form['riesgoqx_id']->render(array('class' => 'form-control')) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['eventoqx_id']->hasError()) ?>">
+                <?php echo $form['eventoqx_id']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-warning"></i></span>
+                    <div class="input-icon right">
+                        <?php echo $form['eventoqx_id']->render(array('class' => 'form-control')) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- FIN ROW 2-->
+
+    <div class="row"> <!-- INICIO ROW 3 -->
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['contaminacionqx_id']->hasError()) ?>">
+                <?php echo $form['contaminacionqx_id']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lemon-o"></i></span>
+                    <div class="input-icon right">
+                        <?php echo $form['contaminacionqx_id']->render(array('class' => 'form-control')) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['destino_px']->hasError()) ?>">
+                <?php echo $form['destino_px']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-send-o"></i></span>
+                    <div class="input-icon right">
+                        <?php echo $form['destino_px']->render(array('class' => 'form-control')) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- FIN ROW 3 -->
+
+    <div class="row"> <!-- INICIO ROW 4 -->
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['ev_adversos_anestesia']->hasError()) ?>">
+            <?php echo $form['ev_adversos_anestesia']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-eye"></i></span>
+                    <?php echo $form['ev_adversos_anestesia']->render(array('class' => 'form-control')) ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+            <div class="<?php echo getClasesCss($form['complicaciones']->hasError()) ?>">
+            <?php echo $form['complicaciones']->renderLabel() ?>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-meh-o"></i></span>
+                    <?php echo $form['complicaciones']->render(array('class' => 'form-control')) ?>
+                </div>
+            </div>
+        </div>
+    </div> <!-- FIN ROW 4 -->
   </div>
-
-   <div class="area cols03">
-    <div class="label"><?php echo $form['clasificacionqx']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['clasificacionqx']->renderError() ?>
-      <?php echo $form['clasificacionqx'] ?>
-    </div>
-  </div>
-
-<div class="area cols06 horizontal">
-    <div class="label"><?php echo $form['destino_px']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['destino_px']->renderError() ?>
-      <?php echo $form['destino_px'] ?>
-    </div>
-  </div>
-
-<br/><br/><br/>
-
-
-  <div class="area cols06">
-    <div class="label"><?php echo $form['riesgoqx_id']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['riesgoqx_id']->renderError() ?>
-      <?php echo $form['riesgoqx_id'] ?>
-    </div>
-  </div>
-
-
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['eventoqx_id']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['eventoqx_id']->renderError() ?>
-      <?php echo $form['eventoqx_id'] ?>
-    </div>
-  </div>
-
-  <div class="area cols03">
-    <div class="label"><?php echo $form['contaminacionqx_id']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['contaminacionqx_id']->renderError() ?>
-      <?php echo $form['contaminacionqx_id'] ?>
-    </div>
-  </div>
-
-
-
-  <div class="area cols12">
-    <div class="label"><?php echo $form['ev_adversos_anestesia']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['ev_adversos_anestesia']->renderError() ?>
-      <?php echo $form['ev_adversos_anestesia'] ?>
-    </div>
-  </div>
-
-  <div class="area cols12">
-    <div class="label"><?php echo $form['complicaciones']->renderLabel() ?></div>
-    <div class="field">
-      <?php echo $form['complicaciones']->renderError() ?>
-      <?php echo $form['complicaciones'] ?>
-    </div>
-  </div>
-
+</div>
 
 <?php //$formularios = $form->getEmbeddedForm('temporal')?>
 
-<?php $x = 1?>
+<div class="col-sm-6 col-md-6">
+    <div class="portlet paddingless tasks-widget">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="fa fa-user-md"></i>Médicos que finalizan
+        </div>
+      </div>
 
+      <div class="portlet-body">
+        <div class="task-content">
+          <div>
+            <div class="scrollable">
+              <ul class="task-list" id="listaDoctores">
+                  <?php foreach ($form['temporal'] as $formulario):?>
+                    <!-- <div ><?php echo $formulario['finaliza']->renderLabel($formulario['personal_nombre']->getValue()) ?></div> -->
+                    <li>
+                      <div class="task-checkbox">
+                        <div>
+                          <span><?php echo $formulario['finaliza'] ?></span>
+                        </div>
+                      </div>
+                      <div class="task-title"><span class="task-title-sp"><?php echo $formulario['personal_nombre']->getValue() ?></span></div>
+                      <div style="display:none" ><?php echo $formulario['personal_nombre'] ?></div>
+                    </li>
+                  <?php endforeach;?>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <input id="marcarTodosBtn" type="button" class="btn btn-link" value="Marcar todos" />
+      </div>
+    </div>
+</div>
 
-<h3 style="float: left; margin-top: 20px; width: 100%;">Del personal que participa en esta cirugia, quienes finalizan</h3>
-<?php foreach ($form['temporal'] as $formulario):?>
-
-   <div class="area cols04">
-    <!-- <div class="label"><?php echo $formulario['finaliza']->renderLabel($formulario['personal_nombre']->getValue()) ?></div> -->
-    <div class="label"><?php echo $formulario['personal_nombre']->getValue() ?></div>
-    <div style="display:none" ><?php echo $formulario['personal_nombre'] ?></div>
-  </div>
-
-  <div class="area cols08">
-    <?php echo $formulario['finaliza'] ?>
-  </div>
-
-
-
-<?php endforeach;?>
-
-
-  <div class="area control">
+  <div class="form-actions-right">
     <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Guardar">
+    <input class="btn btn-primary btn-block" type="submit" value="Enviar">
   </div>
 
 </form>
+
 </div>
+
+<script type="text/javascript">
+    // marcar todos los médicos
+    function marcarTodos() {
+    $("#listaDoctores input[name*='agenda']").each(function(){
+        $(this).parent().addClass('checked');
+        $(this).prop('checked', true);
+    });
+}
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.scrollable').slimScroll({
+            height: '250px'
+        });
+
+        $('.timepickermr').timepicker({
+            showMeridian: true
+        });
+
+        $("#marcarTodosBtn").click(function(){
+            marcarTodos()
+        });
+
+    });
+</script>
 

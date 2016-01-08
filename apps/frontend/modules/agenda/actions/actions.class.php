@@ -529,8 +529,8 @@ $mes['max'] = $fechafinal->format("Y-m-d");
     //~ $Quirofano = QuirofanoQuery::create()->findOneById($agenda->getQuirofanoid());
 
     if ($agenda->estaAtrasado() && !$agenda->esDiferido()) {
-      $this->getUser()->setFlash('obligar', 'Esta cirugia tiene más de 24 Horas de atraso por lo que se debe marcar como diferida y especificar
-      una causa, antes de poder reprogramarse');
+      $this->getUser()->setFlash('obligar', 'Esta cirugia tiene más de 24 horas de atraso por lo que se debe marcar como diferida y especificar
+      una causa antes de poder reprogramarse.');
       $this->redirect('agenda/diferir?id='.$agenda->getId().'&reprogramar=1');
     }
     $this->form = new programarCirugiaForm($agenda);

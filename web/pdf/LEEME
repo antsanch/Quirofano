@@ -1,0 +1,5 @@
+En este folder se guardan los pdfs temporalmente, una vez que son enviados al cliente estos son eliminados.
+
+
+Lo importante de aquello es que no debemos de borrar este folder aunque este vacio para evitar feos errores :(
+

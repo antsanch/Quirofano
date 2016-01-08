@@ -70,7 +70,7 @@ abstract class BaseAgendaForm extends BaseFormPropel
       'destino_px'            => new sfWidgetFormInputText(),
       'liberacion_sala'       => new sfWidgetFormTime(),
       'tiempo_est'            => new sfWidgetFormTime(),
-      'riesgo_qx_pre'         => new sfWidgetFormInputText(),
+      'riesgo_qx_pre'         => new sfWidgetFormTextarea(),
       'show_in_index'         => new sfWidgetFormInputCheckbox(),
       'protocolo'             => new sfWidgetFormInputCheckbox(),
       'cancelada'             => new sfWidgetFormInputCheckbox(),

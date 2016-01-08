@@ -31,7 +31,7 @@ class postoperatorioQuirofanoForm extends AgendaForm
   $this->widgetSchema['status']->setAttribute('value', '100');
   $this->setWidget('destino_px', new sfWidgetFormChoice(array(
     'choices' => AgendaPeer::getDestinoPx(),
-    'expanded' => true
+    'expanded' => false
   )));
   $this->setWidget('clasificacionqx', new sfWidgetFormChoice(array(
     'choices' => array(null, 'Mayor', 'Menor'),
@@ -40,6 +40,10 @@ class postoperatorioQuirofanoForm extends AgendaForm
   $this->widgetSchema->setLabels(AgendaPeer::getLabels());
     /* Ajustes a los validadores */
   $this->validatorSchema['egreso']->setOption('required', true);
+  $this->validatorSchema['ev_adversos_anestesia']->setOption('required', true);
+  $this->validatorSchema['complicaciones']->setOption('required', true);
+  $this->validatorSchema['contaminacionqx_id']->setOption('required', true);
+  $this->validatorSchema['destino_px']->setOption('required', true);
   $this->validatorSchema['egreso']->setMessage('required','Falta hora');
   $this->widgetSchema['egreso']->setAttributes(array(
     'id' => 'datahora',

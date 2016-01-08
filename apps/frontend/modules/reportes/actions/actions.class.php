@@ -25,6 +25,10 @@ class reportesActions extends sfActions
 
     $this->reportes = ReporteqxQuery::create()->find();
 
+    $this->fechas = array('desde' => $request->getParameter('agenda_filters')['programacion']['from']['date'],
+                          'hasta' => $request->getParameter('agenda_filters')['programacion']['to']['date']
+    );
+
     if ($request->getParameter('agenda_filters', null)) {
       $this->filter->bind($request->getParameter($this->filter->getName()), $request->getFiles($this->filter->getName()));
       $this->cirugias = AgendaQuery::create()
@@ -98,4 +102,55 @@ class reportesActions extends sfActions
     $this->redirect('reportes/index?'.http_build_query(array('agenda_filters' => $reporte->getQuerystringArray())));
   }
 
+  /*
+  * Executes generarReporte action
+  * @autor:
+  * @date: 2015-05-25
+  * @param sfRequest $request A request object
+  * Genera un reporte y lo guarda en la carpeta /web/pdf.
+  * Regresa una cadena JSON con el timestamp de la fecha de creación del pdf
+  * para su posterior descarga.
+  */
+  public function executeGenerarReporte($request)
+  {
+    require_once 'lib/vendor/sigahu_reporte/SigaReporte_include.php';
+    $this->forward404Unless($request->isXmlHttpRequest());
+
+    if ($request->getPostParameter('html')) {
+      $html = $request->getPostParameter('html');
+      $reporte = new SigaReporte("Reporte general", date('Y-m-d H:i:s'));
+      $reporte->agregarSeccionHTML("Resultados", $html);
+      $reporte->generarPDF();
+
+      $json = array('pdfTimestamp' => $reporte->getPdfTimestamp());
+      return $this->renderText(json_encode($json));
+    }
+
+    //die();
+  }
+
+  /*
+  * Executes descargarReporte action
+  * @autor:
+  * @date: 2015-05-25
+  * @param sfRequest $request A request object
+  */
+  public function executeDescargarReporte($request)
+  {
+    //$this->forward404Unless($request->isXmlHttpRequest());
+    $this->forward404Unless($request->getParameter('pdfTimestamp'));
+
+    if ($request->getParameter('pdfTimestamp')) {
+      $pdfNombre = $request->getParameter('pdfTimestamp') . 'reporte.pdf';
+      $fullPath = realpath('./pdf/' . $pdfNombre);
+      if (file_exists($fullPath)) {
+        header('Content-type: application/pdf');
+        readfile($fullPath);
+        unlink($fullPath); // eliminar PDF
+      }
+      else {
+        $this->forward404();
+      }
+    }
+  }
 }

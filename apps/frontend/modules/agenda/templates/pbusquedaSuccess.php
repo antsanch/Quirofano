@@ -1,34 +1,43 @@
-<div class="formulario clearfix">
-<h1 style="color:#FFFFFF;">Busqueda Personalizada: </h1>
+<h3 class="page-title">Búsqueda personalizada</h3>
 
+<?php include_partial('qbreadcrumb', array('locacion' => 'Búsqueda personalizada')) ?>
 
-<form action="<?php echo url_for('agenda/busquedapersonalisada') ?>" style="display:inline; float:right;">
-<div class="area cols03">
-    <div class="label"><?php echo "Quirofano: " ?></div>
-      <div class="field">
-        <input type="text" id="busqueda" name="Quirofano" placeholder="Quirofano" style="width:120px">
+<div class="col-md-6 col-sm-offset-3">
+<div class="portlet box blue">
+  <div class="portlet-title">
+  <div class="caption">
+      <i class="fa fa-search"></i> Busqueda personalizada
+  </div>
+</div>
+<div class="portlet-body form">
+<form action="<?php echo url_for('agenda/busquedapersonalisada') ?>" class="form-horizontal">
+<div class="form-body">
+<div class="form-group">
+    <label class="col-md-3">Quirofano</label>
+      <div class="col-md-9">
+        <input class="form-control" type="text" id="busqueda" name="Quirofano" placeholder="Nombre del quirofano">
       </div>
 </div>
 
-<div class="area cols03">
-    <div class="label"><?php echo "Sala: " ?></div>
-      <div class="field">
-        <input type="text" id="busqueda" name="Sala" placeholder="Sala" style="width:120px">
+<div class="form-group">
+    <label class="col-md-3">Sala</label>
+      <div class="col-md-9">
+        <input class="form-control" type="text" id="busqueda" name="Sala" placeholder="Sala">
       </div>
 </div>
 
 
-<div class="area cols06">
-    <div class="label"><?php echo "Nombre: " ?></div>
-      <div class="field">
-        <input type="text" id="busqueda" name="Nombre" placeholder="Nombre">
+<div class="form-group">
+    <label class="col-md-3">Nombre</label>
+      <div class="col-md-9">
+        <input class="form-control" type="text" id="busqueda" name="Nombre" placeholder="Nombre">
       </div>
 </div>
 
-<div class="area cols03">
-    <div class="label"><?php echo "Mes: " ?></div>
-
-<select id= "busqueda "name="Mes" style = "width:120px"> 
+<div class="form-group">
+    <label class="col-md-3">Mes</label>
+<div class="col-md-9">
+<select id= "busqueda "name="Mes" class="form-control"> 
    <option value="01">Enero</option> 
    <option value="02">Febrero</option> 
    <option value="03">Marzo</option>
@@ -43,21 +52,20 @@
    <option value="12">Diciembre</option> 
 </select> 
 </div>
+</div>
 
-<div class="area cols03">
-    <div class="label"><?php echo "Año: " ?></div>
-      <div class="field">
-        <input type="number" id="busqueda" name="Año" placeholder="Año" style="width:120px"  min="2013" maxlength="4">
+<div class="form-group">
+    <label class="col-md-3">Año</label>
+      <div class="col-md-9">
+        <input class="form-control" type="number" id="busqueda" name="Año" placeholder="Año"  min="2013" maxlength="4" value="2015">
       </div>
 </div>
-
-<div class="area control">
-    <input type="submit" value="Buscar">
 </div>
 
-
+<div class="form-actions">
+    <input class="btn btn-primary btn-block" type="submit" value="Buscar">
+</div>
 </form>
-
-  
-
+</div>
+</div>
 </div>

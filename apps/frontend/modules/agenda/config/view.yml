@@ -2,25 +2,25 @@
 
 diferidasSuccess:
  has_layout:     on
- layout:         layout_sn
+ layout:         layout
 todosSuccess:
  has_layout:     on
- layout:         layout_sn
+ layout:         layout
 showSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 busquedaSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 calendarSuccess:
   has_layout:     on
   layout:         layout_sn
 busquedapersonalisadaSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 canceladasSuccess:
   has_layout:     on
-  layout:         layout_sn
+  layout:         layout
 
 default:
   http_metas:
@@ -33,7 +33,7 @@ default:
     #language:     en
     robots:       index, follow
 
-  stylesheets:    [main]
+  # stylesheets:    [main]
 
   javascripts:    []
 

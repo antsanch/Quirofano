@@ -1,94 +1,47 @@
-<?php use_stylesheet('/css/global/styleAgenda.css')?>
-<?php use_stylesheet('/min/?f=EasyUI/themes/default/easyui.css', '', array('raw_name' => true))?>
-<?php use_javascript('/EasyUI/jquery.easyui.min.js')?>
+<?php use_helper('agenda') ?>
+<?php use_stylesheet('global/styleAgenda.css') ?>
 
 <?php slot('titulo') ?>
-  <title>Detalles de la cirugia de <?php echo $cirugia->getPacienteName() ?> | SIGA-HU </title>
+  <title>Detalles de la cirugia de <?php echo $cirugia->getPacienteName() ?> | SIGA-HU</title>
 <?php end_slot() ?>
 
-<style>
-  .detail {
-    border: 1px solid black;
-    margin: 0 0 5px 0;
-    padding: 3px;
-  }
+<h3 class="page-title">Detalles de la cirugía</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Detalles de la cirugía')) ?>
 
-  .head {
-    border-bottom: 1px solid black;
-    font-size: large;
-    text-align: center;
-    width: 100%;
-  }
-
-  .terminada {
-    background: lightblue;
-  }
-
-  .trans {
-    background: lightred;
-  }
-
-  .cellData {
-    float: left;
-    margin: 1px 4px;
-  }
-
-  .tableData .cols01 {width: 051px}
-  .tableData .cols02 {width: 110px}
-  .tableData .cols03 {width: 169px}
-  .tableData .cols04 {width: 228px}
-  .tableData .cols05 {width: 287px}
-  .tableData .cols06 {width: 346px}
-  .tableData .cols07 {width: 405px}
-  .tableData .cols08 {width: 464px}
-  .tableData .cols09 {width: 523px}
-  .tableData .cols10 {width: 582px}
-  .tableData .cols11 {width: 641px}
-  .tableData .cols12 {width: 700px}
-
-  .label {
-    font-weight: bold;
-    /* border-bottom: 1px dashed darkgray; /**/
-  }
-
-  .cellData .value {
-    background: #DDD;
-    border-radius: 3px;
-
-  .menubar a {
-    background: white;
-    border: 1px solid black;
-    color: blue;
-    margin: 0 0 3px 0;
-    padding: 2px 4px;
-    text-decoration: none;
-  }
-
-  .menubar a:hover {
-    background: lightgray;
-  }
-
-</style>
-<div class="menubar clearfix">
-  <a href="<?php echo url_for('agenda/show?slug='.$cirugia->getQuirofano()->getSlug()) ?>">Agenda de <?php echo $cirugia->getQuirofano() ?></a>
-</div>
-
-<div class="easyui-tabs" data-options="fit:false">
 <?php
-switch ($cirugia->getStatus())
-{
-// Datos a mostrar cuando la cirugia esta finalizada
-  case AgendaPeer::REALIZADA_STATUS:
-    include_partial("detailsFinalizada", array('cirugia' => $cirugia));
+  $avisos = generarAvisos($cirugia);
+  if (count($avisos)) {
+    echo "<div class='alert alert-danger'>";
+    echo "<ul>";
+    foreach($avisos as $aviso)
+      echo "<li>{$aviso}.</li>";
+    echo "</ul>";
+    echo "</div>";
+  }
+?>
 
-// Datos a mostrar cuando la cirugia este en transoperatorio
-  case AgendaPeer::TRANSOPERATORIO_STATUS:
-    include_partial("detailsTransoperatorio", array('cirugia' => $cirugia));
+<!-- debido al diseño de bootstrap y de la aplicación hay que agregar manualmente los links para
+  las tabs utilizando javascript, esto se hace en su respectiva parcial -->
 
-// Datos a mostrar cuando la cirugia esta programada o diferida
-  case -50:
-  case 1:
-    include_partial("detailsProgramacion", array('cirugia' => $cirugia));
-}
+<ul id="detallesTabs" class="nav nav-tabs nav-justified">
+  <li id="detallesProg-tab"><a href="#detallesProg" data-toggle="tab">Programación</a></li>
+</ul>
+
+<div class="tab-content">
+<?php
+  // siempre mostrar la programación de la cirugia
+  include_partial("detailsProgramacion", array('cirugia' => $cirugia));
+
+  switch ($cirugia->getStatus()) {
+      // Datos a mostrar cuando la cirugia este en transoperatorio (status 10)
+      case AgendaPeer::TRANSOPERATORIO_STATUS:
+        include_partial("detailsTransoperatorio", array('cirugia' => $cirugia));
+        break;
+      // Datos a mostrar cuando la cirugia esta finalizada (status 100)
+      case AgendaPeer::REALIZADA_STATUS:
+        include_partial("detailsTransoperatorio", array('cirugia' => $cirugia)); // incluir transoperatorio
+        include_partial("detailsFinalizada", array('cirugia' => $cirugia));
+        break;
+    }
 ?>
 </div>

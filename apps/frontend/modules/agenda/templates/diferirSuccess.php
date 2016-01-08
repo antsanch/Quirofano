@@ -1,52 +1,48 @@
-<style>
-  #idTag {
-    background: #e1e279;
-    border-radius: 5px;
-    /*border: 1px solid black;*/
-    box-shadow: 10px 10px 10px #999;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-
-  #idTag div {
-    margin: 0px 5px;
-  }
-
-  #idTag .name {
-    font-size: 1.8em;
-  }
-
-  #idTag .label {
-    font-weight: bold;
-  }
-</style>
-
 <?php slot('titulo') ?>
-  <title>Diferir cirugia | SIGA-HU </title>
+  <title>Diferir cirugía | SIGA-HU </title>
 <?php end_slot() ?>
 
-<div id="idTag">
-  <div class="name"><?php echo $cirugia->getPacienteName() ?></div>
-  <div><span class="label">Registro: </span><span><?php echo "registro del paciente" ?></span></div>
-</div>
+<h3 class="page-title">Diferir cirugía</h3>
+<?php include_partial('qbreadcrumb', array('locacion' => 'Diferir cirugía')) ?>
 
-<div id="alert">
-<?php echo $sf_user->getFlash('obligar')?>
-</div>
+<?php
+  $aviso = $sf_user->getFlash('obligar');
+  if($aviso) {
+    echo "<div class='alert alert-danger'>";
+    echo $aviso;
+    echo '</div>';
+  }
+?>
 
-<div class="formulario clearfix">
-  <form action="" method="POST">
-  <h1>Diferir Cirugia</h1>
-  <div class="area cols12">
-    <div class="label">
+<div class="row">
+  <form action="" method="post" class="form-horizontal">
+    <div style="padding-left: 1.2em;">
       <?php echo $form['causa_diferido_id']->renderLabel() ?>
       <?php echo $form['causa_diferido_id']->renderError() ?>
     </div>
-    <div class="field"><?php echo $form['causa_diferido_id'] ?></div>
-  </div>
-  <div class="area control">
+    <div class="col-md-4">
+      <?php echo $form['causa_diferido_id'] ?> <!-- class form-control -->
+    </div>
     <?php echo $form->renderHiddenFields() ?>
-    <input type="submit" value="Aceptar" />
-  </div>
+    <div class="col-md-2">
+      <input type="submit" class="btn btn-primary" value="Diferir"/>
+    </div>
   </form>
+</div>
+</br>
+<div class="panel-group accordion" id="acordDetalles">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+      <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#acordDetalles" href="#collapseDetallesProg" aria-expanded="false">
+      <i class="fa fa-plus"></i>
+      Detalles de la programación de <?php echo $cirugia->getPacienteName() ?></a>
+      </h4>
+    </div>
+    <div id="collapseDetallesProg" class="panel-collapse collapse" aria-expanded="false">
+      <div class="panel-body">
+        <?php include_partial("detailsProgramacion", array('cirugia' => $cirugia)); ?>                    
+      </div>
+    </div>
+  </div>                              
 </div>
